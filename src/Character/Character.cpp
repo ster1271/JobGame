@@ -1,7 +1,7 @@
-#include "object.h"
+#include "Character.h"
 
-//コンストラクタ
-CObject::CObject()
+//コンストラクタ・デストラクタ
+CCharacter::CCharacter()
 {
 	//ハンドルの初期化
 	iHndl = -1;
@@ -12,8 +12,7 @@ CObject::CObject()
 	memset(&cRotate, 0, sizeof(VECTOR));
 }
 
-//デストラクタ
-CObject::~CObject()
+CCharacter::~CCharacter()
 {
 	//ハンドルの削除
 	if (iHndl != -1)
@@ -28,7 +27,7 @@ CObject::~CObject()
 }
 
 //初期化
-void CObject::Init()
+void CCharacter::Init()
 {
 	//ハンドルの初期化
 	iHndl = -1;
@@ -40,35 +39,19 @@ void CObject::Init()
 }
 
 //読み込み関連
-bool CObject::Load(const char FILEPATH[])
-{
-	//モデルの読み込み
-	iHndl = MV1LoadModel(FILEPATH);
+void CCharacter::Load(){}
 
-	/*読み込み成功 = true, 読み込み失敗 = false*/	
-	if (iHndl != -1)
-	{
-		return true;
-	}
-	else
-		return false;
-}
-
-//毎フレーム行う処理
-void CObject::Step()
-{
-}
+//毎フレーム行う処理()
+void CCharacter::Step(){}
 
 //更新処理
-void CObject::Updata()
+void CCharacter::Updata()
 {
-	MV1SetPosition(iHndl, cPos);		//座標の更新
-	MV1SetScale(iHndl, cSize);			//サイズの更新
-	MV1SetRotationXYZ(iHndl, cRotate);	//回転値の更新
+
 }
 
 //後処理
-void CObject::Exit()
+void CCharacter::Exit()
 {
 	//ハンドルの削除
 	if (iHndl != -1)
@@ -76,4 +59,3 @@ void CObject::Exit()
 		MV1DeleteModel(iHndl);
 	}
 }
-
