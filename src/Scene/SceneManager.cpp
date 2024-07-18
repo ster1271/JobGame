@@ -37,6 +37,8 @@ void SceneManager::Loop()
 	case SCENE_TITLE:
 		if (cTitleScene.Loop() != 0)
 		{
+			//ここでタイトルシーンを削除
+
 			eSceneID = SCENE_PLAY;
 		}
 		break;
@@ -44,6 +46,8 @@ void SceneManager::Loop()
 	case SCENE_PLAY:
 		if (cPlayScene.Loop() != 0)
 		{
+			//ここでプレイシーンを削除
+
 			eSceneID = SCENE_RESULT;
 		}
 		break;
@@ -51,6 +55,8 @@ void SceneManager::Loop()
 	case SCENE_RESULT:
 		if (cResultScene.Loop() != 0)
 		{
+			//ここでリザルトシーンを削除
+
 			eSceneID = SCENE_TITLE;
 		}
 		break;
