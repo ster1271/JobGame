@@ -35,10 +35,18 @@ void CObject::Init()
 }
 
 //読み込み関連
-void CObject::Load(const char FILEPATH[])
+bool CObject::Load(const char FILEPATH[])
 {
 	//モデルの読み込み
 	iHndl = MV1LoadModel(FILEPATH);
+
+	/*読み込み成功 = true, 読み込み失敗 = false*/	
+	if (iHndl != -1)
+	{
+		return true;
+	}
+	else
+		return false;
 }
 
 //毎フレーム行う処理

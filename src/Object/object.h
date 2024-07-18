@@ -14,7 +14,7 @@ public:
 	void Init();
 
 	//読み込み関連
-	void Load(const char FILEPATH[]);
+	bool Load(const char FILEPATH[]);
 
 	//毎フレーム行う処理()
 	virtual void Step() = 0;
