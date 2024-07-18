@@ -100,5 +100,6 @@ void CTitleScene::Draw()
 //-------------------------------------
 void CTitleScene::Exit()
 {
-	
+	//ÉVÅ[ÉìIDÇINITÇ…ñﬂÇ∑
+	eSceneID = TITLE_SCENE_INIT;
 }

@@ -99,5 +99,6 @@ void CResultScene::Draw()
 //-------------------------------------
 void CResultScene::Exit()
 {
-	
+	//ÉVÅ[ÉìIDÇINITÇ…ñﬂÇ∑
+	eSceneID = RESULT_SCENE_INIT;
 }
