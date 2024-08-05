@@ -70,6 +70,8 @@ int CPlayScene::Loop()
 //-----------------------------------
 void CPlayScene::Draw()
 {
+	cCharacterManager.Draw();
+
 	DrawString(0, 0, "プレイ画面です", GetColor(255, 255, 255));
 	DrawString(0, 15, "Enterでシーン移動", GetColor(255, 255, 255));
 }
@@ -80,7 +82,7 @@ void CPlayScene::Draw()
 //-----------------------------------
 void CPlayScene::Init()
 {
-
+	cCharacterManager.Init();
 }
 
 
@@ -89,7 +91,7 @@ void CPlayScene::Init()
 //-----------------------------------
 void CPlayScene::Exit()
 {
-
+	cCharacterManager.Exit();
 }
 
 
@@ -98,7 +100,7 @@ void CPlayScene::Exit()
 //-----------------------------------
 void CPlayScene::Load()
 {
-	
+	cCharacterManager.Load();
 }
 
 
@@ -107,6 +109,7 @@ void CPlayScene::Load()
 //-----------------------------------
 void CPlayScene::Step()
 {
+	cCharacterManager.Step();
 	//シーン遷移処理(仮)
 	if (CInput::IsKeyPush(KEY_INPUT_RETURN))
 	{

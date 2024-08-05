@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../Character/CharacterManager.h"
+
 
 class CPlayScene
 {
@@ -15,6 +17,8 @@ private:
 	};
 
 	tagPLAY_SCENE eSceneID;
+
+	CCharacterManager cCharacterManager;	//キャラクターマネージャー
 
 public:
 	//コンストラクタ・デストラクタ

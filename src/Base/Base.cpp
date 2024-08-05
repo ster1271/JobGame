@@ -1,7 +1,7 @@
-#include "object.h"
+#include "Base.h"
 
 //コンストラクタ
-CObject::CObject()
+CBase::CBase()
 {
 	//ハンドルの初期化
 	iHndl = -1;
@@ -13,13 +13,10 @@ CObject::CObject()
 }
 
 //デストラクタ
-CObject::~CObject()
+CBase::~CBase()
 {
-	//ハンドルの削除
-	if (iHndl != -1)
-	{
-		MV1DeleteModel(iHndl);
-	}
+	//ハンドルの初期化
+	iHndl = -1;
 
 	//変数の初期化
 	memset(&cPos, 0, sizeof(VECTOR));
@@ -28,7 +25,7 @@ CObject::~CObject()
 }
 
 //初期化
-void CObject::Init()
+void CBase::Init()
 {
 	//ハンドルの初期化
 	iHndl = -1;
@@ -40,7 +37,7 @@ void CObject::Init()
 }
 
 //読み込み関連
-bool CObject::Load(const char FILEPATH[])
+bool CBase::Load(const char FILEPATH[])
 {
 	//モデルの読み込み
 	iHndl = MV1LoadModel(FILEPATH);
@@ -54,13 +51,18 @@ bool CObject::Load(const char FILEPATH[])
 		return false;
 }
 
-//毎フレーム行う処理
-void CObject::Step()
+//描画
+void CBase::Draw()
 {
+	//モデルの描画
+	MV1DrawModel(iHndl);
 }
 
+//毎フレーム行う処理
+void CBase::Step(){}
+
 //更新処理
-void CObject::Updata()
+void CBase::Update()
 {
 	MV1SetPosition(iHndl, cPos);		//座標の更新
 	MV1SetScale(iHndl, cSize);			//サイズの更新
@@ -68,12 +70,18 @@ void CObject::Updata()
 }
 
 //後処理
-void CObject::Exit()
+void CBase::Exit()
 {
 	//ハンドルの削除
 	if (iHndl != -1)
 	{
 		MV1DeleteModel(iHndl);
+		iHndl = -1;
 	}
+
+	//変数の初期化
+	memset(&cPos, 0, sizeof(VECTOR));
+	memset(&cSize, 0, sizeof(VECTOR));
+	memset(&cRotate, 0, sizeof(VECTOR));
 }
 

@@ -2,13 +2,13 @@
 #include <DxLib.h>
 
 //オブジェクトクラス
-class CObject
+class CBase
 {
 
 public:
 	//コンストラクタ・デストラクタ
-	CObject();
-	~CObject();
+	CBase();
+	~CBase();
 
 	//初期化
 	void Init();
@@ -16,11 +16,14 @@ public:
 	//読み込み関連
 	bool Load(const char FILEPATH[]);
 
-	//毎フレーム行う処理()
+	//描画
+	void Draw();
+
+	//毎フレーム行う処理
 	virtual void Step() = 0;
 
 	//更新処理
-	void Updata();
+	void Update();
 
 	//後処理
 	void Exit();
