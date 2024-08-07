@@ -3,6 +3,7 @@
 //コンストラクタ
 CCharacterManager::CCharacterManager()
 {
+	MainID = ID_NUM;
 }
 
 //デストラクタ
@@ -15,6 +16,7 @@ CCharacterManager::~CCharacterManager()
 void CCharacterManager::Init()
 {
 	cAttacker.Init();
+	MainID = ID_NUM;
 }
 
 //データロード

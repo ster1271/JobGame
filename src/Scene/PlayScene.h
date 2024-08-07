@@ -1,5 +1,8 @@
 #pragma once
 
+#include "../Input/Input.h"
+#include "../CollisionManager/CollisionManager.h"
+#include "../Camera/CameraManager.h"
 #include "../Character/CharacterManager.h"
 
 
@@ -18,6 +21,7 @@ private:
 
 	tagPLAY_SCENE eSceneID;
 
+	CCameraManager cCameraManager;			//カメラマネージャー
 	CCharacterManager cCharacterManager;	//キャラクターマネージャー
 
 public:

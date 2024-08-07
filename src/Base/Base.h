@@ -4,6 +4,12 @@
 //オブジェクトクラス
 class CBase
 {
+protected:
+	VECTOR cPos;		//座標
+	VECTOR cSize;		//サイズ
+	VECTOR cRotate;		//回転値
+
+	int iHndl;			//ハンドル
 
 public:
 	//コンストラクタ・デストラクタ
@@ -28,10 +34,12 @@ public:
 	//後処理
 	void Exit();
 
-protected:
-	VECTOR cPos;		//座標
-	VECTOR cSize;		//サイズ
-	VECTOR cRotate;		//回転値
+	//座標取得
+	VECTOR GetPos() { return cPos; }
 
-	int iHndl;			//ハンドル
+	//サイズ取得
+	VECTOR GetSize() { return cSize; }
+
+	//回転地取得
+	VECTOR GetRotate() { return cRotate; }
 };
