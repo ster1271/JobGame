@@ -120,20 +120,34 @@ void CPlayScene::Step()
 		eSceneID = PLAY_SCENE_END;
 	}
 
+	//カメラ視点切り替え
 	if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_PALY)
 	{
-		if (CInput::IsKeyPush(KEY_INPUT_LEFT))
+		//メインキャラ視点変更
+		if (CInput::IsKeyPush(KEY_INPUT_UP))
 		{
 			
 		}
-		else if (CInput::IsKeyPush(KEY_INPUT_RIGHT))
+		else if (CInput::IsKeyPush(KEY_INPUT_DOWN))
 		{
 
 		}
+
+		//視点位置変更(アングルを変更する)
+		if (CInput::IsKeyKeep(KEY_INPUT_LEFT))
+		{
+
+		}
+		else if (CInput::IsKeyPush(KEY_INPUT_DOWN))
+		{
+
+		}
+
+		//キャラクター更新処理
 		cCharacterManager.Step();
 	}
 
-	//カメラの切り替え処理
+	//デバックカメラとの切り替え処理
 	if (CInput::IsKeyPush(KEY_INPUT_C))
 	{
 		cCameraManager.ChangeCamera(CCameraManager::CAMERA_ID_DEBUG);
@@ -146,5 +160,5 @@ void CPlayScene::Step()
 
 
 	//カメラ更新処理
-	/*cCameraManager.Step(cCharacterManager.GetPosition(), VGet(0.0f, 0.0f, 0.0f));*/
+	cCameraManager.Step(/*cCharacterManager.GetPosition()*/VGet(0.0f, 0.0f, 0.0f), VGet(0.0f, 0.0f, 0.0f));
 }
