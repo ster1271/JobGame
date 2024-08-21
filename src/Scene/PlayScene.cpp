@@ -126,11 +126,12 @@ void CPlayScene::Step()
 		//メインキャラ視点変更
 		if (CInput::IsKeyPush(KEY_INPUT_UP))
 		{
-			
+			cCharacterManager.SetMainID(MainID_ATTACKER);
 		}
 		else if (CInput::IsKeyPush(KEY_INPUT_DOWN))
 		{
-
+			//cCharacterManager.SetMainID(MainID_TANK);
+			cCharacterManager.SetMainID(MainID_SUPPORT);
 		}
 
 		//視点位置変更(アングルを変更する)
@@ -160,5 +161,5 @@ void CPlayScene::Step()
 
 
 	//カメラ更新処理
-	cCameraManager.Step(/*cCharacterManager.GetPosition()*/VGet(0.0f, 0.0f, 0.0f), VGet(0.0f, 0.0f, 0.0f));
+	cCameraManager.Step(cCharacterManager.GetPosition(), VGet(0.0f, 0.0f, 0.0f));
 }

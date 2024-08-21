@@ -5,7 +5,6 @@
 #include "../Camera/CameraManager.h"
 #include "../Character/CharacterManager.h"
 
-
 class CPlayScene
 {
 private:
@@ -47,5 +46,9 @@ private:
 
 	//毎フレーム呼ぶ処理
 	void Step();
+
+	//メインキャラ視点変更処理
+	void ChangeMainView(CCharacterManager::MainPlayerID);
+
 
 };

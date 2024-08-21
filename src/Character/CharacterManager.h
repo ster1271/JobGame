@@ -38,16 +38,22 @@ public:
 	//描画処理
 	void Draw();
 
+	//メインキャラID設定
+	void SetMainID(MainPlayerID Id)
+	{
+		MainID = Id;
+	}
+
 
 	//操作キャラの座標取得
-	VECTOR GetPosition(MainPlayerID id)
+	VECTOR GetPosition()
 	{
-		if (id == MainID_ATTACKER)
+		if (MainID == MainID_ATTACKER)
 			return cAttacker.GetPos();
-		else if (id == MainID_TANK)
-			return cAttacker.GetPos();
-		else if (id == MainID_SUPPORT)
-			return cAttacker.GetPos();
+		else if (MainID == MainID_TANK)
+			return /*cAttacker.GetPos()*/ VGet(100.0f, 100.0f, 100.0f);
+		else if (MainID == MainID_SUPPORT)
+			return/*cAttacker.GetPos()*/VGet(200.0f, 200.0f, 200.0f);
 	}
 
 };

@@ -80,6 +80,11 @@ void CAttacker::Update()
 void CAttacker::Draw()
 {
 	MV1DrawModel(iHndl);
+
+	DrawFormatString(0, 100, GetColor(255, 255, 255), "プレイヤーX座標:%f", cPos.x);
+	DrawFormatString(0, 115, GetColor(255, 255, 255), "プレイヤーY座標:%f", cPos.y);
+	DrawFormatString(0, 130, GetColor(255, 255, 255), "プレイヤーZ座標:%f", cPos.z);
+
 }
 
 //終了処理
