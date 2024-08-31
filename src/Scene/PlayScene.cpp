@@ -68,7 +68,10 @@ int CPlayScene::Loop()
 //-----------------------------------
 void CPlayScene::Draw()
 {
+	//キャラクター描画
 	cCharacterManager.Draw();
+	//ボット描画
+	cBot.Draw();
 
 	DrawString(0, 0, "プレイ画面です", GetColor(255, 255, 255));
 	DrawString(0, 15, "Enterでシーン移動", GetColor(255, 255, 255));
@@ -85,6 +88,8 @@ void CPlayScene::Init()
 	cCameraManager.SetNearFar(5.0f, 10000.0f);
 	//キャラクター初期化
 	cCharacterManager.Init();
+	//ボット初期化
+	cBot.Init();
 }
 
 
@@ -97,6 +102,8 @@ void CPlayScene::Exit()
 	cCameraManager.Exit();
 	//キャラクターマネージャー終了処理
 	cCharacterManager.Exit();
+	//ボットクラス終了処理
+	cBot.Exit();
 }
 
 
@@ -105,7 +112,10 @@ void CPlayScene::Exit()
 //-----------------------------------
 void CPlayScene::Load()
 {
+	//キャラクターデータ読み込み
 	cCharacterManager.Load();
+	//ボットデータ読み込み
+	cBot.Load();
 }
 
 
@@ -146,6 +156,8 @@ void CPlayScene::Step()
 
 		//キャラクター更新処理
 		cCharacterManager.Step();
+		//ボット更新処理
+		cBot.Step();
 	}
 
 	//デバックカメラとの切り替え処理
@@ -157,8 +169,6 @@ void CPlayScene::Step()
 	{
 		cCameraManager.ChangeCamera(CCameraManager::CAMERA_ID_PALY);
 	}
-
-
 
 	//カメラ更新処理
 	cCameraManager.Step(cCharacterManager.GetPosition(), VGet(0.0f, 0.0f, 0.0f));

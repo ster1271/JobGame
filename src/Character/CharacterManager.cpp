@@ -3,6 +3,7 @@
 //コンストラクタ
 CCharacterManager::CCharacterManager()
 {
+	//メインIDを初期化
 	MainID = ID_NUM;
 }
 
@@ -16,6 +17,7 @@ CCharacterManager::~CCharacterManager()
 void CCharacterManager::Init()
 {
 	cAttacker.Init();
+	//メインIDを初期化
 	MainID = ID_NUM;
 }
 

@@ -4,6 +4,7 @@
 #include "../CollisionManager/CollisionManager.h"
 #include "../Camera/CameraManager.h"
 #include "../Character/CharacterManager.h"
+#include "../Bot/Bot.h"
 
 class CPlayScene
 {
@@ -22,6 +23,8 @@ private:
 
 	CCameraManager cCameraManager;			//カメラマネージャー
 	CCharacterManager cCharacterManager;	//キャラクターマネージャー
+	CBot cBot;								//ボットクラス
+	
 
 public:
 	//コンストラクタ・デストラクタ
@@ -46,9 +49,5 @@ private:
 
 	//毎フレーム呼ぶ処理
 	void Step();
-
-	//メインキャラ視点変更処理
-	void ChangeMainView(CCharacterManager::MainPlayerID);
-
 
 };
