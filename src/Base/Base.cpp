@@ -44,9 +44,7 @@ bool CBase::Load(const char FILEPATH[])
 
 	/*“Ç‚İ‚İ¬Œ÷ = true, “Ç‚İ‚İ¸”s = false*/	
 	if (iHndl != -1)
-	{
 		return true;
-	}
 	else
 		return false;
 }
