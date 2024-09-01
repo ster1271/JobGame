@@ -5,6 +5,9 @@
 //サポートクラス
 class CSupport : public CBase
 {
+private:
+
+public:
 	//コンストラクタ・デストラクタ
 	CSupport();
 	~CSupport();

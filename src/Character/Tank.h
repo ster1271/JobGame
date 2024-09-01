@@ -5,6 +5,9 @@
 //タンククラス
 class CTank : public CBase
 {
+private:
+
+public:
 	//コンストラクタ・デストラクタ
 	CTank();
 	~CTank();

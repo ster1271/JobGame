@@ -30,7 +30,27 @@ void CCharacterManager::Load()
 //終了処理
 void CCharacterManager::Exit()
 {
-	cAttacker.Exit();
+	//メインキャラ後処理
+	switch (MainID)
+	{
+	case MainID_ATTACKER:
+		cAttacker.Exit();
+		break;
+
+	case MainID_TANK:
+		cTank.Exit();
+		break;
+
+	case MainID_SUPPORT:
+		cSupport.Exit();
+		break;
+
+	case ID_NUM:
+		break;
+
+	default:
+		break;
+	}
 }
 
 //毎フレーム呼ぶ処理
@@ -45,9 +65,39 @@ void CCharacterManager::Step()
 		break;
 
 	case MainID_TANK:
+		cTank.Step();
+		cTank.Update();
 		break;
 
 	case MainID_SUPPORT:
+		cSupport.Step();
+		cSupport.Update();
+		break;
+
+	case ID_NUM:
+		break;
+
+	default:
+		break;
+	}	
+}
+
+//描画処理
+void CCharacterManager::Draw()
+{
+	//メインキャラ描画
+	switch (MainID)
+	{
+	case MainID_ATTACKER:
+		cAttacker.Draw();
+		break;
+
+	case MainID_TANK:
+		cTank.Draw();
+		break;
+
+	case MainID_SUPPORT:
+		cSupport.Draw();
 		break;
 
 	case ID_NUM:
@@ -56,11 +106,4 @@ void CCharacterManager::Step()
 	default:
 		break;
 	}
-	
-}
-
-//描画処理
-void CCharacterManager::Draw()
-{
-	cAttacker.Draw();
 }
