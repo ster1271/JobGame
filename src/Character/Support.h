@@ -2,15 +2,12 @@
 #include "../Base/Base.h"
 #include "../Input/Input.h"
 
-//アタッカークラス
-class CAttacker : public CBase
+//サポートクラス
+class CSupport : public CBase
 {
-private:
-
-public:
 	//コンストラクタ・デストラクタ
-	CAttacker();
-	~CAttacker();
+	CSupport();
+	~CSupport();
 
 	//初期化
 	void Init();

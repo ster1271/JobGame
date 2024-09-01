@@ -1,12 +1,13 @@
-#include "Attacker.h"
+#include "Support.h"
 
-const char ATTACKER_PATH[] = { "data/character/il/あいえるたん.pmx" };
+const char SUPPORT_PATH[] = { "" };
 
 const float SPERE_R = 3.0f;
 #define MOVESPEED	(0.3f)
 
+
 //コンストラクタ・デストラクタ
-CAttacker::CAttacker()
+CSupport::CSupport()
 {
 	//ハンドルの初期化
 	iHndl = -1;
@@ -17,7 +18,7 @@ CAttacker::CAttacker()
 	memset(&cRotate, 0, sizeof(VECTOR));
 }
 
-CAttacker::~CAttacker()
+CSupport::~CSupport()
 {
 	//ハンドルの初期化
 	iHndl = -1;
@@ -29,7 +30,7 @@ CAttacker::~CAttacker()
 }
 
 //初期化
-void CAttacker::Init()
+void CSupport::Init()
 {
 	//ハンドルの初期化
 	iHndl = -1;
@@ -41,13 +42,13 @@ void CAttacker::Init()
 }
 
 //データ読み込み
-void CAttacker::Load()
+void CSupport::Load()
 {
-	iHndl = MV1LoadModel(ATTACKER_PATH);
+	iHndl = MV1LoadModel(SUPPORT_PATH);
 }
 
 //毎フレーム行う処理
-void CAttacker::Step()
+void CSupport::Step()
 {
 	if (CInput::IsKeyKeep(KEY_INPUT_W))
 	{
@@ -69,7 +70,7 @@ void CAttacker::Step()
 }
 
 //更新処理
-void CAttacker::Update()
+void CSupport::Update()
 {
 	MV1SetPosition(iHndl, cPos);		//座標の更新
 	MV1SetScale(iHndl, cSize);			//サイズの更新
@@ -77,26 +78,18 @@ void CAttacker::Update()
 }
 
 //描画
-void CAttacker::Draw()
+void CSupport::Draw()
 {
-	//条件式がtrueならモデルをfalseなら球を表示
-	if (iHndl != -1)
-	{
-		MV1DrawModel(iHndl);
-	}
-	else
-	{
-		DrawSphere3D(cPos, SPERE_R, 32, GetColor(255, 0, 0), GetColor(255, 0, 0), TRUE);
-	}
+	MV1DrawModel(iHndl);
 
-	DrawFormatString(0, 100, GetColor(255, 255, 255), "アタッカーX座標:%f", cPos.x);
-	DrawFormatString(0, 115, GetColor(255, 255, 255), "アタッカーY座標:%f", cPos.y);
-	DrawFormatString(0, 130, GetColor(255, 255, 255), "アタッカーZ座標:%f", cPos.z);
+	DrawFormatString(0, 100, GetColor(255, 255, 255), "サポートX座標:%f", cPos.x);
+	DrawFormatString(0, 115, GetColor(255, 255, 255), "サポートY座標:%f", cPos.y);
+	DrawFormatString(0, 130, GetColor(255, 255, 255), "サポートZ座標:%f", cPos.z);
 
 }
 
 //終了処理
-void CAttacker::Exit()
+void CSupport::Exit()
 {
 	//ハンドルの削除
 	if (iHndl != -1)

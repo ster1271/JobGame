@@ -36,8 +36,27 @@ void CCharacterManager::Exit()
 //毎フレーム呼ぶ処理
 void CCharacterManager::Step()
 {
-	cAttacker.Step();
-	cAttacker.Update();
+	//メインキャラ処理
+	switch (MainID)
+	{
+	case MainID_ATTACKER:
+		cAttacker.Step();
+		cAttacker.Update();
+		break;
+
+	case MainID_TANK:
+		break;
+
+	case MainID_SUPPORT:
+		break;
+
+	case ID_NUM:
+		break;
+
+	default:
+		break;
+	}
+	
 }
 
 //描画処理

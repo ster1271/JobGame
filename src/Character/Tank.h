@@ -2,15 +2,12 @@
 #include "../Base/Base.h"
 #include "../Input/Input.h"
 
-//アタッカークラス
-class CAttacker : public CBase
+//タンククラス
+class CTank : public CBase
 {
-private:
-
-public:
 	//コンストラクタ・デストラクタ
-	CAttacker();
-	~CAttacker();
+	CTank();
+	~CTank();
 
 	//初期化
 	void Init();

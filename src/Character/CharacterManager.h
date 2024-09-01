@@ -1,5 +1,7 @@
 #pragma once
 #include "../Character/Attacker.h"
+#include "../Character/Tank.h"
+#include "../Character/Support.h"
 
 //自分が操作しているキャラID
 enum MainPlayerID
@@ -15,7 +17,10 @@ class CCharacterManager
 {
 private:
 	MainPlayerID MainID;
-	CAttacker cAttacker;
+	CAttacker cAttacker;	//アタッカークラス
+	CTank cTank;			//タンククラス
+	CSupport cSupport;		//サポートクラス
+
 
 
 public:
@@ -51,9 +56,9 @@ public:
 		if (MainID == MainID_ATTACKER)
 			return cAttacker.GetPos();
 		else if (MainID == MainID_TANK)
-			return /*cAttacker.GetPos()*/ VGet(100.0f, 100.0f, 100.0f);
+			return cTank.GetPos();
 		else if (MainID == MainID_SUPPORT)
-			return/*cAttacker.GetPos()*/VGet(200.0f, 200.0f, 200.0f);
+			return cSupport.GetPos();
 	}
 
 };
