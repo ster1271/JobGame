@@ -1,6 +1,5 @@
 #pragma once
 #include "../Base/Base.h"
-#include "../Input/Input.h"
 
 //サポートクラス
 class CSupport : public CBase
@@ -19,7 +18,7 @@ public:
 	void Load();
 
 	//毎フレーム行う処理
-	void Step();
+	void Step(CShotManager& cShotManager);
 
 	//更新処理
 	void Update();

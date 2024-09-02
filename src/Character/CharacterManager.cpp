@@ -16,7 +16,13 @@ CCharacterManager::~CCharacterManager()
 //初期化
 void CCharacterManager::Init()
 {
+	//ショットマネージャー初期化
+	cShotManager.Init();
+
 	cAttacker.Init();
+	cTank.Init();
+	cSupport.Init();
+
 	//メインIDを初期化
 	MainID = ID_NUM;
 }
@@ -24,13 +30,19 @@ void CCharacterManager::Init()
 //データロード
 void CCharacterManager::Load()
 {
+	//ショットマネージャー初期化
+	cShotManager.Load();
+
 	cAttacker.Load();
+	cTank.Load();
+	cSupport.Load();
 }
 
 //終了処理
 void CCharacterManager::Exit()
 {
 	//メインキャラ後処理
+	/*
 	switch (MainID)
 	{
 	case MainID_ATTACKER:
@@ -51,6 +63,13 @@ void CCharacterManager::Exit()
 	default:
 		break;
 	}
+	*/
+	cAttacker.Exit();
+	cTank.Exit();
+	cSupport.Exit();
+
+	//ショットマネージャー後処理
+	cShotManager.Exit();
 }
 
 //毎フレーム呼ぶ処理
@@ -60,17 +79,17 @@ void CCharacterManager::Step()
 	switch (MainID)
 	{
 	case MainID_ATTACKER:
-		cAttacker.Step();
+		cAttacker.Step(cShotManager);
 		cAttacker.Update();
 		break;
 
 	case MainID_TANK:
-		cTank.Step();
+		cTank.Step(cShotManager);
 		cTank.Update();
 		break;
 
 	case MainID_SUPPORT:
-		cSupport.Step();
+		cSupport.Step(cShotManager);
 		cSupport.Update();
 		break;
 
@@ -79,7 +98,10 @@ void CCharacterManager::Step()
 
 	default:
 		break;
-	}	
+	}
+
+	
+	cShotManager.Step(cAttacker.GetPos());
 }
 
 //描画処理
@@ -106,4 +128,6 @@ void CCharacterManager::Draw()
 	default:
 		break;
 	}
+
+	cShotManager.Draw();
 }

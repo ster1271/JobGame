@@ -17,9 +17,11 @@ class CCharacterManager
 {
 private:
 	MainPlayerID MainID;
-	CAttacker cAttacker;	//アタッカークラス
-	CTank cTank;			//タンククラス
-	CSupport cSupport;		//サポートクラス
+
+	CShotManager cShotManager;	//ショットマネージャー
+	CAttacker cAttacker;		//アタッカークラス
+	CTank cTank;				//タンククラス
+	CSupport cSupport;			//サポートクラス
 
 
 

@@ -1,5 +1,8 @@
 #pragma once
 #include <DxLib.h>
+#include "math.h"
+#include "../Input/Input.h"
+#include "../Shot/ShotManager.h"
 
 //オブジェクトクラス
 class CBase
@@ -26,7 +29,7 @@ public:
 	void Draw();
 
 	//毎フレーム行う処理
-	virtual void Step() = 0;
+	virtual void Step(CShotManager& cShotManager) = 0;
 
 	//更新処理
 	void Update();

@@ -2,7 +2,7 @@
 
 const char TANK_PATH[] = { "" };
 
-const float SPERE_R = 3.0f;
+const float SPERE_R = 10.0f;
 #define MOVESPEED	(0.3f)
 
 
@@ -48,8 +48,9 @@ void CTank::Load()
 }
 
 //毎フレーム行う処理
-void CTank::Step()
+void CTank::Step(CShotManager& cShotManager)
 {
+	//移動処理
 	if (CInput::IsKeyKeep(KEY_INPUT_W))
 	{
 		cPos.z -= MOVESPEED;
@@ -67,6 +68,22 @@ void CTank::Step()
 		cPos.x -= MOVESPEED;
 	}
 
+	//発射処理
+	if (CInput::IsKeyPush(KEY_INPUT_SPACE))
+	{
+		//弾の位置決定
+		VECTOR BulletPos = VGet(0.0f, 0.0f, 0.0f);
+
+		//速度はプレイヤーと同じ方法で移動方向を決める
+		const float SHOT_SPEED = 5.0f;
+		VECTOR vSpd;
+
+		vSpd.x = sinf(cPos.y) * -SHOT_SPEED;
+		vSpd.z = cosf(cRotate.y) * -SHOT_SPEED;
+		vSpd.y = 0.0f;
+
+		cShotManager.RequestPlayerShot(BulletPos, vSpd, cRotate.x);
+	}
 }
 
 //更新処理
@@ -80,7 +97,15 @@ void CTank::Update()
 //描画
 void CTank::Draw()
 {
-	MV1DrawModel(iHndl);
+	//条件式がtrueならモデルをfalseなら球を表示
+	if (iHndl != -1)
+	{
+		MV1DrawModel(iHndl);
+	}
+	else
+	{
+		DrawSphere3D(cPos, SPERE_R, 32, GetColor(0, 255, 0), GetColor(0, 255, 0), TRUE);
+	}
 
 	DrawFormatString(0, 100, GetColor(255, 255, 255), "タンクX座標:%f", cPos.x);
 	DrawFormatString(0, 115, GetColor(255, 255, 255), "タンクY座標:%f", cPos.y);
