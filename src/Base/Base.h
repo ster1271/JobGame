@@ -4,7 +4,7 @@
 #include "../Input/Input.h"
 #include "../Shot/ShotManager.h"
 
-//オブジェクトクラス
+//ヒューマンベースクラス
 class CBase
 {
 protected:

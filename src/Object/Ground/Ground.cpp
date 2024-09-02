@@ -3,26 +3,41 @@
 //コンストラクタ
 CGround::CGround()
 {
+	//ハンドルの初期化
+	iHndl = -1;
 
+	//変数の初期化
+	memset(&cPos, 0, sizeof(VECTOR));
+	memset(&cSize, 0, sizeof(VECTOR));
+	memset(&cRotate, 0, sizeof(VECTOR));
 }
 
 //デストラクタ
 CGround::~CGround()
 {
+	//ハンドルの初期化
+	iHndl = -1;
 
+	//変数の初期化
+	memset(&cPos, 0, sizeof(VECTOR));
+	memset(&cSize, 0, sizeof(VECTOR));
+	memset(&cRotate, 0, sizeof(VECTOR));
 }
 
 //初期化
 void CGround::Init()
 {
+	//ハンドルの初期化
+	iHndl = -1;
+
+	//各変数の初期化
 	cPos = VGet(0.0f, 0.0f, 0.0f);
-	iHndl = MV1LoadModel("Data/field/field.x");
-	MV1SetPosition(iHndl, cPos);
-	MV1SetScale(iHndl, VGet(0.1f, 0.1f, 0.1f));
+	cSize = VGet(1.0f, 1.0f, 1.0f);
+	cRotate = VGet(0.0f, 0.0f, 0.0f);
 }
 
-//描画
-void CGround::Draw()
+//モデル読み込み
+void CGround::Load()
 {
-	MV1DrawModel(iHndl);
+	iHndl = MV1LoadModel("data/field/field.x");
 }

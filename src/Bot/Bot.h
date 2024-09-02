@@ -1,9 +1,9 @@
 #pragma once 
 #include "DxLib.h"
-#include "../Base/Base.h"
+#include "../Object/Object.h"
 
 //ボットクラス
-class CBot :public CBase
+class CBot :public CObject
 {
 private:
 
