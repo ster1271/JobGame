@@ -5,6 +5,7 @@ const char ATTACKER_PATH[] = { "data/character/il/あいえるたん.pmx" };
 
 const float SPERE_R = 3.0f;
 #define MOVESPEED	(0.3f)
+#define ROT_SPEED	(0.05f)	
 
 //コンストラクタ・デストラクタ
 CAttacker::CAttacker()
@@ -50,29 +51,32 @@ void CAttacker::Load()
 //毎フレーム行う処理
 void CAttacker::Step(CShotManager& cShotManager)
 {
-	//移動処理
 	if (CInput::IsKeyKeep(KEY_INPUT_W))
 	{
 		cPos.z -= MOVESPEED;
+		cRotate.y = 0.0f;
 	}
 	if (CInput::IsKeyKeep(KEY_INPUT_S))
 	{
 		cPos.z += MOVESPEED;
+		cRotate.y = DX_PI_F;
 	}
 	if (CInput::IsKeyKeep(KEY_INPUT_A))
 	{
 		cPos.x += MOVESPEED;
+		cRotate.y = -DX_PI_F / 2;
 	}
 	if (CInput::IsKeyKeep(KEY_INPUT_D))
 	{
 		cPos.x -= MOVESPEED;
+		cRotate.y = DX_PI_F / 2;
 	}
 
 	//発射処理
 	if (CInput::IsKeyPush(KEY_INPUT_SPACE))
 	{
 		//弾の位置決定
-		VECTOR BulletPos = VGet(0.0f, 0.0f, 0.0f);
+		VECTOR BulletPos = cPos;
 
 		//速度はプレイヤーと同じ方法で移動方向を決める
 		const float SHOT_SPEED = 5.0f;

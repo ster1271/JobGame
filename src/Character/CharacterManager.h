@@ -63,4 +63,15 @@ public:
 			return cSupport.GetPos();
 	}
 
+	//‘€ìƒLƒƒƒ‰‚ÌŠp“xæ“¾
+	VECTOR GetRotate()
+	{
+		if (MainID == MainID_ATTACKER)
+			return cAttacker.GetRotate();
+		else if (MainID == MainID_TANK)
+			return cTank.GetRotate();
+		else if (MainID == MainID_SUPPORT)
+			return cSupport.GetRotate();
+	}
+
 };

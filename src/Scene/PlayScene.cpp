@@ -77,8 +77,8 @@ void CPlayScene::Draw()
 	//ボット描画
 	cBot.Draw();
 
-	DrawString(0, 0, "プレイ画面です", GetColor(255, 255, 255));
-	DrawString(0, 15, "Enterでシーン移動", GetColor(255, 255, 255));
+	//カメラ情報表示
+	cCameraManager.Draw();
 }
 
 
@@ -160,16 +160,6 @@ void CPlayScene::Step()
 		{
 			//cCharacterManager.SetMainID(MainID_TANK);
 			cCharacterManager.SetMainID(MainID_SUPPORT);
-		}
-
-		//視点位置変更(アングルを変更する)
-		if (CInput::IsKeyKeep(KEY_INPUT_LEFT))
-		{
-
-		}
-		else if (CInput::IsKeyPush(KEY_INPUT_DOWN))
-		{
-
 		}
 
 		//オブジェクト更新処理
