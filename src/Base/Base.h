@@ -12,6 +12,7 @@ protected:
 	VECTOR cSize;		//サイズ
 	VECTOR cRotate;		//回転値
 
+	float Life;			//プレイヤーライフ
 	int iHndl;			//ハンドル
 
 public:

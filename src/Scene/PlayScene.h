@@ -3,6 +3,7 @@
 #include "../Input/Input.h"
 #include "../CollisionManager/CollisionManager.h"
 #include "../Camera/CameraManager.h"
+#include "../Shot/ShotManager.h"
 #include "../Character/CharacterManager.h"
 #include "../Object/ObjectManager.h"
 #include "../Bot/Bot.h"
@@ -23,6 +24,7 @@ private:
 	tagPLAY_SCENE eSceneID;
 
 	CCameraManager cCameraManager;			//カメラマネージャー
+	CShotManager cShotManager;				//ショットマネージャー
 	CCharacterManager cCharacterManager;	//キャラクターマネージャー
 	CObjectManager cObjectManager;			//オブジェクトマネージャー
 	CBot cBot;								//ボットクラス

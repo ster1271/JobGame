@@ -82,7 +82,7 @@ void CTank::Step(CShotManager& cShotManager)
 		vSpd.z = cosf(cRotate.y) * -SHOT_SPEED;
 		vSpd.y = 0.0f;
 
-		cShotManager.RequestPlayerShot(BulletPos, vSpd, cRotate.x);
+		cShotManager.RequestPlayerShot(BulletPos, vSpd);
 	}
 }
 

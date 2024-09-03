@@ -1,8 +1,8 @@
 #include "ShotManager.h"
-#include "../SoundManager/SoundManager.h"
+
 
 //定義
-static const char PLSHOT_MODEL_PATH[] = { "Data/shot/plshot.x" };
+static const char PLSHOT_MODEL_PATH[] = { "data/shot/plshot.x" };
 
 //------------------------------------
 //コンストラクタ
@@ -93,11 +93,11 @@ void CShotManager::Draw()
 //------------------------------------
 //プレイヤーのショットリクエスト
 //------------------------------------
-void CShotManager::RequestPlayerShot(const VECTOR& vPos, const VECTOR& vSpeed, const float& YSpeed)
+void CShotManager::RequestPlayerShot(const VECTOR& vPos, const VECTOR& vSpeed)
 {
 	for (int i = 0; i < PL_SHOT_NUM; i++)
 	{
-		if (cPlayerShot[i].RequestShot(vPos, vSpeed, YSpeed))
+		if (cPlayerShot[i].RequestShot(vPos, vSpeed))
 		{
 			CSoundManager::Play(CSoundManager::SOUNDID_SE_PLSHOT);
 			break;

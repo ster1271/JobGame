@@ -101,16 +101,13 @@ void CShot::Step(VECTOR Pos)
 
 	//座標に速度を加算
 	m_vPos = VAdd(m_vPos, m_vSpeed);
-	m_vPos.y += Yspeed;
-	Yspeed -= GRAVITY;
 
 
 	//一定範囲を超えたら消す
 	float fLength =	600;
 
 	if (m_vPos.x > Pos.x + fLength || m_vPos.x < Pos.x -fLength
-		|| m_vPos.z > Pos.z + fLength || m_vPos.z < Pos.z - fLength
-		|| m_vPos.y < 0.0f)
+		|| m_vPos.z > Pos.z + fLength || m_vPos.z < Pos.z - fLength)
 	{
 		isActive = false;
 	}
@@ -124,14 +121,13 @@ void CShot::Step(VECTOR Pos)
 //----------------------------------------
 //リクエスト
 //----------------------------------------
-bool CShot::RequestShot(const VECTOR &vPos, const VECTOR &vSpeed , const float&YSpeed)
+bool CShot::RequestShot(const VECTOR &vPos, const VECTOR &vSpeed)
 {
 	//すでに発射されている
 	if (isActive) return false;
 
 	m_vPos = vPos;
 	m_vSpeed = vSpeed;
-	Yspeed = YSpeed;
 	isActive = true;
 
 	return true;

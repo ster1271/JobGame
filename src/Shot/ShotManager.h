@@ -1,8 +1,8 @@
 #pragma once
 #include "Shot.h"
+#include "../SoundManager/SoundManager.h"
 
-
-#define PL_SHOT_NUM	(3)
+#define PL_SHOT_NUM	(1)
 
 class CShotManager
 {
@@ -31,5 +31,5 @@ public:
 	inline CShot& GetPlayerShot(int iID) { return cPlayerShot[iID]; }
 
 	//プレイヤーのショットリクエスト
-	void RequestPlayerShot(const VECTOR& vPos, const VECTOR& vSpeed, const float& YSpeed);
+	void RequestPlayerShot(const VECTOR& vPos, const VECTOR& vSpeed);
 };

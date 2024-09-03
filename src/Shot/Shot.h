@@ -40,7 +40,7 @@ public:
 	//m_vPos		： 初期座標
 	//m_vSpeed	： 移動速度(方向ベクトルで)
 	//return	： true = リクエスト成功, false = 失敗
-	bool RequestShot(const VECTOR& vPos, const VECTOR& vSpeed, const float& YSpeed);
+	bool RequestShot(const VECTOR& vPos, const VECTOR& vSpeed);
 
 	//生存判定
 	//return 　： true = 生存, false = 失敗
