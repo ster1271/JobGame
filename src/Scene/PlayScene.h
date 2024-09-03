@@ -4,6 +4,7 @@
 #include "../CollisionManager/CollisionManager.h"
 #include "../Camera/CameraManager.h"
 #include "../Character/CharacterManager.h"
+#include "../Object/ObjectManager.h"
 #include "../Bot/Bot.h"
 
 class CPlayScene
@@ -23,6 +24,7 @@ private:
 
 	CCameraManager cCameraManager;			//カメラマネージャー
 	CCharacterManager cCharacterManager;	//キャラクターマネージャー
+	CObjectManager cObjectManager;			//オブジェクトマネージャー
 	CBot cBot;								//ボットクラス
 	
 

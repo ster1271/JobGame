@@ -20,11 +20,19 @@ void CSky::Init()
 }
 
 
+//ƒ‚ƒfƒ‹“Ç‚İ‚İ
+void CSky::Load()
+{
+	iHndl = MV1LoadModel("data/Sky/Sky.x");
+}
+
+
 //’Êíˆ—
-void CSky::Step(VECTOR vForcus, float fRot)
+void CSky::Step()
 {
 	cRotate.y += 0.0005f;
 
+	/*
 	VECTOR vDir;
 	vDir.x = sinf(fRot) * 30.0f;
 	vDir.z = cosf(fRot) * 30.0f;
@@ -33,6 +41,7 @@ void CSky::Step(VECTOR vForcus, float fRot)
 	vDir.y = 10.0f;
 
 	SetSkyPos(vForcus, vDir);
+	*/
 }
 
 //ˆÚ“®ˆ—

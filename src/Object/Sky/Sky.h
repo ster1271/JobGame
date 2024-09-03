@@ -13,8 +13,11 @@ public:
 	//‰Šú‰»
 	void Init();
 
+	//ƒ‚ƒfƒ‹“Ç‚İ‚İ
+	void Load();
+
 	//’Êíˆ—
-	void Step(VECTOR vForcus, float fRot);
+	void Step();
 
 	//ˆÚ“®ˆ—
 	void SetSkyPos(VECTOR vF, VECTOR dir);

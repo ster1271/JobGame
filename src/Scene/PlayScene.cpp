@@ -68,6 +68,8 @@ int CPlayScene::Loop()
 //-----------------------------------
 void CPlayScene::Draw()
 {
+	//オブジェクト描画
+	cObjectManager.Draw();
 	//キャラクター描画
 	cCharacterManager.Draw();
 	//ボット描画
@@ -86,6 +88,8 @@ void CPlayScene::Init()
 	//カメラ初期化
 	cCameraManager.Init();
 	cCameraManager.SetNearFar(5.0f, 10000.0f);
+	//オブジェクト初期化
+	cObjectManager.Init();
 	//キャラクター初期化
 	cCharacterManager.Init();
 	//ボット初期化
@@ -100,6 +104,8 @@ void CPlayScene::Exit()
 {
 	//カメラマネージャー終了処理
 	cCameraManager.Exit();
+	//オブジェクトマネージャー終了処理
+	cObjectManager.Exit();
 	//キャラクターマネージャー終了処理
 	cCharacterManager.Exit();
 	//ボットクラス終了処理
@@ -112,6 +118,8 @@ void CPlayScene::Exit()
 //-----------------------------------
 void CPlayScene::Load()
 {
+	//オブジェクトデータ読み込み
+	cObjectManager.Load();
 	//キャラクターデータ読み込み
 	cCharacterManager.Load();
 	//ボットデータ読み込み
@@ -124,6 +132,8 @@ void CPlayScene::Load()
 //-----------------------------------
 void CPlayScene::Step()
 {
+	
+
 	//シーン遷移処理(仮)
 	if (CInput::IsKeyPush(KEY_INPUT_RETURN))
 	{
@@ -154,6 +164,8 @@ void CPlayScene::Step()
 
 		}
 
+		//オブジェクト更新処理
+		cObjectManager.Step();
 		//キャラクター更新処理
 		cCharacterManager.Step();
 		//ボット更新処理
