@@ -54,22 +54,18 @@ void CAttacker::Step(CShotManager& cShotManager)
 	if (CInput::IsKeyKeep(KEY_INPUT_W))
 	{
 		cPos.z -= MOVESPEED;
-		cRotate.y = 0.0f;
 	}
 	if (CInput::IsKeyKeep(KEY_INPUT_S))
 	{
 		cPos.z += MOVESPEED;
-		cRotate.y = DX_PI_F;
 	}
 	if (CInput::IsKeyKeep(KEY_INPUT_A))
 	{
 		cPos.x += MOVESPEED;
-		cRotate.y = -DX_PI_F / 2;
 	}
 	if (CInput::IsKeyKeep(KEY_INPUT_D))
 	{
 		cPos.x -= MOVESPEED;
-		cRotate.y = DX_PI_F / 2;
 	}
 
 	//発射処理
@@ -78,7 +74,7 @@ void CAttacker::Step(CShotManager& cShotManager)
 		//弾の位置決定
 		VECTOR BulletPos = cPos;
 
-		//速度はプレイヤーと同じ方法で移動方向を決める
+		//弾のスピード
 		const float SHOT_SPEED = 5.0f;
 		VECTOR vSpd;
 

@@ -66,7 +66,16 @@ void CBot::Draw()
 //マイフレーム行う処理
 void CBot::Step()
 {
+	
+
 	//更新処理
 	Update();
+}
+
+
+//指定の場所に動く処理
+void CBot::Move_Bot()
+{
+
 }
 

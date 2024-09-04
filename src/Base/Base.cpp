@@ -10,6 +10,8 @@ CBase::CBase()
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
+	memset(&Life, 0, sizeof(float));
+	
 }
 
 //デストラクタ

@@ -51,7 +51,6 @@ void CSupport::Load()
 //毎フレーム行う処理
 void CSupport::Step(CShotManager& cShotManager)
 {
-	//移動処理
 	if (CInput::IsKeyKeep(KEY_INPUT_W))
 	{
 		cPos.z -= MOVESPEED;
@@ -73,9 +72,9 @@ void CSupport::Step(CShotManager& cShotManager)
 	if (CInput::IsKeyPush(KEY_INPUT_SPACE))
 	{
 		//弾の位置決定
-		VECTOR BulletPos = VGet(0.0f, 0.0f, 0.0f);
+		VECTOR BulletPos = cPos;
 
-		//速度はプレイヤーと同じ方法で移動方向を決める
+		//弾のスピード
 		const float SHOT_SPEED = 5.0f;
 		VECTOR vSpd;
 

@@ -12,7 +12,7 @@ protected:
 	VECTOR cSize;		//サイズ
 	VECTOR cRotate;		//回転値
 
-	float Life;			//プレイヤーライフ
+	float Life;			//ライフ
 	int iHndl;			//ハンドル
 
 public:
@@ -46,4 +46,5 @@ public:
 
 	//回転地取得
 	VECTOR GetRotate() { return cRotate; }
+
 };

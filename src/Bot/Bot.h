@@ -23,4 +23,8 @@ public:
 
 	//毎フレーム行う処理
 	void Step();
+
+	//指定の場所に動く処理
+	void Move_Bot();
+
 };
