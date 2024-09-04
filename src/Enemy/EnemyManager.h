@@ -1,7 +1,7 @@
 #pragma once
 #include "EnemyBase.h"
 
-#define ENEMY_NUM	(1)
+#define ENEMY_NUM	(5)
 
 class CEnemyManager
 {

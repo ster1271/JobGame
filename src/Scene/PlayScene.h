@@ -5,6 +5,7 @@
 #include "../Camera/CameraManager.h"
 #include "../Shot/ShotManager.h"
 #include "../Character/CharacterManager.h"
+#include "../Enemy/EnemyManager.h"
 #include "../Object/ObjectManager.h"
 #include "../Bot/Bot.h"
 
@@ -26,6 +27,7 @@ private:
 	CCameraManager cCameraManager;			//カメラマネージャー
 	CShotManager cShotManager;				//ショットマネージャー
 	CCharacterManager cCharacterManager;	//キャラクターマネージャー
+	CEnemyManager cEnemyManager;			//エネミーマネージャー
 	CObjectManager cObjectManager;			//オブジェクトマネージャー
 	CBot cBot;								//ボットクラス
 	

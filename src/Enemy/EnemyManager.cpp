@@ -1,7 +1,7 @@
 #include "EnemyManager.h"
 
 //定義
-static const char ENEMY_MODEL_PATH[] = { "Data/enemy/enemy.pmx" };
+static const char ENEMY_MODEL_PATH[] = { "data/enemy/enemy.pmx" };
 static const int WAIT_TIME = 10;		//敵が再登場するまでの時間
 
 //コンストラクタ
@@ -54,7 +54,7 @@ void CEnemyManager::Step()
 	for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		cEnemyBace[i].Step();
-		if (cEnemyBace[i].IsActive())
+		if (cEnemyBace[i].GetActive())
 		{
 			iEnemyCnt++;
 		}
@@ -82,7 +82,7 @@ void CEnemyManager::Draw()
 //敵リクエスト
 void CEnemyManager::RequestEnemy()
 {
-	VECTOR vPos = VGet((float)GetRand(200) - 100.0f, 0, 200.0f);
+	VECTOR vPos = VGet((float)GetRand(200) - 100.0f, 5.0f , 200.0f);
 	VECTOR vSpeed = VGet(0.0f, 0.0f, -0.1f);
 	for (int i = 0; i < ENEMY_NUM; i++)
 	{

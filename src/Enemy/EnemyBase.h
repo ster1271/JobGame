@@ -9,6 +9,7 @@ private:
 	VECTOR cPos;		//座標
 	VECTOR cSize;		//サイズ
 	VECTOR cRotate;		//回転値
+	float Radius;		//半径
 	int iHndl;			//ハンドル
 
 	float Life;			//ライフ
@@ -50,7 +51,7 @@ public:
 	//モデルの半径取得
 	float GetRadius()
 	{
-		return ENEMY_RADIUS;
+		return Radius;
 	}
 
 	//当たり判定の処理

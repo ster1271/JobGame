@@ -72,6 +72,8 @@ void CPlayScene::Draw()
 	cObjectManager.Draw();
 	//キャラクター描画
 	cCharacterManager.Draw();
+	//エネミー描画
+	cEnemyManager.Draw();
 	//弾描画
 	cShotManager.Draw();
 	//ボット描画
@@ -94,6 +96,8 @@ void CPlayScene::Init()
 	cObjectManager.Init();
 	//キャラクター初期化
 	cCharacterManager.Init();
+	//エネミー初期化
+	cEnemyManager.Init();
 	//弾初期化
 	cShotManager.Init();
 	//ボット初期化
@@ -112,6 +116,8 @@ void CPlayScene::Exit()
 	cObjectManager.Exit();
 	//キャラクターマネージャー終了処理
 	cCharacterManager.Exit();
+	//キャラクターマネジャー終了処理
+	cEnemyManager.Exit();
 	//弾終了処理
 	cShotManager.Exit();
 	//ボットクラス終了処理
@@ -128,6 +134,8 @@ void CPlayScene::Load()
 	cObjectManager.Load();
 	//キャラクターデータ読み込み
 	cCharacterManager.Load();
+	//エネミーデータ読み込み
+	cEnemyManager.Load();
 	//弾データ読み込み
 	cShotManager.Load();
 	//ボットデータ読み込み
@@ -166,6 +174,8 @@ void CPlayScene::Step()
 		cObjectManager.Step();
 		//キャラクター更新処理
 		cCharacterManager.Step();
+		//エネミー更新処理
+		cEnemyManager.Step();
 		//弾更新処理
 		cShotManager.Step(cCharacterManager.GetPosition());
 		//ボット更新処理
@@ -185,3 +195,4 @@ void CPlayScene::Step()
 	//カメラ更新処理
 	cCameraManager.Step(cCharacterManager.GetPosition(), VGet(0.0f, 0.0f, 0.0f));
 }
+

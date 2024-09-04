@@ -1,9 +1,9 @@
 #include"EnemyBase.h"
 
 
-const int ENEMY_RADIUS	(5);	//モデルの半径
-const int MAX_LIFE	(3);		//最大体力
-const float SPEED(1.0f);		//移動速度
+const float NEMY_RADIUS	(5.0f);		//モデルの半径
+const int MAX_LIFE		(3);		//最大体力
+const float SPEED		(1.0f);		//移動速度
 
 //--------------------------------------
 //コンストラクタ
@@ -14,9 +14,9 @@ CEnemyBase::CEnemyBase()
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
-
-	Life = 0;;			//ライフ
-	HitCount = 0;;		//弾の当たった回数
+	Radius = NEMY_RADIUS;
+	Life = 0;			//ライフ
+	HitCount = 0;		//弾の当たった回数
 	iHndl = -1;			//ハンドル
 
 	IsActive = false;	//生存フラグ
@@ -38,7 +38,7 @@ CEnemyBase::~CEnemyBase()
 void CEnemyBase::Init()
 {
 	//ひとまず初期化
-	memset(&cPos, 0, sizeof(VECTOR));
+	cPos = VGet(0.0f, 0.0f, 0.0f);
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
 
@@ -93,8 +93,6 @@ void CEnemyBase::Draw()
 	if (IsActive)
 	{
 		MV1DrawModel(iHndl);
-		VECTOR vPos = cPos;
-		vPos.y += ENEMY_RADIUS;
 
 		//デバック用---------------------------------------------------------------------
 		int R, G, B;
@@ -125,7 +123,7 @@ void CEnemyBase::Draw()
 		default:
 			break;
 		}
-		DrawSphere3D(vPos, ENEMY_RADIUS, 16, GetColor(R, G, B), GetColor(R, G, B), false);
+		DrawSphere3D(cPos, Radius, 16, GetColor(R, G, B), GetColor(R, G, B), false);
 		//デバック用---------------------------------------------------------------------
 	}
 
