@@ -10,6 +10,7 @@ protected:
 	VECTOR cPos;		//座標
 	VECTOR cSize;		//サイズ
 	VECTOR cRotate;		//回転値
+	
 
 	int iHndl;			//ハンドル
 

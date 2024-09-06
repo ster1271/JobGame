@@ -24,6 +24,8 @@ CBase::~CBase()
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
+	memset(&Life, 0, sizeof(float));
+
 }
 
 //èâä˙âª
@@ -36,6 +38,8 @@ void CBase::Init()
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
+	memset(&Life, 0, sizeof(float));
+
 }
 
 //ì«Ç›çûÇ›ä÷òA
@@ -83,5 +87,6 @@ void CBase::Exit()
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
+	memset(&Life, 0, sizeof(float));
 }
 
