@@ -63,7 +63,7 @@ void CBase::Draw()
 }
 
 //毎フレーム行う処理
-void CBase::Step(CShotManager& cShotManager) {}
+void CBase::Step(CShotManager& cShotManager, CTurretManager& cTurretManager) {}
 
 //更新処理
 void CBase::Update()

@@ -19,10 +19,7 @@ public:
 	void Load();
 
 	//毎フレーム行う処理
-	void Step(CShotManager& cShotManager);
-
-	//更新処理
-	void Update();
+	void Step(CShotManager& cShotManager, CTurretManager& cTurretManager);
 
 	//描画
 	void Draw();

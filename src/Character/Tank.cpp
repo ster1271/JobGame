@@ -9,36 +9,16 @@ const float SPERE_R = 10.0f;
 //コンストラクタ・デストラクタ
 CTank::CTank()
 {
-	//ハンドルの初期化
-	iHndl = -1;
-
-	//変数の初期化
-	memset(&cPos, 0, sizeof(VECTOR));
-	memset(&cSize, 0, sizeof(VECTOR));
-	memset(&cRotate, 0, sizeof(VECTOR));
 }
 
 CTank::~CTank()
 {
-	//ハンドルの初期化
-	iHndl = -1;
-
-	//変数の初期化
-	memset(&cPos, 0, sizeof(VECTOR));
-	memset(&cSize, 0, sizeof(VECTOR));
-	memset(&cRotate, 0, sizeof(VECTOR));
 }
 
 //初期化
 void CTank::Init()
 {
-	//ハンドルの初期化
-	iHndl = -1;
-
-	//変数の初期化
-	cPos = VGet(0.0f, 0.0f, 0.0f);
-	cSize = VGet(1.0f, 1.0f, 1.0f);
-	cRotate = VGet(0.0f, 0.0f, 0.0f);
+	CBase::Init();
 }
 
 //データ読み込み
@@ -48,7 +28,7 @@ void CTank::Load()
 }
 
 //毎フレーム行う処理
-void CTank::Step(CShotManager& cShotManager)
+void CTank::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 {
 	if (CInput::IsKeyKeep(KEY_INPUT_W))
 	{
@@ -85,14 +65,6 @@ void CTank::Step(CShotManager& cShotManager)
 	}
 }
 
-//更新処理
-void CTank::Update()
-{
-	MV1SetPosition(iHndl, cPos);		//座標の更新
-	MV1SetScale(iHndl, cSize);			//サイズの更新
-	MV1SetRotationXYZ(iHndl, cRotate);	//回転値の更新
-}
-
 //描画
 void CTank::Draw()
 {
@@ -115,15 +87,5 @@ void CTank::Draw()
 //終了処理
 void CTank::Exit()
 {
-	//ハンドルの削除
-	if (iHndl != -1)
-	{
-		MV1DeleteModel(iHndl);
-		iHndl = -1;
-	}
-
-	//変数の初期化
-	memset(&cPos, 0, sizeof(VECTOR));
-	memset(&cSize, 0, sizeof(VECTOR));
-	memset(&cRotate, 0, sizeof(VECTOR));
+	CBase::Exit();
 }

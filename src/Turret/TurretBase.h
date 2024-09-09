@@ -15,11 +15,17 @@ public:
 	TurretBase();
 	~TurretBase();
 	
+	//初期化
+	void Init();
+
 	//データロード
 	void Load(const char FILEPATH[]);
 
 	//毎フレーム行う処理
-	void Step();
+	virtual void Step() = 0;
+
+	//後処理
+	void Exit();
 
 	//タレット設置処理
 	bool TurretSpawn(const VECTOR& vPos);

@@ -79,17 +79,17 @@ void CCharacterManager::Step()
 	switch (MainID)
 	{
 	case MainID_ATTACKER:
-		cAttacker.Step(cShotManager);
+		cAttacker.Step(cShotManager, cTurretManager);
 		cAttacker.Update();
 		break;
 
 	case MainID_TANK:
-		cTank.Step(cShotManager);
+		cTank.Step(cShotManager, cTurretManager);
 		cTank.Update();
 		break;
 
 	case MainID_SUPPORT:
-		cSupport.Step(cShotManager);
+		cSupport.Step(cShotManager, cTurretManager);
 		cSupport.Update();
 		break;
 

@@ -10,36 +10,16 @@ const float SPERE_R = 3.0f;
 //コンストラクタ・デストラクタ
 CAttacker::CAttacker()
 {
-	//ハンドルの初期化
-	iHndl = -1;
-
-	//変数の初期化
-	memset(&cPos, 0, sizeof(VECTOR));
-	memset(&cSize, 0, sizeof(VECTOR));
-	memset(&cRotate, 0, sizeof(VECTOR));
 }
 
 CAttacker::~CAttacker()
 {
-	//ハンドルの初期化
-	iHndl = -1;
-
-	//変数の初期化
-	memset(&cPos, 0, sizeof(VECTOR));
-	memset(&cSize, 0, sizeof(VECTOR));
-	memset(&cRotate, 0, sizeof(VECTOR));
 }
 
 //初期化
 void CAttacker::Init()
 {
-	//ハンドルの初期化
-	iHndl = -1;
-
-	//変数の初期化
-	cPos = VGet(0.0f, 0.0f, 0.0f);
-	cSize = VGet(1.0f, 1.0f, 1.0f);
-	cRotate = VGet(0.0f, 0.0f, 0.0f);
+	CBase::Init();
 }
 
 //データ読み込み
@@ -49,7 +29,7 @@ void CAttacker::Load()
 }
 
 //毎フレーム行う処理
-void CAttacker::Step(CShotManager& cShotManager)
+void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 {
 	if (CInput::IsKeyKeep(KEY_INPUT_W))
 	{
@@ -86,14 +66,6 @@ void CAttacker::Step(CShotManager& cShotManager)
 	}
 }
 
-//更新処理
-void CAttacker::Update()
-{
-	MV1SetPosition(iHndl, cPos);		//座標の更新
-	MV1SetScale(iHndl, cSize);			//サイズの更新
-	MV1SetRotationXYZ(iHndl, cRotate);	//回転値の更新
-}
-
 //描画
 void CAttacker::Draw()
 {
@@ -116,15 +88,5 @@ void CAttacker::Draw()
 //終了処理
 void CAttacker::Exit()
 {
-	//ハンドルの削除
-	if (iHndl != -1)
-	{
-		MV1DeleteModel(iHndl);
-		iHndl = -1;
-	}
-
-	//変数の初期化
-	memset(&cPos, 0, sizeof(VECTOR));
-	memset(&cSize, 0, sizeof(VECTOR));
-	memset(&cRotate, 0, sizeof(VECTOR));
+	CBase::Exit();
 }

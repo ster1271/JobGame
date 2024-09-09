@@ -18,10 +18,11 @@ class CCharacterManager
 private:
 	MainPlayerID MainID;
 
-	CShotManager cShotManager;	//ショットマネージャー
-	CAttacker cAttacker;		//アタッカークラス
-	CTank cTank;				//タンククラス
-	CSupport cSupport;			//サポートクラス
+	CShotManager cShotManager;		//ショットマネージャー
+	CTurretManager cTurretManager;	//タレットマネージャー
+	CAttacker cAttacker;			//アタッカークラス
+	CTank cTank;					//タンククラス
+	CSupport cSupport;				//サポートクラス
 
 
 
@@ -45,7 +46,7 @@ public:
 	//描画処理
 	void Draw();
 
-	//メインキャラID設定
+	//メインキャラID設定(未変更)
 	void SetMainID(MainPlayerID Id)
 	{
 		MainID = Id;
