@@ -23,6 +23,8 @@ void CAttacker::Init()
 	cPos = VGet(0.0f, 0.0f, 0.0f);
 	cSize = VGet(1.0f, 1.0f, 1.0f);
 	cRotate = VGet(0.0f, 0.0f, 0.0f);
+
+	Life = 100;
 }
 
 //ÉfÅ[É^ì«Ç›çûÇ›

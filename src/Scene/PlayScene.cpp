@@ -179,7 +179,7 @@ void CPlayScene::Step()
 		//弾更新処理
 		cShotManager.Step(cCharacterManager.GetPosition());
 		//ボット更新処理
-		cBot.Step();
+		cBot.Step(cCharacterManager.GetPosition());
 	}
 
 	//デバックカメラとの切り替え処理
