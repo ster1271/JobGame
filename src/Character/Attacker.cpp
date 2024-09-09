@@ -53,6 +53,15 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 		cPos.x -= MOVESPEED;
 	}
 
+	if (CInput::IsKeyKeep(KEY_INPUT_LEFT))
+	{
+		cRotate.y -= 0.05f;
+	}
+	if (CInput::IsKeyKeep(KEY_INPUT_RIGHT))
+	{
+		cRotate.y += 0.05f;
+	}
+
 	//î≠éÀèàóù
 	if (CInput::IsKeyPush(KEY_INPUT_SPACE))
 	{

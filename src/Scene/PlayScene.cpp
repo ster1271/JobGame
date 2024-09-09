@@ -193,6 +193,6 @@ void CPlayScene::Step()
 	}
 
 	//ƒJƒƒ‰XVˆ—
-	cCameraManager.Step(cCharacterManager.GetPosition(), VGet(0.0f, 0.0f, 0.0f));
+	cCameraManager.Step(cCharacterManager.GetPosition(), cCharacterManager.GetRotate());
 }
 

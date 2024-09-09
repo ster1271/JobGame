@@ -89,8 +89,8 @@ void CBot::Move_Bot(VECTOR Set_Point)
 	float Dir = 0.0f;
 
 	VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ボットの移動速度
-	vSpd.x = cosf(DEG_TO_RAD(cRotate.x));
-	vSpd.y = sinf(DEG_TO_RAD(cRotate.x));
+	vSpd.x = sinf(DEG_TO_RAD(cRotate.x));
+	vSpd.y = cosf(DEG_TO_RAD(cRotate.x));
 	vSpd.z = 0.0f;
 
 	Dir = (Vtmp.x * vSpd.y) - (vSpd.x * Vtmp.y);
@@ -106,17 +106,18 @@ void CBot::Move_Bot(VECTOR Set_Point)
 	{
 		cRotate.x += 1.0f;
 	}
-	else
+	
+	/*if(-0.1 < Dir < 0.1)
 	{
 		IsMove = false;
-	}
+	}*/
 
-	vSpd.x = cosf(DEG_TO_RAD(cRotate.x));
-	vSpd.y = sinf(DEG_TO_RAD(cRotate.x));
+	vSpd.x = sinf(DEG_TO_RAD(cRotate.x));
+	vSpd.y = cosf(DEG_TO_RAD(cRotate.x));
 
 	//座標に速度を加算する
-	cPos.x += vSpd.x * 0.5f;
-	cPos.z += vSpd.y * 0.5f;
+	cPos.x += vSpd.x * 0.3f;
+	cPos.z += vSpd.y * 0.3f;
 
 }
 
