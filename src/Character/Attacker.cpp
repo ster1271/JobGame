@@ -20,6 +20,9 @@ CAttacker::~CAttacker()
 void CAttacker::Init()
 {
 	CBase::Init();
+	cPos = VGet(0.0f, 0.0f, 0.0f);
+	cSize = VGet(1.0f, 1.0f, 1.0f);
+	cRotate = VGet(0.0f, 0.0f, 0.0f);
 }
 
 //データ読み込み
@@ -69,6 +72,7 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 //描画
 void CAttacker::Draw()
 {
+
 	//条件式がtrueならモデルをfalseなら球を表示
 	if (iHndl != -1)
 	{
