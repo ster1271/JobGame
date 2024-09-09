@@ -6,36 +6,17 @@ const float SPERE_R = 3.0f;
 //コンストラクタ
 CBot::CBot()
 {
-	//ハンドルの初期化
-	iHndl = -1;
-
-	//変数の初期化
-	memset(&cPos, 0, sizeof(VECTOR));
-	memset(&cSize, 0, sizeof(VECTOR));
-	memset(&cRotate, 0, sizeof(VECTOR));
 }
 
 //デストラクタ
 CBot::~CBot()
 {
-	//ハンドルの初期化
-	iHndl = -1;
-
-	//変数の初期化
-	memset(&cPos, 0, sizeof(VECTOR));
-	memset(&cSize, 0, sizeof(VECTOR));
-	memset(&cRotate, 0, sizeof(VECTOR));
 }
 
 //初期化
 void CBot::Init()
 {
-	//ハンドルの初期化
-	iHndl = -1;
-
-	cPos = VGet(0.0f, 10.0f, 50.0f);
-	cSize = VGet(1.0f, 1.0f, 1.0f);
-	cRotate = VGet(0.0f, 0.0f, 0.0f);
+	CObject::Init();
 }
 
 //読み込み
