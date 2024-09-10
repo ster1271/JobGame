@@ -15,7 +15,6 @@
 //コンストラクタ
 CPlayCamera::CPlayCamera()
 {
-	//初期化
 	memset(&CameraPos, 0, sizeof(VECTOR));
 	memset(&ForcusPos, 0, sizeof(VECTOR));
 	memset(&Up, 0, sizeof(VECTOR));
@@ -25,7 +24,9 @@ CPlayCamera::CPlayCamera()
 //デストラクタ
 CPlayCamera::~CPlayCamera()
 {
-
+	memset(&CameraPos, 0, sizeof(VECTOR));
+	memset(&ForcusPos, 0, sizeof(VECTOR));
+	memset(&Up, 0, sizeof(VECTOR));
 }
 
 //初期化

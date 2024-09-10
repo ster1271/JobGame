@@ -22,9 +22,7 @@ void CSupport::Init()
 	CBase::Init();
 	cPos = VGet(0.0f, 0.0f, 0.0f);
 	cSize = VGet(1.0f, 1.0f, 1.0f);
-	cRotate = VGet(0.0f, 0.0f, 0.0f);
-
-	
+	cRotate = VGet(0.0f, DX_PI_F, 0.0f);
 }
 
 //ÉfÅ[É^ì«Ç›çûÇ›
@@ -38,19 +36,19 @@ void CSupport::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 {
 	if (CInput::IsKeyKeep(KEY_INPUT_W))
 	{
-		cPos.z -= MOVESPEED;
+		cPos.z += MOVESPEED;
 	}
 	if (CInput::IsKeyKeep(KEY_INPUT_S))
 	{
-		cPos.z += MOVESPEED;
+		cPos.z -= MOVESPEED;
 	}
 	if (CInput::IsKeyKeep(KEY_INPUT_A))
 	{
-		cPos.x += MOVESPEED;
+		cPos.x -= MOVESPEED;
 	}
 	if (CInput::IsKeyKeep(KEY_INPUT_D))
 	{
-		cPos.x -= MOVESPEED;
+		cPos.x += MOVESPEED;
 	}
 
 	//î≠éÀèàóù
