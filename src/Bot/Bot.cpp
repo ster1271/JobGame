@@ -8,11 +8,13 @@ const float SPERE_R = 3.0f;
 //コンストラクタ
 CBot::CBot()
 {
+	State_Id = STATE_NUM;
 }
 
 //デストラクタ
 CBot::~CBot()
 {
+	State_Id = STATE_NUM;
 }
 
 //初期化
@@ -23,13 +25,14 @@ void CBot::Init()
 	cSize = VGet(1.0f, 1.0f, 1.0f);
 	cRotate = VGet(0.0f, 0.0f, 0.0f);
 
-	IsMove = false;
+	State_Id = STATE_NUM;
 }
 
 //読み込み
 bool CBot::Load()
 {
 	iHndl = MV1LoadModel(BOT_FILE_PATH);
+	State_Id = STATE_STOP;
 
 	if (iHndl != -1)
 		return true;
@@ -53,22 +56,33 @@ void CBot::Draw()
 	DrawFormatString(0, 150, GetColor(0, 0, 0), "ボットX座標:%f", cPos.x);
 	DrawFormatString(0, 165, GetColor(0, 0, 0), "ボットY座標:%f", cPos.y);
 	DrawFormatString(0, 180, GetColor(0, 0, 0), "ボットZ座標:%f", cPos.z);
-	DrawFormatString(0, 195, GetColor(0, 0, 0), "内積:%f", tmp_dir);
+	DrawFormatString(0, 195, GetColor(0, 0, 0), "外積:%f", tmp_dir);
+	DrawFormatString(0, 210, GetColor(0, 0, 0), "距離:%f", tmp_Range);
+
 }
 
 //マイフレーム行う処理
 void CBot::Step(VECTOR Set_Point)
 {
-	if (CInput::IsKeyPush(KEY_INPUT_1))
-	{
-		IsMove = true;
-	}
+	
 
-
-	if (IsMove)
+	switch (State_Id)
 	{
+	case CBot::STATE_STOP:
+		
+		if (CInput::IsKeyPush(KEY_INPUT_1))
+		{
+			State_Id = STATE_MOVE;
+		}
+		break;
+
+	case CBot::STATE_MOVE:
 		//追尾処理
 		Move_Bot(Set_Point);
+		break;
+
+	default:
+		break;
 	}
 	
 	//更新処理
@@ -82,42 +96,46 @@ void CBot::Move_Bot(VECTOR Set_Point)
 	//ボットから指定の地点へ行くベクトルを計算
 	VECTOR Vtmp;
 	Vtmp.x = Set_Point.x - cPos.x;
-	Vtmp.z = 0.0f;
-	Vtmp.y = Set_Point.z - cPos.z;
+	Vtmp.y = 0.0f;
+	Vtmp.z = Set_Point.z - cPos.z;
 
 	//進行方向のどちら側にいるのかを調べる
 	float Dir = 0.0f;
 
 	VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ボットの移動速度
-	vSpd.x = sinf(DEG_TO_RAD(cRotate.x));
-	vSpd.y = cosf(DEG_TO_RAD(cRotate.x));
-	vSpd.z = 0.0f;
-
-	Dir = (Vtmp.x * vSpd.y) - (vSpd.x * Vtmp.y);
+	vSpd.x = sinf(cRotate.y) * -1.0f;
+	vSpd.y = 0.0f;
+	vSpd.z = cosf(cRotate.y) * -1.0f;
+	
+	//外積計算
+	Dir = (Vtmp.x * vSpd.z) - (vSpd.x * Vtmp.z);
 	//確認用
 	tmp_dir = Dir;
 
 	//回転する角度を決める
 	if (Dir > 0.0f)
 	{
-		cRotate.x -= 1.0f;
+		cRotate.y += 0.01f;
 	}
 	else if (Dir < 0.0f)
 	{
-		cRotate.x += 1.0f;
+		cRotate.y -= 0.01f;
 	}
-	
-	/*if(-0.1 < Dir < 0.1)
-	{
-		IsMove = false;
-	}*/
-
-	vSpd.x = sinf(DEG_TO_RAD(cRotate.x));
-	vSpd.y = cosf(DEG_TO_RAD(cRotate.x));
 
 	//座標に速度を加算する
-	cPos.x += vSpd.x * 0.3f;
-	cPos.z += vSpd.y * 0.3f;
+	cPos.x += sinf(cRotate.y) * -0.3f;
+	cPos.z += cosf(cRotate.y) * -0.3f;
 
+	//プレイヤーとの距離を計算
+	float Range = (Set_Point.x - cPos.x) * (Set_Point.x - cPos.x) + (Set_Point.z - cPos.z) * (Set_Point.z - cPos.z);
+	Range = sqrt(Range);
+	//確認用
+	tmp_Range = Range;
+
+	//距離が一定値に達したらIdを変更する
+	if (Range <= 0.1f)
+	{
+		State_Id = STATE_STOP;
+	}
 }
 

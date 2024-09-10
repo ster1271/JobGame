@@ -21,7 +21,7 @@ public:
 	//毎フレーム呼ぶ処理
 	void Step(VECTOR vForcus, VECTOR fRot);
 
-	//更新したデータを反映させる
+	//データ更新
 	void Update();
 
 	//カメラの座標取得

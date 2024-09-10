@@ -7,8 +7,17 @@
 class CBot :public CObject
 {
 private:
-	bool IsMove;
+	//ボットの状態遷移
+	enum BOT_STATE
+	{
+		STATE_STOP = 0,	//停止
+		STATE_MOVE,		//移動
+		STATE_NUM,
+	};
+
+	BOT_STATE State_Id;
 	float tmp_dir;
+	float tmp_Range;
 public:
 	//コンストラクタ・デストラクタ
 	CBot();
