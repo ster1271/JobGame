@@ -1,7 +1,7 @@
 #include "Bot.h"
 
 const char BOT_FILE_PATH[] = { "" };
-const float SPERE_R = 3.0f;
+const float SPERE_R = 5.0f;
 
 #define DEG_TO_RAD(a)	((a) * DX_PI_F / 180.0f)	//ラジアン角に変換する式
 
@@ -69,16 +69,18 @@ void CBot::Step(VECTOR Set_Point)
 	switch (State_Id)
 	{
 	case CBot::STATE_STOP:
-		
+
+		//テスト用処理
 		if (CInput::IsKeyPush(KEY_INPUT_1))
 		{
+			//Idを変更する
 			State_Id = STATE_MOVE;
 		}
 		break;
 
 	case CBot::STATE_MOVE:
-		//追尾処理
-		Move_Bot(Set_Point);
+
+		Move_Bot(Set_Point);	//追尾処理
 		break;
 
 	default:
@@ -102,24 +104,24 @@ void CBot::Move_Bot(VECTOR Set_Point)
 	//進行方向のどちら側にいるのかを調べる
 	float Dir = 0.0f;
 
-	VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ボットの移動速度
+	VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ボットの移動ベクトル
 	vSpd.x = sinf(cRotate.y) * -1.0f;
 	vSpd.y = 0.0f;
 	vSpd.z = cosf(cRotate.y) * -1.0f;
 	
 	//外積計算
-	Dir = (Vtmp.x * vSpd.z) - (vSpd.x * Vtmp.z);
+	Dir = Vtmp.x * vSpd.z - vSpd.x * Vtmp.z;
 	//確認用
 	tmp_dir = Dir;
 
 	//回転する角度を決める
-	if (Dir > 0.0f)
+	if (Dir >= 0.0f)
 	{
-		cRotate.y += 0.01f;
+		cRotate.y += 0.05f;
 	}
 	else if (Dir < 0.0f)
 	{
-		cRotate.y -= 0.01f;
+		cRotate.y -= 0.05f;
 	}
 
 	//座標に速度を加算する
@@ -133,7 +135,7 @@ void CBot::Move_Bot(VECTOR Set_Point)
 	tmp_Range = Range;
 
 	//距離が一定値に達したらIdを変更する
-	if (Range <= 0.1f)
+	if (Range < 1.0f)
 	{
 		State_Id = STATE_STOP;
 	}
