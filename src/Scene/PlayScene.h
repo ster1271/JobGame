@@ -6,6 +6,7 @@
 #include "../Shot/ShotManager.h"
 #include "../Character/CharacterManager.h"
 #include "../Enemy/EnemyManager.h"
+#include "../Turret/TurretManager.h"
 #include "../Object/ObjectManager.h"
 #include "../Bot/Bot.h"
 
@@ -29,6 +30,7 @@ private:
 	CCharacterManager cCharacterManager;	//キャラクターマネージャー
 	CEnemyManager cEnemyManager;			//エネミーマネージャー
 	CObjectManager cObjectManager;			//オブジェクトマネージャー
+	CTurretManager cTurretManager;			//タレットマネージャー
 	CBot cBot;								//ボットクラス
 	
 

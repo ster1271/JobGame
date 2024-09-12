@@ -1,10 +1,12 @@
 #pragma once
 #include <DxLib.h>
+#include "../Turret/Turret_Normal.h"
 
 //タレットマネージャークラス
 class CTurretManager
 {
 private:
+	CTurret_Normal cTurret_Normal;
 
 public:
 	//コンストラクタ・デストラクタ
@@ -25,4 +27,6 @@ public:
 	//描画処理
 	void Draw();
 
+	//タレット設置処理
+	void TurretSpawn(const VECTOR vPos);
 };

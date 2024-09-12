@@ -15,7 +15,7 @@ public:
 	void Init();
 
 	//データロード
-	void Load(const char FILEPATH[]);
+	void Load();
 
 	//描画
 	void Draw();
@@ -25,4 +25,7 @@ public:
 
 	//後処理
 	void Exit();
+
+	//タレット設置処理
+	bool TurretSpawn(const VECTOR vPos);
 };

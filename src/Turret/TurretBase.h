@@ -6,8 +6,8 @@ class TurretBase : public CObject
 {
 protected:
 	VECTOR ShotRenge;	//射程距離
-	VECTOR ShotSpeed;		//射撃スピード
-	float Life;			//タレットのHP
+
+	float Hp;			//タレットのHP
 	int Power_Up_Count;	//強化回数
 
 	bool IsActive;		//生存フラグ
@@ -28,8 +28,11 @@ public:
 	//後処理
 	void Exit();
 
+	//フラグ取得
+	bool GetIsActive() { return IsActive; }
+
 	//タレット設置処理
-	bool TurretSpawn(const VECTOR& vPos);
+	virtual bool TurretSpawn(const VECTOR vPos);
 
 	//タレット強化
 	void Turret_Power_Up();

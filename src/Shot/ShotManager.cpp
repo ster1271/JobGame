@@ -71,7 +71,6 @@ void CShotManager::Step(VECTOR Pos)
 		cPlayerShot[i].Step(Pos);
 	}
 
-	
 }
 
 
