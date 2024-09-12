@@ -22,19 +22,28 @@ void CTurret_Normal::Init()
 //データロード
 void CTurret_Normal::Load(const char FILEPATH[])
 {
-
+	//モデルの読み込み
+	iHndl = MV1LoadModel(FILEPATH);
 }
 
 //描画
 void CTurret_Normal::Draw()
 {
+	if (iHndl != -1)
+	{
+		MV1DrawModel(iHndl);
+	}
 
 }
 
 //毎フレーム行う処理
 void CTurret_Normal::Step()
 {
+	if (!IsActive) return;
 
+	//座標に速度を加算
+
+	
 }
 
 //後処理

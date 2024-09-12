@@ -6,6 +6,7 @@ class TurretBase : public CObject
 {
 protected:
 	VECTOR ShotRenge;	//射程距離
+	VECTOR ShotSpeed;		//射撃スピード
 	float Life;			//タレットのHP
 	int Power_Up_Count;	//強化回数
 

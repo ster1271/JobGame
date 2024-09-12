@@ -1,11 +1,14 @@
 #include "TurretBase.h"
 
+#define SHOT_SPEED			()
 #define MAX_POWER_UP_COUNT	(5)	//最大強化回数
 
 //コンストラクタ
 TurretBase::TurretBase()
 {
+	CObject::Init();
 	memset(&ShotRenge, 0, sizeof(VECTOR));
+	memset(&ShotSpeed, 0, sizeof(VECTOR));
 	Life = 0.0f;
 	Power_Up_Count = 0;
 	IsActive = false;		
@@ -14,12 +17,9 @@ TurretBase::TurretBase()
 //デストラクタ
 TurretBase::~TurretBase()
 {
-	iHndl = -1;
-
-	memset(&cPos, 0, sizeof(VECTOR));
-	memset(&cSize, 0, sizeof(VECTOR));
-	memset(&cRotate, 0, sizeof(VECTOR));
+	CObject::Init();
 	memset(&ShotRenge, 0, sizeof(VECTOR));
+	memset(&ShotSpeed, 0, sizeof(VECTOR));
 
 	Life = 0.0f;
 	Power_Up_Count = 0;
@@ -29,11 +29,9 @@ TurretBase::~TurretBase()
 //初期化
 void TurretBase::Init()
 {
-	iHndl = -1;
-
-	memset(&cPos, 0, sizeof(VECTOR));
-	memset(&cSize, 0, sizeof(VECTOR));
-	memset(&cRotate, 0, sizeof(VECTOR));
+	CObject::Init();
+	memset(&ShotRenge, 0, sizeof(VECTOR));
+	memset(&ShotSpeed, 0, sizeof(VECTOR));
 
 	Life = 0.0f;
 	Power_Up_Count = 0;
@@ -50,7 +48,6 @@ void TurretBase::Load(const char FILEPATH[])
 //毎フレーム行う処理
 void TurretBase::Step()
 {
-	
 }
 
 //後処理
