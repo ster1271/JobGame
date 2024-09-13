@@ -25,6 +25,8 @@ private:
 
 	tagPLAY_SCENE eSceneID;
 
+
+
 	CCameraManager cCameraManager;			//カメラマネージャー
 	CShotManager cShotManager;				//ショットマネージャー
 	CCharacterManager cCharacterManager;	//キャラクターマネージャー

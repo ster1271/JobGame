@@ -56,5 +56,8 @@ void CTurretManager::Draw()
 //タレット設置処理
 void CTurretManager::TurretSpawn(const VECTOR& vPos)
 {
+	//仮の変数
+	CTurret_Normal A;
+	A.TurretSpawn(vPos);
 	cTurret_Normal.TurretSpawn(vPos);
 }

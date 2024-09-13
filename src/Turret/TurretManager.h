@@ -1,11 +1,16 @@
 #pragma once
 #include <DxLib.h>
+#include <iostream>
+#include <vector>
 #include "../Turret/Turret_Normal.h"
+
+using namespace std;
 
 //タレットマネージャークラス
 class CTurretManager
 {
 private:
+
 	CTurret_Normal cTurret_Normal;
 
 public:
