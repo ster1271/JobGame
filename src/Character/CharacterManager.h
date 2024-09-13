@@ -19,7 +19,6 @@ private:
 	MainPlayerID MainID;
 
 	CShotManager cShotManager;		//ショットマネージャー
-	CTurretManager cTurretManager;	//タレットマネージャー
 	CAttacker cAttacker;			//アタッカークラス
 	CTank cTank;					//タンククラス
 	CSupport cSupport;				//サポートクラス
@@ -41,7 +40,7 @@ public:
 	void Exit();
 
 	//毎フレーム呼ぶ処理
-	void Step();
+	void Step(CTurretManager& cTurretManager);
 
 	//描画処理
 	void Draw();

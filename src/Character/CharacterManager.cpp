@@ -73,7 +73,7 @@ void CCharacterManager::Exit()
 }
 
 //毎フレーム呼ぶ処理
-void CCharacterManager::Step()
+void CCharacterManager::Step(CTurretManager& cTurretManager)
 {
 	//メインキャラ処理
 	switch (MainID)

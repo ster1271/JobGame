@@ -84,7 +84,6 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	{
 		cTurretManager.TurretSpawn(cPos);
 	}
-
 }
 
 //•`‰æ

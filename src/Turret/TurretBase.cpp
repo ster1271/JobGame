@@ -16,12 +16,6 @@ TurretBase::TurretBase()
 //デストラクタ
 TurretBase::~TurretBase()
 {
-	CObject::Init();
-	memset(&ShotRenge, 0, sizeof(VECTOR));
-
-	Hp = 0.0f;
-	Power_Up_Count = 0;
-	IsActive = false;
 }
 
 //初期化

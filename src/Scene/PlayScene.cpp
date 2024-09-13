@@ -183,7 +183,7 @@ void CPlayScene::Step()
 		//オブジェクト更新処理
 		cObjectManager.Step();
 		//キャラクター更新処理
-		cCharacterManager.Step();
+		cCharacterManager.Step(cTurretManager);
 		//エネミー更新処理
 		cEnemyManager.Step();
 		//タレット更新処理

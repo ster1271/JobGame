@@ -13,8 +13,6 @@ CTurret_Normal::CTurret_Normal()
 //デストラクタ
 CTurret_Normal::~CTurret_Normal()
 {
-	Attack = 0.0f;
-	Exit();
 }
 
 //初期化
@@ -73,7 +71,6 @@ bool CTurret_Normal::TurretSpawn(const VECTOR &vPos)
 {
 	//すでに生成されている
 	if (IsActive) return false;
-
 
 	cPos = vPos;
 	
