@@ -28,5 +28,5 @@ public:
 	void Draw();
 
 	//タレット設置処理
-	void TurretSpawn(const VECTOR vPos);
+	void TurretSpawn(const VECTOR& vPos);
 };

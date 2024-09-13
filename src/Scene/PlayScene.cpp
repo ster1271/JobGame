@@ -164,16 +164,18 @@ void CPlayScene::Step()
 		eSceneID = PLAY_SCENE_END;
 	}
 
-	//カメラ視点切り替え
+	//更新処理
 	if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_PALY)
 	{
 		//メインキャラ視点変更
 		if (CInput::IsKeyPush(KEY_INPUT_UP))
 		{
+			//メインキャラへ変更
 			cCharacterManager.SetMainID(MainID_ATTACKER);
 		}
 		else if (CInput::IsKeyPush(KEY_INPUT_DOWN))
 		{
+			//CPUキャラへ変更
 			//cCharacterManager.SetMainID(MainID_TANK);
 			cCharacterManager.SetMainID(MainID_SUPPORT);
 		}

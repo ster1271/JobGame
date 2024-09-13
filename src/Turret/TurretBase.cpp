@@ -59,7 +59,7 @@ void TurretBase::Exit()
 
 	Hp = 0.0f;
 	Power_Up_Count = 0;
-	IsActive = false;
+	/*IsActive = false;*/
 }
 
 //タレット設置処理

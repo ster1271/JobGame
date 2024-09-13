@@ -14,20 +14,26 @@ CTurret_Normal::CTurret_Normal()
 CTurret_Normal::~CTurret_Normal()
 {
 	Attack = 0.0f;
+	Exit();
 }
 
 //初期化
 void CTurret_Normal::Init()
 {
 	TurretBase::Init();
+	cRotate = VGet(0.0f, DX_PI_F / 2, DX_PI_F / 2);
+	cSize = VGet(0.1f, 0.1f, 0.1f);
 	Attack = 0.0f;
 }
 
 //データロード
 void CTurret_Normal::Load()
 {
-	//モデルの読み込み
-	iHndl = MV1LoadModel(TURRET_NORMAL_PATH);
+	if (iHndl == -1)
+	{
+		//モデルの読み込み
+		iHndl = MV1LoadModel(TURRET_NORMAL_PATH);
+	}
 }
 
 //描画
@@ -36,19 +42,23 @@ void CTurret_Normal::Draw()
 	if (IsActive)
 	{
 		MV1DrawModel(iHndl);
+
+	
 	}
 
 	DrawFormatString(0, 500, GetColor(255, 255, 0), "タレットX座標:%f", cPos.x);
 	DrawFormatString(0, 515, GetColor(255, 255, 0), "タレットY座標:%f", cPos.y);
 	DrawFormatString(0, 530, GetColor(255, 255, 0), "タレットZ座標:%f", cPos.z);
+
 }
 
 //毎フレーム行う処理
 void CTurret_Normal::Step()
 {
+	
 	if (!IsActive)return;
 
-	Update();
+
 }
 
 //後処理
@@ -59,11 +69,14 @@ void CTurret_Normal::Exit()
 }
 
 //タレット設置処理
-bool CTurret_Normal::TurretSpawn(const VECTOR vPos)
+bool CTurret_Normal::TurretSpawn(const VECTOR &vPos)
 {
-	cPos = VGet(100.0f, 0.0f, 200.0f);
-	cRotate = VGet(0.0f, 90.0f, 0.0f);
-	cSize = VGet(0.1f, 0.1f, 0.1f);
+	//すでに生成されている
+	if (IsActive) return false;
+
+
+	cPos = vPos;
+	
 
 	ShotRenge = VGet(0.0f, 0.0f, 0.0f);
 	Hp = MAX_LIFE;

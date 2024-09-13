@@ -54,7 +54,7 @@ void CTurretManager::Draw()
 }
 
 //タレット設置処理
-void CTurretManager::TurretSpawn(const VECTOR vPos)
+void CTurretManager::TurretSpawn(const VECTOR& vPos)
 {
 	cTurret_Normal.TurretSpawn(vPos);
 }

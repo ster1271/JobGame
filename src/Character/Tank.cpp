@@ -66,6 +66,12 @@ void CTank::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 
 		cShotManager.RequestPlayerShot(BulletPos, vSpd);
 	}
+
+	//ƒ^ƒŒƒbƒg¶¬ˆ—
+	if (CInput::IsKeyPush(KEY_INPUT_P))
+	{
+		cTurretManager.TurretSpawn(cPos);
+	}
 }
 
 //•`‰æ

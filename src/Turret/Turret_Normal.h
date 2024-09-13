@@ -27,5 +27,5 @@ public:
 	void Exit();
 
 	//タレット設置処理
-	bool TurretSpawn(const VECTOR vPos);
+	bool TurretSpawn(const VECTOR &vPos);
 };
