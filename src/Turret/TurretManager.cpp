@@ -16,48 +16,65 @@ CTurretManager::~CTurretManager()
 //初期化
 void CTurretManager::Init()
 {
-	cTurret_Normal.Init();
+	for (int Turret_Index = 0; Turret_Index < TURRET_MAX; Turret_Index++)
+	{
+		cTurretBase[Turret_Index] = new CTurret_Normal;
+		cTurretBase[Turret_Index]->Init();
+	}
 }
 
 //データロード
 void CTurretManager::Load()
 {
-	cTurret_Normal.Load();
+	for (int Turret_Index = 0; Turret_Index < TURRET_MAX; Turret_Index++)
+	{
+		cTurretBase[Turret_Index]->Load();
+	}
 }
 
 //終了処理
 void CTurretManager::Exit()
 {
-	cTurret_Normal.Exit();
+	for (int Turret_Index = 0; Turret_Index < TURRET_MAX; Turret_Index++)
+	{
+		cTurretBase[Turret_Index]->Exit();
+	}
 }
 
 //繰り返し行う処理
 void CTurretManager::Step(VECTOR Pos)
 {
+	for (int Turret_Index = 0; Turret_Index < TURRET_MAX; Turret_Index++)
+	{
+		cTurretBase[Turret_Index]->Step();
+	}
 
-	cTurret_Normal.Step();
-
-	//更新処理
 	Update();
 }
 
 //更新処理
 void CTurretManager::Update()
 {
-	cTurret_Normal.Update();
+	for (int Turret_Index = 0; Turret_Index < TURRET_MAX; Turret_Index++)
+	{
+		cTurretBase[Turret_Index]->Update();
+	}
 }
 
 //描画処理
 void CTurretManager::Draw()
 {
-	cTurret_Normal.Draw();
+	for (int Turret_Index = 0; Turret_Index < TURRET_MAX; Turret_Index++)
+	{
+		cTurretBase[Turret_Index]->Draw();
+	}
 }
 
 //タレット設置処理
 void CTurretManager::TurretSpawn(const VECTOR& vPos)
 {
-	//仮の変数
-	CTurret_Normal A;
-	A.TurretSpawn(vPos);
-	cTurret_Normal.TurretSpawn(vPos);
+	for (int Turret_Index = 0; Turret_Index < TURRET_MAX; Turret_Index++)
+	{
+		cTurretBase[Turret_Index]->TurretSpawn(vPos);
+	}
 }

@@ -100,9 +100,9 @@ void CAttacker::Draw()
 		DrawSphere3D(cPos, SPERE_R, 32, GetColor(255, 0, 0), GetColor(255, 0, 0), TRUE);
 	}
 
-	DrawFormatString(0, 100, GetColor(255, 255, 255), "アタッカーX座標:%f", cPos.x);
-	DrawFormatString(0, 115, GetColor(255, 255, 255), "アタッカーY座標:%f", cPos.y);
-	DrawFormatString(0, 130, GetColor(255, 255, 255), "アタッカーZ座標:%f", cPos.z);
+	DrawFormatString(0, 100, GetColor(255, 0, 0), "アタッカーX座標:%f", cPos.x);
+	DrawFormatString(0, 115, GetColor(255, 0, 0), "アタッカーY座標:%f", cPos.y);
+	DrawFormatString(0, 130, GetColor(255, 0, 0), "アタッカーZ座標:%f", cPos.z);
 
 }
 

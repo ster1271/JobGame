@@ -18,9 +18,7 @@ CTurret_Normal::~CTurret_Normal()
 //初期化
 void CTurret_Normal::Init()
 {
-	TurretBase::Init();
-	cRotate = VGet(0.0f, DX_PI_F / 2, DX_PI_F / 2);
-	cSize = VGet(0.1f, 0.1f, 0.1f);
+	CTurretBase::Init();
 	Attack = 0.0f;
 }
 
@@ -40,8 +38,6 @@ void CTurret_Normal::Draw()
 	if (IsActive)
 	{
 		MV1DrawModel(iHndl);
-
-	
 	}
 
 	DrawFormatString(0, 500, GetColor(255, 255, 0), "タレットX座標:%f", cPos.x);
@@ -62,18 +58,19 @@ void CTurret_Normal::Step()
 //後処理
 void CTurret_Normal::Exit()
 {
-	TurretBase::Exit();
+	CTurretBase::Exit();
 	Attack = 0.0f;
 }
 
 //タレット設置処理
-bool CTurret_Normal::TurretSpawn(const VECTOR &vPos)
+void CTurret_Normal::TurretSpawn(const VECTOR &vPos)
 {
 	//すでに生成されている
-	if (IsActive) return false;
+	if (IsActive) return;
 
 	cPos = vPos;
-	
+	cRotate = VGet(0.0f, DX_PI_F / 2, DX_PI_F / 2);
+	cSize = VGet(0.1f, 0.1f, 0.1f);
 
 	ShotRenge = VGet(0.0f, 0.0f, 0.0f);
 	Hp = MAX_LIFE;
@@ -81,6 +78,11 @@ bool CTurret_Normal::TurretSpawn(const VECTOR &vPos)
 	Attack = ATTACK;
 
 	IsActive = true;
+}
 
-	return true;
+
+//タレット強化
+void CTurret_Normal::Turret_Power_Up()
+{
+
 }

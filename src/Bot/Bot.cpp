@@ -125,8 +125,8 @@ void CBot::Move_Bot(VECTOR Set_Point)
 	}
 
 	//座標に速度を加算する
-	cPos.x += sinf(cRotate.y) * -0.3f;
-	cPos.z += cosf(cRotate.y) * -0.3f;
+	cPos.x += sinf(cRotate.y) * -0.1f;
+	cPos.z += cosf(cRotate.y) * -0.1f;
 
 	//プレイヤーとの距離を計算
 	float Range = (Set_Point.x - cPos.x) * (Set_Point.x - cPos.x) + (Set_Point.z - cPos.z) * (Set_Point.z - cPos.z);
@@ -135,7 +135,7 @@ void CBot::Move_Bot(VECTOR Set_Point)
 	tmp_Range = Range;
 
 	//距離が一定値に達したらIdを変更する
-	if (Range < 1.0f)
+	if (Range < 0.05f)
 	{
 		State_Id = STATE_STOP;
 	}

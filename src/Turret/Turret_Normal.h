@@ -2,7 +2,7 @@
 #include "TurretBase.h"
 
 //タレットクラス(通常)
-class CTurret_Normal: public TurretBase
+class CTurret_Normal: public CTurretBase
 {
 private:
 	float Attack;
@@ -27,5 +27,8 @@ public:
 	void Exit();
 
 	//タレット設置処理
-	bool TurretSpawn(const VECTOR &vPos);
+	void TurretSpawn(const VECTOR &vPos);
+
+	//タレット強化
+	void Turret_Power_Up();
 };

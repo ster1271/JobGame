@@ -1,10 +1,17 @@
 #pragma once
 #include "../Object/Object.h"
 
+
+
 //タレットベースクラス
-class TurretBase : public CObject
+class CTurretBase
 {
 protected:
+	int iHndl;			//モデルハンドル
+
+	VECTOR cPos;		//座標
+	VECTOR cRotate;		//回転値
+	VECTOR cSize;		//拡縮値
 	VECTOR ShotRenge;	//射程距離
 
 	float Hp;			//タレットのHP
@@ -13,29 +20,45 @@ protected:
 	bool IsActive;		//生存フラグ
 
 public:
-	TurretBase();
-	~TurretBase();
+	CTurretBase();
+	~CTurretBase();
 	
 	//初期化
 	void Init();
 
-	//データロード
-	void Load(const char FILEPATH[]);
+	//モデル読み込み
+	virtual void Load() = 0;
+	
+	//描画
+	virtual void Draw() = 0;
 
 	//毎フレーム行う処理
 	virtual void Step() = 0;
 
+	//情報更新
+	void Update();
+
 	//後処理
 	void Exit();
+
+	//座標取得
+	VECTOR GetPos() { return cPos; }
+
+	//サイズ取得
+	VECTOR GetSize() { return cSize; }
+
+	//回転地取得
+	VECTOR GetRotate() { return cRotate; }
 
 	//フラグ取得
 	bool GetIsActive() { return IsActive; }
 
 	//タレット設置処理
-	virtual bool TurretSpawn(const VECTOR vPos);
+	virtual void TurretSpawn(const VECTOR &vPos) = 0;
+
 
 	//タレット強化
-	void Turret_Power_Up();
+	virtual void Turret_Power_Up() = 0;
 
 };
 
