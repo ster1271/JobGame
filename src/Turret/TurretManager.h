@@ -2,10 +2,11 @@
 #include <DxLib.h>
 #include <iostream>
 #include <vector>
+#include <list>
 #include "../Turret/TurretBase.h"
 #include "../Turret/Turret_Normal.h"
 
-static const int TURRET_MAX = 30;	//タレットの最大数
+//static const int TURRET_MAX = 30;	//タレットの最大数
 
 using namespace std;
 
@@ -13,13 +14,8 @@ using namespace std;
 class CTurretManager
 {
 private:
-
-	//TurretBase型のvector配列
-	vector<CTurretBase> Enemy_List;
-
-	//ベースクラスのポインタ配列を用意
-	CTurretBase* cTurretBase[TURRET_MAX];
-
+	//CTurretBase型のList配列
+	list<CTurretBase*> Turret_List;
 
 public:
 	//コンストラクタ・デストラクタ
