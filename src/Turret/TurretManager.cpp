@@ -18,7 +18,6 @@ void CTurretManager::Init()
 {
 	for (int Turret_Index = 0; Turret_Index < TURRET_MAX; Turret_Index++)
 	{
-		cTurretBase[Turret_Index] = new CTurret_Normal;
 		cTurretBase[Turret_Index]->Init();
 	}
 }
@@ -75,6 +74,7 @@ void CTurretManager::TurretSpawn(const VECTOR& vPos)
 {
 	for (int Turret_Index = 0; Turret_Index < TURRET_MAX; Turret_Index++)
 	{
+		cTurretBase[Turret_Index] = new CTurret_Normal;
 		cTurretBase[Turret_Index]->TurretSpawn(vPos);
 	}
 }

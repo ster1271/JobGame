@@ -13,6 +13,10 @@ using namespace std;
 class CTurretManager
 {
 private:
+
+	//TurretBase型のvector配列
+	vector<CTurretBase> Enemy_List;
+
 	//ベースクラスのポインタ配列を用意
 	CTurretBase* cTurretBase[TURRET_MAX];
 
