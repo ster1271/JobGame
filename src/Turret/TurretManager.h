@@ -14,7 +14,9 @@ using namespace std;
 class CTurretManager
 {
 private:
-
+	//モデルのコピー元
+	int Org_Hndl;
+	
 	//CTurretBase型のList配列
 	vector<CTurretBase*> Turret_List;
 

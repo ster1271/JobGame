@@ -1,4 +1,5 @@
 #pragma once
+#include <math.h>
 #include "../Object/Object.h"
 
 
@@ -7,7 +8,8 @@
 class CTurretBase
 {
 protected:
-	int iHndl;			//モデルハンドル
+	int Org_Hndl;		//モデルハンドル(コピー元)
+	int iHndl;			//モデルハンドル(コピー用)
 
 	VECTOR cPos;		//座標
 	VECTOR cRotate;		//回転値
@@ -27,13 +29,13 @@ public:
 	void Init();
 
 	//モデル読み込み
-	virtual void Load() = 0;
+	virtual void Load(int Hndl) = 0;
 	
 	//描画
 	virtual void Draw() = 0;
 
 	//毎フレーム行う処理
-	virtual void Step() = 0;
+	virtual void Step(const VECTOR vPos) = 0;
 
 	//情報更新
 	void Update();
@@ -56,9 +58,11 @@ public:
 	//タレット設置処理
 	virtual void TurretSpawn(const VECTOR &vPos) = 0;
 
-
 	//タレット強化
 	virtual void Turret_Power_Up() = 0;
+
+	//タレット発射処理
+	virtual void Turret_Rotate(const VECTOR vPos) = 0;
 
 };
 

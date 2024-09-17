@@ -2,7 +2,6 @@
 
 const float MAX_LIFE = 50.0f;
 const float ATTACK = 5.0f;
-const char TURRET_NORMAL_PATH[] = { "data/Turret/Turret_Normal.x" };
 
 //コンストラクタ
 CTurret_Normal::CTurret_Normal()
@@ -23,13 +22,10 @@ void CTurret_Normal::Init()
 }
 
 //データロード
-void CTurret_Normal::Load()
+void CTurret_Normal::Load(int Hndl)
 {
-	if (iHndl == -1)
-	{
-		//モデルの読み込み
-		iHndl = MV1LoadModel(TURRET_NORMAL_PATH);
-	}
+	//コピーモデルをロード
+	iHndl = MV1DuplicateModel(Hndl);
 }
 
 //描画
@@ -44,15 +40,20 @@ void CTurret_Normal::Draw()
 	DrawFormatString(0, 515, GetColor(255, 255, 0), "タレットY座標:%f", cPos.y);
 	DrawFormatString(0, 530, GetColor(255, 255, 0), "タレットZ座標:%f", cPos.z);
 
+
+	DrawFormatString(0, 550, GetColor(255, 255, 0), "タレットY軸:%f", cRotate.y);
+	DrawFormatString(0, 565, GetColor(255, 255, 0), "アークタンジェント NUM :%f", testRotate);
+
 }
 
 //毎フレーム行う処理
-void CTurret_Normal::Step()
+void CTurret_Normal::Step(const VECTOR vPos)
 {
 	
 	if (!IsActive)return;
 
-
+	//角度計算
+	Turret_Rotate(vPos);
 }
 
 //後処理
@@ -69,7 +70,8 @@ void CTurret_Normal::TurretSpawn(const VECTOR &vPos)
 	if (IsActive) return;
 
 	cPos = vPos;
-	cRotate = VGet(0.0f, DX_PI_F / 2, DX_PI_F / 2);
+	cPos.y += 5.0f;
+	cRotate = VGet(0.0, 0.0f, 0.0f);
 	cSize = VGet(0.1f, 0.1f, 0.1f);
 
 	ShotRenge = VGet(0.0f, 0.0f, 0.0f);
@@ -85,4 +87,38 @@ void CTurret_Normal::TurretSpawn(const VECTOR &vPos)
 void CTurret_Normal::Turret_Power_Up()
 {
 
+}
+
+//タレット発射処理
+void CTurret_Normal::Turret_Rotate(const VECTOR vPos)
+{
+	float X = vPos.x - cPos.x;
+	float Z = vPos.z - cPos.z;
+
+	//角度を求める
+	float NUM = atan2f(X, Z);
+
+	testRotate = NUM;
+
+	if (cRotate.y == NUM)
+	{
+		return;
+	}
+	else if (cRotate.y < NUM)
+	{
+		cRotate.y += 0.01f;
+		if (NUM > DX_PI_F)
+		{
+			cRotate.y -= DX_PI_F * 2.0f;
+		}
+	}
+	else
+	{
+		cRotate.y -= 0.01f;
+		if (NUM < -DX_PI_F)
+		{
+			cRotate.y += DX_PI_F * 2.0f;
+		}
+	}
+	
 }

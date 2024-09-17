@@ -1,10 +1,11 @@
 #include "TurretManager.h"
 
-
+const char TURRET_NORMAL_PATH[] = { "data/Turret/Turret_Normal.x" };
 
 //コンストラクタ
 CTurretManager::CTurretManager()
 {
+	Org_Hndl = -1;
 }
 
 //デストラクタ
@@ -16,19 +17,15 @@ CTurretManager::~CTurretManager()
 //初期化
 void CTurretManager::Init()
 {
-	//ベースクラスのポインタ配列へ代入
-	CTurretBase* cTurretBase = new CTurret_Normal;
-	cTurretBase->Init();
-	//リストに追加
-	Turret_List.push_back(cTurretBase);
 }
 
 //データロード
 void CTurretManager::Load()
 {
-	for (auto itr = Turret_List.begin(); itr != Turret_List.end(); itr++)
+	//オリジナルハンドルにロード
+	if (Org_Hndl == -1)
 	{
-		(*itr)->Load();
+		Org_Hndl = MV1LoadModel(TURRET_NORMAL_PATH);
 	}
 }
 
@@ -46,7 +43,7 @@ void CTurretManager::Step(VECTOR Pos)
 {
 	for (auto itr = Turret_List.begin(); itr != Turret_List.end(); itr++)
 	{
-		(*itr)->Step();
+		(*itr)->Step(Pos);
 	}
 
 	Update();
@@ -76,8 +73,9 @@ void CTurretManager::TurretSpawn(const VECTOR& vPos)
 	//変数代入用クラス
 	CTurretBase* cTurretBase =  new CTurret_Normal;
 	cTurretBase->Init();
-	cTurretBase->Load();
+	cTurretBase->Load(Org_Hndl);
 	cTurretBase->TurretSpawn(vPos);
+	
 	//リストに追加
 	Turret_List.push_back(cTurretBase);
 

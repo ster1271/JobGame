@@ -6,6 +6,7 @@ class CTurret_Normal: public CTurretBase
 {
 private:
 	float Attack;
+	float testRotate;
 public:
 	//コンストラクタ・デストラクタ
 	CTurret_Normal();
@@ -15,13 +16,13 @@ public:
 	void Init();
 
 	//データロード
-	void Load();
+	void Load(int Hndl);
 
 	//描画
 	void Draw();
 
 	//毎フレーム行う処理
-	void Step();
+	void Step(const VECTOR vPos);
 
 	//後処理
 	void Exit();
@@ -31,4 +32,8 @@ public:
 
 	//タレット強化
 	void Turret_Power_Up();
+
+	//タレット発射処理
+	void Turret_Rotate(const VECTOR vPos);
+
 };
