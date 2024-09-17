@@ -14,8 +14,9 @@ using namespace std;
 class CTurretManager
 {
 private:
+
 	//CTurretBase型のList配列
-	list<CTurretBase*> Turret_List;
+	vector<CTurretBase*> Turret_List;
 
 public:
 	//コンストラクタ・デストラクタ

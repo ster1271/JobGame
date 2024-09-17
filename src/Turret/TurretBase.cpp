@@ -41,6 +41,16 @@ void CTurretBase::Init()
 	IsActive = false;
 }
 
+//モデルデータ読み込み
+void CTurretBase::Load()
+{
+}
+
+//描画処理
+void CTurretBase::Draw()
+{
+}
+
 //毎フレーム行う処理
 void CTurretBase::Step()
 {
