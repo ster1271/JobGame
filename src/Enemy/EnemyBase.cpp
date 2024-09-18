@@ -61,6 +61,8 @@ void CEnemyBase::Exit()
 		iHndl = -1;
 	}
 
+	if()
+
 	//Ç–Ç∆Ç‹Ç∏èâä˙âª
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));

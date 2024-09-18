@@ -5,7 +5,7 @@
 
 class CEnemyBase
 {
-private:
+protected:
 	VECTOR cPos;		//座標
 	VECTOR cSize;		//サイズ
 	VECTOR cRotate;		//回転値
@@ -31,7 +31,7 @@ public:
 	void Exit();
 
 	//毎フレーム呼ぶ処理
-	void Step();
+	virtual void Step();
 
 	//更新処理
 	void Update();
@@ -40,7 +40,7 @@ public:
 	void Draw();
 
 	//リクエスト
-	bool RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed);
+	virtual bool RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed);
 
 	//生存判定
 	bool GetActive() { return IsActive; }
@@ -55,7 +55,7 @@ public:
 	}
 
 	//当たり判定の処理
-	void HitCalc()
+	virtual void HitCalc()
 	{
 		CSoundManager::Play(CSoundManager::SOUNDID_SE_EXPLORE);
 		Life -= 1;

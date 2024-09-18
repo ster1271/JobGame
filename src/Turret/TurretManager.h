@@ -17,6 +17,7 @@ private:
 	
 	//CTurretBase型のList配列
 	vector<CTurretBase*> Turret_List;
+	
 
 public:
 	//コンストラクタ・デストラクタ

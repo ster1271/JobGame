@@ -36,7 +36,7 @@ void CEnemyManager::Load()
 	}
 	for (int i = 0; i < ENEMY_NUM; i++)
 	{
-		cEnemyBace[i].Load(iHndl);
+		cEnemyBace[i].Load(Org_Hndl);
 	}
 }
 
@@ -46,6 +46,12 @@ void CEnemyManager::Exit()
 	for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		cEnemyBace[i].Exit();
+	}
+
+	if (Org_Hndl != -1)
+	{
+		MV1DeleteModel(Org_Hndl);
+		Org_Hndl = -1;
 	}
 }
 
@@ -87,11 +93,13 @@ void CEnemyManager::RequestEnemy()
 {
 	VECTOR vPos = VGet((float)GetRand(200) - 100.0f, 5.0f , 200.0f);
 	VECTOR vSpeed = VGet(0.0f, 0.0f, -0.1f);
-	for (int i = 0; i < ENEMY_NUM; i++)
-	{
-		if (cEnemyBace[i].RequestEnemy(vPos, vSpeed))
-		{
-			break;
-		}
-	}
+
+	//変数代入用クラス
+	CEnemyBase* cEnemyBase/* = new */;
+	cEnemyBase->Init();
+	cEnemyBase->Load(Org_Hndl);
+	cEnemyBase->RequestEnemy(vPos, vSpeed);
+
+	//リストに追加
+	Enemy_List.push_back(cEnemyBase);
 }
