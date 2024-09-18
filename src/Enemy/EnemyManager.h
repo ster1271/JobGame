@@ -1,11 +1,22 @@
 #pragma once
+#include <iostream>
+#include <vector>
+#include <list>
 #include "EnemyBase.h"
+
+using namespace std;
 
 #define ENEMY_NUM	(5)
 
 class CEnemyManager
 {
 private:
+	//モデルのコピー元
+	int Org_Hndl;
+
+	//CEnemyBase型のList配列
+	vector<CEnemyBase*> Enemy_List;
+
 	CEnemyBase cEnemyBace[ENEMY_NUM];
 
 	int m_iWaitCnt;		//敵が生成されるまでの時間

@@ -59,10 +59,10 @@ public:
 	virtual void TurretSpawn(const VECTOR &vPos) = 0;
 
 	//タレット強化
-	virtual void Turret_Power_Up() = 0;
+	virtual void Turret_Power_Up();
 
 	//タレット発射処理
-	virtual void Turret_Rotate(const VECTOR vPos) = 0;
+	virtual void Turret_Rotate(const VECTOR vPos);
 
 };
 

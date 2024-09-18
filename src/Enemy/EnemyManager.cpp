@@ -29,8 +29,11 @@ void CEnemyManager::Init()
 //データロード
 void CEnemyManager::Load()
 {
-	//オリジナルデータ読み込み	
-	int iHndl = MV1LoadModel(ENEMY_MODEL_PATH);
+	//オリジナルデータ読み込み
+	if (Org_Hndl == -1)
+	{
+		Org_Hndl = MV1LoadModel(ENEMY_MODEL_PATH);
+	}
 	for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		cEnemyBace[i].Load(iHndl);

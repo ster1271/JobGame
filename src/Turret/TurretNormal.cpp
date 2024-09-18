@@ -42,7 +42,6 @@ void CTurret_Normal::Draw()
 
 
 	DrawFormatString(0, 550, GetColor(255, 255, 0), "タレットY軸:%f", cRotate.y);
-	DrawFormatString(0, 565, GetColor(255, 255, 0), "アークタンジェント NUM :%f", testRotate);
 
 }
 
@@ -87,38 +86,4 @@ void CTurret_Normal::TurretSpawn(const VECTOR &vPos)
 void CTurret_Normal::Turret_Power_Up()
 {
 
-}
-
-//タレット発射処理
-void CTurret_Normal::Turret_Rotate(const VECTOR vPos)
-{
-	float X = vPos.x - cPos.x;
-	float Z = vPos.z - cPos.z;
-
-	//角度を求める
-	float NUM = atan2f(X, Z);
-
-	testRotate = NUM;
-
-	if (cRotate.y == NUM)
-	{
-		return;
-	}
-	else if (cRotate.y < NUM)
-	{
-		cRotate.y += 0.01f;
-		if (NUM > DX_PI_F)
-		{
-			cRotate.y -= DX_PI_F * 2.0f;
-		}
-	}
-	else
-	{
-		cRotate.y -= 0.01f;
-		if (NUM < -DX_PI_F)
-		{
-			cRotate.y += DX_PI_F * 2.0f;
-		}
-	}
-	
 }

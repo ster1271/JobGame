@@ -6,8 +6,6 @@
 #include "../Turret/TurretBase.h"
 #include "../Turret/Turret_Normal.h"
 
-//static const int TURRET_MAX = 30;	//タレットの最大数
-
 using namespace std;
 
 //タレットマネージャークラス

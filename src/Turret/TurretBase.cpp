@@ -66,3 +66,39 @@ void CTurretBase::Update()
 	MV1SetRotationXYZ(iHndl, cRotate);	//回転値の更新
 }
 
+//タレット強化
+void CTurretBase::Turret_Power_Up()
+{
+
+}
+
+
+//タレット発射処理
+void CTurretBase::Turret_Rotate(const VECTOR vPos)
+{
+	//タレットと対象のベクトルを計算
+	VECTOR Vtmp;
+	Vtmp.x = vPos.x - cPos.x;
+	Vtmp.y = 0.0f;
+	Vtmp.z = vPos.z - cPos.z;
+
+	//タレットの仮の移動ベクトルを計算
+	VECTOR Turret_Vec;
+	Turret_Vec.x = sinf(cRotate.y) * 1.0f;
+	Turret_Vec.y = 0.0f;
+	Turret_Vec.z = cosf(cRotate.y) * 1.0f;
+
+	//外積計算
+	float Dir = Vtmp.x * Turret_Vec.z - Turret_Vec.x * Vtmp.z;
+
+	//回転する角度を決める
+	if (Dir >= 0.0f)
+	{
+		cRotate.y += 0.01f;
+	}
+	else if (Dir < 0.0f)
+	{
+		cRotate.y -= 0.01f;
+	}
+}
+

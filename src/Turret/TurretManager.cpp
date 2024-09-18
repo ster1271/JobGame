@@ -1,6 +1,6 @@
 #include "TurretManager.h"
 
-const char TURRET_NORMAL_PATH[] = { "data/Turret/Turret_Normal.x" };
+static const char TURRET_NORMAL_PATH[] = { "data/Turret/Turret_Normal.x" };
 
 //コンストラクタ
 CTurretManager::CTurretManager()
