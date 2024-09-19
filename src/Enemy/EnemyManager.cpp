@@ -7,6 +7,7 @@ static const int WAIT_TIME = 10;		//敵が再登場するまでの時間
 //コンストラクタ
 CEnemyManager::CEnemyManager()
 {
+	Org_Hndl = -1;
 	m_iWaitCnt = 0;
 }
 
@@ -20,9 +21,13 @@ CEnemyManager::~CEnemyManager()
 void CEnemyManager::Init()
 {
 	m_iWaitCnt = WAIT_TIME;
-	for (int i = 0; i < ENEMY_NUM; i++)
+	/*for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		cEnemyBace[i].Init();
+	}*/
+	for (int Enemy_Index = 0; Enemy_Index < Enemy_List.size(); Enemy_Index++)
+	{
+		Enemy_List[Enemy_Index]->Init();
 	}
 }
 
@@ -34,18 +39,29 @@ void CEnemyManager::Load()
 	{
 		Org_Hndl = MV1LoadModel(ENEMY_MODEL_PATH);
 	}
-	for (int i = 0; i < ENEMY_NUM; i++)
+
+	for (int Enemy_Index = 0; Enemy_Index < Enemy_List.size(); Enemy_Index++)
+	{
+		Enemy_List[Enemy_Index]->Draw();
+	}
+
+	/*for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		cEnemyBace[i].Load(Org_Hndl);
-	}
+	}*/
 }
 
 //終了処理
 void CEnemyManager::Exit()
 {
-	for (int i = 0; i < ENEMY_NUM; i++)
+	/*for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		cEnemyBace[i].Exit();
+	}*/
+
+	for (int Enemy_Index = 0; Enemy_Index < Enemy_List.size(); Enemy_Index++)
+	{
+		Enemy_List[Enemy_Index]->Exit();
 	}
 
 	if (Org_Hndl != -1)
@@ -60,31 +76,55 @@ void CEnemyManager::Step()
 {
 	int iEnemyCnt = 0;	//敵の出現数
 	//敵の移動処理
-	for (int i = 0; i < ENEMY_NUM; i++)
+	for (int Enemy_Index = 0; Enemy_Index < Enemy_List.size(); Enemy_Index++)
+	{
+		Enemy_List[Enemy_Index]->Step();
+		if (Enemy_List[Enemy_Index]->GetActive())
+		{
+			iEnemyCnt++;
+			if (iEnemyCnt == 10)
+			{
+				iEnemyCnt = 10;
+			}
+		}
+	}
+
+	/*for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		cEnemyBace[i].Step();
 		if (cEnemyBace[i].GetActive())
 		{
 			iEnemyCnt++;
 		}
-	}
+	}*/
 
 	//敵の出現
 	m_iWaitCnt--;
 	if (m_iWaitCnt < 0 || iEnemyCnt == 0)
 	{
-		RequestEnemy();
+		/*RequestEnemy();*/
 		m_iWaitCnt = WAIT_TIME;
 	}
+
+	/*if (m_iWaitCnt < 0 || iEnemyCnt == 0)
+	{
+		RequestEnemy();
+		m_iWaitCnt = WAIT_TIME;
+	}*/
 }
 
 //描画処理
 void CEnemyManager::Draw()
 {
-	for (int i = 0; i < ENEMY_NUM; i++)
+	for (int Enemy_Index = 0; Enemy_Index < Enemy_List.size(); Enemy_Index++)
+	{
+		Enemy_List[Enemy_Index]->Draw();
+	}
+
+	/*for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		cEnemyBace[i].Draw();
-	}
+	}*/
 }
 
 
@@ -95,7 +135,7 @@ void CEnemyManager::RequestEnemy()
 	VECTOR vSpeed = VGet(0.0f, 0.0f, -0.1f);
 
 	//変数代入用クラス
-	CEnemyBase* cEnemyBase/* = new */;
+	CEnemyBase* cEnemyBase = new CEnemy_Normal;
 	cEnemyBase->Init();
 	cEnemyBase->Load(Org_Hndl);
 	cEnemyBase->RequestEnemy(vPos, vSpeed);

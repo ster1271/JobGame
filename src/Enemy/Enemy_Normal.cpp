@@ -31,10 +31,9 @@ void CEnemy_Normal::Draw()
 }
 
 //–ˆƒtƒŒ[ƒ€s‚¤ˆ—
-void CEnemy_Normal::Step(const VECTOR vPos)
-{
-
-}
+//void CEnemy_Normal::Step(const VECTOR vPos)
+//{
+//}
 
 //Œãˆ—
 void CEnemy_Normal::Exit()

@@ -9,6 +9,7 @@ protected:
 	VECTOR cPos;		//座標
 	VECTOR cSize;		//サイズ
 	VECTOR cRotate;		//回転値
+	VECTOR cSpeed;		//移動速度
 	float Radius;		//半径
 	int iHndl;			//ハンドル
 
@@ -31,7 +32,7 @@ public:
 	void Exit();
 
 	//毎フレーム呼ぶ処理
-	virtual void Step();
+	void Step();
 
 	//更新処理
 	void Update();

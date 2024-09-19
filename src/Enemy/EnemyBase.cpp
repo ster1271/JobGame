@@ -14,6 +14,8 @@ CEnemyBase::CEnemyBase()
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
+	memset(&cSpeed, 0, sizeof(VECTOR));
+
 	Radius = NEMY_RADIUS;
 	Life = 0;			//ƒ‰ƒCƒt
 	HitCount = 0;		//’e‚Ì“–‚½‚Á‚½‰ñ”
@@ -38,9 +40,11 @@ CEnemyBase::~CEnemyBase()
 void CEnemyBase::Init()
 {
 	//‚Ð‚Æ‚Ü‚¸‰Šú‰»
-	cPos = VGet(0.0f, 0.0f, 0.0f);
+	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
+	memset(&cSpeed, 0, sizeof(VECTOR));
+
 
 	Life = 0;;			//ƒ‰ƒCƒt
 	HitCount = 0;;		//’e‚Ì“–‚½‚Á‚½‰ñ”
@@ -61,12 +65,11 @@ void CEnemyBase::Exit()
 		iHndl = -1;
 	}
 
-	if()
-
 	//‚Ð‚Æ‚Ü‚¸‰Šú‰»
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
+	memset(&cSpeed, 0, sizeof(VECTOR));
 
 	Life = 0;;			//ƒ‰ƒCƒt
 	HitCount = 0;;		//’e‚Ì“–‚½‚Á‚½‰ñ”
@@ -144,6 +147,7 @@ bool CEnemyBase::RequestEnemy(const VECTOR &vPos, const VECTOR &vSpeed)
 	}
 
 	cPos = vPos;
+	cSpeed = vSpeed;
 	Life = MAX_LIFE;
 	IsActive = true;
 
@@ -163,7 +167,7 @@ void CEnemyBase::Step()
 	}
 
 	//À•W‚É‘¬“x‚ð‰ÁŽZ
-	cPos = VAdd(cPos, VGet(SPEED, 0.0f, SPEED));
+	cPos = VAdd(cPos, cSpeed);
 	//ˆê’è”ÍˆÍ‚ð’´‚¦‚½‚çÁ‚·
 	float fLength = 300.0f;
 	if (cPos.x > fLength || cPos.x < -fLength

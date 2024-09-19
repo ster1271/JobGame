@@ -3,6 +3,7 @@
 #include <vector>
 #include <list>
 #include "EnemyBase.h"
+#include "../Enemy/Enemy_Normal.h"
 
 using namespace std;
 
