@@ -7,7 +7,7 @@
 
 using namespace std;
 
-#define ENEMY_NUM	(5)
+#define ENEMY_NUM	(100)
 
 class CEnemyManager
 {
@@ -18,9 +18,7 @@ private:
 	//CEnemyBase型のList配列
 	vector<CEnemyBase*> Enemy_List;
 
-	CEnemyBase cEnemyBace[ENEMY_NUM];
-
-	int m_iWaitCnt;		//敵が生成されるまでの時間
+	CEnemyBase cEnemyBace;
 
 public:
 	//コンストラクタ・デストラクタ
@@ -43,7 +41,7 @@ public:
 	void Draw();
 
 	//敵情報取得
-	inline CEnemyBase& GetEnemy(int iID) { return cEnemyBace[iID]; }
+	//inline CEnemyBase& GetEnemy(int iID) { return cEnemyBace; }
 
 private:
 	//敵リクエスト

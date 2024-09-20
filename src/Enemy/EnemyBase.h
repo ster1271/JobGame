@@ -32,13 +32,13 @@ public:
 	void Exit();
 
 	//毎フレーム呼ぶ処理
-	void Step();
+	virtual void Step();
 
 	//更新処理
 	void Update();
 
 	//描画処理
-	void Draw();
+	virtual void Draw();
 
 	//リクエスト
 	virtual bool RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed);

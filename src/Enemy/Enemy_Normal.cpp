@@ -31,9 +31,26 @@ void CEnemy_Normal::Draw()
 }
 
 //毎フレーム行う処理
-//void CEnemy_Normal::Step(const VECTOR vPos)
-//{
-//}
+void CEnemy_Normal::Step()
+{
+	if (!IsActive)
+	{
+		return;
+	}
+
+	//座標に速度を加算
+	cPos = VAdd(cPos, cSpeed);
+	//一定範囲を超えたら消す
+	float fLength = 300.0f;
+	if (cPos.x > fLength || cPos.x < -fLength
+		|| cPos.z > fLength || cPos.z < -fLength)
+	{
+		IsActive = false;
+	}
+
+	//更新処理
+	Update();
+}
 
 //後処理
 void CEnemy_Normal::Exit()
@@ -51,6 +68,7 @@ bool CEnemy_Normal::RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed)
 	}
 
 	cPos = vPos;
+	cSpeed = vSpeed;
 	Life = MAX_LIFE;
 	IsActive = true;
 

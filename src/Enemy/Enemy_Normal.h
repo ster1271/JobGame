@@ -20,7 +20,7 @@ public:
 	void Draw();
 
 	//–ˆƒtƒŒ[ƒ€s‚¤ˆ—
-	/*void Step(const VECTOR vPos);*/
+	void Step();
 
 	//Œãˆ—
 	void Exit();

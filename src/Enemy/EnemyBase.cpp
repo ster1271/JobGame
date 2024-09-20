@@ -151,8 +151,6 @@ bool CEnemyBase::RequestEnemy(const VECTOR &vPos, const VECTOR &vSpeed)
 	Life = MAX_LIFE;
 	IsActive = true;
 
-	//一度座標更新しておく
-	MV1SetPosition(iHndl, cPos);
 	return true;
 }
 
@@ -161,23 +159,6 @@ bool CEnemyBase::RequestEnemy(const VECTOR &vPos, const VECTOR &vSpeed)
 //--------------------------------------
 void CEnemyBase::Step()
 {
-	if (!IsActive)
-	{
-		return;
-	}
-
-	//座標に速度を加算
-	cPos = VAdd(cPos, cSpeed);
-	//一定範囲を超えたら消す
-	float fLength = 300.0f;
-	if (cPos.x > fLength || cPos.x < -fLength
-		|| cPos.z > fLength || cPos.z < -fLength)
-	{
-		IsActive = false;
-	}
-
-	//更新処理
-	Update();
 }
 
 //更新処理
