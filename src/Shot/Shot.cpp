@@ -104,7 +104,7 @@ void CShot::Step(VECTOR Pos)
 
 
 	//ˆê’è”ÍˆÍ‚ð’´‚¦‚½‚çÁ‚·
-	float fLength =	600;
+	float fLength =	200;
 
 	if (m_vPos.x > Pos.x + fLength || m_vPos.x < Pos.x -fLength
 		|| m_vPos.z > Pos.z + fLength || m_vPos.z < Pos.z - fLength)

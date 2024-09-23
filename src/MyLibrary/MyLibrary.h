@@ -1,4 +1,5 @@
 #pragma once
+#include "DxLib.h"
 
 //*もし計算が間違ってたら書き直してください
 //計算用クラス

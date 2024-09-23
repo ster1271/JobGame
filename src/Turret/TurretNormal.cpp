@@ -51,6 +51,7 @@ void CTurret_Normal::Step(const VECTOR vPos)
 	
 	if (!IsActive)return;
 
+	
 	//äpìxåvéZ
 	Turret_Rotate(vPos);
 }
@@ -73,7 +74,7 @@ void CTurret_Normal::TurretSpawn(const VECTOR &vPos)
 	cRotate = VGet(0.0, 0.0f, 0.0f);
 	cSize = VGet(0.1f, 0.1f, 0.1f);
 
-	ShotRenge = VGet(0.0f, 0.0f, 0.0f);
+	ShotRenge = 0.0f;
 	Hp = MAX_LIFE;
 	Power_Up_Count = 0;
 	Attack = ATTACK;

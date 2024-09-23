@@ -12,7 +12,7 @@ CTurretBase::CTurretBase()
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
-	memset(&ShotRenge, 0, sizeof(VECTOR));
+	ShotRenge = 0.0f;
 
 	Hp = 0.0f;
 	Power_Up_Count = 0;
@@ -34,7 +34,7 @@ void CTurretBase::Init()
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
-	memset(&ShotRenge, 0, sizeof(VECTOR));
+	ShotRenge = 0.0f;
 
 	Hp = 0.0f;
 	Power_Up_Count = 0;
@@ -51,7 +51,7 @@ void CTurretBase::Exit()
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
-	memset(&ShotRenge, 0, sizeof(VECTOR));
+	ShotRenge = 0.0f;
 
 	Hp = 0.0f;
 	Power_Up_Count = 0;
@@ -89,7 +89,7 @@ void CTurretBase::Turret_Rotate(const VECTOR vPos)
 	Turret_Vec.z = cosf(cRotate.y) * 1.0f;
 
 	//外積計算
-	float Dir = Vtmp.x * Turret_Vec.z - Turret_Vec.x * Vtmp.z;
+	float Dir = Vtmp.x * Turret_Vec.z - Vtmp.z * Turret_Vec.x;
 
 	//回転する角度を決める
 	if (Dir >= 0.0f)
@@ -102,3 +102,9 @@ void CTurretBase::Turret_Rotate(const VECTOR vPos)
 	}
 }
 
+
+//タレット発射処理
+void CTurretBase::Turret_Shot()
+{
+
+}

@@ -99,7 +99,7 @@ float CMyLibrary::VecCross_2D(VECTOR vec1, VECTOR vec2)
 {
 	float ret;
 
-	ret = vec1.x * vec2.y - vec1.y * vec2.x;
+	ret = vec1.x * vec2.y - vec2.y * vec1.x;
 
 	return ret;
 }

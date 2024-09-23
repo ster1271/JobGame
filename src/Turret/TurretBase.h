@@ -1,5 +1,6 @@
 #pragma once
 #include <math.h>
+#include "../MyLibrary/MyLibrary.h"
 #include "../Object/Object.h"
 
 
@@ -14,7 +15,7 @@ protected:
 	VECTOR cPos;		//座標
 	VECTOR cRotate;		//回転値
 	VECTOR cSize;		//拡縮値
-	VECTOR ShotRenge;	//射程距離
+	float ShotRenge;	//射程距離
 
 	float Hp;			//タレットのHP
 	int Power_Up_Count;	//強化回数
@@ -61,7 +62,7 @@ public:
 	//タレット強化
 	virtual void Turret_Power_Up();
 
-	//タレット発射処理
+	//タレット回転処理
 	virtual void Turret_Rotate(const VECTOR vPos);
 
 };
