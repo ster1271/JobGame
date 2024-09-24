@@ -3,13 +3,15 @@
 
 //定義
 static const char PLSHOT_MODEL_PATH[] = { "data/shot/plshot.x" };
+static const char TURRETSHOT_MODEL_PATH[] = { "data/shot/plshot.x" };
 
 //------------------------------------
 //コンストラクタ
 //------------------------------------
 CShotManager::CShotManager()
 {
-
+	PlayerHndl = -1;
+	TurretHndl = -1;
 }
 
 
@@ -40,13 +42,27 @@ void CShotManager::Init()
 void CShotManager::Load()
 {
 	//オリジナルモデルの読み込み
-	int iHndl = MV1LoadModel(PLSHOT_MODEL_PATH);
+	if (PlayerHndl == -1)
+	{
+		PlayerHndl = MV1LoadModel(PLSHOT_MODEL_PATH);
+	}
 	//モデルの複製
 	for (int i = 0; i < PL_SHOT_NUM; i++)
 	{
-		cPlayerShot[i].Load(iHndl);
+		cPlayerShot[i].Load(PlayerHndl);
 	}
-	MV1DeleteModel(iHndl);
+
+
+	//オリジナルモデルの読み込み
+	if (TurretHndl == -1)
+	{
+		TurretHndl = MV1LoadModel(TURRETSHOT_MODEL_PATH);
+	}
+	//モデルの複製
+	for (int i = 0; i < TURRET_SHOT_NUM; i++)
+	{
+		cTurretShot[i].Load(TurretHndl);
+	}
 }
 
 
@@ -59,6 +75,16 @@ void CShotManager::Exit()
 	{
 		cPlayerShot[i].Exit();
 	}
+
+	for (int i = 0; i < TURRET_SHOT_NUM; i++)
+	{
+		cTurretShot[i].Exit();
+	}
+
+	MV1DeleteModel(PlayerHndl);
+	PlayerHndl = -1;
+	MV1DeleteModel(TurretHndl);
+	TurretHndl = -1;
 }
 
 //------------------------------------
@@ -70,9 +96,7 @@ void CShotManager::Step(VECTOR Pos)
 	{
 		cPlayerShot[i].Step(Pos);
 	}
-
 }
-
 
 //------------------------------------
 //更新処理
@@ -85,7 +109,10 @@ void CShotManager::Draw()
 	}
 
 	
-
+	for (int i = 0; i < TURRET_SHOT_NUM; i++)
+	{
+		cTurretShot[i].Draw();
+	}
 }
 
 
@@ -98,9 +125,18 @@ void CShotManager::RequestPlayerShot(const VECTOR& vPos, const VECTOR& vSpeed)
 	{
 		if (cPlayerShot[i].RequestShot(vPos, vSpeed))
 		{
-			CSoundManager::Play(CSoundManager::SOUNDID_SE_PLSHOT);
+			//CSoundManager::Play(CSoundManager::SOUNDID_SE_PLSHOT);
 			break;
 		}
 	}
 }
 
+
+//タレットのショットリクエスト
+void CShotManager::RequestTurretShot(const VECTOR vPos, const VECTOR& vSpeed)
+{
+	for (int i = 0; i < TURRET_SHOT_NUM; i++)
+	{
+		cTurretShot[i].RequestShot(vPos, vSpeed);
+	}
+}

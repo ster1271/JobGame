@@ -101,7 +101,7 @@ void CCharacterManager::Step(CTurretManager& cTurretManager)
 	}
 
 	
-	cShotManager.Step(cAttacker.GetPos());
+	cShotManager.Step(GetPosition());
 }
 
 //•`‰æˆ—

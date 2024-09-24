@@ -30,6 +30,9 @@ public:
 	//タレット設置処理
 	void TurretSpawn(const VECTOR &vPos);
 
+	//タレット弾発射処理
+
+
 	//タレット強化
 	void Turret_Power_Up();
 

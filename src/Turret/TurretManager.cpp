@@ -27,43 +27,48 @@ void CTurretManager::Load()
 	{
 		Org_Hndl = MV1LoadModel(TURRET_NORMAL_PATH);
 	}
+	for (int TurretIndex = 0; TurretIndex < Turret_List.size(); TurretIndex++)
+	{
+		Turret_List[TurretIndex]->Load(Org_Hndl);
+	}
 }
 
 //終了処理
 void CTurretManager::Exit()
 {
-	for (auto itr = Turret_List.begin(); itr != Turret_List.end(); itr++)
+	for (int TurretIndex = 0; TurretIndex < Turret_List.size(); TurretIndex++)
 	{
-		(*itr)->Exit();
+		Turret_List[TurretIndex]->Exit();
 	}
 }
 
 //繰り返し行う処理
 void CTurretManager::Step(VECTOR Pos)
 {
-	for (auto itr = Turret_List.begin(); itr != Turret_List.end(); itr++)
+	for (int TurretIndex = 0; TurretIndex < Turret_List.size(); TurretIndex++)
 	{
-		(*itr)->Step(Pos);
+		Turret_List[TurretIndex]->Step(Pos);
 	}
 
 	Update();
+
 }
 
 //更新処理
 void CTurretManager::Update()
 {
-	for (auto itr = Turret_List.begin(); itr != Turret_List.end(); itr++)
+	for (int TurretIndex = 0; TurretIndex < Turret_List.size(); TurretIndex++)
 	{
-		(*itr)->Update();
+		Turret_List[TurretIndex]->Update();
 	}
 }
 
 //描画処理
 void CTurretManager::Draw()
 {
-	for (auto itr = Turret_List.begin(); itr != Turret_List.end(); itr++)
+	for (int TurretIndex = 0; TurretIndex < Turret_List.size(); TurretIndex++)
 	{
-		(*itr)->Draw();
+		Turret_List[TurretIndex]->Draw();
 	}
 }
 

@@ -54,6 +54,21 @@ void CTurret_Normal::Step(const VECTOR vPos)
 	
 	//角度計算
 	Turret_Rotate(vPos);
+
+
+	//弾の位置決定
+	VECTOR BulletPos = cPos;
+
+	//弾のスピード
+	const float SHOT_SPEED = 5.0f;
+	VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);
+
+	vSpd.x = sinf(cRotate.y) * -SHOT_SPEED;
+	vSpd.z = cosf(cRotate.y) * -SHOT_SPEED;
+	vSpd.y = 0.0f;
+
+
+
 }
 
 //後処理

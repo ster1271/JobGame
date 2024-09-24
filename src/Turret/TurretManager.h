@@ -17,7 +17,7 @@ private:
 	
 	//CTurretBase型のList配列
 	vector<CTurretBase*> Turret_List;
-	
+	CShotManager cShotManager;		//ショットマネージャー
 
 public:
 	//コンストラクタ・デストラクタ

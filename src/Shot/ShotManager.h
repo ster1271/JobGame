@@ -1,15 +1,19 @@
 #pragma once
 #include "Shot.h"
+#include "TurretShot.h"
 #include "../SoundManager/SoundManager.h"
 
-#define PL_SHOT_NUM	(1)
+#define PL_SHOT_NUM	(10)
+#define TURRET_SHOT_NUM	(10)
 
 class CShotManager
 {
 private:
-	//プレイヤーのショット
-	//メモリの動的確保が望ましい
+	int PlayerHndl;
+	int TurretHndl;
+
 	CShot cPlayerShot[PL_SHOT_NUM];
+	CTurretShot cTurretShot[TURRET_SHOT_NUM];
 
 public:
 	//コンストラクタ・デストラクタ
@@ -24,6 +28,7 @@ public:
 	void Exit();
 	//繰り返し行う処理
 	void Step(VECTOR Pos);
+
 	//描画処理
 	void Draw();
 
@@ -32,4 +37,7 @@ public:
 
 	//プレイヤーのショットリクエスト
 	void RequestPlayerShot(const VECTOR& vPos, const VECTOR& vSpeed);
+
+	//タレットのショットリクエスト
+	void RequestTurretShot(const VECTOR vPos, const VECTOR& vSpeed);
 };

@@ -2,13 +2,27 @@
 #include <math.h>
 #include "../MyLibrary/MyLibrary.h"
 #include "../Object/Object.h"
+#include "../Shot/ShotManager.h"
 
+//弾情報
+struct Bullet
+{
+	VECTOR Pos;			//座標
+	VECTOR Rotate;		//回転値
+	VECTOR Size;			//拡縮値
+	VECTOR Speed;			//移動速度
+
+	int iHndl;				//モデルのハンドル
+	float Radius;			//モデルの半径
+	bool IsActive;			//生存フラグ
+};
 
 
 //タレットベースクラス
 class CTurretBase
 {
 protected:
+	Bullet BulletInfo;	//弾情報格納変数
 	int Org_Hndl;		//モデルハンドル(コピー元)
 	int iHndl;			//モデルハンドル(コピー用)
 
@@ -64,6 +78,9 @@ public:
 
 	//タレット回転処理
 	virtual void Turret_Rotate(const VECTOR vPos);
+
+	//リクエスト
+	bool RequestShot(const VECTOR& vPos, const VECTOR& vSpeed);
 
 };
 

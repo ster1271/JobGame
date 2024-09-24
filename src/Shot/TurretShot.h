@@ -15,15 +15,12 @@ public:
 	void Init();
 
 	//読み込み
-	void Load();
+	void Load(int iMdlHndl);
 
 	//描画
 	void Draw();
 
 	//毎フレーム行う処理
-	void Step();
-
-	//リクエスト
-	bool RequestShot(const VECTOR& vPos, const VECTOR& vSpeed);
+	void Step(VECTOR TurretPos);
 
 };

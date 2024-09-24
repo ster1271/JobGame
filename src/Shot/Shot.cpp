@@ -9,14 +9,6 @@
 //----------------------------------------
 CShot::CShot()
 {
-	//初期化
-	memset(&m_vPos, 0, sizeof(VECTOR));
-	memset(&m_vSpeed, 0, sizeof(VECTOR));
-	Yspeed = 0.0f;
-	iHndl = -1;
-	isActive = false;
-	m_Radius = 0;
-
 }
 
 //----------------------------------------
@@ -33,13 +25,14 @@ CShot::~CShot()
 //----------------------------------------
 void CShot::Init()
 {
-	memset(&m_vPos, 0, sizeof(VECTOR));
-	memset(&m_vSpeed, 0, sizeof(VECTOR));
-	Yspeed = 0.0f;
-	iHndl = -1;
-	isActive = false;
-	m_Radius = SHOTRADIUS;
+	memset(&cPos, 0, sizeof(VECTOR));
+	memset(&cRotate, 0, sizeof(VECTOR));
+	memset(&cSize, 0, sizeof(VECTOR));
+	memset(&cSpeed, 0, sizeof(VECTOR));
 
+	iHndl = -1;
+	Radius = 0.0f;
+	IsActive = false;
 }
 
 
@@ -74,21 +67,17 @@ void CShot::Load(int iMdlHndl)
 //----------------------------------------
 void CShot::Draw()
 {
-	if (isActive)
+	if (IsActive)
 	{
 		MV1DrawModel(iHndl);
 
-		VECTOR vPos = m_vPos;
-		
-
-		DrawFormatString(500, 0, GetColor(255, 0, 0), "X座標：%f", m_vPos.x);
-		DrawFormatString(500, 15, GetColor(255, 0, 0), "Y座標：%f", m_vPos.y);
-		DrawFormatString(500, 30, GetColor(255, 0, 0), "Z座標：%f", m_vPos.z);
+		/*DrawFormatString(500, 0, GetColor(255, 0, 0), "X座標：%f", cPos.x);
+		DrawFormatString(500, 15, GetColor(255, 0, 0), "Y座標：%f", cPos.y);
+		DrawFormatString(500, 30, GetColor(255, 0, 0), "Z座標：%f", cPos.z);*/
 		/*DrawSphere3D(vPos, m_Radius, 16, GetColor(255, 255, 255), GetColor(255, 255, 255), FALSE);*/
 
 	}
 
-	
 }
 
 
@@ -97,24 +86,23 @@ void CShot::Draw()
 //----------------------------------------
 void CShot::Step(VECTOR Pos)
 {
-	if (!isActive) return;
+	if (!IsActive) return;
 
 	//座標に速度を加算
-	m_vPos = VAdd(m_vPos, m_vSpeed);
+	cPos = VAdd(cPos, cSpeed);
 
 
 	//一定範囲を超えたら消す
 	float fLength =	200;
 
-	if (m_vPos.x > Pos.x + fLength || m_vPos.x < Pos.x -fLength
-		|| m_vPos.z > Pos.z + fLength || m_vPos.z < Pos.z - fLength)
+	if (cPos.x > Pos.x + fLength || cPos.x < Pos.x -fLength
+		|| cPos.z > Pos.z + fLength || cPos.z < Pos.z - fLength)
 	{
-		isActive = false;
+		IsActive = false;
 	}
 
-	//座標更新
-	MV1SetPosition(iHndl, m_vPos);
-	MV1SetScale(iHndl, VGet(0.05f, 0.05f, 0.05f));
+	//情報更新
+	UpDate();
 }
 
 
@@ -124,11 +112,13 @@ void CShot::Step(VECTOR Pos)
 bool CShot::RequestShot(const VECTOR &vPos, const VECTOR &vSpeed)
 {
 	//すでに発射されている
-	if (isActive) return false;
+	if (IsActive) return false;
 
-	m_vPos = vPos;
-	m_vSpeed = vSpeed;
-	isActive = true;
+	cPos = vPos;
+	cRotate = VGet(0.0f, 0.0f, 0.0f);
+	cSize = VGet(0.05f, 0.05f, 0.05f);
+	cSpeed = vSpeed;
+	IsActive = true;
 
 	return true;
 	
