@@ -102,9 +102,3 @@ void CTurretBase::Turret_Rotate(const VECTOR vPos)
 	}
 }
 
-
-//ƒ^ƒŒƒbƒg”­Ëˆ—
-void CTurretBase::Turret_Shot()
-{
-
-}
