@@ -59,10 +59,24 @@ void CTurretShot::Step(VECTOR TurretPos)
 	//一定範囲を超えたら消す
 	float fLength = 100;
 
-	if (cPos.x > TurretPos.x + fLength || cPos.x < TurretPos.x - fLength
+	/*if (cPos.x > TurretPos.x + fLength || cPos.x < TurretPos.x - fLength
 		|| cPos.z > TurretPos.z + fLength || cPos.z < TurretPos.z - fLength)
 	{
 		IsActive = false;
-	}
+	}*/
 
+}
+
+//リクエスト
+bool CTurretShot::RequestShot(const VECTOR& vPos, const VECTOR& vSpeed)
+{
+	//すでに発射されている
+	if (IsActive) return false;
+
+	cPos = vPos;
+	cSize = VGet(0.05f, 0.05f, 0.05f);
+	cSpeed = vSpeed;
+	IsActive = true;
+
+	return true;
 }

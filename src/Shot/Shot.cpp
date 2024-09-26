@@ -93,7 +93,7 @@ void CShot::Step(VECTOR Pos)
 
 
 	//ˆê’è”ÍˆÍ‚ð’´‚¦‚½‚çÁ‚·
-	float fLength =	200;
+	float fLength =	500;
 
 	if (cPos.x > Pos.x + fLength || cPos.x < Pos.x -fLength
 		|| cPos.z > Pos.z + fLength || cPos.z < Pos.z - fLength)
@@ -115,7 +115,6 @@ bool CShot::RequestShot(const VECTOR &vPos, const VECTOR &vSpeed)
 	if (IsActive) return false;
 
 	cPos = vPos;
-	cRotate = VGet(0.0f, 0.0f, 0.0f);
 	cSize = VGet(0.05f, 0.05f, 0.05f);
 	cSpeed = vSpeed;
 	IsActive = true;

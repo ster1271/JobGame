@@ -68,8 +68,6 @@ void CCharacterManager::Exit()
 	cTank.Exit();
 	cSupport.Exit();
 
-	//ショットマネージャー後処理
-	cShotManager.Exit();
 }
 
 //毎フレーム呼ぶ処理

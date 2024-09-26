@@ -22,7 +22,7 @@ public:
 	void Draw();
 
 	//–ˆƒtƒŒ[ƒ€s‚¤ˆ—
-	void Step(const VECTOR vPos);
+	void Step(const VECTOR vPos, CShotManager& cShotManager);
 
 	//Œãˆ—
 	void Exit();

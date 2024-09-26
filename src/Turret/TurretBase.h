@@ -4,25 +4,10 @@
 #include "../Object/Object.h"
 #include "../Shot/ShotManager.h"
 
-//弾情報
-struct Bullet
-{
-	VECTOR Pos;			//座標
-	VECTOR Rotate;		//回転値
-	VECTOR Size;			//拡縮値
-	VECTOR Speed;			//移動速度
-
-	int iHndl;				//モデルのハンドル
-	float Radius;			//モデルの半径
-	bool IsActive;			//生存フラグ
-};
-
-
 //タレットベースクラス
 class CTurretBase
 {
 protected:
-	Bullet BulletInfo;	//弾情報格納変数
 	int Org_Hndl;		//モデルハンドル(コピー元)
 	int iHndl;			//モデルハンドル(コピー用)
 
@@ -50,7 +35,7 @@ public:
 	virtual void Draw() = 0;
 
 	//毎フレーム行う処理
-	virtual void Step(const VECTOR vPos) = 0;
+	virtual void Step(const VECTOR vPos, CShotManager& cShotManager) = 0;
 
 	//情報更新
 	void Update();

@@ -23,4 +23,6 @@ public:
 	//毎フレーム行う処理
 	void Step(VECTOR TurretPos);
 
+	//リクエスト
+	bool RequestShot(const VECTOR& vPos, const VECTOR& vSpeed);
 };

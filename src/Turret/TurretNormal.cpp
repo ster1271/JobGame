@@ -46,7 +46,7 @@ void CTurret_Normal::Draw()
 }
 
 //毎フレーム行う処理
-void CTurret_Normal::Step(const VECTOR vPos)
+void CTurret_Normal::Step(const VECTOR vPos, CShotManager& cShotManager)
 {
 	
 	if (!IsActive)return;
@@ -66,9 +66,9 @@ void CTurret_Normal::Step(const VECTOR vPos)
 	vSpd.x = sinf(cRotate.y) * -SHOT_SPEED;
 	vSpd.z = cosf(cRotate.y) * -SHOT_SPEED;
 	vSpd.y = 0.0f;
-
-
-
+	
+	//タレットの弾リクエスト
+	cShotManager.RequestTurretShot(BulletPos, vSpd);
 }
 
 //後処理

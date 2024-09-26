@@ -10,7 +10,6 @@ CTurretBase::CTurretBase()
 	iHndl = -1;
 
 	//変数の初期化
-	memset(&BulletInfo, 0, sizeof(Bullet));
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
@@ -33,7 +32,6 @@ void CTurretBase::Init()
 	iHndl = -1;
 
 	//変数の初期化
-	memset(&BulletInfo, 0, sizeof(Bullet));
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
@@ -51,7 +49,6 @@ void CTurretBase::Exit()
 	iHndl = -1;
 
 	//変数の初期化
-	memset(&BulletInfo, 0, sizeof(Bullet));
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
@@ -62,14 +59,15 @@ void CTurretBase::Exit()
 	IsActive = false;
 }
 
+//毎フレーム行う処理
+void Step(const VECTOR vPos, CShotManager& cShotManager) {};
+
 //情報更新
 void CTurretBase::Update()
 {
 	MV1SetPosition(iHndl, cPos);		//座標の更新
 	MV1SetScale(iHndl, cSize);			//サイズの更新
 	MV1SetRotationXYZ(iHndl, cRotate);	//回転値の更新
-
-
 }
 
 //タレット強化
@@ -109,17 +107,3 @@ void CTurretBase::Turret_Rotate(const VECTOR vPos)
 }
 
 
-//リクエスト
-bool CTurretBase::RequestShot(const VECTOR& vPos, const VECTOR& vSpeed)
-{
-	//すでに発射されている
-	if (BulletInfo.IsActive) return false;
-
-	BulletInfo.Pos = vPos;
-	BulletInfo.Rotate = VGet(0.0f, 0.0f, 0.0f);
-	BulletInfo.Size = VGet(0.01f, 0.01f, 0.01f);
-	BulletInfo.Speed = vSpeed;
-	BulletInfo.IsActive = true;
-
-	return true;
-}

@@ -33,6 +33,11 @@ void CShotManager::Init()
 	{
 		cPlayerShot[i].Init();
 	}
+
+	for (int i = 0; i < TURRET_SHOT_NUM; i++)
+	{
+		cTurretShot[i].Init();
+	}
 }
 
 
@@ -96,6 +101,12 @@ void CShotManager::Step(VECTOR Pos)
 	{
 		cPlayerShot[i].Step(Pos);
 	}
+
+	for (int i = 0; i < TURRET_SHOT_NUM; i++)
+	{
+		//引数座標がプレイヤーになっているためタレットに置き換える
+		cTurretShot[i].Step(Pos);
+	}
 }
 
 //------------------------------------
@@ -133,10 +144,13 @@ void CShotManager::RequestPlayerShot(const VECTOR& vPos, const VECTOR& vSpeed)
 
 
 //タレットのショットリクエスト
-void CShotManager::RequestTurretShot(const VECTOR vPos, const VECTOR& vSpeed)
+void CShotManager::RequestTurretShot(const VECTOR& vPos, const VECTOR& vSpeed)
 {
 	for (int i = 0; i < TURRET_SHOT_NUM; i++)
 	{
-		cTurretShot[i].RequestShot(vPos, vSpeed);
+		if (cTurretShot[i].RequestShot(vPos, vSpeed))
+		{
+			break;
+		}
 	}
 }

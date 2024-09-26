@@ -47,7 +47,7 @@ void CTurretManager::Step(VECTOR Pos)
 {
 	for (int TurretIndex = 0; TurretIndex < Turret_List.size(); TurretIndex++)
 	{
-		Turret_List[TurretIndex]->Step(Pos);
+		Turret_List[TurretIndex]->Step(Pos, cShotManager);
 	}
 
 	Update();

@@ -39,5 +39,5 @@ public:
 	void RequestPlayerShot(const VECTOR& vPos, const VECTOR& vSpeed);
 
 	//タレットのショットリクエスト
-	void RequestTurretShot(const VECTOR vPos, const VECTOR& vSpeed);
+	void RequestTurretShot(const VECTOR& vPos, const VECTOR& vSpeed);
 };
