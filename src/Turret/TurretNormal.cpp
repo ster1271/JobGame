@@ -46,14 +46,14 @@ void CTurret_Normal::Draw()
 }
 
 //毎フレーム行う処理
-void CTurret_Normal::Step(const VECTOR vPos, CShotManager& cShotManager)
+void CTurret_Normal::Step(CShotManager& cShotManager, const VECTOR PayerPos)
 {
 	
 	if (!IsActive)return;
 
 	
 	//角度計算
-	Turret_Rotate(vPos);
+	Turret_Rotate(PayerPos);
 
 
 	//弾の位置決定
@@ -67,8 +67,18 @@ void CTurret_Normal::Step(const VECTOR vPos, CShotManager& cShotManager)
 	vSpd.z = cosf(cRotate.y) * -SHOT_SPEED;
 	vSpd.y = 0.0f;
 	
-	//タレットの弾リクエスト
-	cShotManager.RequestTurretShot(BulletPos, vSpd);
+	if (CInput::IsKeyPush(KEY_INPUT_Q))
+	{
+		//タレットの弾リクエスト
+		cShotManager.RequestTurretShot(BulletPos, vSpd);
+	}
+	DrawFormatString(300, 10, GetColor(255, 255, 255), "BulletPos.x%0.2f", BulletPos.x);
+	DrawFormatString(300, 25, GetColor(255, 255, 255), "BulletPos.y%0.2f", BulletPos.y);
+	DrawFormatString(300, 40, GetColor(255, 255, 255), "BulletPos.z%0.2f", BulletPos.z);
+	DrawFormatString(300, 55, GetColor(255, 255, 255), "vSpd.x%0.2f", vSpd.x);
+	DrawFormatString(300, 70, GetColor(255, 255, 255), "vSpd.y%0.2f", vSpd.y);
+	DrawFormatString(300, 85, GetColor(255, 255, 255), "vSpd.z%0.2f", vSpd.z);
+
 }
 
 //後処理

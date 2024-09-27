@@ -59,9 +59,6 @@ void CTurretBase::Exit()
 	IsActive = false;
 }
 
-//毎フレーム行う処理
-void Step(const VECTOR vPos, CShotManager& cShotManager) {};
-
 //情報更新
 void CTurretBase::Update()
 {

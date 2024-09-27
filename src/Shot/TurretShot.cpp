@@ -1,5 +1,7 @@
 #include "TurretShot.h"
 
+#define RADIUS	(3.0f)
+
 
 //コンストラクタ・デストラクタ
 CTurretShot::CTurretShot()
@@ -26,10 +28,7 @@ void CTurretShot::Init()
 //読み込み
 void CTurretShot::Load(int iMdlHndl)
 {
-	if (iHndl == -1)
-	{
-		iHndl = MV1DuplicateModel(iMdlHndl);
-	}
+	iHndl = MV1DuplicateModel(iMdlHndl);
 }
 
 //描画
@@ -38,13 +37,16 @@ void CTurretShot::Draw()
 	if (IsActive)
 	{
 		MV1DrawModel(iHndl);
-
-		/*DrawFormatString(500, 0, GetColor(255, 0, 0), "X座標：%f", cPos.x);
+		DrawFormatString(500, 0, GetColor(255, 0, 0), "X座標：%f", cPos.x);
 		DrawFormatString(500, 15, GetColor(255, 0, 0), "Y座標：%f", cPos.y);
-		DrawFormatString(500, 30, GetColor(255, 0, 0), "Z座標：%f", cPos.z);*/
-		/*DrawSphere3D(vPos, m_Radius, 16, GetColor(255, 255, 255), GetColor(255, 255, 255), FALSE);*/
+		DrawFormatString(500, 30, GetColor(255, 0, 0), "Z座標：%f", cPos.z);
+
+		DrawSphere3D(cPos, RADIUS, 16, GetColor(255, 255, 255), GetColor(255, 255, 255), FALSE);
+
 
 	}
+
+	
 }
 
 //毎フレーム行う処理

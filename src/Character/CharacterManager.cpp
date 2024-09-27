@@ -16,9 +16,6 @@ CCharacterManager::~CCharacterManager()
 //初期化
 void CCharacterManager::Init()
 {
-	//ショットマネージャー初期化
-	cShotManager.Init();
-
 	cAttacker.Init();
 	cTank.Init();
 	cSupport.Init();
@@ -30,9 +27,6 @@ void CCharacterManager::Init()
 //データロード
 void CCharacterManager::Load()
 {
-	//ショットマネージャー初期化
-	cShotManager.Load();
-
 	cAttacker.Load();
 	cTank.Load();
 	cSupport.Load();
@@ -71,7 +65,7 @@ void CCharacterManager::Exit()
 }
 
 //毎フレーム呼ぶ処理
-void CCharacterManager::Step(CTurretManager& cTurretManager)
+void CCharacterManager::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 {
 	//メインキャラ処理
 	switch (MainID)
@@ -98,8 +92,6 @@ void CCharacterManager::Step(CTurretManager& cTurretManager)
 		break;
 	}
 
-	
-	cShotManager.Step(GetPosition());
 }
 
 //描画処理
@@ -126,6 +118,4 @@ void CCharacterManager::Draw()
 	default:
 		break;
 	}
-
-	cShotManager.Draw();
 }

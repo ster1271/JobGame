@@ -17,7 +17,6 @@ private:
 	
 	//CTurretBase型のList配列
 	vector<CTurretBase*> Turret_List;
-	CShotManager cShotManager;		//ショットマネージャー
 
 public:
 	//コンストラクタ・デストラクタ
@@ -32,7 +31,7 @@ public:
 	//終了処理
 	void Exit();
 	//繰り返し行う処理
-	void Step(VECTOR Pos);
+	void Step(CShotManager& cShotManager ,VECTOR PlayerPos);
 	//更新処理
 	void Update();
 	//描画処理

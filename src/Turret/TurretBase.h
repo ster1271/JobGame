@@ -35,7 +35,7 @@ public:
 	virtual void Draw() = 0;
 
 	//毎フレーム行う処理
-	virtual void Step(const VECTOR vPos, CShotManager& cShotManager) = 0;
+	virtual void Step(CShotManager& cShotManager, const VECTOR PayerPos) = 0;
 
 	//情報更新
 	void Update();
@@ -63,9 +63,6 @@ public:
 
 	//タレット回転処理
 	virtual void Turret_Rotate(const VECTOR vPos);
-
-	//リクエスト
-	bool RequestShot(const VECTOR& vPos, const VECTOR& vSpeed);
 
 };
 

@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../Character/Attacker.h"
 #include "../Character/Tank.h"
 #include "../Character/Support.h"
@@ -18,7 +19,6 @@ class CCharacterManager
 private:
 	MainPlayerID MainID;
 
-	CShotManager cShotManager;		//ショットマネージャー
 	CAttacker cAttacker;			//アタッカークラス
 	CTank cTank;					//タンククラス
 	CSupport cSupport;				//サポートクラス
@@ -40,7 +40,7 @@ public:
 	void Exit();
 
 	//毎フレーム呼ぶ処理
-	void Step(CTurretManager& cTurretManager);
+	void Step(CShotManager& cShotManager,  CTurretManager& cTurretManager);
 
 	//描画処理
 	void Draw();

@@ -22,7 +22,8 @@ public:
 	void Draw();
 
 	//–ˆƒtƒŒ[ƒ€s‚¤ˆ—
-	void Step(const VECTOR vPos, CShotManager& cShotManager);
+	void Step(CShotManager& cShotManager, const VECTOR PayerPos);
+
 
 	//Œãˆ—
 	void Exit();

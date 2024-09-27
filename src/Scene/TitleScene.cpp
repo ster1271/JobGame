@@ -57,7 +57,7 @@ int CTitleScene::Loop()
 
 	case TITLE_SCENE_LOOP:
 		Step();
-		Draw();
+
 		break;
 
 	case TITLE_SCENE_END:

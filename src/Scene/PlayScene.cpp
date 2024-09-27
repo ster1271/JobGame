@@ -12,6 +12,8 @@
 //------------------------------------------
 CPlayScene::CPlayScene()
 {
+	memset(&Posinfo, 0, sizeof(PosInfo));
+
 	//ひとまず初期化にしておく
 	eSceneID = PLAY_SCENE_INIT;
 }
@@ -46,7 +48,6 @@ int CPlayScene::Loop()
 
 	case PLAY_SCENE_LOOP:
 		Step();
-		Draw();
 		break;
 
 	case PLAY_SCENE_END:
@@ -106,6 +107,9 @@ void CPlayScene::Init()
 	cShotManager.Init();
 	//ボット初期化
 	cBot.Init();
+
+	memset(&Posinfo, 0, sizeof(PosInfo));
+
 }
 
 
@@ -128,6 +132,9 @@ void CPlayScene::Exit()
 	cShotManager.Exit();
 	//ボットクラス終了処理
 	cBot.Exit();
+
+	memset(&Posinfo, 0, sizeof(PosInfo));
+
 }
 
 
@@ -156,7 +163,9 @@ void CPlayScene::Load()
 //-----------------------------------
 void CPlayScene::Step()
 {
-	
+	Posinfo.PlayerPos = cCharacterManager.GetPosition();
+	//Posinfo.TurretPos = cTurretManager.
+
 
 	//シーン遷移処理(仮)
 	if (CInput::IsKeyPush(KEY_INPUT_RETURN))
@@ -183,11 +192,11 @@ void CPlayScene::Step()
 		//オブジェクト更新処理
 		cObjectManager.Step();
 		//キャラクター更新処理
-		cCharacterManager.Step(cTurretManager);
+		cCharacterManager.Step(cShotManager, cTurretManager);
 		//エネミー更新処理
 		cEnemyManager.Step();
 		//タレット更新処理
-		cTurretManager.Step(cCharacterManager.GetPosition());
+		cTurretManager.Step(cShotManager, cCharacterManager.GetPosition());
 		//弾更新処理
 		cShotManager.Step(cCharacterManager.GetPosition());
 		//ボット更新処理

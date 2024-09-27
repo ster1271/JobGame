@@ -79,19 +79,18 @@ void SceneManager::Draw()
 	switch (eSceneID)
 	{
 	case SCENE_TITLE:
-
+		cTitleScene.Draw();
 		break;
 
 	case SCENE_PLAY:
-
+		cPlayScene.Draw();
 		break;
 
 	case SCENE_RESULT:
-
+		cResultScene.Draw();
 		break;
 
 	case SCENE_NUM:
-
 		break;
 
 	default:

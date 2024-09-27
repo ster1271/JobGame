@@ -62,9 +62,6 @@ void CBase::Draw()
 	MV1DrawModel(iHndl);
 }
 
-//毎フレーム行う処理
-void CBase::Step(CShotManager& cShotManager, CTurretManager& cTurretManager) {}
-
 //更新処理
 void CBase::Update()
 {

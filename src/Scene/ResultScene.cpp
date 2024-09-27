@@ -55,7 +55,6 @@ int CResultScene::Loop()
 
 	case RESULT_SCENE_LOOP:
 		Step();
-		Draw();
 		break;
 
 	case RESULT_SCENE_END:
