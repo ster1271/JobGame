@@ -69,6 +69,7 @@ int CPlayScene::Loop()
 //-----------------------------------
 void CPlayScene::Draw()
 {
+
 	//オブジェクト描画
 	cObjectManager.Draw();
 	//キャラクター描画
@@ -164,7 +165,10 @@ void CPlayScene::Load()
 void CPlayScene::Step()
 {
 	Posinfo.PlayerPos = cCharacterManager.GetPosition();
-	//Posinfo.TurretPos = cTurretManager.
+	for (int TurretIndex = 0; TurretIndex < cTurretManager.GetTurretSize(); TurretIndex++)
+	{
+		Posinfo.TurretPos = cTurretManager.GetTurretPos(TurretIndex);
+	}
 
 
 	//シーン遷移処理(仮)

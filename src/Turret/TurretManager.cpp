@@ -72,6 +72,12 @@ void CTurretManager::Draw()
 	}
 }
 
+//タレット座標取得
+VECTOR CTurretManager::GetTurretPos(int Index)
+{
+	Turret_List[Index]->GetPos();
+}
+
 //タレット設置処理
 void CTurretManager::TurretSpawn(const VECTOR& vPos)
 {

@@ -100,6 +100,7 @@ void CEnemyBase::Draw()
 		MV1DrawModel(iHndl);
 
 		//デバック用---------------------------------------------------------------------
+		/*
 		int R, G, B;
 		B = 255;
 		R = G = 0;
@@ -129,6 +130,7 @@ void CEnemyBase::Draw()
 			break;
 		}
 		DrawSphere3D(cPos, Radius, 16, GetColor(R, G, B), GetColor(R, G, B), false);
+		*/
 		//デバック用---------------------------------------------------------------------
 	}
 

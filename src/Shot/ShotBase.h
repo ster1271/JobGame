@@ -20,7 +20,7 @@ public:
 	~CShotBase();
 
 	//•`‰æˆ—
-	void Draw();
+	virtual void Draw();
 
 	//î•ñXV
 	void UpDate();

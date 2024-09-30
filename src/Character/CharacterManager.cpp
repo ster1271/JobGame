@@ -21,7 +21,7 @@ void CCharacterManager::Init()
 	cSupport.Init();
 
 	//メインIDを初期化
-	MainID = ID_NUM;
+	MainID = MainID_ATTACKER;
 }
 
 //データロード
@@ -36,28 +36,6 @@ void CCharacterManager::Load()
 void CCharacterManager::Exit()
 {
 	//メインキャラ後処理
-	/*
-	switch (MainID)
-	{
-	case MainID_ATTACKER:
-		cAttacker.Exit();
-		break;
-
-	case MainID_TANK:
-		cTank.Exit();
-		break;
-
-	case MainID_SUPPORT:
-		cSupport.Exit();
-		break;
-
-	case ID_NUM:
-		break;
-
-	default:
-		break;
-	}
-	*/
 	cAttacker.Exit();
 	cTank.Exit();
 	cSupport.Exit();

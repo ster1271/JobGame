@@ -41,7 +41,7 @@ void CEnemy_Normal::Step()
 	//À•W‚É‘¬“x‚ð‰ÁŽZ
 	cPos = VAdd(cPos, cSpeed);
 	//ˆê’è”ÍˆÍ‚ð’´‚¦‚½‚çÁ‚·
-	float fLength = 300.0f;
+	float fLength = 1000.0f;
 	if (cPos.x > fLength || cPos.x < -fLength
 		|| cPos.z > fLength || cPos.z < -fLength)
 	{

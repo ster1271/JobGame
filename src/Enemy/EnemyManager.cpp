@@ -68,14 +68,14 @@ void CEnemyManager::Step()
 		RequestEnemy();
 	}
 
-	for (int Enemy_Index = 0; Enemy_Index < Enemy_List.size(); Enemy_Index++)
-	{
-		if (!Enemy_List[Enemy_Index]->GetActive())
-		{
-			//再利用のため初期化しておく
-			Enemy_List[Enemy_Index]->Init();
-		}	
-	}
+	//for (int Enemy_Index = 0; Enemy_Index < Enemy_List.size(); Enemy_Index++)
+	//{
+	//	if (!Enemy_List[Enemy_Index]->GetActive())
+	//	{
+	//		//再利用のため初期化しておく
+	//		Enemy_List[Enemy_Index]->Init();
+	//	}	
+	//}
 }
 
 //描画処理
@@ -92,8 +92,8 @@ void CEnemyManager::Draw()
 //敵リクエスト
 void CEnemyManager::RequestEnemy()
 {
-	VECTOR vPos = VGet((float)GetRand(200) - 100.0f, 5.0f , 200.0f);
-	VECTOR vSpeed = VGet(-1.0f, 0.0f, -1.0f);
+	VECTOR vPos = VGet(0.0f, 5.0f , GetRand(200.0f)+ 100.0f);
+	VECTOR vSpeed = VGet(0.0f, 0.0f, 1.0f);
 
 	//変数代入用クラス
 	CEnemyBase* cEnemyBase = new CEnemy_Normal;

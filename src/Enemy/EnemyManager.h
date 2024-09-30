@@ -7,7 +7,7 @@
 
 using namespace std;
 
-#define ENEMY_NUM	(100)
+#define ENEMY_NUM	(10)
 
 class CEnemyManager
 {

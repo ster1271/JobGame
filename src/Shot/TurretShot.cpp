@@ -37,11 +37,11 @@ void CTurretShot::Draw()
 	if (IsActive)
 	{
 		MV1DrawModel(iHndl);
-		DrawFormatString(500, 0, GetColor(255, 0, 0), "X座標：%f", cPos.x);
-		DrawFormatString(500, 15, GetColor(255, 0, 0), "Y座標：%f", cPos.y);
-		DrawFormatString(500, 30, GetColor(255, 0, 0), "Z座標：%f", cPos.z);
+		DrawFormatString(500, 0, GetColor(255, 0, 0), "タレット弾X座標：%f", cPos.x);
+		DrawFormatString(500, 15, GetColor(255, 0, 0), "タレット弾Y座標：%f", cPos.y);
+		DrawFormatString(500, 30, GetColor(255, 0, 0), "タレット弾Z座標：%f", cPos.z);
 
-		DrawSphere3D(cPos, RADIUS, 16, GetColor(255, 255, 255), GetColor(255, 255, 255), FALSE);
+		//DrawSphere3D(cPos, RADIUS, 16, GetColor(255, 255, 255), GetColor(255, 255, 255), FALSE);
 
 
 	}
@@ -67,6 +67,8 @@ void CTurretShot::Step(VECTOR TurretPos)
 		IsActive = false;
 	}*/
 
+	//情報の更新
+	UpDate();
 }
 
 //リクエスト
@@ -76,7 +78,7 @@ bool CTurretShot::RequestShot(const VECTOR& vPos, const VECTOR& vSpeed)
 	if (IsActive) return false;
 
 	cPos = vPos;
-	cSize = VGet(0.05f, 0.05f, 0.05f);
+	cSize = VGet(0.0005f, 0.0005f, 0.0005f);
 	cSpeed = vSpeed;
 	IsActive = true;
 
