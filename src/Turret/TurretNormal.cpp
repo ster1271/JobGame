@@ -67,17 +67,9 @@ void CTurret_Normal::Step(CShotManager& cShotManager, const VECTOR PayerPos)
 	vSpd.z = cosf(cRotate.y) * -SHOT_SPEED;
 	vSpd.y = 0.0f;
 	
-	if (CInput::IsKeyPush(KEY_INPUT_Q))
-	{
-		//タレットの弾リクエスト
-		cShotManager.RequestTurretShot(BulletPos, vSpd);
-	}
-	DrawFormatString(300, 10, GetColor(255, 255, 255), "BulletPos.x%0.2f", BulletPos.x);
-	DrawFormatString(300, 25, GetColor(255, 255, 255), "BulletPos.y%0.2f", BulletPos.y);
-	DrawFormatString(300, 40, GetColor(255, 255, 255), "BulletPos.z%0.2f", BulletPos.z);
-	DrawFormatString(300, 55, GetColor(255, 255, 255), "vSpd.x%0.2f", vSpd.x);
-	DrawFormatString(300, 70, GetColor(255, 255, 255), "vSpd.y%0.2f", vSpd.y);
-	DrawFormatString(300, 85, GetColor(255, 255, 255), "vSpd.z%0.2f", vSpd.z);
+	
+	//タレットの弾リクエスト
+	cShotManager.RequestTurretShot(BulletPos, vSpd);
 
 }
 

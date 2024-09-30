@@ -23,16 +23,8 @@ private:
 		PLAY_SCENE_NUM
 	};
 
-	//座標情報格納
-	struct PosInfo
-	{
-		VECTOR PlayerPos;
-		VECTOR TurretPos;
-	};
-
-
+	
 	tagPLAY_SCENE eSceneID;
-	PosInfo Posinfo;	
 
 	CCameraManager cCameraManager;			//カメラマネージャー
 	CShotManager cShotManager;				//ショットマネージャー

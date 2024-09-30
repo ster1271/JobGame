@@ -70,7 +70,7 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 
 		//弾のスピード
 		const float SHOT_SPEED = 5.0f;
-		VECTOR vSpd;
+		VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);
 
 		vSpd.x = sinf(cRotate.y) * -SHOT_SPEED;
 		vSpd.z = cosf(cRotate.y) * -SHOT_SPEED;

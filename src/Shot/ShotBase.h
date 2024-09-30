@@ -10,6 +10,8 @@ protected:
 	VECTOR cSize;			//拡縮値
 	VECTOR cSpeed;			//移動速度
 
+	VECTOR SetPos;			//初期地点
+
 	int iHndl;				//モデルのハンドル
 	float Radius;			//モデルの半径
 	bool IsActive;			//生存フラグ

@@ -50,22 +50,22 @@ void CTurretShot::Draw()
 }
 
 //毎フレーム行う処理
-void CTurretShot::Step(VECTOR TurretPos)
+void CTurretShot::Step()
 {
 	if (!IsActive) return;
 
 	//座標に速度を加算
-	cPos = VAdd(cPos, cSpeed);
+	cPos = VSub(cPos, cSpeed);
 
 
 	//一定範囲を超えたら消す
 	float fLength = 100;
 
-	/*if (cPos.x > TurretPos.x + fLength || cPos.x < TurretPos.x - fLength
-		|| cPos.z > TurretPos.z + fLength || cPos.z < TurretPos.z - fLength)
+	if (cPos.x > SetPos.x + fLength || cPos.x < SetPos.x - fLength
+		|| cPos.z > SetPos.z + fLength || cPos.z < SetPos.z - fLength)
 	{
 		IsActive = false;
-	}*/
+	}
 
 	//情報の更新
 	UpDate();
@@ -78,7 +78,9 @@ bool CTurretShot::RequestShot(const VECTOR& vPos, const VECTOR& vSpeed)
 	if (IsActive) return false;
 
 	cPos = vPos;
-	cSize = VGet(0.0005f, 0.0005f, 0.0005f);
+	cPos.y += 5.0f;
+	SetPos = vPos;
+	cSize = VGet(0.01f, 0.01f, 0.01f);
 	cSpeed = vSpeed;
 	IsActive = true;
 

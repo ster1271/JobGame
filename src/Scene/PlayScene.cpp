@@ -12,8 +12,6 @@
 //------------------------------------------
 CPlayScene::CPlayScene()
 {
-	memset(&Posinfo, 0, sizeof(PosInfo));
-
 	//ひとまず初期化にしておく
 	eSceneID = PLAY_SCENE_INIT;
 }
@@ -108,9 +106,6 @@ void CPlayScene::Init()
 	cShotManager.Init();
 	//ボット初期化
 	cBot.Init();
-
-	memset(&Posinfo, 0, sizeof(PosInfo));
-
 }
 
 
@@ -133,8 +128,6 @@ void CPlayScene::Exit()
 	cShotManager.Exit();
 	//ボットクラス終了処理
 	cBot.Exit();
-
-	memset(&Posinfo, 0, sizeof(PosInfo));
 
 }
 
@@ -164,13 +157,6 @@ void CPlayScene::Load()
 //-----------------------------------
 void CPlayScene::Step()
 {
-	Posinfo.PlayerPos = cCharacterManager.GetPosition();
-	for (int TurretIndex = 0; TurretIndex < cTurretManager.GetTurretSize(); TurretIndex++)
-	{
-		Posinfo.TurretPos = cTurretManager.GetTurretPos(TurretIndex);
-	}
-
-
 	//シーン遷移処理(仮)
 	if (CInput::IsKeyPush(KEY_INPUT_RETURN))
 	{

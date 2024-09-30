@@ -104,8 +104,7 @@ void CShotManager::Step(VECTOR Pos)
 
 	for (int i = 0; i < TURRET_SHOT_NUM; i++)
 	{
-		//引数座標がプレイヤーになっているためタレットに置き換える
-		cTurretShot[i].Step(Pos);
+		cTurretShot[i].Step();
 	}
 }
 

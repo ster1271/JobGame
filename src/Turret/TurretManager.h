@@ -37,15 +37,6 @@ public:
 	//描画処理
 	void Draw();
 
-	//vectorのサイズ取得
-	int GetTurretSize()
-	{
-		return Turret_List.size();
-	}
-
-	//タレット座標取得
-	VECTOR GetTurretPos(int Index);
-
 	//タレット設置処理
 	void TurretSpawn(const VECTOR& vPos);
 };

@@ -7,6 +7,8 @@ CShotBase::CShotBase()
 	memset(&cRotate, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cSpeed, 0, sizeof(VECTOR));
+	memset(&SetPos, 0, sizeof(VECTOR));
+
 
 	iHndl = -1;
 	Radius = 0.0f;
@@ -38,6 +40,8 @@ void CShotBase::Exit()
 	memset(&cRotate, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cSpeed, 0, sizeof(VECTOR));
+	memset(&SetPos, 0, sizeof(VECTOR));
+
 
 	iHndl = -1;
 	Radius = 0.0f;
