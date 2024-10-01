@@ -31,7 +31,7 @@ void CGround::Init()
 	iHndl = -1;
 
 	//Še•Ï”‚Ì‰Šú‰»
-	cPos = VGet(0.0f, 0.0f, 0.0f);
+	cPos = VGet(0.0f, -5.0f, 0.0f);
 	cSize = VGet(1.0f, 1.0f, 1.0f);
 	cRotate = VGet(0.0f, 0.0f, 0.0f);
 }
@@ -39,5 +39,5 @@ void CGround::Init()
 //ƒ‚ƒfƒ‹“Ç‚İ‚İ
 void CGround::Load()
 {
-	iHndl = MV1LoadModel("data/field/field.x");
+	iHndl = MV1LoadModel("data/Map/tile.x");
 }

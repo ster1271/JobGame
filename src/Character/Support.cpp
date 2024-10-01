@@ -34,22 +34,25 @@ void CSupport::Load()
 //毎フレーム行う処理
 void CSupport::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 {
+	//キャラクターの移動
+	float fSpd = 0.0f;
 	if (CInput::IsKeyKeep(KEY_INPUT_W))
 	{
-		cPos.z += MOVESPEED;
+		fSpd = -MOVESPEED;
 	}
-	if (CInput::IsKeyKeep(KEY_INPUT_S))
+	else if (CInput::IsKeyKeep(KEY_INPUT_S))
 	{
-		cPos.z -= MOVESPEED;
+		fSpd = MOVESPEED;
 	}
-	if (CInput::IsKeyKeep(KEY_INPUT_A))
-	{
-		cPos.x -= MOVESPEED;
-	}
-	if (CInput::IsKeyKeep(KEY_INPUT_D))
-	{
-		cPos.x += MOVESPEED;
-	}
+
+	//入力したキー情報とプレイヤーの角度から、移動速度を求める
+	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
+	vSpeed.x = sin(cRotate.y) * fSpd;
+	vSpeed.z = cos(cRotate.y) * fSpd;
+
+	//移動速度を現在の座標に加算する
+	cPos.x += vSpeed.x;
+	cPos.z += vSpeed.z;
 
 	//発射処理
 	if (CInput::IsKeyPush(KEY_INPUT_SPACE))
