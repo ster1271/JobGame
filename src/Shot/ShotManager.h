@@ -34,7 +34,7 @@ public:
 	void Draw();
 
 	//プレイヤーのショット情報取得
-	inline CShot& GetPlayerShot(int iID) { return cPlayerShot[iID]; }
+	//inline CShot& GetPlayerShot(int iID) { return cPlayerShot[iID]; }
 
 	//プレイヤーのショットリクエスト
 	void RequestPlayerShot(const VECTOR& vPos, const VECTOR& vSpeed);
