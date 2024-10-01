@@ -50,7 +50,6 @@ void CTurret_Normal::Step(CShotManager& cShotManager, const VECTOR PayerPos)
 {
 	
 	if (!IsActive)return;
-
 	
 	//角度計算
 	Turret_Rotate(PayerPos);
@@ -60,7 +59,7 @@ void CTurret_Normal::Step(CShotManager& cShotManager, const VECTOR PayerPos)
 	VECTOR BulletPos = cPos;
 
 	//弾のスピード
-	const float SHOT_SPEED = 5.0f;
+	const float SHOT_SPEED = 2.0f;
 	VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);
 
 	vSpd.x = sinf(cRotate.y) * -SHOT_SPEED;

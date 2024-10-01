@@ -4,6 +4,8 @@
 //定義
 static const char PLSHOT_MODEL_PATH[] = { "data/shot/plshot.x" };
 static const char TURRETSHOT_MODEL_PATH[] = { "data/shot/plshot.x" };
+const int BULLET_COOL_TIME = 10;
+
 
 //------------------------------------
 //コンストラクタ
@@ -12,6 +14,7 @@ CShotManager::CShotManager()
 {
 	PlayerHndl = -1;
 	TurretHndl = -1;
+	Count = 0;
 }
 
 
@@ -29,6 +32,8 @@ CShotManager::~CShotManager()
 //------------------------------------
 void CShotManager::Init()
 {
+	Count = 0;
+
 	for (int i = 0; i < PL_SHOT_NUM; i++)
 	{
 		cPlayerShot[i].Init();
@@ -97,6 +102,7 @@ void CShotManager::Exit()
 //------------------------------------
 void CShotManager::Step(VECTOR Pos)
 {
+
 	for (int i = 0; i < PL_SHOT_NUM; i++)
 	{
 		cPlayerShot[i].Step(Pos);
@@ -106,6 +112,8 @@ void CShotManager::Step(VECTOR Pos)
 	{
 		cTurretShot[i].Step();
 	}
+
+	//cTurretShot[Count].Step();
 }
 
 //------------------------------------
@@ -123,6 +131,9 @@ void CShotManager::Draw()
 	{
 		cTurretShot[i].Draw();
 	}
+
+	/*cTurretShot[Count].Draw();*/
+
 }
 
 
@@ -145,11 +156,22 @@ void CShotManager::RequestPlayerShot(const VECTOR& vPos, const VECTOR& vSpeed)
 //タレットのショットリクエスト
 void CShotManager::RequestTurretShot(const VECTOR& vPos, const VECTOR& vSpeed)
 {
+
 	for (int i = 0; i < TURRET_SHOT_NUM; i++)
 	{
 		if (cTurretShot[i].RequestShot(vPos, vSpeed))
 		{
+
 			break;
 		}
 	}
+	
+	/*Count++;
+
+	cTurretShot[Count].RequestShot(vPos, vSpeed);
+
+	if (Count == TURRET_SHOT_NUM)
+	{
+		Count = 0;
+	}*/
 }

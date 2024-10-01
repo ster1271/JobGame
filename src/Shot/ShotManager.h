@@ -11,6 +11,7 @@ class CShotManager
 private:
 	int PlayerHndl;
 	int TurretHndl;
+	int Count;
 
 	CShot cPlayerShot[PL_SHOT_NUM];
 	CTurretShot cTurretShot[TURRET_SHOT_NUM];
