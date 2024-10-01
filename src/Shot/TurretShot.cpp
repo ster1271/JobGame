@@ -59,7 +59,7 @@ void CTurretShot::Step()
 
 
 	//ˆê’è”ÍˆÍ‚ð’´‚¦‚½‚çÁ‚·
-	float fLength = 100;
+	float fLength = 200;
 
 	if (cPos.x > SetPos.x + fLength || cPos.x < SetPos.x - fLength
 		|| cPos.z > SetPos.z + fLength || cPos.z < SetPos.z - fLength)

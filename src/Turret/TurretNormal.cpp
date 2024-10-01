@@ -2,6 +2,7 @@
 
 const float MAX_LIFE = 50.0f;
 const float ATTACK = 5.0f;
+const int MAX_COOL_TIME = 30;
 
 //コンストラクタ
 CTurret_Normal::CTurret_Normal()
@@ -19,6 +20,7 @@ void CTurret_Normal::Init()
 {
 	CTurretBase::Init();
 	Attack = 0.0f;
+	CoolTime = 0;
 }
 
 //データロード
@@ -66,9 +68,13 @@ void CTurret_Normal::Step(CShotManager& cShotManager, const VECTOR PayerPos)
 	vSpd.z = cosf(cRotate.y) * -SHOT_SPEED;
 	vSpd.y = 0.0f;
 	
-	
-	//タレットの弾リクエスト
-	cShotManager.RequestTurretShot(BulletPos, vSpd);
+	CoolTime++;
+	if (CoolTime > MAX_COOL_TIME)
+	{
+		//タレットの弾リクエスト
+		cShotManager.RequestTurretShot(BulletPos, vSpd);
+		CoolTime = 0;
+	}
 
 }
 
@@ -77,6 +83,7 @@ void CTurret_Normal::Exit()
 {
 	CTurretBase::Exit();
 	Attack = 0.0f;
+	CoolTime = 0;
 }
 
 //タレット設置処理
@@ -94,6 +101,7 @@ void CTurret_Normal::TurretSpawn(const VECTOR &vPos)
 	Hp = MAX_LIFE;
 	Power_Up_Count = 0;
 	Attack = ATTACK;
+	CoolTime = 0;
 
 	IsActive = true;
 }

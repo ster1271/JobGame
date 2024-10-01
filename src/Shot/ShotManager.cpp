@@ -112,8 +112,6 @@ void CShotManager::Step(VECTOR Pos)
 	{
 		cTurretShot[i].Step();
 	}
-
-	//cTurretShot[Count].Step();
 }
 
 //------------------------------------
@@ -131,9 +129,6 @@ void CShotManager::Draw()
 	{
 		cTurretShot[i].Draw();
 	}
-
-	/*cTurretShot[Count].Draw();*/
-
 }
 
 
@@ -165,13 +160,4 @@ void CShotManager::RequestTurretShot(const VECTOR& vPos, const VECTOR& vSpeed)
 			break;
 		}
 	}
-	
-	/*Count++;
-
-	cTurretShot[Count].RequestShot(vPos, vSpeed);
-
-	if (Count == TURRET_SHOT_NUM)
-	{
-		Count = 0;
-	}*/
 }

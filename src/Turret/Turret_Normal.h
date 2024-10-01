@@ -6,6 +6,7 @@ class CTurret_Normal: public CTurretBase
 {
 private:
 	float Attack;
+	int CoolTime;
 
 public:
 	//コンストラクタ・デストラクタ
