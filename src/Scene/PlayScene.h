@@ -9,6 +9,7 @@
 #include "../Turret/TurretManager.h"
 #include "../Object/ObjectManager.h"
 #include "../Bot/Bot.h"
+#include "../Check_Point/Check_Point.h"
 
 class CPlayScene
 {
@@ -33,6 +34,7 @@ private:
 	CObjectManager cObjectManager;			//オブジェクトマネージャー
 	CTurretManager cTurretManager;			//タレットマネージャー
 	CBot cBot;								//ボットクラス
+	CCheck_Point cCheck_Point[5];				//チェックポイントクラス
 	
 
 public:
@@ -48,7 +50,7 @@ public:
 
 private:
 	//初期化
-	void Init(void);
+	void Init();
 
 	//終了処理
 	void Exit();

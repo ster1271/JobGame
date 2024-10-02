@@ -4,38 +4,78 @@ const char POINT_PATH[] = { "data/Map/Point.x" };
 
 
 //コンストラクタ
-Check_Point::Check_Point()
+CCheck_Point::CCheck_Point()
 {
+	tmp_Hndl = -1;
 }
 
 //デストラクタ
-v::~CRoute_Point()
+CCheck_Point::~CCheck_Point()
 {
+	Exit();
 }
 
 //初期化
-void CRoute_Point::Init()
+void CCheck_Point::Init()
 {
-	VECTOR vPos = VGet(GetRand(400.0f) - 200.0f, 5.0f, GetRand(600.0f) - 300.0f);
+	CBase_Check::Init();
+	tmp_Hndl = -1;
+	VECTOR vPos;
+	vPos = VGet(GetRand(400.0f) - 200.0f, 5.0f, GetRand(600.0f) - 300.0f);
 	Set_Point(vPos);
 }
 
 //モデル読み込み
-void CRoute_Point::Load(int Hndl)
+void CCheck_Point::Load()
 {
-	iHndl = MV1DuplicateModel(Hndl);
+	if (tmp_Hndl == -1)
+	{
+		tmp_Hndl = MV1LoadModel(POINT_PATH);
+	}
+
+	//モデルのコピー
+	iHndl = MV1DuplicateModel(tmp_Hndl);
+}
+
+//描画
+void CCheck_Point::Draw()
+{
+	if (!IsActive)
+		return;
+
+	MV1DrawModel(iHndl);
+}
+
+//毎フレーム行う処理
+void CCheck_Point::Step()
+{
+	if (!IsActive)
+		return;
+
+	CBase_Check::UpData();
+}
+
+//後処理
+void CCheck_Point::Exit()
+{
+	if (iHndl != -1)
+	{
+		MV1DeleteModel(iHndl);
+		iHndl = -1;
+	}
+
+	if (tmp_Hndl != -1)
+	{
+		MV1DeleteModel(tmp_Hndl);
+		tmp_Hndl = -1;
+	}
 }
 
 //設置処理
-void CRoute_Point::Set_Point(const VECTOR vPos)
+void CCheck_Point::Set_Point(VECTOR vPos)
 {
-	//すでに生成されている
-	if (IsActive) return;
-
 	cPos = vPos;
-	cRotate = VGet(0.0, 0.0f, 0.0f);
 	cSize = VGet(0.1f, 0.1f, 0.1f);
-
 	IsActive = true;
 }
 

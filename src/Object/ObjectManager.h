@@ -5,7 +5,6 @@
 #include "Object.h"
 #include "Sky/Sky.h"
 #include "Ground/Ground.h"
-#include "Route_Point/Route_Point.h"
 
 using namespace std;
 
@@ -15,11 +14,6 @@ class CObjectManager
 private:
 	CSky cSky;			//天球クラス
 	CGround cGround;	//マップクラス
-
-	int Point_Hndl;
-	Check_Point Check_Point[5];
-	//CObject型のRoute_Point格納配列
-	//vector<CObject*> Point_List;
 
 
 public:
@@ -45,6 +39,4 @@ public:
 	//後処理
 	void Exit();
 
-	//設置処理
-	void Set_Point(const VECTOR& vPos);
 };
