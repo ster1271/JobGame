@@ -4,7 +4,7 @@
 class CEnemy_Normal: public CEnemyBase
 {
 private:
-
+	VECTOR Respown_Pos;
 public:
 	//コンストラクタ・デストラクタ
 	CEnemy_Normal();

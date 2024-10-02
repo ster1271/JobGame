@@ -14,11 +14,12 @@ class CEnemyManager
 private:
 	//モデルのコピー元
 	int Org_Hndl;
+	CEnemy_Normal cEnemy_Normal[10];
 
 	//CEnemyBase型のList配列
-	vector<CEnemyBase*> Enemy_List;
+	/*vector<CEnemyBase*> Enemy_List;
 
-	CEnemyBase cEnemyBace;
+	CEnemyBase cEnemyBace;*/
 
 public:
 	//コンストラクタ・デストラクタ
