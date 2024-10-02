@@ -1,7 +1,13 @@
 #pragma once
-#include "../Object/Sky/Sky.h"
-#include "../Object/Ground/Ground.h"
+#include <iostream>
+#include <vector>
+#include <list>
+#include "Object.h"
+#include "Sky/Sky.h"
+#include "Ground/Ground.h"
+#include "Route_Point/Route_Point.h"
 
+using namespace std;
 
 //オブジェクトマネージャークラス
 class CObjectManager
@@ -9,6 +15,11 @@ class CObjectManager
 private:
 	CSky cSky;			//天球クラス
 	CGround cGround;	//マップクラス
+
+	int Point_Hndl;
+	//CObject型のRoute_Point格納配列
+	vector<CObject*> Point_List;
+
 
 public:
 	//コンストラクタ・デストラクタ
@@ -32,4 +43,7 @@ public:
 
 	//後処理
 	void Exit();
+
+	//設置処理
+	void Set_Point(const VECTOR& vPos);
 };

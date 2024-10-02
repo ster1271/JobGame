@@ -4,7 +4,7 @@
 const char ATTACKER_PATH[] = { "data/character/il/あいえるたん.pmx" };
 
 const float SPERE_R = 3.0f;
-#define MOVESPEED	(0.3f)
+#define MOVESPEED	(1.0f)
 #define ROT_SPEED	(0.05f)	
 
 //コンストラクタ・デストラクタ

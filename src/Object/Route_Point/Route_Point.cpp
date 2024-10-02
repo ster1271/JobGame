@@ -1,5 +1,6 @@
 #include "Route_Point.h"
 
+const char POINT_PATH[] = { "data/Map/Point.x" };
 
 
 //コンストラクタ
@@ -19,8 +20,12 @@ void CRoute_Point::Init()
 }
 
 //モデル読み込み
-void CRoute_Point::Load(int Org_Hndl)
+void CRoute_Point::Load()
 {
+	if (Org_Hndl == -1)
+	{
+		Org_Hndl = MV1LoadModel(POINT_PATH);
+	}
 	iHndl = MV1DuplicateModel(Org_Hndl);
 }
 

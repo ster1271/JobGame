@@ -5,7 +5,7 @@ static const char TURRET_NORMAL_PATH[] = { "data/Turret/Turret_Normal.x" };
 //コンストラクタ
 CTurretManager::CTurretManager()
 {
-	Org_Hndl = -1;
+	TurretN_Hndl = -1;
 }
 
 //デストラクタ
@@ -23,13 +23,9 @@ void CTurretManager::Init()
 void CTurretManager::Load()
 {
 	//オリジナルハンドルにロード
-	if (Org_Hndl == -1)
+	if (TurretN_Hndl == -1)
 	{
-		Org_Hndl = MV1LoadModel(TURRET_NORMAL_PATH);
-	}
-	for (int TurretIndex = 0; TurretIndex < Turret_List.size(); TurretIndex++)
-	{
-		Turret_List[TurretIndex]->Load(Org_Hndl);
+		TurretN_Hndl = MV1LoadModel(TURRET_NORMAL_PATH);
 	}
 }
 
@@ -78,7 +74,7 @@ void CTurretManager::TurretSpawn(const VECTOR& vPos)
 	//変数代入用クラス
 	CTurretBase* cTurretBase =  new CTurret_Normal;
 	cTurretBase->Init();
-	cTurretBase->Load(Org_Hndl);
+	cTurretBase->Load(TurretN_Hndl);
 	cTurretBase->TurretSpawn(vPos);
 	
 	//リストに追加

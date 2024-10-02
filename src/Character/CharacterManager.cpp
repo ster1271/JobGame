@@ -72,6 +72,14 @@ void CCharacterManager::Step(CShotManager& cShotManager, CTurretManager& cTurret
 
 }
 
+void CCharacterManager::DebugStep(CObjectManager& cObjectManager)
+{
+	//if (CInput::IsKeyPush(KEY_INPUT_SPACE))
+	//{
+	//	cObjectManager.Set_Point();
+	//}
+}
+
 //•`‰æˆ—
 void CCharacterManager::Draw()
 {

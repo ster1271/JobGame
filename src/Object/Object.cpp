@@ -4,49 +4,52 @@
 CObject::CObject()
 {
 	//ハンドルの初期化
+	Org_Hndl = -1;
 	iHndl = -1;
 
 	//変数の初期化
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
+
+	IsActive = false;
 }
 
 //デストラクタ
 CObject::~CObject()
 {
 	//ハンドルの初期化
+	Org_Hndl = -1;
 	iHndl = -1;
 
 	//変数の初期化
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
+
+	IsActive = false;
 }
 
 //初期化
 void CObject::Init()
 {
 	//ハンドルの初期化
+	Org_Hndl = -1;
 	iHndl = -1;
 
 	//変数の初期化
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
+
+	IsActive = false;
 }
 
 //読み込み関連
-bool CObject::Load(const char FILEPATH[])
+void CObject::Load(int Org_Hndl)
 {
 	//モデルの読み込み
-	iHndl = MV1LoadModel(FILEPATH);
-
-	/*読み込み成功 = true, 読み込み失敗 = false*/
-	if (iHndl != -1)
-		return true;
-	else
-		return false;
+	iHndl = MV1DuplicateModel(Org_Hndl);
 }
 
 //描画
@@ -83,3 +86,5 @@ void CObject::Exit()
 	memset(&cRotate, 0, sizeof(VECTOR));
 }
 
+//設置処理
+void CObject::Set_Point(const VECTOR& vPos) {};

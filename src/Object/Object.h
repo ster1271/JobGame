@@ -11,8 +11,10 @@ protected:
 	VECTOR cSize;		//サイズ
 	VECTOR cRotate;		//回転値
 	
-
+	int Org_Hndl;		
 	int iHndl;			//ハンドル
+
+	bool IsActive;		//フラグ
 
 public:
 	//コンストラクタ・デストラクタ
@@ -23,7 +25,7 @@ public:
 	void Init();
 
 	//読み込み関連
-	bool Load(const char FILEPATH[]);
+	void Load(int Org_Hndl);
 
 	//描画
 	void Draw();
@@ -45,4 +47,7 @@ public:
 
 	//回転地取得
 	VECTOR GetRotate() { return cRotate; }
+
+	//設置処理
+	virtual void Set_Point(const VECTOR& vPos);
 };

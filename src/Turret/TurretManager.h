@@ -13,7 +13,7 @@ class CTurretManager
 {
 private:
 	//モデルのコピー元
-	int Org_Hndl;
+	int TurretN_Hndl;
 	
 	//CTurretBase型のList配列
 	vector<CTurretBase*> Turret_List;

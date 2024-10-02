@@ -15,7 +15,7 @@ public:
 	void Init();
 
 	//ƒ‚ƒfƒ‹“Ç‚İ‚İ
-	void Load(int Org_Hndl);
+	void Load();
 
 	//İ’uˆ—
 	void Set_Point(const VECTOR& vPos);
