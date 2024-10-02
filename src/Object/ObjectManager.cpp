@@ -20,6 +20,11 @@ void CObjectManager::Init()
 {
 	cSky.Init();
 	cGround.Init();
+
+	for (int Point_Index = 0; Point_Index < 5; Point_Index++)
+	{
+		Check_Point[Point_Index].Init();
+	}
 }
 
 //読み込み関連
@@ -28,6 +33,11 @@ void CObjectManager::Load()
 	cSky.Load();
 	cGround.Load();
 	Point_Hndl = MV1LoadModel(POINT_PATH);
+
+	for (int Point_Index = 0; Point_Index < 5; Point_Index++)
+	{
+		Check_Point[Point_Index].Load(Point_Hndl);
+	}
 }
 
 //描画
@@ -36,9 +46,14 @@ void CObjectManager::Draw()
 	cSky.Draw();
 	cGround.Draw();
 
-	for (int Point_Index = 0; Point_Index < Point_List.size(); Point_Index++)
+	/*for (int Point_Index = 0; Point_Index < Point_List.size(); Point_Index++)
 	{
 		Point_List[Point_Index]->Draw();
+	}*/
+
+	for (int Point_Index = 0; Point_Index < 5; Point_Index++)
+	{
+		Check_Point[Point_Index].Draw();
 	}
 }
 
@@ -48,9 +63,14 @@ void CObjectManager::Step()
 	cSky.Step();
 	cGround.Step();
 
-	for (int Point_Index = 0; Point_Index < Point_List.size(); Point_Index++)
+	//for (int Point_Index = 0; Point_Index < Point_List.size(); Point_Index++)
+	//{
+	//	Point_List[Point_Index]->Step();
+	//}
+
+	for (int Point_Index = 0; Point_Index < 5; Point_Index++)
 	{
-		Point_List[Point_Index]->Step();
+		Check_Point[Point_Index].Step();
 	}
 
 	Update();
@@ -62,9 +82,14 @@ void CObjectManager::Update()
 	cSky.Update();
 	cGround.Update();
 
-	for (int Point_Index = 0; Point_Index < Point_List.size(); Point_Index++)
+	/*for (int Point_Index = 0; Point_Index < Point_List.size(); Point_Index++)
 	{
 		Point_List[Point_Index]->Update();
+	}*/
+
+	for (int Point_Index = 0; Point_Index < 5; Point_Index++)
+	{
+		Check_Point[Point_Index].Update();
 	}
 }
 
@@ -74,9 +99,14 @@ void CObjectManager::Exit()
 	cSky.Exit();
 	cGround.Exit();
 
-	for (int Point_Index = 0; Point_Index < Point_List.size(); Point_Index++)
+	/*for (int Point_Index = 0; Point_Index < Point_List.size(); Point_Index++)
 	{
 		Point_List[Point_Index]->Exit();
+	}*/
+
+	for (int Point_Index = 0; Point_Index < 5; Point_Index++)
+	{
+		Check_Point[Point_Index].Exit();
 	}
 
 	if (Point_Hndl != -1)
@@ -89,12 +119,12 @@ void CObjectManager::Exit()
 //設置処理
 void CObjectManager::Set_Point(const VECTOR& vPos)
 {
-	//変数代入用クラス
-	CObject* cObject = new CRoute_Point;
-	cObject->Init();
-	cObject->Load(Point_Hndl);
-	cObject->Set_Point(vPos);
+	////変数代入用クラス
+	//CObject* cObject = new Check_Point;
+	//cObject->Init();
+	//cObject->Load(Point_Hndl);
+	//cObject->Set_Point(vPos);
 
-	//リストに追加
-	Point_List.push_back(cObject);
+	////リストに追加
+	//Point_List.push_back(cObject);
 }

@@ -92,11 +92,15 @@ void CEnemyManager::Step()
 	//		Enemy_List[Enemy_Index]->Init();
 	//	}	
 	//}
+	VECTOR vPos;
+	vPos = VGet(GetRand(200.0f) - 100.0f, 5.0f, GetRand(200.0f) + 100.0f);
+	VECTOR vSpeed;
+	vSpeed = VGet(0.0f, 0.0f, 0.5f);
 
 	for (int Enemy_Index = 0; Enemy_Index < 10; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Step();
-
+		cEnemy_Normal[Enemy_Index].RequestEnemy(vPos, vSpeed);
 	}
 }
 

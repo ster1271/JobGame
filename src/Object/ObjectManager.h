@@ -17,8 +17,9 @@ private:
 	CGround cGround;	//マップクラス
 
 	int Point_Hndl;
+	Check_Point Check_Point[5];
 	//CObject型のRoute_Point格納配列
-	vector<CObject*> Point_List;
+	//vector<CObject*> Point_List;
 
 
 public:

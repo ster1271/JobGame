@@ -1,6 +1,7 @@
 #include "Bot.h"
 
 const char BOT_FILE_PATH[] = { "" };
+const float MOVE_SPEED = 2.0f;
 const float SPERE_R = 5.0f;
 
 #define DEG_TO_RAD(a)	((a) * DX_PI_F / 180.0f)	//ラジアン角に変換する式
@@ -8,6 +9,8 @@ const float SPERE_R = 5.0f;
 //コンストラクタ
 CBot::CBot()
 {
+	tmp_dir = 0;
+	tmp_Range = 0;
 	State_Id = STATE_NUM;
 }
 
@@ -105,9 +108,9 @@ void CBot::Move_Bot(VECTOR Set_Point)
 	float Dir = 0.0f;
 
 	VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ボットの移動ベクトル
-	vSpd.x = sinf(cRotate.y) * -1.0f;
+	vSpd.x = sinf(cRotate.y) * -MOVE_SPEED;
 	vSpd.y = 0.0f;
-	vSpd.z = cosf(cRotate.y) * -1.0f;
+	vSpd.z = cosf(cRotate.y) * -MOVE_SPEED;
 	
 	//外積計算
 	Dir = Vtmp.x * vSpd.z - vSpd.x * Vtmp.z;

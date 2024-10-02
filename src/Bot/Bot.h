@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include "../Input/Input.h"
 #include "../Object/Object.h"
+#include "../Object/ObjectManager.h"
 
 //ボットクラス
 class CBot :public CObject
@@ -37,5 +38,8 @@ public:
 
 	//指定の場所に動く処理
 	void Move_Bot(VECTOR Set_point);
+
+	//指定の場所に動く処理
+	void Move_Bot_Test();
 
 };
