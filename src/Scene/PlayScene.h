@@ -34,7 +34,7 @@ private:
 	CObjectManager cObjectManager;			//オブジェクトマネージャー
 	CTurretManager cTurretManager;			//タレットマネージャー
 	CBot cBot;								//ボットクラス
-	CCheck_Point cCheck_Point[5];				//チェックポイントクラス
+	CCheck_Point cCheck_Point;			//チェックポイントクラス
 	
 
 public:

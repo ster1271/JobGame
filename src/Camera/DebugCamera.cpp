@@ -67,6 +67,16 @@ void CDebugCamera::Step()
 		fRot = 90.0f * DX_PI_F / 180.0f;
 	}
 
+	//カメラの移動
+	if (CInput::IsKeyKeep(KEY_INPUT_Q))
+	{
+		fSpd = CAMERA_MOVE_SPEED;
+	}
+	else if (CInput::IsKeyKeep(KEY_INPUT_E))
+	{
+		fSpd = -CAMERA_MOVE_SPEED;
+	}
+
 	// カメラの向きの操作
 	if (CInput::IsKeyKeep(KEY_INPUT_UP)) {
 		vRot.x -= CAMERA_ROTATE_SPEED;
@@ -79,6 +89,14 @@ void CDebugCamera::Step()
 	}
 	else if (CInput::IsKeyKeep(KEY_INPUT_RIGHT)) {
 		vRot.y += CAMERA_ROTATE_SPEED;
+	}
+
+	// カメラの向きの操作
+	if (CInput::IsKeyKeep(KEY_INPUT_Q)) {
+		CameraPos.y += 5.0f;
+	}
+	else if (CInput::IsKeyKeep(KEY_INPUT_E)) {
+		CameraPos.y -= 5.0f;
 	}
 
 	// 入力したキー情報とカメラの角度から、移動速度を求める

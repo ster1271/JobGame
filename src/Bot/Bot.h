@@ -3,6 +3,7 @@
 #include "../Input/Input.h"
 #include "../Object/Object.h"
 #include "../Object/ObjectManager.h"
+#include "../Check_Point/Check_Point.h"
 
 //ボットクラス
 class CBot :public CObject
@@ -19,6 +20,8 @@ private:
 	BOT_STATE State_Id;
 	float tmp_dir;
 	float tmp_Range;
+	int tmp;
+
 public:
 	//コンストラクタ・デストラクタ
 	CBot();
@@ -34,12 +37,9 @@ public:
 	void Draw();
 
 	//毎フレーム行う処理
-	void Step(VECTOR Set_Point);
+	void Step(vector<VECTOR> List);
 
 	//指定の場所に動く処理
-	void Move_Bot(VECTOR Set_point);
-
-	//指定の場所に動く処理
-	void Move_Bot_Test();
+	void Move_Bot(vector<VECTOR> List);
 
 };

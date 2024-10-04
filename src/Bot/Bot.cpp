@@ -1,7 +1,7 @@
 #include "Bot.h"
 
 const char BOT_FILE_PATH[] = { "" };
-const float MOVE_SPEED = 2.0f;
+const float MOVE_SPEED = 5.0f;
 const float SPERE_R = 5.0f;
 
 #define DEG_TO_RAD(a)	((a) * DX_PI_F / 180.0f)	//ラジアン角に変換する式
@@ -27,6 +27,8 @@ void CBot::Init()
 	cPos = VGet(0.0f, 10.0f, 100.0f);
 	cSize = VGet(1.0f, 1.0f, 1.0f);
 	cRotate = VGet(0.0f, 0.0f, 0.0f);
+
+	tmp = 0;
 
 	State_Id = STATE_NUM;
 }
@@ -65,7 +67,7 @@ void CBot::Draw()
 }
 
 //マイフレーム行う処理
-void CBot::Step(VECTOR Set_Point)
+void CBot::Step(vector<VECTOR> List)
 {
 	
 
@@ -83,7 +85,7 @@ void CBot::Step(VECTOR Set_Point)
 
 	case CBot::STATE_MOVE:
 
-		Move_Bot(Set_Point);	//追尾処理
+		Move_Bot(List);	//追尾処理
 		break;
 
 	default:
@@ -96,13 +98,60 @@ void CBot::Step(VECTOR Set_Point)
 
 
 //指定の場所に動く処理
-void CBot::Move_Bot(VECTOR Set_Point)
+void CBot::Move_Bot(vector<VECTOR> List)
 {
+	////ボットから指定の地点へ行くベクトルを計算
+	//VECTOR Vtmp;
+	//Vtmp.x = Set_Point.x - cPos.x;
+	//Vtmp.y = 0.0f;
+	//Vtmp.z = Set_Point.z - cPos.z;
+
+	////進行方向のどちら側にいるのかを調べる
+	//float Dir = 0.0f;
+
+	//VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ボットの移動ベクトル
+	//vSpd.x = sinf(cRotate.y) * -MOVE_SPEED;
+	//vSpd.y = 0.0f;
+	//vSpd.z = cosf(cRotate.y) * -MOVE_SPEED;
+	//
+	////外積計算
+	//Dir = Vtmp.x * vSpd.z - vSpd.x * Vtmp.z;
+	////確認用
+	//tmp_dir = Dir;
+
+	////回転する角度を決める
+	//if (Dir >= 0.0f)
+	//{
+	//	cRotate.y += 0.05f;
+	//}
+	//else if (Dir < 0.0f)
+	//{
+	//	cRotate.y -= 0.05f;
+	//}
+
+	////座標に速度を加算する
+	//cPos.x += sinf(cRotate.y) * -0.1f;
+	//cPos.z += cosf(cRotate.y) * -0.1f;
+
+	////プレイヤーとの距離を計算
+	//float Range = (Set_Point.x - cPos.x) * (Set_Point.x - cPos.x) + (Set_Point.z - cPos.z) * (Set_Point.z - cPos.z);
+	//Range = sqrt(Range);
+	////確認用
+	//tmp_Range = Range;
+
+	////距離が一定値に達したらIdを変更する
+	//if (Range < 0.05f)
+	//{
+	//	State_Id = STATE_STOP;
+	//}
+
+
+
 	//ボットから指定の地点へ行くベクトルを計算
 	VECTOR Vtmp;
-	Vtmp.x = Set_Point.x - cPos.x;
+	Vtmp.x = List[tmp].x - cPos.x;
 	Vtmp.y = 0.0f;
-	Vtmp.z = Set_Point.z - cPos.z;
+	Vtmp.z = List[tmp].z - cPos.z;
 
 	//進行方向のどちら側にいるのかを調べる
 	float Dir = 0.0f;
@@ -111,7 +160,7 @@ void CBot::Move_Bot(VECTOR Set_Point)
 	vSpd.x = sinf(cRotate.y) * -MOVE_SPEED;
 	vSpd.y = 0.0f;
 	vSpd.z = cosf(cRotate.y) * -MOVE_SPEED;
-	
+
 	//外積計算
 	Dir = Vtmp.x * vSpd.z - vSpd.x * Vtmp.z;
 	//確認用
@@ -120,27 +169,33 @@ void CBot::Move_Bot(VECTOR Set_Point)
 	//回転する角度を決める
 	if (Dir >= 0.0f)
 	{
-		cRotate.y += 0.05f;
+		cRotate.y += 0.01f;
 	}
 	else if (Dir < 0.0f)
 	{
-		cRotate.y -= 0.05f;
+		cRotate.y -= 0.01f;
 	}
 
 	//座標に速度を加算する
-	cPos.x += sinf(cRotate.y) * -0.1f;
-	cPos.z += cosf(cRotate.y) * -0.1f;
+	cPos.x += sinf(cRotate.y) * -0.2f;
+	cPos.z += cosf(cRotate.y) * -0.2f;
 
 	//プレイヤーとの距離を計算
-	float Range = (Set_Point.x - cPos.x) * (Set_Point.x - cPos.x) + (Set_Point.z - cPos.z) * (Set_Point.z - cPos.z);
+	float Range = (List[tmp].x - cPos.x) * (List[tmp].x - cPos.x) + (List[tmp].z - cPos.z) * (List[tmp].z - cPos.z);
 	Range = sqrt(Range);
 	//確認用
 	tmp_Range = Range;
 
 	//距離が一定値に達したらIdを変更する
-	if (Range < 0.05f)
+	if (Range < 0.1f)
 	{
-		State_Id = STATE_STOP;
+		tmp++;
+
+		if (tmp == List.size())
+		{
+			State_Id = STATE_STOP;
+			tmp = 0;
+		}
 	}
 }
 

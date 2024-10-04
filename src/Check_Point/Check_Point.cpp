@@ -2,6 +2,7 @@
 
 const char POINT_PATH[] = { "data/Map/Point.x" };
 
+#define MAX_NUM	(5)
 
 //コンストラクタ
 CCheck_Point::CCheck_Point()
@@ -18,11 +19,20 @@ CCheck_Point::~CCheck_Point()
 //初期化
 void CCheck_Point::Init()
 {
-	CBase_Check::Init();
+	tmp = 0;
 	tmp_Hndl = -1;
-	VECTOR vPos;
-	vPos = VGet(GetRand(400.0f) - 200.0f, 5.0f, GetRand(600.0f) - 300.0f);
-	Set_Point(vPos);
+	
+	memset(cPos, 0, sizeof(VECTOR));
+	memset(cRotate, 0, sizeof(VECTOR));
+	memset(cSize, 0, sizeof(VECTOR));
+
+	for (int Index = 0; Index < MAX_NUM; Index++)
+	{
+
+		VECTOR vPos;
+		vPos = VGet(GetRand(400.0f) - 200.0f, 5.0f, GetRand(600.0f) - 300.0f);
+		Set_Point(Index,vPos);
+	}
 }
 
 //モデル読み込み
@@ -33,37 +43,64 @@ void CCheck_Point::Load()
 		tmp_Hndl = MV1LoadModel(POINT_PATH);
 	}
 
-	//モデルのコピー
-	iHndl = MV1DuplicateModel(tmp_Hndl);
+	for (int Index = 0; Index < MAX_NUM; Index++)
+	{
+		//モデルのコピー
+		iHndl[Index] = MV1DuplicateModel(tmp_Hndl);
+	}
 }
+
+//情報更新
+void CCheck_Point::UpData()
+{
+	for (int tmp = 0; tmp < MAX_NUM; tmp++)
+	{
+		MV1SetPosition(iHndl[tmp], cPos[tmp]);		//座標の更新
+		MV1SetScale(iHndl[tmp], cSize[tmp]);			//サイズの更新
+		MV1SetRotationXYZ(iHndl[tmp], cRotate[tmp]);	//回転値の更新
+	}
+}
+
 
 //描画
 void CCheck_Point::Draw()
 {
-	if (!IsActive)
-		return;
+	for (int Index = 0; Index < MAX_NUM; Index++)
+	{
+		if (!IsActive)
+			return;
 
-	MV1DrawModel(iHndl);
+		MV1DrawModel(iHndl[Index]);
+	}
 }
 
 //毎フレーム行う処理
 void CCheck_Point::Step()
 {
-	if (!IsActive)
-		return;
+	for (int Index = 0; Index < MAX_NUM; Index++)
+	{
+		if (!IsActive)
+			return;
 
-	CBase_Check::UpData();
+		UpData();
+	}
 }
 
 //後処理
 void CCheck_Point::Exit()
 {
-	if (iHndl != -1)
-	{
-		MV1DeleteModel(iHndl);
-		iHndl = -1;
-	}
+	memset(cPos, 0, sizeof(VECTOR));
+	memset(cRotate, 0, sizeof(VECTOR));
+	memset(cSize, 0, sizeof(VECTOR));
 
+	for (int Index = 0; Index < MAX_NUM; Index++)
+	{
+		if (iHndl[Index] != -1)
+		{
+			MV1DeleteModel(iHndl[Index]);
+			iHndl[Index] = -1;
+		}
+	}
 	if (tmp_Hndl != -1)
 	{
 		MV1DeleteModel(tmp_Hndl);
@@ -72,10 +109,11 @@ void CCheck_Point::Exit()
 }
 
 //設置処理
-void CCheck_Point::Set_Point(VECTOR vPos)
+void CCheck_Point::Set_Point(int Index, VECTOR vPos)
 {
-	cPos = vPos;
-	cSize = VGet(0.1f, 0.1f, 0.1f);
-	IsActive = true;
+	cPos[Index] = vPos;
+	cSize[Index] = VGet(0.1f, 0.1f, 0.1f);
+	IsActive[Index] = true;
+	Point_info_List.push_back(cPos[Index]);
 }
 
