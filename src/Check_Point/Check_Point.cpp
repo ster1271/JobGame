@@ -114,6 +114,27 @@ void CCheck_Point::Set_Point(int Index, VECTOR vPos)
 	cPos[Index] = vPos;
 	cSize[Index] = VGet(0.1f, 0.1f, 0.1f);
 	IsActive[Index] = true;
+
 	Point_info_List.push_back(cPos[Index]);
 }
+
+/*
+//ファイル読み込み
+void CCheck_Point::LoadFile()
+{
+	FILE* fp;
+
+	//ファイルを開く
+	fopen_s(&fp, "data/file/CheckPoint.txt", "r");
+
+	if (fp != nullptr)
+	{
+		//1行目を読み込む
+		fscanf_s(fp, "%f %f %f", &cPos[0].x, &cPos[0].y, &cPos[0].z);
+	}
+
+	//ファイルを閉じる
+	fclose(fp);
+}
+*/
 

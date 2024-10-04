@@ -45,14 +45,16 @@ public:
 	//後処理
 	void Exit();
 
-	//設置処理
-	void Set_Point(int Index,const VECTOR vPos);
-
-
 	//リスト所得
 	vector<VECTOR> Get_List()
 	{
 		return Point_info_List;
 	}
 
+	//設置処理
+	void Set_Point(int Index, const VECTOR vPos);
+
+
+	//ファイル読み込み
+	void LoadFile();
 };

@@ -42,11 +42,7 @@ void CTurretShot::Draw()
 		DrawFormatString(500, 30, GetColor(255, 0, 0), "タレット弾Z座標：%f", cPos.z);
 
 		//DrawSphere3D(cPos, RADIUS, 16, GetColor(255, 255, 255), GetColor(255, 255, 255), FALSE);
-
-
 	}
-
-	
 }
 
 //毎フレーム行う処理

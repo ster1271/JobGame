@@ -5,5 +5,6 @@
 class CCollisionManager
 {
 public:
-	
+
+	void TurretToEnemy();
 };
