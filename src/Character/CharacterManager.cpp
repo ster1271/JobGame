@@ -21,7 +21,7 @@ void CCharacterManager::Init()
 	cSupport.Init();
 
 	//メインIDを初期化
-	MainID = ID_NUM;
+	MainID = MainID_ATTACKER;
 }
 
 //データロード

@@ -34,14 +34,14 @@ CDebugCamera::~CDebugCamera()
 //‰Šú‰»
 void CDebugCamera::Init()
 {
-	CameraPos = VGet(0.0f, 0.0f, 1.0f);
-	vRot = VGet(0.0f, 0.0f, 0.0f);
+	CameraPos = VGet(0.0f, 30.0f, 0.0f);
+	vRot = VGet(DX_PI_F, 0.0f, 0.0f);
 
 }
 void CDebugCamera::Init(VECTOR vPos, float fRot)
 {
 	CameraPos = vPos;
-	vRot.y = fRot + DX_PI_F;
+	vRot = VGet(DX_PI_F / 2.0f, 0.0f, 0.0f);
 }
 
 //–ˆƒtƒŒ[ƒ€ŒÄ‚Ôˆ—

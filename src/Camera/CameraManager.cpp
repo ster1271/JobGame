@@ -5,6 +5,7 @@
 static const VECTOR DEFAULT_EYE_POS = { 0.0f, 0.0f, -20.0f };
 static const VECTOR DEFAULT_FORCUS_POS = { 0.0f, 0.0f, 0.0f };
 static const VECTOR DEFAULT_UP_VEC = { 0.0f, 1.0f, 0.0f };
+static const VECTOR DEFAULT_DEBUG_EYE_POS = { 0.0f, 300.0f, 0.0f };
 
 
 //-------------------------
@@ -109,7 +110,7 @@ void CCameraManager::ChangeCamera(tagCAMERA_ID ID)
 	{
 	case CCameraManager::CAMERA_ID_DEBUG:
 		// デバッグカメラ初期化
-		cDebugCam.Init(cPlayCam.GetPlayCameraPos(), PlayerRotateY);
+		cDebugCam.Init(DEFAULT_DEBUG_EYE_POS);
 	default:
 		break;
 	}

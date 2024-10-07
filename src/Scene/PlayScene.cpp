@@ -67,21 +67,33 @@ int CPlayScene::Loop()
 //-----------------------------------
 void CPlayScene::Draw()
 {
+	//プレイ時処理
+	if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_PALY)
+	{
+		//オブジェクト描画
+		cObjectManager.Draw();
+		//キャラクター描画
+		cCharacterManager.Draw();
+		//エネミー描画
+		cEnemyManager.Draw();
+		//タレット描画
+		cTurretManager.Draw();
+		//弾描画
+		cShotManager.Draw();
+		//ボット描画
+		cBot.Draw();
+		//チェックポイント描画
+		cCheck_Manager.Draw();
+	}
+	else if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_DEBUG)
+	{
+		//オブジェクト描画
+		cObjectManager.Draw();
+		//デバック時描画
+		cCheck_Manager.DebugDraw();
+	}
 
-	//オブジェクト描画
-	cObjectManager.Draw();
-	//キャラクター描画
-	cCharacterManager.Draw();
-	//エネミー描画
-	cEnemyManager.Draw();
-	//タレット描画
-	cTurretManager.Draw();
-	//弾描画
-	cShotManager.Draw();
-	//ボット描画
-	cBot.Draw();
-	//チェックポイント描画
-	cCheck_Manager.Draw();
+	
 
 	//カメラ情報表示
 	cCameraManager.Draw();
@@ -174,6 +186,7 @@ void CPlayScene::Step()
 	}
 
 	//更新処理
+	//プレイ時処理
 	if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_PALY)
 	{
 		//メインキャラ視点変更
@@ -203,6 +216,16 @@ void CPlayScene::Step()
 		cBot.Step(cCheck_Manager.Get_List());
 		//チェックポイント更新処理
 		cCheck_Manager.Step();
+	}
+
+	//デバック時処理
+	if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_DEBUG)
+	{
+		// マウスを表示状態にする
+		//SetMouseDispFlag(TRUE);
+
+		//デバック時更新処理
+		cCheck_Manager.DebugStep();
 	}
 
 	//デバックカメラとの切り替え処理
