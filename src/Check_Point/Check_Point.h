@@ -2,22 +2,15 @@
 #include <DxLib.h>
 #include <iostream>
 #include <vector>
+#include "../Check_Point/Check_Base.h"
 
 #define  MAX_NUM	(5)
 
 using namespace std;
 
-class CCheck_Point
+class CCheck_Point: public CCheck_Base
 {
 private:
-	VECTOR cPos[MAX_NUM];		//座標
-	VECTOR cSize[MAX_NUM];		//サイズ
-	VECTOR cRotate[MAX_NUM];	//回転値
-
-	int iHndl[MAX_NUM];			//ハンドル
-
-	bool IsActive[MAX_NUM];		//フラグ
-
 	vector<VECTOR> Point_info_List;
 	int tmp_Hndl;
 	int tmp;
@@ -31,13 +24,10 @@ public:
 	void Init();
 
 	//モデル読み込み
-	void Load();
+	void Load(int Hndl);
 
 	//描画
 	void Draw();
-
-	//情報更新
-	void UpData();
 
 	//毎フレーム行う処理
 	void Step();
@@ -52,7 +42,7 @@ public:
 	}
 
 	//設置処理
-	void Set_Point(int Index, const VECTOR vPos);
+	void Set_Point(const VECTOR vPos);
 
 
 	//ファイル読み込み

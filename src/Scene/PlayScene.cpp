@@ -81,7 +81,7 @@ void CPlayScene::Draw()
 	//ボット描画
 	cBot.Draw();
 	//チェックポイント描画
-	cCheck_Point.Draw();
+	cCheck_Manager.Draw();
 
 	//カメラ情報表示
 	cCameraManager.Draw();
@@ -109,7 +109,7 @@ void CPlayScene::Init()
 	//ボット初期化
 	cBot.Init();
 	//チェックポイント初期化
-	cCheck_Point.Init();
+	cCheck_Manager.Init();
 
 }
 
@@ -134,7 +134,7 @@ void CPlayScene::Exit()
 	//ボットクラス終了処理
 	cBot.Exit();
 	//チェックポイント終了処理
-	cCheck_Point.Exit();
+	cCheck_Manager.Exit();
 
 }
 
@@ -157,7 +157,7 @@ void CPlayScene::Load()
 	//ボットデータ読み込み
 	cBot.Load();
 	//チェックポイントデータ読み込み
-	cCheck_Point.Load();
+	cCheck_Manager.Load();
 
 }
 
@@ -200,9 +200,9 @@ void CPlayScene::Step()
 		//弾更新処理
 		cShotManager.Step(cCharacterManager.GetPosition());
 		//ボット更新処理
-		cBot.Step(cCheck_Point.Get_List());
+		cBot.Step(cCheck_Manager.Get_List());
 		//チェックポイント更新処理
-		cCheck_Point.Step();
+		cCheck_Manager.Step();
 	}
 
 	//デバックカメラとの切り替え処理

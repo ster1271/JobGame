@@ -1,13 +1,11 @@
 #include "Check_Point.h"
 
-const char POINT_PATH[] = { "data/Map/Point.x" };
-
-#define MAX_NUM	(5)
-
 //コンストラクタ
 CCheck_Point::CCheck_Point()
 {
+	memset(&Point_info_List, 0, sizeof(VECTOR));
 	tmp_Hndl = -1;
+	tmp = -1;
 }
 
 //デストラクタ
@@ -19,88 +17,46 @@ CCheck_Point::~CCheck_Point()
 //初期化
 void CCheck_Point::Init()
 {
+	CCheck_Base::Init();
+
 	tmp = 0;
 	tmp_Hndl = -1;
 	
-	memset(cPos, 0, sizeof(VECTOR));
-	memset(cRotate, 0, sizeof(VECTOR));
-	memset(cSize, 0, sizeof(VECTOR));
-
-	for (int Index = 0; Index < MAX_NUM; Index++)
-	{
-
-		VECTOR vPos;
-		vPos = VGet(GetRand(400.0f) - 200.0f, 5.0f, GetRand(600.0f) - 300.0f);
-		Set_Point(Index,vPos);
-	}
+	VECTOR vPos;
+	vPos = VGet(GetRand(400.0f) - 200.0f, 5.0f, GetRand(600.0f) - 300.0f);
+	Set_Point(vPos);
 }
 
 //モデル読み込み
-void CCheck_Point::Load()
+void CCheck_Point::Load(int Hndl)
 {
-	if (tmp_Hndl == -1)
-	{
-		tmp_Hndl = MV1LoadModel(POINT_PATH);
-	}
-
-	for (int Index = 0; Index < MAX_NUM; Index++)
-	{
-		//モデルのコピー
-		iHndl[Index] = MV1DuplicateModel(tmp_Hndl);
-	}
-}
-
-//情報更新
-void CCheck_Point::UpData()
-{
-	for (int tmp = 0; tmp < MAX_NUM; tmp++)
-	{
-		MV1SetPosition(iHndl[tmp], cPos[tmp]);		//座標の更新
-		MV1SetScale(iHndl[tmp], cSize[tmp]);			//サイズの更新
-		MV1SetRotationXYZ(iHndl[tmp], cRotate[tmp]);	//回転値の更新
-	}
+	//モデルのコピー
+	iHndl = MV1DuplicateModel(Hndl);
 }
 
 
 //描画
 void CCheck_Point::Draw()
 {
-	for (int Index = 0; Index < MAX_NUM; Index++)
-	{
-		if (!IsActive)
-			return;
+	if (!IsActive)
+		return;
 
-		MV1DrawModel(iHndl[Index]);
-	}
+	MV1DrawModel(iHndl);
 }
 
 //毎フレーム行う処理
 void CCheck_Point::Step()
 {
-	for (int Index = 0; Index < MAX_NUM; Index++)
-	{
-		if (!IsActive)
-			return;
+	if (!IsActive)
+		return;
 
-		UpData();
-	}
 }
 
 //後処理
 void CCheck_Point::Exit()
 {
-	memset(cPos, 0, sizeof(VECTOR));
-	memset(cRotate, 0, sizeof(VECTOR));
-	memset(cSize, 0, sizeof(VECTOR));
+	CCheck_Base::Exit();
 
-	for (int Index = 0; Index < MAX_NUM; Index++)
-	{
-		if (iHndl[Index] != -1)
-		{
-			MV1DeleteModel(iHndl[Index]);
-			iHndl[Index] = -1;
-		}
-	}
 	if (tmp_Hndl != -1)
 	{
 		MV1DeleteModel(tmp_Hndl);
@@ -109,13 +65,13 @@ void CCheck_Point::Exit()
 }
 
 //設置処理
-void CCheck_Point::Set_Point(int Index, VECTOR vPos)
+void CCheck_Point::Set_Point(const VECTOR vPos)
 {
-	cPos[Index] = vPos;
-	cSize[Index] = VGet(0.1f, 0.1f, 0.1f);
-	IsActive[Index] = true;
+	cPos = vPos;
+	cSize= VGet(0.1f, 0.1f, 0.1f);
+	IsActive = true;
 
-	Point_info_List.push_back(cPos[Index]);
+	Point_info_List.push_back(cPos);
 }
 
 /*
