@@ -15,16 +15,29 @@ CCheck_Point::~CCheck_Point()
 }
 
 //初期化
-void CCheck_Point::Init()
+void CCheck_Point::Init(FILE* fp)
 {
 	CCheck_Base::Init();
 
 	tmp = 0;
 	tmp_Hndl = -1;
+
+	VECTOR vPos = VGet(0.0f, 0.0f, 0.0f);
 	
-	VECTOR vPos;
-	vPos = VGet(GetRand(400.0f) - 200.0f, 5.0f, GetRand(600.0f) - 300.0f);
-	Set_Point(vPos);
+	//読み込み
+	//ファイルを開く
+	fopen_s(&fp, "Data/ObjectFile/Object_file.txt", "r");
+
+	if (fp != nullptr)
+	{
+		while (fscanf_s(fp, "%f, %f, %f", &vPos.x, &vPos.y, &vPos.z) != EOF)
+		{
+			Set_Point(vPos);
+		}
+	}
+
+	fclose(fp);
+	
 }
 
 //モデル読み込み
@@ -74,25 +87,7 @@ void CCheck_Point::Set_Point(const VECTOR vPos)
 	Point_info_List.push_back(cPos);
 }
 
-/*
-//ファイル読み込み
-void CCheck_Point::LoadFile()
-{
-	FILE* fp;
 
-	//ファイルを開く
-	fopen_s(&fp, "data/file/CheckPoint.txt", "r");
-
-	if (fp != nullptr)
-	{
-		//1行目を読み込む
-		fscanf_s(fp, "%f %f %f", &cPos[0].x, &cPos[0].y, &cPos[0].z);
-	}
-
-	//ファイルを閉じる
-	fclose(fp);
-}
-*/
 
 
 

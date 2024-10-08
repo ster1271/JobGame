@@ -20,9 +20,9 @@ void CChecck_Manager::Init()
 {
 	check_Hndl = -1;
 
-	for (int Index = 0; Index < MAX_NUM; Index++)
+	for (int Index = 0; Index < Point_info_List.size(); Index++)
 	{
-		cCheck_Point[Index].Init();
+		cCheck_Point[Index].Init(fp);
 	}
 }
 
@@ -100,7 +100,7 @@ void CChecck_Manager::DebugStep(VECTOR vPos)
 
 		if (fp != nullptr)
 		{
-			fprintf(fp, "XÀ•W = %.1f, YÀ•W = %.1f, ZÀ•W = %.1f \n", vPos.x, vPos.y, vPos.z);
+			fprintf(fp, "%.1f, %.1f, %.1f \n", vPos.x, vPos.y, vPos.z);
 
 			fclose(fp);
 		}

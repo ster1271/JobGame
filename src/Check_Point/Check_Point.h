@@ -21,7 +21,7 @@ public:
 	~CCheck_Point();
 
 	//‰Šú‰»
-	void Init();
+	void Init(FILE * fp);
 
 	//ƒ‚ƒfƒ‹“Ç‚İ‚İ
 	void Load(int Hndl);
