@@ -91,6 +91,8 @@ void CPlayScene::Draw()
 		cObjectManager.Draw();
 		//デバック時描画
 		cCheck_Manager.DebugDraw();
+
+		cGame_Pointer.Draw();
 	}
 
 	
@@ -123,6 +125,8 @@ void CPlayScene::Init()
 	//チェックポイント初期化
 	cCheck_Manager.Init();
 
+	cGame_Pointer.Init();
+
 }
 
 
@@ -147,6 +151,8 @@ void CPlayScene::Exit()
 	cBot.Exit();
 	//チェックポイント終了処理
 	cCheck_Manager.Exit();
+
+	cGame_Pointer.Exit();
 
 }
 
@@ -221,8 +227,7 @@ void CPlayScene::Step()
 	//デバック時処理
 	if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_DEBUG)
 	{
-		// マウスを表示状態にする
-		//SetMouseDispFlag(TRUE);
+		cGame_Pointer.Step();
 
 		//デバック時更新処理
 		cCheck_Manager.DebugStep();
@@ -239,6 +244,6 @@ void CPlayScene::Step()
 	}
 
 	//カメラ更新処理
-	cCameraManager.Step(cCharacterManager.GetPosition(), cCharacterManager.GetRotate());
+	cCameraManager.Step(cCharacterManager.GetPosition(), cCharacterManager.GetRotate(), cGame_Pointer.GetPos());
 }
 

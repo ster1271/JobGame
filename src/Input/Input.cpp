@@ -1,4 +1,3 @@
-#include "DxLib.h"
 #include "Input.h"
 
 #define KEY_BUF_LEN	(256)

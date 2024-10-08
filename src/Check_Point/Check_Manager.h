@@ -16,11 +16,14 @@ private:
 	};
 
 	Check_ID check_id;
-
-	VECTOR MousePos;
-	int MouseX, MouseY;
 	int check_Hndl;
 	CCheck_Point cCheck_Point[MAX_NUM];
+
+	VECTOR WorldPos;
+	int MouseX, MouseY;
+	vector<VECTOR> Point_info_List;
+	FILE* fp;
+
 
 public:
 	//コンストラクタ・デストラクタ

@@ -20,7 +20,7 @@ private:
 	CDebugCamera cDebugCam;			//デバックカメラ
 	tagCAMERA_ID eCurrentCameraID;	//現在のカメラID
 
-	float			PlayerRotateY;	//プレイヤーの角度
+	float	PlayerRotateY;	//プレイヤーの角度
 
 public:
 	//コンストラクタ・デストラクタ
@@ -34,7 +34,7 @@ public:
 	void Exit();
 
 	//更新処理
-	void Step(VECTOR vForcus, VECTOR fRot);
+	void Step(VECTOR vForcus, VECTOR fRot, VECTOR vPos);
 
 	//描画
 	void Draw();

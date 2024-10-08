@@ -56,7 +56,7 @@ void CCameraManager::Exit()
 //-------------------------
 //毎フレーム呼ぶ処理
 //-------------------------
-void CCameraManager::Step(VECTOR vForcus, VECTOR fRot)
+void CCameraManager::Step(VECTOR vForcus, VECTOR fRot, VECTOR vPos)
 {
 	//カメラのタイプに合わせて、更新処理を変更する
 	switch (eCurrentCameraID)
@@ -67,7 +67,7 @@ void CCameraManager::Step(VECTOR vForcus, VECTOR fRot)
 		break;
 
 	case CAMERA_ID_DEBUG:
-		cDebugCam.Step();
+		cDebugCam.Step(vPos);
 		cDebugCam.Update();
 		
 	default:

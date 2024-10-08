@@ -1,4 +1,5 @@
 #pragma once
+#include "DxLib.h"
 
 //インプットクラス
 class CInput
@@ -22,6 +23,8 @@ public:
 
 	//単純に押されているか
 	static bool IsKeyDown(int Key_code);
+
+	static bool IsMousePush();
 };
 
 
