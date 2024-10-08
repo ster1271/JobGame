@@ -19,8 +19,6 @@ private:
 	int check_Hndl;
 	CCheck_Point cCheck_Point[MAX_NUM];
 
-	VECTOR WorldPos;
-	int MouseX, MouseY;
 	vector<VECTOR> Point_info_List;
 	FILE* fp;
 
@@ -49,7 +47,7 @@ public:
 	void Step();
 
 	//デバック時の処理
-	void DebugStep();
+	void DebugStep(VECTOR vPos);
 
 	//デバック時の描画
 	void DebugDraw();

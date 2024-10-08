@@ -230,7 +230,7 @@ void CPlayScene::Step()
 		cGame_Pointer.Step();
 
 		//デバック時更新処理
-		cCheck_Manager.DebugStep();
+		cCheck_Manager.DebugStep(cGame_Pointer.GetPos());
 	}
 
 	//デバックカメラとの切り替え処理

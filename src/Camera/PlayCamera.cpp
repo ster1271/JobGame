@@ -35,8 +35,7 @@ void CPlayCamera::Init()
 	//”O‚Ì‚½‚ß‰Šú’l‚ğİ’è
 	CameraPos = VGet(0.0f, 0.0f, 1.0f);
 	ForcusPos = VGet(0.0f, 0.0f, 1.0f);
-	Up = VGet(0.0f, 1.0f, 0.0f);
-	
+	Up = VGet(0.0f, 1.0f, 0.0f);	
 }
 
 //‰Šú‰»

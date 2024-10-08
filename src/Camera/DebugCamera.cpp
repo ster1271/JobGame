@@ -4,13 +4,13 @@
 #include "../MyLibrary/MyLibrary.h"
 
 //カメラの距離
-#define CAMERA_LENGTH	(0.0f)
+#define CAMERA_LENGTH	(-30.0f)
 
 //視点の高さ
-#define CAMERA_OFFSET_Y	(300.0f)
+#define CAMERA_OFFSET_Y	(400.0f)
 
 //注視点の高さ
-#define FORCUS_OFFSET_Y	(10.0f)
+#define FOCUS_OFFSET_Y	(10.0f)
 
 //カメラの移動速度
 #define CAMERA_MOVE_SPEED	(1.0f)
@@ -47,55 +47,10 @@ void CDebugCamera::Init(VECTOR vPos, float fRot)
 //毎フレーム呼ぶ処理
 void CDebugCamera::Step(VECTOR vPos)
 {
-	////カメラの移動
-	//float fSpd = 0.0f;
-	//if (CInput::IsKeyKeep(KEY_INPUT_W))
-	//{
-	//	fSpd = CAMERA_MOVE_SPEED;
-	//}
-	//else if (CInput::IsKeyKeep(KEY_INPUT_S))
-	//{
-	//	fSpd = -CAMERA_MOVE_SPEED;
-	//}
-	//float fRot = 0.0f;
-	//if (CInput::IsKeyKeep(KEY_INPUT_A)) {
-	//	fSpd = -CAMERA_MOVE_SPEED;
-	//	fRot = 90.0f * DX_PI_F / 180.0f;
-	//}
-	//else if (CInput::IsKeyKeep(KEY_INPUT_D)) {
-	//	fSpd = CAMERA_MOVE_SPEED;
-	//	fRot = 90.0f * DX_PI_F / 180.0f;
-	//}
-
-	//// カメラの向きの操作
-	//if (CInput::IsKeyKeep(KEY_INPUT_UP)) {
-	//	vRot.x -= CAMERA_ROTATE_SPEED;
-	//}
-	//else if (CInput::IsKeyKeep(KEY_INPUT_DOWN)) {
-	//	vRot.x += CAMERA_ROTATE_SPEED;
-	//}
-	//else if (CInput::IsKeyKeep(KEY_INPUT_LEFT)) {
-	//	vRot.y -= CAMERA_ROTATE_SPEED;
-	//}
-	//else if (CInput::IsKeyKeep(KEY_INPUT_RIGHT)) {
-	//	vRot.y += CAMERA_ROTATE_SPEED;
-	//}
-
-	//// カメラの向きの操作
-	//if (CInput::IsKeyKeep(KEY_INPUT_Q)) {
-	//	CameraPos.y += 5.0f;
-	//}
-	//else if (CInput::IsKeyKeep(KEY_INPUT_E)) {
-	//	CameraPos.y -= 5.0f;
-	//}
-
-	//// 入力したキー情報とカメラの角度から、移動速度を求める
-	//CameraPos.x += sinf(vRot.y + fRot) * fSpd;
-	//CameraPos.z += cosf(vRot.y + fRot) * fSpd;
-
 	VECTOR vDir;
-	vDir.x = sinf(vRot.y) * CAMERA_LENGTH;
-	vDir.z = cosf(vRot.y) * CAMERA_LENGTH;
+	vDir.x = sinf(vRot.y) * CAMERA_LENGTH + 20.0f;
+	vDir.z = cosf(vRot.y) * CAMERA_LENGTH - 200.0f;
+
 
 	//視点の高さは固定
 	vDir.y = CAMERA_OFFSET_Y;
@@ -104,15 +59,13 @@ void CDebugCamera::Step(VECTOR vPos)
 	//注視点(プレイヤー)の位置から計算結果の距離を移動させればカメラの視点になる
 	CameraPos = VAdd(vPos, vDir);
 
-	//注視点はターゲットの位置を利用する
-	/*ForcusPos = vPos;
-	ForcusPos.y = FORCUS_OFFSET_Y;*/
+	FocusPos = vPos;
 }
 
 //更新したデータを反映させる
 void CDebugCamera::Update()
 {
-	SetCameraPositionAndAngle(CameraPos, vRot.x, vRot.y, vRot.z);
+	SetCameraPositionAndTargetAndUpVec(CameraPos, FocusPos, VGet(0.0f, 1.0f, 0.0f));
 }
 
 //-----------------------
@@ -121,5 +74,7 @@ void CDebugCamera::Update()
 void CDebugCamera::Draw()
 {
 	DrawString(0, 0, "デバックカメラモード", GetColor(255, 255, 255));
-	DrawFormatString(0, 15, GetColor(255, 255, 255), "座標X：%f, 座標Y：%f, 座標Z：%f", CameraPos.x, CameraPos.y, CameraPos.z);
+	DrawString(0, 15, "Pで設置", GetColor(255, 255, 255));
+	DrawString(0, 30, "1:チェックポイント 2:敵のスポーン地点", GetColor(255, 255, 255));
+	DrawFormatString(0, 45, GetColor(255, 0, 0), "座標X：%f, 座標Y：%f, 座標Z：%f", CameraPos.x, CameraPos.y, CameraPos.z);
 }

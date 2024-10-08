@@ -17,6 +17,7 @@ CGame_Pointer::~CGame_Pointer() {};
 void CGame_Pointer::Init()
 {
 	memset(&cPos, 0, sizeof(VECTOR));
+	cPos = VGet(0.0f, 5.0f, 0.0f);
 	cBoxSize = VGet(20.0f, 20.0f, 20.0f);
 	iHndl = -1;
 }
@@ -58,6 +59,6 @@ void CGame_Pointer::Draw()
 void CGame_Pointer::Exit()
 {
 	memset(&cPos, 0, sizeof(VECTOR));
-	cBoxSize = VGet(5.0f, 5.0f, 5.0f);
+	cBoxSize = VGet(100.0f, 100.0f, 100.0f);
 	iHndl = -1;
 }

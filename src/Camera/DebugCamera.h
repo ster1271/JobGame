@@ -6,7 +6,7 @@ class CDebugCamera
 {
 private:
 	VECTOR CameraPos;	//視点
-	VECTOR FocusPos;
+	VECTOR FocusPos;	//注視点
 	VECTOR vRot;		//カメラの角度
 
 public:
