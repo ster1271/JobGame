@@ -55,6 +55,6 @@ public:
 	//ƒŠƒXƒgî•ñæ“¾
 	vector<VECTOR> Get_List()
 	{
-		return cCheck_Point->Get_List();
+		return Point_info_List;
 	}
 };

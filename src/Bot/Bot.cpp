@@ -100,53 +100,6 @@ void CBot::Step(vector<VECTOR> List)
 //指定の場所に動く処理
 void CBot::Move_Bot(vector<VECTOR> List)
 {
-	////ボットから指定の地点へ行くベクトルを計算
-	//VECTOR Vtmp;
-	//Vtmp.x = Set_Point.x - cPos.x;
-	//Vtmp.y = 0.0f;
-	//Vtmp.z = Set_Point.z - cPos.z;
-
-	////進行方向のどちら側にいるのかを調べる
-	//float Dir = 0.0f;
-
-	//VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ボットの移動ベクトル
-	//vSpd.x = sinf(cRotate.y) * -MOVE_SPEED;
-	//vSpd.y = 0.0f;
-	//vSpd.z = cosf(cRotate.y) * -MOVE_SPEED;
-	//
-	////外積計算
-	//Dir = Vtmp.x * vSpd.z - vSpd.x * Vtmp.z;
-	////確認用
-	//tmp_dir = Dir;
-
-	////回転する角度を決める
-	//if (Dir >= 0.0f)
-	//{
-	//	cRotate.y += 0.05f;
-	//}
-	//else if (Dir < 0.0f)
-	//{
-	//	cRotate.y -= 0.05f;
-	//}
-
-	////座標に速度を加算する
-	//cPos.x += sinf(cRotate.y) * -0.1f;
-	//cPos.z += cosf(cRotate.y) * -0.1f;
-
-	////プレイヤーとの距離を計算
-	//float Range = (Set_Point.x - cPos.x) * (Set_Point.x - cPos.x) + (Set_Point.z - cPos.z) * (Set_Point.z - cPos.z);
-	//Range = sqrt(Range);
-	////確認用
-	//tmp_Range = Range;
-
-	////距離が一定値に達したらIdを変更する
-	//if (Range < 0.05f)
-	//{
-	//	State_Id = STATE_STOP;
-	//}
-
-
-
 	//ボットから指定の地点へ行くベクトルを計算
 	VECTOR Vtmp;
 	Vtmp.x = List[tmp].x - cPos.x;

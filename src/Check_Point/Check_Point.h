@@ -11,9 +11,6 @@ using namespace std;
 class CCheck_Point: public CCheck_Base
 {
 private:
-	vector<VECTOR> Point_info_List;
-	int tmp_Hndl;
-	int tmp;
 
 public:
 	//コンストラクタ・デストラクタ
@@ -35,16 +32,13 @@ public:
 	//後処理
 	void Exit();
 
-	//リスト所得
-	vector<VECTOR> Get_List()
-	{
-		return Point_info_List;
-	}
-
 	//設置処理
 	void Set_Point(const VECTOR vPos);
 
 
 	//ファイル読み込み
 	void LoadFile();
+
+	//ファイル書き込み
+	void WriteFile(const VECTOR vPos);
 };
