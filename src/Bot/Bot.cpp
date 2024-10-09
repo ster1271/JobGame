@@ -143,6 +143,31 @@ void CBot::Move_Bot(vector<VECTOR> List)
 	if (Range < 0.1f)
 	{
 		tmp++;
+		
+		//もう一度計算しなおす
+		Vtmp.x = List[tmp].x - cPos.x;
+		Vtmp.y = 0.0f;
+		Vtmp.z = List[tmp].z - cPos.z;
+
+		vSpd.x = sinf(cRotate.y) * -MOVE_SPEED;
+		vSpd.y = 0.0f;
+		vSpd.z = cosf(cRotate.y) * -MOVE_SPEED;
+
+		//外積計算
+		Dir = Vtmp.x * vSpd.z - vSpd.x * Vtmp.z;
+
+		//アークタンジェントで角度を出す
+		//float NextRot = 
+
+		if (Dir >= 0.0f)
+		{
+			//プラス方向へ
+		}
+		else
+		{
+			//マイナス方向へ
+
+		}
 
 		if (tmp == List.size())
 		{
