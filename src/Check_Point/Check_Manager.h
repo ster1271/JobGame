@@ -1,4 +1,5 @@
 #pragma once
+#include "Check_Base.h"
 #include "Check_Point.h"
 #include "../Input/Input.h"
 
@@ -16,11 +17,12 @@ private:
 	};
 
 	vector<VECTOR> Point_info_List;
+	vector<CCheck_Base*> Info_List;
 	FILE* fp;
 
 	Check_ID check_id;
 	int check_Hndl;
-	CCheck_Point cCheck_Point[];
+	CCheck_Point cCheck_Point[MAX_NUM];
 
 
 public:
@@ -30,6 +32,9 @@ public:
 
 	//初期化
 	void Init();
+
+	//全ての情報読み取り
+	void LoadInfo();
 
 	//データ読み込み
 	void Load();

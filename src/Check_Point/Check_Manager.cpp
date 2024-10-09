@@ -20,23 +20,32 @@ void CChecck_Manager::Init()
 {
 	check_Hndl = -1;
 
-	VECTOR vPos = VGet(0.0f, 0.0f, 0.0f);
 	int Count = 0;
 	//読み込み
 	//ファイルを開く
 	fopen_s(&fp, "Data/ObjectFile/Object_file.txt", "r");
-
+	VECTOR vPos = VGet(0.0f, 0.0f, 0.0f);
 	if (fp != nullptr)
 	{
 		while (fscanf_s(fp, "%f, %f, %f", &vPos.x, &vPos.y, &vPos.z) != EOF)
 		{
 			cCheck_Point[Count].Set_Point(vPos);
 			Point_info_List.push_back(vPos);
+			
 			Count++;
 		}
 	}
 
 	fclose(fp);
+
+	
+	
+}
+
+//全ての情報読み取り
+void CChecck_Manager::LoadInfo()
+{
+	
 }
 
 //データ読み込み

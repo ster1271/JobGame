@@ -35,10 +35,4 @@ public:
 	//設置処理
 	void Set_Point(const VECTOR vPos);
 
-
-	//ファイル読み込み
-	void LoadFile();
-
-	//ファイル書き込み
-	void WriteFile(const VECTOR vPos);
 };

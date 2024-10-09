@@ -57,17 +57,6 @@ void CCheck_Point::Set_Point(const VECTOR vPos)
 }
 
 
-//ファイル読み込み
-void CCheck_Point::LoadFile()
-{
-
-}
-
-//ファイル書き込み
-void CCheck_Point::WriteFile(const VECTOR vPos)
-{
-	
-}
 
 
 
