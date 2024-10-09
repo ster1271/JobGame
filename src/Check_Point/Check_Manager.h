@@ -15,12 +15,12 @@ private:
 		ID_NUM
 	};
 
-	Check_ID check_id;
-	int check_Hndl;
-	CCheck_Point cCheck_Point[MAX_NUM];
-
 	vector<VECTOR> Point_info_List;
 	FILE* fp;
+
+	Check_ID check_id;
+	int check_Hndl;
+	CCheck_Point cCheck_Point[];
 
 
 public:

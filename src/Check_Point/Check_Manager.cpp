@@ -44,7 +44,7 @@ void CChecck_Manager::Load()
 {
 	check_Hndl = MV1LoadModel(POINT_PATH);
 
-	for (int Index = 0; Index < MAX_NUM; Index++)
+	for (int Index = 0; Index < Point_info_List.size(); Index++)
 	{
 		cCheck_Point[Index].Load(check_Hndl);
 	}
@@ -53,7 +53,7 @@ void CChecck_Manager::Load()
 //Œãˆ—
 void CChecck_Manager::Exit()
 {
-	for (int Index = 0; Index < MAX_NUM; Index++)
+	for (int Index = 0; Index < Point_info_List.size(); Index++)
 	{
 		cCheck_Point[Index].Exit();
 	}
@@ -62,7 +62,7 @@ void CChecck_Manager::Exit()
 //î•ñXV
 void CChecck_Manager::Updata()
 {
-	for (int Index = 0; Index < MAX_NUM; Index++)
+	for (int Index = 0; Index < Point_info_List.size(); Index++)
 	{
 		cCheck_Point[Index].Updata();
 	}
@@ -71,7 +71,7 @@ void CChecck_Manager::Updata()
 //•`‰æ
 void CChecck_Manager::Draw()
 {
-	for (int Index = 0; Index < MAX_NUM; Index++)
+	for (int Index = 0; Index < Point_info_List.size(); Index++)
 	{
 		cCheck_Point[Index].Draw();
 	}
@@ -79,7 +79,7 @@ void CChecck_Manager::Draw()
 
 void CChecck_Manager::Step()
 {
-	for (int Index = 0; Index < MAX_NUM; Index++)
+	for (int Index = 0; Index < Point_info_List.size(); Index++)
 	{
 		cCheck_Point[Index].Step();
 	}

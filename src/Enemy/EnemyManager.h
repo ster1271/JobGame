@@ -3,18 +3,20 @@
 #include <vector>
 #include <list>
 #include "EnemyBase.h"
-#include "../Enemy/Enemy_Normal.h"
+#include "Enemy_Normal.h"
+#include "EnemyBoss.h"
 
 using namespace std;
 
-#define ENEMY_NUM	(10)
+#define ENEMY_NUM	(3)
 
 class CEnemyManager
 {
 private:
 	//モデルのコピー元
 	int Org_Hndl;
-	CEnemy_Normal cEnemy_Normal[10];
+	CEnemy_Normal cEnemy_Normal[ENEMY_NUM];
+	CEnemyBoss cEnemyBoss[ENEMY_NUM];
 
 	//CEnemyBase型のList配列
 	/*vector<CEnemyBase*> Enemy_List;

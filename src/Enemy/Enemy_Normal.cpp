@@ -1,6 +1,6 @@
 #include "Enemy_Normal.h"
 
-const int MAX_LIFE (3);		//最大体力
+const int MAX_LIFE = 3;		//最大体力
 
 //コンストラクタ
 CEnemy_Normal::CEnemy_Normal()
@@ -44,7 +44,7 @@ void CEnemy_Normal::Step()
 	//座標に速度を加算
 	cPos = VSub(cPos, cSpeed);
 	//一定範囲を超えたら消す
-	float fLength = 100.0f;
+	float fLength = 200.0f;
 	if (cPos.x > Respown_Pos.x + fLength || cPos.x < Respown_Pos.x -fLength
 		|| cPos.z > Respown_Pos.z + fLength || cPos.z < Respown_Pos .z -fLength)
 	{
@@ -108,9 +108,9 @@ bool CEnemy_Normal::RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed)
 	}
 
 	cPos = vPos;
-	Respown_Pos = cPos;
+	Respown_Pos = vPos;
 	cSize = VGet(0.1f, 0.1f, 0.1f);
-	cRotate = VGet(0.0f, -DX_PI_F / 2, 0.0f);
+	cRotate = VGet(0.0f, DX_PI_F / 2, 0.0f);
 	cSpeed = vSpeed;
 	Life = MAX_LIFE;
 	IsActive = true;

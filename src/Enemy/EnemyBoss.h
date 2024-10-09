@@ -1,14 +1,15 @@
 #pragma once
 #include "EnemyBase.h"
 
-class CEnemy_Normal: public CEnemyBase
+class CEnemyBoss :public CEnemyBase
 {
 private:
 	VECTOR Respown_Pos;
+
 public:
 	//コンストラクタ・デストラクタ
-	CEnemy_Normal();
-	~CEnemy_Normal();
+	CEnemyBoss();
+	~CEnemyBoss();
 
 	//初期化
 	void Init();
