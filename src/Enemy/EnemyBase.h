@@ -6,6 +6,14 @@
 class CEnemyBase
 {
 protected:
+	enum ENEMY_STATE
+	{
+		STATE_MOVE = 0,	//移動
+		STATE_ATTACK,	//攻撃
+
+		STATE_NUM,
+	};
+
 	VECTOR cPos;		//座標
 	VECTOR cSize;		//サイズ
 	VECTOR cRotate;		//回転値

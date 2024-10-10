@@ -157,7 +157,7 @@ void CBot::Move_Bot(vector<VECTOR> List)
 		Dir = Vtmp.x * vSpd.z - vSpd.x * Vtmp.z;
 
 		//アークタンジェントで角度を出す
-		//float NextRot = 
+		//float NextRot = atan2
 
 		if (Dir >= 0.0f)
 		{
