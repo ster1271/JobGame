@@ -5,16 +5,18 @@
 
 #define MAX_NUM	(5)
 
+enum Check_ID
+{
+	ID_CHECK_POINT = 0,	//チェックポイント
+	ID_ENEMY_SPAWN,		//敵の沸きポイント
+
+	ID_NUM
+};
+
 class CChecck_Manager
 {
 private:
-	enum Check_ID
-	{
-		ID_CHECK_POINT = 0,	//チェックポイント
-		ID_ENEMY_SPAWN,		//敵の沸きポイント
-
-		ID_NUM
-	};
+	
 
 	vector<VECTOR> Point_info_List;
 	vector<CCheck_Base*> Info_List;
@@ -62,4 +64,7 @@ public:
 	{
 		return Point_info_List;
 	}
+
+	//Id取得関数
+	Check_ID GetId() { return check_id; }
 };

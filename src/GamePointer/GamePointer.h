@@ -1,8 +1,10 @@
 #pragma once
 #include "DxLib.h"
-#include "../Draw3D/Draw3D.h"
 #include "math.h"
+#include "../Draw3D/Draw3D.h"
 #include "../Input/Input.h"
+#include "../Check_Point/Check_Manager.h"
+
 
 class CGame_Pointer
 {
@@ -24,10 +26,10 @@ public:
 	void Load();
 
 	//–ˆƒtƒŒ[ƒ€s‚¤ˆ—
-	void Step();
+	void Step(Check_ID id);
 
 	//•`‰æ
-	void Draw();
+	void Draw(Check_ID id);
 
 	//Œãˆ—
 	void Exit();
