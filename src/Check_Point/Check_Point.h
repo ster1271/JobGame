@@ -4,7 +4,7 @@
 #include <vector>
 #include "../Check_Point/Check_Base.h"
 
-#define  MAX_NUM	(5)
+#define  MAX_NUM	(10)
 
 using namespace std;
 
