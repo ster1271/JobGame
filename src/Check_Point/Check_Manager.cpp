@@ -117,7 +117,7 @@ void CChecck_Manager::DebugStep(VECTOR vPos)
 		
 		switch (check_id)
 		{
-		case CChecck_Manager::ID_CHECK_POINT:
+		case ID_CHECK_POINT:
 		//ƒŠƒXƒg‚É’Ç‰Á‚·‚é
 		Point_info_List.push_back(vPos);
 
@@ -132,7 +132,7 @@ void CChecck_Manager::DebugStep(VECTOR vPos)
 		}
 			break;
 
-		case CChecck_Manager::ID_ENEMY_SPAWN:
+		case ID_ENEMY_SPAWN:
 
 			break;
 

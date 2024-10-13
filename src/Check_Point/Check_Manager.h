@@ -5,7 +5,7 @@
 
 #define MAX_NUM	(5)
 
-enum Check_ID
+enum CHECK_ID
 {
 	ID_CHECK_POINT = 0,	//チェックポイント
 	ID_ENEMY_SPAWN,		//敵の沸きポイント
@@ -22,7 +22,7 @@ private:
 	vector<CCheck_Base*> Info_List;
 	FILE* fp;
 
-	Check_ID check_id;
+	CHECK_ID check_id;
 	int check_Hndl;
 	CCheck_Point cCheck_Point[MAX_NUM];
 
@@ -66,5 +66,5 @@ public:
 	}
 
 	//Id取得関数
-	Check_ID GetId() { return check_id; }
+	CHECK_ID GetId() { return check_id; }
 };
