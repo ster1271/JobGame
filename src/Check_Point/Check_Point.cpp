@@ -12,7 +12,7 @@ CCheck_Point::~CCheck_Point()
 }
 
 //‰Šú‰»
-void CCheck_Point::Init(FILE* fp)
+void CCheck_Point::Init()
 {
 	CCheck_Base::Init();
 }

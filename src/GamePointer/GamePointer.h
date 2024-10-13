@@ -26,10 +26,10 @@ public:
 	void Load();
 
 	//–ˆƒtƒŒ[ƒ€s‚¤ˆ—
-	void Step(Check_ID id);
+	void Step(CHECK_ID id);
 
 	//•`‰æ
-	void Draw(Check_ID id);
+	void Draw(CHECK_ID id);
 
 	//Œãˆ—
 	void Exit();

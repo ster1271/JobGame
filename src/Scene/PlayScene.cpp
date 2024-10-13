@@ -92,10 +92,8 @@ void CPlayScene::Draw()
 		//デバック時描画
 		cCheck_Manager.DebugDraw();
 
-		cGame_Pointer.Draw(cCheck_Manager.GetId());
+		cGame_Pointer.Draw(cCheck_Manager.GetID());
 	}
-
-	
 
 	//カメラ情報表示
 	cCameraManager.Draw();
@@ -227,7 +225,7 @@ void CPlayScene::Step()
 	//デバック時処理
 	if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_DEBUG)
 	{
-		cGame_Pointer.Step(cCheck_Manager.GetId());
+		cGame_Pointer.Step(cCheck_Manager.GetID());
 
 		//デバック時更新処理
 		cCheck_Manager.DebugStep(cGame_Pointer.GetPos());

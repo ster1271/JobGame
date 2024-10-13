@@ -29,7 +29,7 @@ void CGame_Pointer::Load()
 }
 
 //ñàÉtÉåÅ[ÉÄçsÇ§èàóù
-void CGame_Pointer::Step(Check_ID id)
+void CGame_Pointer::Step(CHECK_ID id)
 {
 	
 	if (CInput::IsKeyKeep(KEY_INPUT_W))
@@ -47,22 +47,24 @@ void CGame_Pointer::Step(Check_ID id)
 		cPos.x += MOVE_SPEED;
 	}
 
-	/*if (id == ID_CHECK_POINT)
-	{
-
-	}*/
+	
 
 }
 
 //ï`âÊ
-void CGame_Pointer::Draw(Check_ID id)
+void CGame_Pointer::Draw(CHECK_ID id)
 {
 	/*if (id == ID_CHECK_POINT)
 	{
 		MV1DrawModel();
 	}
-	else*/
+	else
+	{
+		CDraw3D::DrawBox3D(cPos, cBoxSize);
+	}*/
+
 	CDraw3D::DrawBox3D(cPos, cBoxSize);
+
 }
 
 //å„èàóù

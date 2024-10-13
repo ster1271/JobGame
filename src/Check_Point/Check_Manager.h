@@ -10,7 +10,7 @@ enum CHECK_ID
 	ID_CHECK_POINT = 0,	//チェックポイント
 	ID_ENEMY_SPAWN,		//敵の沸きポイント
 
-	ID_NUM
+	MAX_ID,
 };
 
 class CChecck_Manager
@@ -22,7 +22,7 @@ private:
 	vector<CCheck_Base*> Info_List;
 	FILE* fp;
 
-	CHECK_ID check_id;
+	CHECK_ID Check_id;
 	int check_Hndl;
 	CCheck_Point cCheck_Point[MAX_NUM];
 
@@ -65,6 +65,5 @@ public:
 		return Point_info_List;
 	}
 
-	//Id取得関数
-	CHECK_ID GetId() { return check_id; }
+	CHECK_ID GetID() { return Check_id; }
 };

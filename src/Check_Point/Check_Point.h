@@ -18,7 +18,7 @@ public:
 	~CCheck_Point();
 
 	//‰Šú‰»
-	void Init(FILE * fp);
+	void Init();
 
 	//ƒ‚ƒfƒ‹“Ç‚İ‚İ
 	void Load(int Hndl);
@@ -35,4 +35,7 @@ public:
 	//İ’uˆ—
 	void Set_Point(const VECTOR vPos);
 
+
+
 };
+

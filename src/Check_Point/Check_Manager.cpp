@@ -9,7 +9,7 @@ CChecck_Manager::CChecck_Manager()
 	memset(&fp, 0, sizeof(FILE));
 
 	check_Hndl = -1;
-	check_id = ID_NUM;
+	Check_id = MAX_ID;
 }
 
 //デストラクタ
@@ -103,11 +103,11 @@ void CChecck_Manager::DebugStep(VECTOR vPos)
 	//オブジェクトの変更処理
 	if (CInput::IsKeyPush(KEY_INPUT_1))
 	{
-		check_id = ID_CHECK_POINT;
+		Check_id = ID_CHECK_POINT;
 	}
 	else if (CInput::IsKeyPush(KEY_INPUT_2))
 	{
-		check_id = ID_ENEMY_SPAWN;
+		Check_id = ID_ENEMY_SPAWN;
 	}
 
 	//オブジェクトの設置処理
@@ -115,7 +115,7 @@ void CChecck_Manager::DebugStep(VECTOR vPos)
 	{
 
 		
-		switch (check_id)
+		switch (Check_id)
 		{
 		case ID_CHECK_POINT:
 		//リストに追加する
@@ -146,7 +146,7 @@ void CChecck_Manager::DebugStep(VECTOR vPos)
 //デバック時の描画
 void CChecck_Manager::DebugDraw()
 {
-	switch (check_id)
+	switch (Check_id)
 	{
 	case ID_CHECK_POINT:
 		DrawFormatString(800, 30, GetColor(255, 0, 0), "チェックポイントだよー");
@@ -154,7 +154,7 @@ void CChecck_Manager::DebugDraw()
 	case ID_ENEMY_SPAWN:
 		DrawFormatString(800, 30, GetColor(255, 0, 0), "敵沸きポイントだよー");
 		break;
-	case ID_NUM:
+	case MAX_ID:
 		DrawFormatString(800, 30, GetColor(255, 0, 0), "何も持ってないよ");
 		break;
 	default:

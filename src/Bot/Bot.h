@@ -42,4 +42,6 @@ public:
 	//w’è‚ÌêŠ‚É“®‚­ˆ—
 	void Move_Bot(vector<VECTOR> List);
 
+	//Œo˜H’Tõ
+
 };
