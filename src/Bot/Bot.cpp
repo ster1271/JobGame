@@ -177,3 +177,58 @@ void CBot::Move_Bot(vector<VECTOR> List)
 	}
 }
 
+//経路探索
+void CBot::Route_Search(VECTOR GoalPos)
+{
+	//引数の小さい順に上(奥),下(手前),右,左,右上,右下,左上,左下
+
+	Search_info.Distance += 50.0f;
+
+	//スタートからの距離を求める
+	Search_info.Range_From_Start[0] = 1.0f;
+	Search_info.Range_From_Start[1] = 1.0f;
+	Search_info.Range_From_Start[2] = 1.0f;
+	Search_info.Range_From_Start[3] = 1.0f;
+	Search_info.Range_From_Start[4] = 1.0f;
+	Search_info.Range_From_Start[5] = 1.0f;
+	Search_info.Range_From_Start[6] = 1.0f;
+	Search_info.Range_From_Start[7] = 1.0f;
+
+	//動いた地点からゴールまでの直線距離を求める
+	/*for (int Index = 0; Index < 8; Index++)
+	{
+
+	}*/
+	Search_info.Renge_To_Goal[0] = hypot((GoalPos.x - cPos.x), (GoalPos.z - (cPos.z + Search_info.Distance)));	//上
+	Search_info.Renge_To_Goal[1] = hypot((GoalPos.x - cPos.x), (GoalPos.z - (cPos.z - Search_info.Distance)));	//下
+	Search_info.Renge_To_Goal[2] = hypot((GoalPos.x - (cPos.x + Search_info.Distance)), (GoalPos.z - cPos.z));	//右
+	Search_info.Renge_To_Goal[3] = hypot((GoalPos.x - (cPos.x - Search_info.Distance)), (GoalPos.z - cPos.z));	//左
+	Search_info.Renge_To_Goal[4] = hypot((GoalPos.x - (cPos.x + Search_info.Distance)), (GoalPos.z - (cPos.z + Search_info.Distance)));	//右上
+	Search_info.Renge_To_Goal[5] = hypot((GoalPos.x - (cPos.x + Search_info.Distance)), (GoalPos.z - (cPos.z - Search_info.Distance)));	//右下
+	Search_info.Renge_To_Goal[6] = hypot((GoalPos.x - (cPos.x - Search_info.Distance)), (GoalPos.z - (cPos.z + Search_info.Distance)));	//左上
+	Search_info.Renge_To_Goal[7] = hypot((GoalPos.x - (cPos.x - Search_info.Distance)), (GoalPos.z - (cPos.z - Search_info.Distance)));	//左下
+
+	//合計距離の最小を求める
+	for (int Index = 0; Index < 8; Index++)
+	{
+		Search_info.Total_Renge[Index] = Search_info.Range_From_Start[Index] + Search_info.Renge_To_Goal[Index];
+		
+		if (Index == 0)
+		{
+			Search_info.Min_Total_Renge = Search_info.Total_Renge[0];
+		}
+		else
+		{
+			if (Search_info.Total_Renge[Index] < Search_info.Min_Total_Renge)
+			{
+				Search_info.Min_Total_Renge = Search_info.Total_Renge[Index];
+				//最小の場所の値を格納する
+				//現在のCenter_Posに離れた座標分を足す
+				Search_info.Center_Pos = VGet(cPos.x, 0.0f, cPos.z);
+			}
+		}
+	}
+
+	
+}
+

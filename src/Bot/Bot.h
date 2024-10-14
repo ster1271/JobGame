@@ -1,5 +1,7 @@
 #pragma once 
 #include "DxLib.h"
+#include <math.h>
+#include "../MyLibrary/MyLibrary.h"
 #include "../Input/Input.h"
 #include "../Object/Object.h"
 #include "../Object/ObjectManager.h"
@@ -17,7 +19,19 @@ private:
 		STATE_NUM,
 	};
 
+	//経路探索に必要な変数情報
+	struct Route_Search_Info
+	{
+		VECTOR Center_Pos;			//探索する中心位置
+		float Range_From_Start[8];	//スタートからの距離
+		float Renge_To_Goal[8];		//ゴールまでの距離
+		float Total_Renge[8];		//合計距離	
+		float Min_Total_Renge;		//最小距離
+		float Distance;
+	};
+
 	BOT_STATE State_Id;
+	Route_Search_Info Search_info;
 	float tmp_dir;
 	float tmp_Range;
 	int tmp;
@@ -43,5 +57,6 @@ public:
 	void Move_Bot(vector<VECTOR> List);
 
 	//経路探索
+	void Route_Search(VECTOR GoalPos);
 
 };
