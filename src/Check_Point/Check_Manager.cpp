@@ -1,6 +1,6 @@
 #include "Check_Manager.h"
 
-const char POINT_PATH[] = { "data/Map/Point.x" };
+const char POINT_PATH[] = { "data/CheckPoint/CheckPoint.x" };
 
 
 //コンストラクタ
@@ -23,7 +23,7 @@ void CChecck_Manager::Init()
 	int Count = 0;
 	//読み込み
 	//ファイルを開く
-	fopen_s(&fp, "Data/ObjectFile/Object_file.txt", "r");
+	fopen_s(&fp, "Data/CheckPoint/CheckPointFile/CheckPointFile.txt", "r");
 	VECTOR vPos = VGet(0.0f, 0.0f, 0.0f);
 	if (fp != nullptr)
 	{

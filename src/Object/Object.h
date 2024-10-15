@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include "math.h"
 #include "../Input/Input.h"
+#include "../Draw3D/Draw3D.h"
 
 //オブジェクトクラス
 class CObject

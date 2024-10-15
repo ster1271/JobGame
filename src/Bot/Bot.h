@@ -1,11 +1,15 @@
 #pragma once 
 #include "DxLib.h"
+#include <iostream>
+#include <vector>
 #include <math.h>
 #include "../MyLibrary/MyLibrary.h"
 #include "../Input/Input.h"
 #include "../Object/Object.h"
 #include "../Object/ObjectManager.h"
 #include "../Check_Point/Check_Point.h"
+
+using namespace std;
 
 //ボットクラス
 class CBot :public CObject
@@ -19,19 +23,10 @@ private:
 		STATE_NUM,
 	};
 
-	//経路探索に必要な変数情報
-	struct Route_Search_Info
-	{
-		VECTOR Center_Pos;			//探索する中心位置
-		float Range_From_Start[8];	//スタートからの距離
-		float Renge_To_Goal[8];		//ゴールまでの距離
-		float Total_Renge[8];		//合計距離	
-		float Min_Total_Renge;		//最小距離
-		float Distance;
-	};
+
 
 	BOT_STATE State_Id;
-	Route_Search_Info Search_info;
+
 	float tmp_dir;
 	float tmp_Range;
 	int tmp;
@@ -57,6 +52,6 @@ public:
 	void Move_Bot(vector<VECTOR> List);
 
 	//経路探索
-	void Route_Search(VECTOR GoalPos);
+	void Route_Search(VECTOR StartPos, VECTOR GoalPos);
 
 };

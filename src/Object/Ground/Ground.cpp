@@ -39,5 +39,14 @@ void CGround::Init()
 //モデル読み込み
 void CGround::Load()
 {
-	iHndl = MV1LoadModel("data/Map/field.x");
+	iHndl = MV1LoadModel("data/Map/Map01.x");
+}
+
+
+void CGround::Draw()
+{
+	MV1DrawModel(iHndl);
+
+	//ボックスのサイズ約1500
+	CDraw3D::DrawBox3D(VGet(0.0f, 0.0f, 0.0f), VGet(1500.0f, 20.0f, 1500.0f));
 }

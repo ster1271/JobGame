@@ -55,8 +55,12 @@ void CObject::Load(int Org_Hndl)
 //描画
 void CObject::Draw()
 {
-	//モデルの描画
-	MV1DrawModel(iHndl);
+	if (iHndl != -1)
+	{
+		//モデルの描画
+		MV1DrawModel(iHndl);
+	}
+	
 }
 
 //毎フレーム行う処理

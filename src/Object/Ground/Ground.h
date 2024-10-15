@@ -14,4 +14,7 @@ public:
 
 	//ƒ‚ƒfƒ‹“Ç‚İ‚İ
 	void Load();
+
+	//•`‰æ
+	void Draw();
 };
