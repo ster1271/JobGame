@@ -1,5 +1,7 @@
 #include "RouteSearch.h"
 
+const float MAX_COST = 999.9f;
+
 
 //ボットの経路探索
 void CRoute_Search::Bot_Route_Search(VECTOR StartPos, VECTOR GoalPos)
@@ -50,10 +52,17 @@ void CRoute_Search::KEISANN(Info info)
 		tmp[i].Renge_To_Goal = _X + _Z;
 
 		//合計コストを求める
+		float Total_Min_Cost = MAX_COST;
 		tmp[i].Total_Cost = tmp[i].Renge_form_Start + tmp[i].Renge_To_Goal;
+		
+		//合計コストの最少を格納する
+		if (tmp[i].Total_Cost <= Total_Min_Cost)
+		{
+			Total_Min_Cost = tmp[i].Total_Cost;
+		}
+
 
 		List.push_back(tmp[i]);
 	}
 
-	
 }
