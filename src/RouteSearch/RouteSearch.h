@@ -1,7 +1,7 @@
 #pragma once
 #include "../Common.h"
 #include "../MyLibrary/MyLibrary.h"
-
+#include "../CollisionManager/CollisionManager.h"
 
 //状態遷移
 enum NODE_STATE
@@ -41,10 +41,13 @@ private:
 
 public:
 	//ボットの経路探索
-	void Bot_Route_Search(VECTOR StartPos, VECTOR GoalPos);
+	void Bot_Route_Search(VECTOR StartPos, VECTOR GoalPos, int MapHndl);
 
 	//評価計算
-	void KEISANN(Info info);
+	void KEISANN(Info info, int MapHndl);
+
+	//経路探索時のマップとの当たり判定
+	bool BoxToMap(VECTOR BoxCenter, int MapHndl);
 };
 
 

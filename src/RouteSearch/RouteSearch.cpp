@@ -1,10 +1,11 @@
 #include "RouteSearch.h"
 
 const float MAX_COST = 999.9f;
+const float RADIUS = 5.0f;
 
 
 //ƒ{ƒbƒg‚ÌŒo˜H’Tõ
-void CRoute_Search::Bot_Route_Search(VECTOR StartPos, VECTOR GoalPos)
+void CRoute_Search::Bot_Route_Search(VECTOR StartPos, VECTOR GoalPos, int MapHndl)
 {
 	m_StartPos = StartPos;
 	m_GoalPos = GoalPos;
@@ -14,7 +15,7 @@ void CRoute_Search::Bot_Route_Search(VECTOR StartPos, VECTOR GoalPos)
 
 
 //•]‰¿ŒvZ
-void CRoute_Search::KEISANN(Info info)
+void CRoute_Search::KEISANN(Info info, int MapHndl)
 {
 	//‚Ì‚¿‚Épush_back‚·‚é‚â‚Â‚ªinfo‚É‚È‚é
 	Info tmp[DIR_NUM];
@@ -44,8 +45,8 @@ void CRoute_Search::KEISANN(Info info)
 		}
 		
 		//Še•Ó10‚ÌBOX‚Æƒ}ƒbƒv‚Ì“–‚½‚è”»’è‚ğ‚Æ‚é
-	/*	if ()
-			continue;*/
+		if (BoxToMap(tmp[i].Pos, MapHndl))
+			continue;
 
 		float _X = fabs(m_GoalPos.x - tmp[i].Pos.x);
 		float _Z = fabs(m_GoalPos.z - tmp[i].Pos.z);
@@ -65,4 +66,21 @@ void CRoute_Search::KEISANN(Info info)
 		List.push_back(tmp[i]);
 	}
 
+}
+
+
+//Œo˜H’Tõ‚Ìƒ}ƒbƒv‚Æ‚Ì“–‚½‚è”»’è
+bool CRoute_Search ::BoxToMap(VECTOR BoxCenter, int MapHndl)
+{
+	//“–‚½‚è”»’è
+	MV1_COLL_RESULT_POLY_DIM result;
+	result = MV1CollCheck_Sphere(MapHndl, -1, BoxCenter, RADIUS);
+
+	//“–‚½‚Á‚½‚çtrue‚ğ•Ô‚·
+	if (result.Dim->HitFlag == true)
+	{
+		return true;
+	}
+
+	return false;
 }

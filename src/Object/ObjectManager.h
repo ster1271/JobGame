@@ -39,4 +39,7 @@ public:
 	//Œãˆ—
 	void Exit();
 
+	//ƒnƒ“ƒhƒ‹æ“¾
+	int GetHndl() { return cGround.GetHndl(); }
+
 };

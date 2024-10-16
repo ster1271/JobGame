@@ -40,6 +40,9 @@ void CGround::Init()
 void CGround::Load()
 {
 	iHndl = MV1LoadModel("data/Map/Map01.x");
+
+	//ƒRƒŠƒWƒ‡ƒ“î•ñ‚ğæ“¾‚·‚é
+	MV1SetupCollInfo(iHndl);
 }
 
 

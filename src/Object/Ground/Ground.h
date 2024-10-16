@@ -17,4 +17,7 @@ public:
 
 	//•`‰æ
 	void Draw();
+
+	//ƒnƒ“ƒhƒ‹Žæ“¾
+	int GetHndl() { return iHndl; }
 };
