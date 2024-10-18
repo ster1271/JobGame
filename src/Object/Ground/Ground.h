@@ -1,8 +1,14 @@
 #pragma once
 #include "../object.h"
 
+#define MAX_NUM		(10)
+
 class CGround :public CObject
 {
+private:
+	int tmp[MAX_NUM][MAX_NUM];
+	
+
 public:
 	//コンストラクタ・デストラクタ
 	CGround();
@@ -20,4 +26,5 @@ public:
 
 	//ハンドル取得
 	int GetHndl() { return iHndl; }
+
 };

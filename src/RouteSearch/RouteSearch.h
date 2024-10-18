@@ -27,15 +27,16 @@ private:
 
 	struct Info
 	{
-		float Renge_form_Start;	//移動コスト(スタート地点から離れた距離)
-		float Renge_To_Goal;	//推定コスト(ゴールまでの距離)
-		float Total_Cost;		//合計コスト
+		int Renge_form_Start;	//移動コスト(スタート地点から離れた距離)
+		int Renge_To_Goal;		//推定コスト(ゴールまでの距離)
+		int Total_Cost;			//合計コスト
 		VECTOR Pos;				//仮の移動先座標
 		int Source_Num;			//親番号
 		bool IsFast;			//最短距離かどうか
 	};
 
-	vector<Info> List;		//格納用
+	vector<Info> List;			//格納用
+	vector<VECTOR> Pos_List;	//座標引き渡し用
 
 
 	VECTOR m_StartPos;	//保存用
@@ -43,14 +44,17 @@ private:
 
 
 public:
+	//経路探索の結果のリスト取得
+	vector<VECTOR> GetSearch_List() { return Pos_List; }
+
 	//ボットの経路探索
-	void Bot_Route_Search(VECTOR StartPos, VECTOR GoalPos, int MapHndl);
+	bool Bot_Route_Search(VECTOR StartPos, VECTOR GoalPos);
 
 	//評価計算
-	int KEISANN(Info info, int Info_Index ,int MapHndl);
+	int KEISANN(Info info, int Info_Index);
 
-	//経路探索時のマップとの当たり判定
-	bool BoxToMap(VECTOR BoxCenter, int MapHndl);
+	void Draw();
+	
 };
 
 

@@ -11,6 +11,7 @@
 #include "../Bot/Bot.h"
 #include "../Check_Point/Check_Manager.h"
 #include "../GamePointer/GamePointer.h"
+#include "../RouteSearch/RouteSearch.h"
 
 class CPlayScene
 {
@@ -37,6 +38,8 @@ private:
 	CBot cBot;								//ボットクラス
 	CChecck_Manager cCheck_Manager;			//チェックポイントマネジャー
 	CGame_Pointer cGame_Pointer;
+	CRoute_Search cRoute_Search;
+	CCollisionManager cCollisionManager;
 	
 
 public:

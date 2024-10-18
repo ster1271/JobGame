@@ -1,13 +1,11 @@
 #pragma once 
-#include "DxLib.h"
-#include <iostream>
-#include <vector>
-#include <math.h>
-#include "../MyLibrary/MyLibrary.h"
-#include "../Input/Input.h"
+#include "../Common.h"
 #include "../Object/Object.h"
 #include "../Object/ObjectManager.h"
 #include "../Check_Point/Check_Point.h"
+#include "../RouteSearch/RouteSearch.h"
+#include "../CollisionManager/CollisionManager.h"
+
 
 using namespace std;
 
@@ -19,10 +17,10 @@ private:
 	enum BOT_STATE
 	{
 		STATE_STOP = 0,	//’â~
+		STATE_SEARCH,	//Œo˜H’Tõ
 		STATE_MOVE,		//ˆÚ“®
 		STATE_NUM,
 	};
-
 
 
 	BOT_STATE State_Id;
@@ -46,12 +44,9 @@ public:
 	void Draw();
 
 	//–ˆƒtƒŒ[ƒ€s‚¤ˆ—
-	void Step(vector<VECTOR> List);
+	void Step(CRoute_Search& cRoute_Search);
 
 	//w’è‚ÌêŠ‚É“®‚­ˆ—
 	void Move_Bot(vector<VECTOR> List);
-
-	//Œo˜H’Tõ
-	void Route_Search(VECTOR StartPos, VECTOR GoalPos);
 
 };

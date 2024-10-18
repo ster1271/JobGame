@@ -75,15 +75,17 @@ void CPlayScene::Draw()
 		//キャラクター描画
 		cCharacterManager.Draw();
 		//エネミー描画
-		cEnemyManager.Draw();
+		//cEnemyManager.Draw();
 		//タレット描画
-		cTurretManager.Draw();
+		//cTurretManager.Draw();
 		//弾描画
-		cShotManager.Draw();
+		//cShotManager.Draw();
 		//ボット描画
 		cBot.Draw();
 		//チェックポイント描画
 		cCheck_Manager.Draw();
+
+		cRoute_Search.Draw();
 	}
 	else if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_DEBUG)
 	{
@@ -199,12 +201,12 @@ void CPlayScene::Step()
 			//メインキャラへ変更
 			cCharacterManager.SetMainID(MainID_ATTACKER);
 		}
-		else if (CInput::IsKeyPush(KEY_INPUT_DOWN))
-		{
-			//CPUキャラへ変更
-			//cCharacterManager.SetMainID(MainID_TANK);
-			cCharacterManager.SetMainID(MainID_SUPPORT);
-		}
+		//else if (CInput::IsKeyPush(KEY_INPUT_DOWN))
+		//{
+		//	//CPUキャラへ変更
+		//	//cCharacterManager.SetMainID(MainID_TANK);
+		//	cCharacterManager.SetMainID(MainID_SUPPORT);
+		//}
 
 		//オブジェクト更新処理
 		cObjectManager.Step();
@@ -217,7 +219,7 @@ void CPlayScene::Step()
 		//弾更新処理
 		cShotManager.Step(cCharacterManager.GetPosition());
 		//ボット更新処理
-		cBot.Step(cCheck_Manager.Get_List());
+		cBot.Step(cRoute_Search);
 		//チェックポイント更新処理
 		cCheck_Manager.Step();
 	}

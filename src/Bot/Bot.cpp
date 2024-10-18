@@ -2,7 +2,7 @@
 
 const char BOT_FILE_PATH[] = { "" };
 const float MOVE_SPEED = 5.0f;
-const float SPERE_R = 5.0f;
+const float SPERE_R = 10.0f;
 
 #define DEG_TO_RAD(a)	((a) * DX_PI_F / 180.0f)	//ラジアン角に変換する式
 
@@ -24,7 +24,7 @@ CBot::~CBot()
 void CBot::Init()
 {
 	CObject::Init();
-	cPos = VGet(0.0f, 10.0f, 100.0f);
+	cPos = VGet(200.0f, 0.0f, -150.0f);
 	cSize = VGet(1.0f, 1.0f, 1.0f);
 	cRotate = VGet(0.0f, 0.0f, 0.0f);
 
@@ -67,7 +67,7 @@ void CBot::Draw()
 }
 
 //マイフレーム行う処理
-void CBot::Step(vector<VECTOR> List)
+void CBot::Step(CRoute_Search& cRoute_Search)
 {
 	
 
@@ -79,13 +79,23 @@ void CBot::Step(vector<VECTOR> List)
 		if (CInput::IsKeyPush(KEY_INPUT_1))
 		{
 			//Idを変更する
-			State_Id = STATE_MOVE;
+			State_Id = STATE_SEARCH;
 		}
 		break;
 
-	case CBot::STATE_MOVE:
+	case CBot::STATE_SEARCH:
+		//経路探索が終了したら
+		VECTOR GOAL = VGet(-150.0f, 0.0f, 200.0f);
+		if (cRoute_Search.Bot_Route_Search(cPos, GOAL))
+		{
+			State_Id = STATE_MOVE;
+		}
 
-		Move_Bot(List);	//追尾処理
+
+		break;
+	case CBot::STATE_MOVE:
+		
+		Move_Bot(cRoute_Search.GetSearch_List());	//追尾処理
 		break;
 
 	default:
@@ -177,12 +187,4 @@ void CBot::Move_Bot(vector<VECTOR> List)
 	}
 }
 
-//経路探索
-void CBot::Route_Search(VECTOR StartPos, VECTOR GoalPos)
-{
-	
-
-	
-	
-}
 

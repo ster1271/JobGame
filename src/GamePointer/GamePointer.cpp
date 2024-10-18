@@ -1,6 +1,6 @@
 #include "GamePointer.h"
 
-#define MOVE_SPEED	(1.0f)
+#define MOVE_SPEED	(3.0f)
 
 //コンストラクタ・デストラクタ
 CGame_Pointer::CGame_Pointer()
