@@ -1,7 +1,5 @@
 #pragma once
-#include <DxLib.h>
-#include "math.h"
-#include "../Input/Input.h"
+#include "../Common.h"
 #include "../Shot/ShotManager.h"
 #include "../Turret/TurretManager.h"
 #include "../Object/ObjectManager.h"

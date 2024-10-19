@@ -1,5 +1,6 @@
 #pragma once
-#include "DxLib.h"
+#include "../Common.h"
+
 
 class  CDraw3D
 {

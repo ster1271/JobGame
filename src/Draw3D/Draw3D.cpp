@@ -1,6 +1,4 @@
 #include "Draw3D.h"
-#include "math.h"
-#include "../MyLibrary/MyLibrary.h"
 
 //3Dのボックス表示関数
 //第1引数：座標(中心でなくてもよい)
