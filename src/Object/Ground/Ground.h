@@ -5,9 +5,20 @@
 
 class CGround :public CObject
 {
+	struct MapInfo
+	{
+		VECTOR vPos;
+		bool IsMap;
+	};
+
+
 private:
+
+	MapInfo Mapinfo;
 	int tmp[MAX_NUM][MAX_NUM];
-	
+	FILE* fp_;
+
+	vector<MapInfo>MapList;
 
 public:
 	//コンストラクタ・デストラクタ
@@ -23,8 +34,5 @@ public:
 
 	//描画
 	void Draw();
-
-	//ハンドル取得
-	int GetHndl() { return iHndl; }
 
 };

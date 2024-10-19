@@ -11,7 +11,7 @@ void CRoute_Search::Draw()
 	for (int a = 0; a < List.size(); a++)
 	{
 		//if (!List[a].IsFast)continue;
-		CDraw3D::DrawBox3D(List[a].Pos, VGet(25.0f, 50.0f, 25.0f));
+		CDraw3D::DrawBox3D(List[a].Pos, VGet(25.0f, 80.0f, 25.0f), GetColor(0, 255, 0));
 	}
 }
 

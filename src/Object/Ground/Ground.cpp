@@ -36,36 +36,50 @@ void CGround::Init()
 	cRotate = VGet(0.0f, 0.0f, 0.0f);
 
 
-	int matrix[MAX_NUM][MAX_NUM] = {
-		{1, 1, 1, 1, 1, 1, 1 ,1 ,1, 1},
-		{1, 0, 0, 0, 0, 0, 1 ,0 ,0, 1},
-		{1, 0, 0, 0, 0, 0, 1 ,0 ,0, 1},
-		{1, 0, 0, 0, 0, 0, 1 ,0 ,0, 1},
-		{1, 0, 0, 0, 0, 0, 1 ,0 ,0, 1},
-		{1, 0, 0, 0, 0, 0, 0 ,0 ,0, 1},
-		{1, 0, 1, 1, 0, 0, 0 ,0 ,0, 1},
-		{1, 0, 0, 1, 0, 0, 0 ,0 ,0, 1},
-		{1, 0, 0, 0, 0, 0, 0 ,0 ,0, 1},
-		{1, 1, 1, 1, 1, 1, 1 ,1 ,1, 1},
-	};
+	
+//読み込み
+//ファイルを開く
+fopen_s(&fp_, "Data/Map/Place_Objects.txt", "r");
+MapInfo tmp;
+VECTOR LoadPos = VGet(0.0f, 0.0f, 0.0f);
+int num;
+if (fp_ != nullptr)
+{
+	while (fscanf_s(fp_, "%f, %f, %f, %d", &LoadPos.x, &LoadPos.y, &LoadPos.z, &num) != EOF)
+	{
+		tmp.vPos = LoadPos;
+		if (num == 1)
+		{
+			tmp.IsMap = true;
+		}
+		else
+		{
+			tmp.IsMap = false;
+		}
+		MapList.push_back(tmp);
+	}
+}
+fclose(fp_);
 
-	/*VECTOR POS[] = {
-		{-200.0f, 50.0f, 200.0f}, {-150.0f, 50.0f, 200.0f},
-		{-100.0f, 50.0f, 200.0f}, {-50.0f, 50.0f, 200.0f},
-		{0.0f, 50.0f, 200.0f}, {50.0f, 50.0f, 200.0f},
-		{50.0f, 50.0f, 200.0f}, {100.0f, 50.0f, 200.0f},
-		{-200.0f, 50.0f, 200.0f}, {-150.0f, 50.0f, 200.0f},
-		{-200.0f, 50.0f, 200.0f}, {-150.0f, 50.0f, 200.0f},
-
-	}*/
-
-	for (int i = 0; i < 10; i++)
+	
+	//マップ情報の書き込み
+	/*for (int i = 0; i < 10; i++)
 	{
 		for (int a = 0; a < 10; a++)
 		{
-			tmp[i][a] = matrix[i][a];
+			fopen_s(&fp_, "Data/Map/Place_Objects.txt", "a");
+
+			if (fp_ != nullptr)
+			{
+				VECTOR vPos = VGet(-200.0f + a * 50.0f, 0.0f, -200.0f + i * 50.0f);
+				fprintf(fp_, "%.1f, %.1f, %.1f, %d \n", vPos.x, vPos.y, vPos.z, matrix[i][a]);
+
+				fclose(fp_);
+			}
 		}
-	}
+	}*/
+
+	
 }
 
 //モデル読み込み
@@ -81,19 +95,14 @@ void CGround::Load()
 void CGround::Draw()
 {
 	//MV1DrawModel(iHndl);
-
-	//ボックスのサイズ約1500
-	//CDraw3D::DrawBox3D(VGet(0.0f, 0.0f, 0.0f), VGet(50.0f, 50.0f, 50.0f));
-
-	for (int i = 0; i < 10; i++)
+	VECTOR vSize = VGet(50.0f, 50.0f, 50.0f);
+	for (int i = 0; i < MapList.size(); i++)
 	{
-		for (int a = 0; a < 10; a++)
+		if (MapList[i].IsMap)
 		{
-			if (tmp[i][a] == 1)
-			{
-				CDraw3D::DrawBox3D(VGet(-200.0f + a * 50.0f, 0.0f, -200.0f + i * 50.0f), VGet(50.0f, 50.0f, 50.0f));
-			}
+			CDraw3D::DrawBox3D(MapList[i].vPos, vSize);
 		}
 	}
-
 }
+
+
