@@ -186,6 +186,7 @@ int CRoute_Search::KEISANN(Info info, int Info_Index, CMap& cMap)
 			continue;
 
 		//オブジェクトと当たっているか判定する
+		bool IsHit = false;
 		for (int i = 0; i < cMap.GetMapInfo().size(); i++)
 		{
 			if (tmp[Index].Pos.x == cMap.GetMapInfo()[i].vPos.x &&
@@ -194,11 +195,13 @@ int CRoute_Search::KEISANN(Info info, int Info_Index, CMap& cMap)
 			{
 				if (cMap.GetMapInfo()[i].IsMap == true)
 				{
+					IsHit = true;
 					break;
 				}
 			}
-
 		}
+		if (IsHit)
+			continue;
 
 		//移動コストを求める
 		int _X = (int)fabs((m_GoalPos.x / 50.0f) - (tmp[Index].Pos.x / 50.0f));
