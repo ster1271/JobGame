@@ -1,4 +1,5 @@
 #include "Bot.h"
+#include "../Map/Map.h"
 
 const char BOT_FILE_PATH[] = { "" };
 const float MOVE_SPEED = 5.0f;
@@ -67,7 +68,7 @@ void CBot::Draw()
 }
 
 //マイフレーム行う処理
-void CBot::Step(CRoute_Search& cRoute_Search)
+void CBot::Step(CRoute_Search& cRoute_Search, CMap &cMap)
 {
 	
 
@@ -86,7 +87,7 @@ void CBot::Step(CRoute_Search& cRoute_Search)
 	case CBot::STATE_SEARCH:
 		//経路探索が終了したら
 		VECTOR GOAL = VGet(-150.0f, 0.0f, 200.0f);
-		if (cRoute_Search.Bot_Route_Search(cPos, GOAL))
+		if (cRoute_Search.Bot_Route_Search(cPos, GOAL, cMap))
 		{
 			State_Id = STATE_MOVE;
 		}

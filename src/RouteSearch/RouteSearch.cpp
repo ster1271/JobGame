@@ -17,7 +17,7 @@ void CRoute_Search::Draw()
 
 
 //ボットの経路探索
-bool CRoute_Search::Bot_Route_Search(VECTOR StartPos, VECTOR GoalPos)
+bool CRoute_Search::Bot_Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap& cMap)
 {
 	
 	List.clear();	//念のため
@@ -35,7 +35,7 @@ bool CRoute_Search::Bot_Route_Search(VECTOR StartPos, VECTOR GoalPos)
 
 
 	int SaveCnt = 0;					//前回のループで増えた配列の個数
-	int CurrentCnt = KEISANN(tmp, -1);	//今回のループで増えた配列の個数(スタート地点の親番号を-1とする)
+	int CurrentCnt = KEISANN(tmp, -1, cMap);	//今回のループで増えた配列の個数(スタート地点の親番号を-1とする)
 	
 	int LoopCount = 0;
 
@@ -62,7 +62,7 @@ bool CRoute_Search::Bot_Route_Search(VECTOR StartPos, VECTOR GoalPos)
 		{
 			if (List[i].Total_Cost == TotalMinCost)
 			{
-				CurrentCnt += KEISANN(List[i], i);
+				CurrentCnt += KEISANN(List[i], i, cMap);
 			}
 		}
 
@@ -135,7 +135,7 @@ bool CRoute_Search::Bot_Route_Search(VECTOR StartPos, VECTOR GoalPos)
 
 
 //評価計算
-int CRoute_Search::KEISANN(Info info, int Info_Index)
+int CRoute_Search::KEISANN(Info info, int Info_Index, CMap& cMap)
 {
 	//のちにpush_backするやつがinfoになる
 	Info tmp[DIR_NUM];
@@ -186,7 +186,19 @@ int CRoute_Search::KEISANN(Info info, int Info_Index)
 			continue;
 
 		//オブジェクトと当たっているか判定する
-		
+		for (int i = 0; i < cMap.GetMapInfo().size(); i++)
+		{
+			if (tmp[Index].Pos.x == cMap.GetMapInfo()[i].vPos.x &&
+				tmp[Index].Pos.y == cMap.GetMapInfo()[i].vPos.y &&
+				tmp[Index].Pos.z == cMap.GetMapInfo()[i].vPos.z)
+			{
+				if (cMap.GetMapInfo()[i].IsMap == true)
+				{
+					break;
+				}
+			}
+
+		}
 
 		//移動コストを求める
 		int _X = (int)fabs((m_GoalPos.x / 50.0f) - (tmp[Index].Pos.x / 50.0f));

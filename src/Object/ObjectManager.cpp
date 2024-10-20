@@ -18,28 +18,24 @@ CObjectManager::~CObjectManager()
 void CObjectManager::Init()
 {
 	cSky.Init();
-	cGround.Init();
 }
 
 //読み込み関連
 void CObjectManager::Load()
 {
 	cSky.Load();
-	cGround.Load();
 }
 
 //描画
 void CObjectManager::Draw()
 {
 	cSky.Draw();
-	cGround.Draw();
 }
 
 //毎フレーム行う処理
 void CObjectManager::Step()
 {
 	cSky.Step();
-	cGround.Step();
 
 	Update();
 }
@@ -48,14 +44,12 @@ void CObjectManager::Step()
 void CObjectManager::Update()
 {
 	cSky.Update();
-	cGround.Update();
 }
 
 //後処理
 void CObjectManager::Exit()
 {
 	cSky.Exit();
-	cGround.Exit();
 }
 
 

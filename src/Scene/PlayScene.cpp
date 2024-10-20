@@ -72,6 +72,8 @@ void CPlayScene::Draw()
 	{
 		//オブジェクト描画
 		cObjectManager.Draw();
+		//マップ描画 
+		cMap.Draw();
 		//キャラクター描画
 		cCharacterManager.Draw();
 		//エネミー描画
@@ -112,6 +114,8 @@ void CPlayScene::Init()
 	cCameraManager.SetNearFar(5.0f, 10000.0f);
 	//オブジェクト初期化
 	cObjectManager.Init();
+	//マップ初期化
+	cMap.Init();
 	//キャラクター初期化
 	cCharacterManager.Init();
 	//エネミー初期化
@@ -139,6 +143,8 @@ void CPlayScene::Exit()
 	cCameraManager.Exit();
 	//オブジェクトマネージャー終了処理
 	cObjectManager.Exit();
+	//マップ終了処理
+	cMap.Exit();
 	//キャラクターマネージャー終了処理
 	cCharacterManager.Exit();
 	//エネミーマネジャー終了処理
@@ -164,6 +170,8 @@ void CPlayScene::Load()
 {
 	//オブジェクトデータ読み込み
 	cObjectManager.Load();
+	//アップデータ読み込み
+	cMap.Load();
 	//キャラクターデータ読み込み
 	cCharacterManager.Load();
 	//エネミーデータ読み込み
@@ -210,6 +218,8 @@ void CPlayScene::Step()
 
 		//オブジェクト更新処理
 		cObjectManager.Step();
+		//マップ更新処理
+		cMap.Step();
 		//キャラクター更新処理
 		cCharacterManager.Step(cShotManager, cTurretManager);
 		//エネミー更新処理
@@ -219,7 +229,7 @@ void CPlayScene::Step()
 		//弾更新処理
 		cShotManager.Step(cCharacterManager.GetPosition());
 		//ボット更新処理
-		cBot.Step(cRoute_Search);
+		cBot.Step(cRoute_Search, cMap);
 		//チェックポイント更新処理
 		cCheck_Manager.Step();
 	}

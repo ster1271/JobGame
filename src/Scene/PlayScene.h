@@ -12,6 +12,7 @@
 #include "../Check_Point/Check_Manager.h"
 #include "../GamePointer/GamePointer.h"
 #include "../RouteSearch/RouteSearch.h"
+#include "../Map/Map.h"
 
 class CPlayScene
 {
@@ -40,6 +41,7 @@ private:
 	CGame_Pointer cGame_Pointer;
 	CRoute_Search cRoute_Search;
 	CCollisionManager cCollisionManager;
+	CMap cMap;
 	
 
 public:

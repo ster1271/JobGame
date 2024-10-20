@@ -36,33 +36,6 @@ void CMap::Init()
 	cSize = VGet(1.0f, 1.0f, 1.0f);
 	cRotate = VGet(0.0f, 0.0f, 0.0f);
 
-
-
-	//読み込み
-	//ファイルを開く
-	fopen_s(&fp_, "Data/Map/Place_Objects.txt", "r");
-	MapInfo tmp;
-	VECTOR LoadPos = VGet(0.0f, 0.0f, 0.0f);
-	int num;
-	if (fp_ != nullptr)
-	{
-		while (fscanf_s(fp_, "%f, %f, %f, %d", &LoadPos.x, &LoadPos.y, &LoadPos.z, &num) != EOF)
-		{
-			tmp.vPos = LoadPos;
-			if (num == 1)
-			{
-				tmp.IsMap = true;
-			}
-			else
-			{
-				tmp.IsMap = false;
-			}
-			MapList.push_back(tmp);
-		}
-	}
-	fclose(fp_);
-
-
 	//マップ情報の書き込み
 	/*for (int i = 0; i < 10; i++)
 	{
@@ -90,6 +63,31 @@ void CMap::Load()
 
 	//コリジョン情報を取得する
 	//MV1SetupCollInfo(iHndl);
+
+
+	//読み込み
+	//ファイルを開く
+	fopen_s(&fp_, "Data/Map/Place_Objects.txt", "r");
+	MapInfo tmp;
+	VECTOR LoadPos = VGet(0.0f, 0.0f, 0.0f);
+	int num;
+	if (fp_ != nullptr)
+	{
+		while (fscanf_s(fp_, "%f, %f, %f, %d", &LoadPos.x, &LoadPos.y, &LoadPos.z, &num) != EOF)
+		{
+			tmp.vPos = LoadPos;
+			if (num == 1)
+			{
+				tmp.IsMap = true;
+			}
+			else
+			{
+				tmp.IsMap = false;
+			}
+			MapList.push_back(tmp);
+		}
+	}
+	fclose(fp_);
 }
 
 

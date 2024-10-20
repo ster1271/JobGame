@@ -44,7 +44,7 @@ public:
 	void Draw();
 
 	//毎フレーム行う処理
-	void Step(CRoute_Search& cRoute_Search);
+	void Step(CRoute_Search& cRoute_Search, CMap& cMap);
 
 	//指定の場所に動く処理
 	void Move_Bot(vector<VECTOR> List);

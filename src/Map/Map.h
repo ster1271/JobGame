@@ -35,6 +35,8 @@ public:
 	//•`‰æ
 	void Draw();
 
+	//ƒ}ƒbƒvî•ñæ“¾
+	vector<MapInfo> GetMapInfo() { return MapList; }
 };
 
 

@@ -4,7 +4,6 @@
 #include <list>
 #include "Object.h"
 #include "Sky/Sky.h"
-#include "Ground/Ground.h"
 
 using namespace std;
 
@@ -13,7 +12,6 @@ class CObjectManager
 {
 private:
 	CSky cSky;			//天球クラス
-	CGround cGround;	//マップクラス
 
 
 public:
