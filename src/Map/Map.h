@@ -5,6 +5,7 @@
 
 class CMap :public CObject
 {
+	//マップ情報
 	struct MapInfo
 	{
 		VECTOR vPos;
@@ -15,10 +16,8 @@ class CMap :public CObject
 private:
 
 	MapInfo Mapinfo;
-	int tmp[MAX_NUM][MAX_NUM];
-	FILE* fp_;
-
-	vector<MapInfo>MapList;
+	FILE* fp_;				//ファイル用
+	vector<MapInfo>MapList;	//マップ情報格納リスト
 
 public:
 	//コンストラクタ・デストラクタ
