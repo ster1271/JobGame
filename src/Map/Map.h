@@ -34,6 +34,11 @@ public:
 	//•`‰æ
 	void Draw();
 
+	//CSV“Ç‚İ‚İ
+	void MapLoad();
+
+	//‘‚«‚İ
+
 	//ƒ}ƒbƒvî•ñæ“¾
 	vector<MapInfo> GetMapInfo() { return MapList; }
 };

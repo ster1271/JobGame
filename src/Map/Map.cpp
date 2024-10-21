@@ -63,9 +63,14 @@ void CMap::Load()
 
 	//コリジョン情報を取得する
 	//MV1SetupCollInfo(iHndl);
+	
+	//ファイル読み込み
+	MapLoad();
+}
 
-
-	//読み込み
+//CSV読み込み
+void CMap::MapLoad()
+{
 	//ファイルを開く
 	fopen_s(&fp_, "Data/Map/Place_Objects.txt", "r");
 	MapInfo tmp;

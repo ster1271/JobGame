@@ -1,13 +1,13 @@
-#include "Bot.h"
+ï»¿#include "Bot.h"
 #include "../Map/Map.h"
 
 const char BOT_FILE_PATH[] = { "" };
 const float MOVE_SPEED = 5.0f;
 const float SPERE_R = 10.0f;
 
-#define DEG_TO_RAD(a)	((a) * DX_PI_F / 180.0f)	//ƒ‰ƒWƒAƒ“Šp‚É•ÏŠ·‚·‚é®
+#define DEG_TO_RAD(a)	((a) * DX_PI_F / 180.0f)	//ãƒ©ã‚¸ã‚¢ãƒ³è§’ã«å¤‰æ›ã™ã‚‹å¼
 
-//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 CBot::CBot()
 {
 	tmp_dir = 0;
@@ -15,13 +15,13 @@ CBot::CBot()
 	State_Id = STATE_NUM;
 }
 
-//ƒfƒXƒgƒ‰ƒNƒ^
+//ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 CBot::~CBot()
 {
 	State_Id = STATE_NUM;
 }
 
-//‰Šú‰»
+//åˆæœŸåŒ–
 void CBot::Init()
 {
 	CObject::Init();
@@ -34,7 +34,7 @@ void CBot::Init()
 	State_Id = STATE_NUM;
 }
 
-//“Ç‚İ‚İ
+//èª­ã¿è¾¼ã¿
 bool CBot::Load()
 {
 	iHndl = MV1LoadModel(BOT_FILE_PATH);
@@ -46,10 +46,10 @@ bool CBot::Load()
 		return false;
 }
 
-//•`‰æ
+//æç”»
 void CBot::Draw()
 {
-	//ğŒ®‚ªtrue‚È‚çƒ‚ƒfƒ‹‚ğfalse‚È‚ç‹…‚ğ•\¦
+	//æ¡ä»¶å¼ãŒtrueãªã‚‰ãƒ¢ãƒ‡ãƒ«ã‚’falseãªã‚‰çƒã‚’è¡¨ç¤º
 	if (iHndl != -1)
 	{
 		MV1DrawModel(iHndl);
@@ -59,15 +59,16 @@ void CBot::Draw()
 		DrawSphere3D(cPos, SPERE_R, 32, GetColor(255, 0, 0), GetColor(255, 0, 0), TRUE);
 	}
 
-	DrawFormatString(0, 150, GetColor(0, 0, 0), "ƒ{ƒbƒgXÀ•W:%f", cPos.x);
-	DrawFormatString(0, 165, GetColor(0, 0, 0), "ƒ{ƒbƒgYÀ•W:%f", cPos.y);
-	DrawFormatString(0, 180, GetColor(0, 0, 0), "ƒ{ƒbƒgZÀ•W:%f", cPos.z);
-	DrawFormatString(0, 195, GetColor(0, 0, 0), "ŠOÏ:%f", tmp_dir);
-	DrawFormatString(0, 210, GetColor(0, 0, 0), "‹——£:%f", tmp_Range);
+	DrawFormatString(0, 150, GetColor(0, 0, 0), "ãƒœãƒƒãƒˆXåº§æ¨™:%f", cPos.x);
+	DrawFormatString(0, 165, GetColor(0, 0, 0), "ãƒœãƒƒãƒˆYåº§æ¨™:%f", cPos.y);
+	DrawFormatString(0, 180, GetColor(0, 0, 0), "ãƒœãƒƒãƒˆZåº§æ¨™:%f", cPos.z);
+	DrawFormatString(0, 195, GetColor(0, 0, 0), "Yè»¸è§’åº¦:%f", cRotate.y);
+	DrawFormatString(0, 210, GetColor(0, 0, 0), "å¤–ç©:%f", tmp_dir);
+	DrawFormatString(0, 225, GetColor(0, 0, 0), "è·é›¢:%f", tmp_Range);
 
 }
 
-//ƒ}ƒCƒtƒŒ[ƒ€s‚¤ˆ—
+//ãƒã‚¤ãƒ•ãƒ¬ãƒ¼ãƒ è¡Œã†å‡¦ç†
 void CBot::Step(CRoute_Search& cRoute_Search, CMap &cMap)
 {
 	
@@ -76,16 +77,16 @@ void CBot::Step(CRoute_Search& cRoute_Search, CMap &cMap)
 	{
 	case CBot::STATE_STOP:
 
-		//ƒeƒXƒg—pˆ—
+		//ãƒ†ã‚¹ãƒˆç”¨å‡¦ç†
 		if (CInput::IsKeyPush(KEY_INPUT_1))
 		{
-			//Id‚ğ•ÏX‚·‚é
+			//Idã‚’å¤‰æ›´ã™ã‚‹
 			State_Id = STATE_SEARCH;
 		}
 		break;
 
 	case CBot::STATE_SEARCH:
-		//Œo˜H’Tõ‚ªI—¹‚µ‚½‚ç
+		//çµŒè·¯æ¢ç´¢ãŒçµ‚äº†ã—ãŸã‚‰
 		VECTOR GOAL = VGet(-150.0f, 0.0f, 200.0f);
 		if (cRoute_Search.Bot_Route_Search(cPos, GOAL, cMap))
 		{
@@ -96,41 +97,42 @@ void CBot::Step(CRoute_Search& cRoute_Search, CMap &cMap)
 		break;
 	case CBot::STATE_MOVE:
 		
-		Move_Bot(cRoute_Search.GetSearch_List());	//’Ç”öˆ—
+		Move_Bot(cRoute_Search.GetSearch_List());	//è¿½å°¾å‡¦ç†
 		break;
 
 	default:
 		break;
 	}
 	
-	//XVˆ—
+	//æ›´æ–°å‡¦ç†
 	Update();
 }
 
 
-//w’è‚ÌêŠ‚É“®‚­ˆ—
+//æŒ‡å®šã®å ´æ‰€ã«å‹•ãå‡¦ç†
 void CBot::Move_Bot(vector<VECTOR> List)
 {
-	//ƒ{ƒbƒg‚©‚çw’è‚Ì’n“_‚Ös‚­ƒxƒNƒgƒ‹‚ğŒvZ
+	
+	//ãƒœãƒƒãƒˆã‹ã‚‰æŒ‡å®šã®åœ°ç‚¹ã¸è¡Œããƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—
 	VECTOR Vtmp;
 	Vtmp.x = List[tmp].x - cPos.x;
 	Vtmp.y = 0.0f;
 	Vtmp.z = List[tmp].z - cPos.z;
 
-	//is•ûŒü‚Ì‚Ç‚¿‚ç‘¤‚É‚¢‚é‚Ì‚©‚ğ’²‚×‚é
+	//é€²è¡Œæ–¹å‘ã®ã©ã¡ã‚‰å´ã«ã„ã‚‹ã®ã‹ã‚’èª¿ã¹ã‚‹
 	float Dir = 0.0f;
 
-	VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ƒ{ƒbƒg‚ÌˆÚ“®ƒxƒNƒgƒ‹
+	VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ãƒœãƒƒãƒˆã®ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«
 	vSpd.x = sinf(cRotate.y) * -MOVE_SPEED;
 	vSpd.y = 0.0f;
 	vSpd.z = cosf(cRotate.y) * -MOVE_SPEED;
 
-	//ŠOÏŒvZ
+	//å¤–ç©è¨ˆç®—
 	Dir = Vtmp.x * vSpd.z - vSpd.x * Vtmp.z;
-	//Šm”F—p
+	//ç¢ºèªç”¨
 	tmp_dir = Dir;
 
-	//‰ñ“]‚·‚éŠp“x‚ğŒˆ‚ß‚é
+	//å›è»¢ã™ã‚‹è§’åº¦ã‚’æ±ºã‚ã‚‹
 	if (Dir >= 0.0f)
 	{
 		cRotate.y += 0.01f;
@@ -140,45 +142,27 @@ void CBot::Move_Bot(vector<VECTOR> List)
 		cRotate.y -= 0.01f;
 	}
 
-	//À•W‚É‘¬“x‚ğ‰ÁZ‚·‚é
+	//åº§æ¨™ã«é€Ÿåº¦ã‚’åŠ ç®—ã™ã‚‹
 	cPos.x += sinf(cRotate.y) * -0.2f;
 	cPos.z += cosf(cRotate.y) * -0.2f;
 
-	//ƒvƒŒƒCƒ„[‚Æ‚Ì‹——£‚ğŒvZ
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã®è·é›¢ã‚’è¨ˆç®—
 	float Range = (List[tmp].x - cPos.x) * (List[tmp].x - cPos.x) + (List[tmp].z - cPos.z) * (List[tmp].z - cPos.z);
 	Range = sqrt(Range);
-	//Šm”F—p
+	//ç¢ºèªç”¨
 	tmp_Range = Range;
 
-	//‹——£‚ªˆê’è’l‚É’B‚µ‚½‚çId‚ğ•ÏX‚·‚é
+	//è·é›¢ãŒä¸€å®šå€¤ã«é”ã—ãŸã‚‰Idã‚’å¤‰æ›´ã™ã‚‹
 	if (Range < 0.1f)
 	{
+		//float X = List[tmp].x - cPos.x;
+		//float Z = List[tmp].z - cPos.z;
+
+		////æŒ‡å®šã®ä½ç½®ã¸è§’åº¦ã‚’å¤‰ãˆã‚‹
+		//float NextRotY = atan2f(X, Z);
+		//cRotate.y += NextRotY;
+
 		tmp++;
-		
-		//‚à‚¤ˆê“xŒvZ‚µ‚È‚¨‚·
-		Vtmp.x = List[tmp].x - cPos.x;
-		Vtmp.y = 0.0f;
-		Vtmp.z = List[tmp].z - cPos.z;
-
-		vSpd.x = sinf(cRotate.y) * -MOVE_SPEED;
-		vSpd.y = 0.0f;
-		vSpd.z = cosf(cRotate.y) * -MOVE_SPEED;
-
-		//ŠOÏŒvZ
-		Dir = Vtmp.x * vSpd.z - vSpd.x * Vtmp.z;
-
-		//ƒA[ƒNƒ^ƒ“ƒWƒFƒ“ƒg‚ÅŠp“x‚ğo‚·
-		//float NextRot = atan2
-
-		if (Dir >= 0.0f)
-		{
-			//ƒvƒ‰ƒX•ûŒü‚Ö
-		}
-		else
-		{
-			//ƒ}ƒCƒiƒX•ûŒü‚Ö
-
-		}
 
 		if (tmp == List.size())
 		{
