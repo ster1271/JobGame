@@ -1,8 +1,6 @@
 #pragma once
 #include "../Object/Object.h"
 
-#define MAX_NUM		(10)
-
 class CMap :public CObject
 {
 	//ƒ}ƒbƒvî•ñ

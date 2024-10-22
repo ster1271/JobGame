@@ -11,7 +11,7 @@
 #define SCREEN_SIZE_Y 720	//画面サイズ 縦
 
 #define MAP_SIZE		50	//マップのサイズ
-#define MAP_MAX_NUM		10
+#define MAP_MAX_NUM		10	//マップの縦横
 
 const unsigned int DEFAULT_COLOR = (255, 0, 0);	//デフォルトの色
 

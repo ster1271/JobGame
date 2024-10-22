@@ -72,24 +72,58 @@ void CMap::Load()
 void CMap::MapLoad()
 {
 	//ファイルを開く
-	fopen_s(&fp_, "Data/Map/Place_Objects.txt", "r");
+	//fopen_s(&fp_, "Data/Map/Place_Objects.txt", "r");
+	//MapInfo tmp;
+	//VECTOR LoadPos = VGet(0.0f, 0.0f, 0.0f);
+	//int num;
+	//if (fp_ != nullptr)
+	//{
+	//	while (fscanf_s(fp_, "%f, %f, %f, %d", &LoadPos.x, &LoadPos.y, &LoadPos.z, &num) != EOF)
+	//	{
+	//		tmp.vPos = LoadPos;
+	//		if (num == 1)
+	//		{
+	//			tmp.IsMap = true;
+	//		}
+	//		else
+	//		{
+	//			tmp.IsMap = false;
+	//		}
+	//		MapList.push_back(tmp);
+	//	}
+	//}
+	//fclose(fp_);
+
+
+
+
+
 	MapInfo tmp;
-	VECTOR LoadPos = VGet(0.0f, 0.0f, 0.0f);
-	int num;
+	int cnt = 0;
+	int num[MAP_MAX_NUM] = { 0 };
+	fopen_s(&fp_, "Data/Map/Maptest.csv", "r");
 	if (fp_ != nullptr)
 	{
-		while (fscanf_s(fp_, "%f, %f, %f, %d", &LoadPos.x, &LoadPos.y, &LoadPos.z, &num) != EOF)
+	
+		while (fscanf_s(fp_, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d",
+			&num[0], &num[1], &num[2], &num[3], &num[4],
+			&num[5], &num[6], &num[7], &num[8], &num[9]) != EOF)
 		{
-			tmp.vPos = LoadPos;
-			if (num == 1)
+			for (int i = 0; i < MAP_MAX_NUM; i++)
 			{
-				tmp.IsMap = true;
+				tmp.vPos = VGet(i * MAP_SIZE, 0.0f, cnt * MAP_SIZE);
+
+				if (num[i] == 0)
+				{
+					tmp.IsMap = false;
+				}
+				else if(num[i] == 1)
+				{
+					tmp.IsMap = true;
+				}
+				MapList.push_back(tmp);
 			}
-			else
-			{
-				tmp.IsMap = false;
-			}
-			MapList.push_back(tmp);
+			cnt++;
 		}
 	}
 	fclose(fp_);

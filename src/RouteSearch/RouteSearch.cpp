@@ -163,7 +163,7 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMap& cMap)
 	{
 		//スタート地点の座標が同じなら計算しない
 		if (tmp[Index].Pos.x == m_StartPos.x &&
-			tmp[Index].Pos.y == m_StartPos.y &&
+			//tmp[Index].Pos.y == m_StartPos.y &&
 			tmp[Index].Pos.z == m_StartPos.z)
 		{
 			continue;
@@ -174,7 +174,7 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMap& cMap)
 		for (int i = 0; i < List.size(); i++)
 		{
 			if (tmp[Index].Pos.x == List[i].Pos.x &&
-				tmp[Index].Pos.y == List[i].Pos.y &&
+				//tmp[Index].Pos.y == List[i].Pos.y &&
 				tmp[Index].Pos.z == List[i].Pos.z)
 			{
 				IsMatch = true;
@@ -189,7 +189,7 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMap& cMap)
 		for (int i = 0; i < cMap.GetMapInfo().size(); i++)
 		{
 			if (tmp[Index].Pos.x == cMap.GetMapInfo()[i].vPos.x &&
-				tmp[Index].Pos.y == cMap.GetMapInfo()[i].vPos.y &&
+				//tmp[Index].Pos.y == cMap.GetMapInfo()[i].vPos.y &&
 				tmp[Index].Pos.z == cMap.GetMapInfo()[i].vPos.z)
 			{
 				if (cMap.GetMapInfo()[i].IsMap == true)

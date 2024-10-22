@@ -1,7 +1,7 @@
 ﻿#include "Bot.h"
 #include "../Map/Map.h"
 
-const char BOT_FILE_PATH[] = { "" };
+const char BOT_FILE_PATH[] = { "data/enemy/enemy01.x" };
 const float MOVE_SPEED = 5.0f;
 const float SPERE_R = 10.0f;
 
@@ -25,8 +25,8 @@ CBot::~CBot()
 void CBot::Init()
 {
 	CObject::Init();
-	cPos = VGet(200.0f, 0.0f, -150.0f);
-	cSize = VGet(1.0f, 1.0f, 1.0f);
+	cPos = VGet(50, 0.0f, 400.0f);
+	cSize = VGet(0.1f, 0.1f, 0.1);
 	cRotate = VGet(0.0f, 0.0f, 0.0f);
 
 	tmp = 0;
@@ -86,7 +86,7 @@ void CBot::Step(CRoute_Search& cRoute_Search, CMap &cMap)
 
 	case CBot::STATE_SEARCH:
 		//経路探索が終了したら
-		VECTOR GOAL = VGet(-150.0f, 0.0f, 200.0f);
+		VECTOR GOAL = VGet(400.0f, 0.0f, 400.0f);
 		if (cRoute_Search.Route_Search(cPos, GOAL, cMap))
 		{
 			State_Id = STATE_MOVE;
@@ -111,6 +111,14 @@ void CBot::Step(CRoute_Search& cRoute_Search, CMap &cMap)
 //指定の場所に動く処理
 void CBot::Move_Bot(vector<VECTOR> List)
 {
+	//float X = List[tmp].x - cPos.x;
+	//float Z = List[tmp].z - cPos.z;
+
+	////指定の位置へ角度を変える
+	//float NextRotY = atan2f(X, Z);
+
+	//cRotate.y = NextRotY;
+
 	
 	//ボットから指定の地点へ行くベクトルを計算
 	VECTOR Vtmp;
@@ -134,11 +142,14 @@ void CBot::Move_Bot(vector<VECTOR> List)
 	//回転する角度を決める
 	if (Dir >= 0.0f)
 	{
-		cRotate.y += 0.01f;
+		cRotate.y += 0.1f;
+
 	}
 	else if (Dir < 0.0f)
 	{
-		cRotate.y -= 0.01f;
+		cRotate.y -= 0.1f;
+
+
 	}
 
 	//座標に速度を加算する
@@ -154,13 +165,6 @@ void CBot::Move_Bot(vector<VECTOR> List)
 	//距離が一定値に達したらIdを変更する
 	if (Range < 0.1f)
 	{
-		//float X = List[tmp].x - cPos.x;
-		//float Z = List[tmp].z - cPos.z;
-
-		////指定の位置へ角度を変える
-		//float NextRotY = atan2f(X, Z);
-		//cRotate.y += NextRotY;
-
 		tmp++;
 
 		if (tmp == List.size())
