@@ -65,7 +65,6 @@ void CBot::Draw()
 	DrawFormatString(0, 195, GetColor(0, 0, 0), "Y軸角度:%f", cRotate.y);
 	DrawFormatString(0, 210, GetColor(0, 0, 0), "外積:%f", tmp_dir);
 	DrawFormatString(0, 225, GetColor(0, 0, 0), "距離:%f", tmp_Range);
-
 }
 
 //マイフレーム行う処理
@@ -88,7 +87,7 @@ void CBot::Step(CRoute_Search& cRoute_Search, CMap &cMap)
 	case CBot::STATE_SEARCH:
 		//経路探索が終了したら
 		VECTOR GOAL = VGet(-150.0f, 0.0f, 200.0f);
-		if (cRoute_Search.Bot_Route_Search(cPos, GOAL, cMap))
+		if (cRoute_Search.Route_Search(cPos, GOAL, cMap))
 		{
 			State_Id = STATE_MOVE;
 		}

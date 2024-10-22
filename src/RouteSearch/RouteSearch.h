@@ -48,10 +48,10 @@ public:
 	vector<VECTOR> GetSearch_List() { return Pos_List; }
 
 	//ƒ{ƒbƒg‚ÌŒo˜H’Tõ
-	bool Bot_Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap& cMap);
+	bool Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap& cMap);
 
 	//•]‰¿ŒvZ
-	int KEISANN(Info info, int Info_Index, CMap& cMap);
+	int Evaluat_Calc(Info info, int Info_Index, CMap& cMap);
 
 	void Draw();
 	

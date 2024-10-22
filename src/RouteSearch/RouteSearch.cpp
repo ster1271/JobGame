@@ -10,14 +10,13 @@ void CRoute_Search::Draw()
 {
 	for (int a = 0; a < List.size(); a++)
 	{
-		//if (!List[a].IsFast)continue;
 		CDraw3D::DrawBox3D(List[a].Pos, VGet(25.0f, 80.0f, 25.0f), GetColor(0, 255, 0));
 	}
 }
 
 
 //ボットの経路探索
-bool CRoute_Search::Bot_Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap& cMap)
+bool CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap& cMap)
 {
 	
 	List.clear();	//念のため
@@ -35,7 +34,7 @@ bool CRoute_Search::Bot_Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap& cMap
 
 
 	int SaveCnt = 0;					//前回のループで増えた配列の個数
-	int CurrentCnt = KEISANN(tmp, -1, cMap);	//今回のループで増えた配列の個数(スタート地点の親番号を-1とする)
+	int CurrentCnt = Evaluat_Calc(tmp, -1, cMap);	//今回のループで増えた配列の個数(スタート地点の親番号を-1とする)
 	
 	int LoopCount = 0;
 
@@ -62,7 +61,7 @@ bool CRoute_Search::Bot_Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap& cMap
 		{
 			if (List[i].Total_Cost == TotalMinCost)
 			{
-				CurrentCnt += KEISANN(List[i], i, cMap);
+				CurrentCnt += Evaluat_Calc(List[i], i, cMap);
 			}
 		}
 
@@ -135,7 +134,7 @@ bool CRoute_Search::Bot_Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap& cMap
 
 
 //評価計算
-int CRoute_Search::KEISANN(Info info, int Info_Index, CMap& cMap)
+int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMap& cMap)
 {
 	//のちにpush_backするやつがinfoになる
 	Info tmp[DIR_NUM];

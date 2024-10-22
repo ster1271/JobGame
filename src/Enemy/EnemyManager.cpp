@@ -20,11 +20,6 @@ CEnemyManager::~CEnemyManager()
 //初期化
 void CEnemyManager::Init()
 {
-	/*for (int Enemy_Index = 0; Enemy_Index < Enemy_List.size(); Enemy_Index++)
-	{
-		Enemy_List[Enemy_Index]->Init();
-	}*/
-
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Init();
@@ -58,11 +53,6 @@ void CEnemyManager::Load()
 void CEnemyManager::Exit()
 {
 
-	/*for (int Enemy_Index = 0; Enemy_Index < Enemy_List.size(); Enemy_Index++)
-	{
-		Enemy_List[Enemy_Index]->Exit();
-	}*/
-
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Exit();
@@ -77,56 +67,38 @@ void CEnemyManager::Exit()
 }
 
 //毎フレーム呼ぶ処理
-void CEnemyManager::Step()
+void CEnemyManager::Step(CBot& cBot, CRoute_Search& cRoute_Search)
 {
-	
-	////敵の移動処理
-	//for (int Enemy_Index = 0; Enemy_Index < Enemy_List.size(); Enemy_Index++)
-	//{
-	//	Enemy_List[Enemy_Index]->Step();
-	//}
+	VECTOR PastPos = VGet(0.0f, 0.0f, 0.0f);	//過去座標を格納する
+	VECTOR CurrentPos = cBot.GetPos();			//現在座標を格納する
 
-	////敵の出現
-	//if (Enemy_List.size() < ENEMY_NUM)
-	//{
-	//	RequestEnemy();
-	//}
+	//ボットの座標が変わったら経路探索をしなおす
+	/*if (PastPos.x != CurrentPos.x ||
+		PastPos.y != CurrentPos.y ||
+		PastPos.z != CurrentPos.z)
+	{
+		for (int i = TYPE_ENEMY01; i < TYPE_NUM; i++)
+		{
+			
+		}
+	}*/
 
-	//for (int Enemy_Index = 0; Enemy_Index < Enemy_List.size(); Enemy_Index++)
-	//{
-	//	if (!Enemy_List[Enemy_Index]->GetActive())
-	//	{
-	//		//再利用のため初期化しておく
-	//		Enemy_List[Enemy_Index]->Init();
-	//	}	
-	//}
-	VECTOR vPos = VGet(0.0f, 0.0f, 0.0f);
-	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
 
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
 	{
-		vPos = VGet(GetRand(200.0f) - 100.0f, 5.0f, GetRand(200.0f) + 100.0f);
-		vSpeed = VGet(0.0f, 0.0f, 0.5f);
 		cEnemy_Normal[Enemy_Index].Step();
-		cEnemy_Normal[Enemy_Index].RequestEnemy(vPos, vSpeed);
+		cEnemyBoss[Enemy_Index].Step();
+
+		
 	}
 
-	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
-	{
-		vPos = VGet(GetRand(300.0f) - 100.0f, 5.0f, GetRand(200.0f) + 100.0f);
-		vSpeed = VGet(0.0f, 0.0f, 0.3f);
-		cEnemyBoss[Enemy_Index].Step();
-		cEnemyBoss[Enemy_Index].RequestEnemy(vPos, vSpeed);
-	}
+	//リクエスト
+	RequestEnemy();
 }
 
 //描画処理
 void CEnemyManager::Draw()
 {
-	/*for (int Enemy_Index = 0; Enemy_Index < Enemy_List.size(); Enemy_Index++)
-	{
-		Enemy_List[Enemy_Index]->Draw();
-	}*/
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Draw();
@@ -138,18 +110,17 @@ void CEnemyManager::Draw()
 //敵リクエスト
 void CEnemyManager::RequestEnemy()
 {
-	//VECTOR vPos = VGet(0.0f, 5.0f , GetRand(200.0f)+ 100.0f);
-	//VECTOR vSpeed = VGet(0.0f, 0.0f, 1.0f);
+	VECTOR vPos = VGet(0.0f, 0.0f, 0.0f);
+	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
+	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
+	{
+		vPos = VGet(GetRand(200.0f) - 100.0f, 5.0f, GetRand(200.0f) + 100.0f);
+		vSpeed = VGet(0.0f, 0.0f, 0.5f);
+		cEnemy_Normal[Enemy_Index].RequestEnemy(vPos, vSpeed);
 
-	////変数代入用クラス
-	//CEnemyBase* cEnemyBase = new CEnemy_Normal;
-	//cEnemyBase->Init();
-	//cEnemyBase->Load(Org_Hndl);
-	//cEnemyBase->RequestEnemy(vPos, vSpeed);
 
-	//
-	//
-	////リストに追加
-	//Enemy_List.push_back(cEnemyBase);
-
+		vPos = VGet(GetRand(300.0f) - 100.0f, 5.0f, GetRand(200.0f) + 100.0f);
+		vSpeed = VGet(0.0f, 0.0f, 0.3f);
+		cEnemyBoss[Enemy_Index].RequestEnemy(vPos, vSpeed);
+	}
 }
