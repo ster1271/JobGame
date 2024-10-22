@@ -7,6 +7,5 @@ class CData
 public:
 
 	//マップデータ
-	struct 
 
 };

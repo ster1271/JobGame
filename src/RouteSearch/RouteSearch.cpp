@@ -221,4 +221,3 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMap& cMap)
 	return cnt;
 }
 
-

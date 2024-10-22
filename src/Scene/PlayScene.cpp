@@ -223,7 +223,7 @@ void CPlayScene::Step()
 		//キャラクター更新処理
 		cCharacterManager.Step(cShotManager, cTurretManager);
 		//エネミー更新処理
-		cEnemyManager.Step();
+		cEnemyManager.Step(cBot, cRoute_Search, cMap);
 		//タレット更新処理
 		cTurretManager.Step(cShotManager, cCharacterManager.GetPosition());
 		//弾更新処理

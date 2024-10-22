@@ -67,21 +67,19 @@ void CEnemyManager::Exit()
 }
 
 //毎フレーム呼ぶ処理
-void CEnemyManager::Step(CBot& cBot, CRoute_Search& cRoute_Search)
+void CEnemyManager::Step(CBot& cBot, CRoute_Search& cRoute_Search, CMap& cMap)
 {
 	VECTOR PastPos = VGet(0.0f, 0.0f, 0.0f);	//過去座標を格納する
 	VECTOR CurrentPos = cBot.GetPos();			//現在座標を格納する
 
 	//ボットの座標が変わったら経路探索をしなおす
-	/*if (PastPos.x != CurrentPos.x ||
+	if (PastPos.x != CurrentPos.x ||
 		PastPos.y != CurrentPos.y ||
 		PastPos.z != CurrentPos.z)
 	{
-		for (int i = TYPE_ENEMY01; i < TYPE_NUM; i++)
-		{
-			
-		}
-	}*/
+
+		
+	}
 
 
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
