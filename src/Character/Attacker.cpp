@@ -1,7 +1,7 @@
 #include "Attacker.h"
 
 
-const char ATTACKER_PATH[] = { "data/character/il/‚ ‚¢‚¦‚é‚½‚ñ.pmx" };
+const char ATTACKER_PATH[] = { "data/character/human.x" };
 
 const float SPERE_R = 3.0f;
 #define MOVESPEED	(1.0f)
@@ -21,7 +21,7 @@ void CAttacker::Init()
 {
 	CBase::Init();
 	cPos = VGet(0.0f, 0.0f, 0.0f);
-	cSize = VGet(1.0f, 1.0f, 1.0f);
+	cSize = VGet(0.05f, 0.05f, 0.05f);
 	cRotate = VGet(0.0f, DX_PI_F, 0.0f);
 
 	Life = 100;
