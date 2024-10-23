@@ -28,6 +28,8 @@ private:
 	float tmp_dir;
 	float tmp_Range;
 	int tmp;
+	int NUM;
+	bool IsCalcu;
 
 public:
 	//コンストラクタ・デストラクタ
