@@ -8,9 +8,39 @@
 class CBase
 {
 protected:
-	VECTOR cPos;		//座標
-	VECTOR cSize;		//サイズ
-	VECTOR cRotate;		//回転値
+	//アニメ再生状態
+	enum ANIME_STATE
+	{
+		ANIMESTATE_NORMAL = 0,
+		ANIMESTATE_LOOP,
+		ANIMESTATE_END,
+	};
+
+	//プレイヤーの状態
+	enum PLAYEY_STATE
+	{
+		STATE_NORMAL = 0,
+		STATE_RUN,
+		STATE_SHOT,
+
+	};
+
+	//アニメ関連のデータをまとめた構造体
+	struct ANIME_DATA
+	{
+		float m_EndFrame;
+		float m_Frame;
+		float m_Speed;
+		int m_iHndl;
+		int m_AnimID;
+		int m_State;
+	};
+
+	VECTOR cPos;			//座標
+	VECTOR cSize;			//サイズ
+	VECTOR cRotate;			//回転値
+	ANIME_DATA AnimData;	//アニメ再生データ
+	PLAYEY_STATE State_Id;
 
 	float Life;			//ライフ
 	int iHndl;			//ハンドル
@@ -37,6 +67,21 @@ public:
 
 	//後処理
 	void Exit();
+
+	//アニメアップデート
+	void UpdateAnim();
+
+	//リクエスト
+	void Reqest(int iAnimID, float iAnimSpd, int iAnimHndl = -1, bool NameCheck = false);
+
+	//ループアニメリクエスト(アニメが最終フレームになったら最初に戻る)
+	void ReqestLoop(int iAnimID, float iAnimSpd, int iAnimHndl = -1, bool NameCheck = false);
+
+	//エンドループアニメリクエスト(アニメが最終フレームになったら止まる)
+	void ReqestEndLoop(int iAnimID, float iAnimSpd, int iAnimHndl = -1, bool NameCheck = false);
+
+	//アニメをデタッチ
+	void DetachAnim();
 
 	//座標取得
 	VECTOR GetPos() { return cPos; }

@@ -13,6 +13,8 @@
 #define MAP_SIZE		50	//マップのサイズ
 #define MAP_MAX_NUM		10	//マップの縦横
 
-const unsigned int DEFAULT_COLOR = (255, 0, 0);	//デフォルトの色
+const unsigned int DEFAULT_COLOR = (255, 0, 0);		//デフォルトの色
+
+const VECTOR VECTOR_ZERO = VGet(0.0f, 0.0f, 0.0f);	//VECTORの初期化に使う
 
 using namespace std;

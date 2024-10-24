@@ -36,15 +36,65 @@ void CAttacker::Load()
 //毎フレーム行う処理
 void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 {
+	switch (AnimData.m_AnimID)
+	{
+	case ANIMEID_DEFAULT:
+		Default();
+		break;
+
+	case ANIMEID_WALK:
+		Walk();
+		break;
+
+	case ANIMEID_RUNSHOT:
+		RunShot();
+		break;
+
+	default:
+		break;
+	}
+
+	switch (State_Id)
+	{
+	case STATE_NORMAL:
+		if (ID != STATE_NORMAL)
+		{
+			ReqestLoop(ANIMEID_DEFAULT, 1.0f);
+			ID = STATE_NORMAL;
+		}
+		break;
+
+	case STATE_RUN:
+		if (ID != STATE_RUN)
+		{
+			ReqestLoop(ANIMEID_WALK, 1.0f);
+			ID = STATE_RUN;
+		}
+		break;
+
+	case STATE_SHOT:
+
+		break;
+
+	default:
+		break;
+	}
+
 	//キャラクターの移動
 	float fSpd = 0.0f;
 	if (CInput::IsKeyKeep(KEY_INPUT_W))
 	{
+		State_Id = STATE_RUN;
 		fSpd = -MOVESPEED;
 	}
 	else if (CInput::IsKeyKeep(KEY_INPUT_S))
 	{
+		State_Id = STATE_RUN;
 		fSpd = MOVESPEED;
+	}
+	else
+	{
+		State_Id = STATE_NORMAL;
 	}
 
 	//入力したキー情報とプレイヤーの角度から、移動速度を求める
@@ -56,11 +106,11 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	cPos.x += vSpeed.x;
 	cPos.z += vSpeed.z;
 
-	if (CInput::IsKeyKeep(KEY_INPUT_LEFT))
+	if (CInput::IsKeyKeep(KEY_INPUT_A))
 	{
 		cRotate.y -= 0.05f;
 	}
-	if (CInput::IsKeyKeep(KEY_INPUT_RIGHT))
+	if (CInput::IsKeyKeep(KEY_INPUT_D))
 	{
 		cRotate.y += 0.05f;
 	}

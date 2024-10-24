@@ -51,6 +51,7 @@ void CCharacterManager::Step(CShotManager& cShotManager, CTurretManager& cTurret
 	case MainID_ATTACKER:
 		cAttacker.Step(cShotManager, cTurretManager);
 		cAttacker.Update();
+		cAttacker.UpdateAnim();
 		break;
 
 	case MainID_TANK:
