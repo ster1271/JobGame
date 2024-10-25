@@ -19,6 +19,7 @@ private:
 		STATE_STOP = 0,	//’âŽ~
 		STATE_SEARCH,	//Œo˜H’Tõ
 		STATE_MOVE,		//ˆÚ“®
+
 		STATE_NUM,
 	};
 

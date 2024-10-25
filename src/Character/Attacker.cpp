@@ -59,7 +59,7 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	case STATE_NORMAL:
 		if (ID != STATE_NORMAL)
 		{
-			ReqestLoop(ANIMEID_DEFAULT, 1.0f);
+			ReqestLoop(ANIMEID_DEFAULT, 0.0f);
 			ID = STATE_NORMAL;
 		}
 		break;
@@ -67,7 +67,7 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	case STATE_RUN:
 		if (ID != STATE_RUN)
 		{
-			ReqestLoop(ANIMEID_WALK, 1.0f);
+			ReqestLoop(ANIMEID_WALK, 0.7f);
 			ID = STATE_RUN;
 		}
 		break;
