@@ -4,9 +4,9 @@
 enum PLAYER_STATE
 {
 	STATE_NONE = 0,
-	STATE_DEFAULT,
-	STATE_RUN,
-	STATE_SHOT,
+	STATE_DEFAULT,	//待機モーション
+	STATE_RUN,		//走りモーション
+	STATE_SHOT,		//走撃ちモーション
 };
 
 //アタッカークラス
@@ -14,10 +14,12 @@ class CAttacker : public CBase
 {
 private:
 	PLAYER_STATE Id;
+	PLAYER_STATE oldId;
 
 	void Default();
 	void Run();
 	void RunShot();
+
 public:
 	//コンストラクタ・デストラクタ
 	CAttacker();

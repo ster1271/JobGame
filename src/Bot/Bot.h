@@ -31,6 +31,7 @@ private:
 	int tmp;
 	int NUM;
 	bool IsCalcu;
+	float NextRotY;
 
 public:
 	//コンストラクタ・デストラクタ

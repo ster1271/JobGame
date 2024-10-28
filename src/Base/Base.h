@@ -26,6 +26,7 @@ protected:
 		float m_Speed;
 		int m_iHndl;
 		int m_AnimID;
+		int m_OldAnimID;
 		int m_State;
 	};
 

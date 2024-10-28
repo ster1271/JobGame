@@ -114,50 +114,41 @@ void CBot::Move_Bot(vector<VECTOR> List)
 	//進行方向のどちら側にいるのかを調べる
 	float Dir = 0.0f;
 
-	
-	if (IsCalcu == false)
+	//ボットから指定の地点へ行くベクトルを計算
+	VECTOR Vtmp;
+	Vtmp.x = List[tmp].x - cPos.x;
+	Vtmp.y = 0.0f;
+	Vtmp.z = List[tmp].z - cPos.z;
+
+	VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ボットの移動ベクトル
+	vSpd.x = sinf(cRotate.y) * -MOVE_SPEED;
+	vSpd.y = 0.0f;
+	vSpd.z = cosf(cRotate.y) * -MOVE_SPEED;
+
+	//外積計算
+	Dir = (Vtmp.x * vSpd.z) - (vSpd.x * Vtmp.z);
+	//確認用
+	tmp_dir = Dir;
+
+	if (fabsf(Dir) < 1.0f)
 	{
-		//ボットから指定の地点へ行くベクトルを計算
-		VECTOR Vtmp;
-		Vtmp.x = List[tmp].x - cPos.x;
-		Vtmp.y = 0.0f;
-		Vtmp.z = List[tmp].z - cPos.z;
+		float X = Vtmp.x = cPos.x - List[tmp].x;
+		float Z = Vtmp.x = cPos.z - List[tmp].z;
 
-		VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ボットの移動ベクトル
-		vSpd.x = sinf(cRotate.y) * -MOVE_SPEED;
-		vSpd.y = 0.0f;
-		vSpd.z = cosf(cRotate.y) * -MOVE_SPEED;
+		//指定の位置へ角度を変える
+		float NextRotY = atan2f(X, Z);
 
-		//外積計算
-		Dir = (Vtmp.x * vSpd.z) - (vSpd.x * Vtmp.z);
-		//確認用
-		tmp_dir = Dir;
-
-		if (fabsf(Dir) < 0.5f)
-		{
-			IsCalcu = true;
-
-			float X = Vtmp.x = cPos.x - List[tmp].x;
-			float Z = Vtmp.x = cPos.z - List[tmp].z;
-
-			//指定の位置へ角度を変える
-			float NextRotY = atan2f(X, Z);
-
-			cRotate.y = NextRotY;
-		}
-
-		
-		if (Dir >= 0.0f)//それ以外は角度を変える
-		{
-			NUM = 1;
-			cRotate.y += 0.05f;
-		}
-		else if (Dir < 0.0f)
-		{
-			NUM = 2;
-			cRotate.y -= 0.05f;
-		}
-		
+		cRotate.y = NextRotY;
+	}
+	else if (Dir >= 0.0f)//それ以外は角度を変える
+	{
+		NUM = 1;
+		cRotate.y += 0.05f;
+	}
+	else if (Dir < 0.0f)
+	{
+		NUM = 2;
+		cRotate.y -= 0.05f;
 	}
 
 	//座標に速度を加算する
@@ -174,7 +165,6 @@ void CBot::Move_Bot(vector<VECTOR> List)
 	if (Range < 0.5f)
 	{
 		tmp++;
-		IsCalcu = false;
 
 		if (tmp == List.size())
 		{

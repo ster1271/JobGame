@@ -42,9 +42,6 @@ public:
 	//毎フレーム呼ぶ処理
 	void Step(CShotManager& cShotManager,  CTurretManager& cTurretManager);
 
-	//デバック用処理
-	void DebugStep(CObjectManager& cObjectManager);
-
 	//描画処理
 	void Draw();
 

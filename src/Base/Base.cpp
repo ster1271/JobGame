@@ -101,16 +101,22 @@ void CBase::Exit()
 //リクエスト
 void CBase::Reqest(int iAnimID, float iAnimSpd, int iAnimHndl, bool NameCheck)
 {
+	//前のアニメーションとo同じだったら処理しない
+	if (AnimData.m_OldAnimID == iAnimID)
+		return;
+
 	//アニメ消失
 	DetachAnim();
 
 	//アニメ再生&各種データをセット
 	AnimData.m_iHndl = MV1AttachAnim(iHndl, iAnimID, iAnimHndl, NameCheck);
 	AnimData.m_AnimID = iAnimID;
+	AnimData.m_OldAnimID = AnimData.m_AnimID;
 	AnimData.m_EndFrame = MV1GetAnimTotalTime(iHndl, iAnimID);
 	AnimData.m_Frame = 0.0f;
 	AnimData.m_Speed = iAnimSpd;
 	AnimData.m_State = ANIMESTATE_NORMAL;
+
 }
 
 //ループアニメリクエスト(アニメが最終フレームになったら最初に戻る)

@@ -37,32 +37,23 @@ void CAttacker::Load()
 
 void CAttacker::Default()
 {
-	if (Id != STATE_DEFAULT)
-	{
-		ReqestLoop(STATE_DEFAULT, 0.8f);
-		Id = STATE_DEFAULT;
-	}
+	ReqestLoop(STATE_DEFAULT, 0.8f);
 }
 
 void CAttacker::Run()
 {
-	if (Id != STATE_RUN)
-	{
-		ReqestLoop(STATE_RUN, 0.7f);
-		Id = STATE_RUN;
-	}
+	ReqestLoop(STATE_RUN, 0.7f);
 }
 
 void CAttacker::RunShot()
 {
-
+	ReqestLoop(STATE_SHOT, 0.1f);
 }
-
 
 //毎フレーム行う処理
 void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 {
-	switch (AnimData.m_AnimID)
+	switch (Id)
 	{
 	case STATE_DEFAULT:
 		Default();
@@ -118,6 +109,7 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	//発射処理
 	if (CInput::IsKeyPush(KEY_INPUT_SPACE))
 	{
+		Id = STATE_SHOT;
 		//弾の位置決定
 		VECTOR BulletPos = cPos;
 
@@ -137,12 +129,13 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	{
 		cTurretManager.TurretSpawn(cPos);
 	}
+
+	oldId = Id;
 }
 
 //描画
 void CAttacker::Draw()
 {
-
 	//条件式がtrueならモデルをfalseなら球を表示
 	if (iHndl != -1)
 	{
