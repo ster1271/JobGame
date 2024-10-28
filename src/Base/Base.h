@@ -16,14 +16,7 @@ protected:
 		ANIMESTATE_END,
 	};
 
-	//プレイヤーの状態
-	enum PLAYEY_STATE
-	{
-		STATE_NORMAL = 0,
-		STATE_RUN,
-		STATE_SHOT,
-
-	};
+	
 
 	//アニメ関連のデータをまとめた構造体
 	struct ANIME_DATA
@@ -40,7 +33,6 @@ protected:
 	VECTOR cSize;			//サイズ
 	VECTOR cRotate;			//回転値
 	ANIME_DATA AnimData;	//アニメ再生データ
-	PLAYEY_STATE State_Id;
 
 	float Life;			//ライフ
 	int iHndl;			//ハンドル

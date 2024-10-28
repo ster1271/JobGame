@@ -22,9 +22,11 @@ void CAttacker::Init()
 	CBase::Init();
 	cPos = VGet(0.0f, 0.0f, 0.0f);
 	cSize = VGet(0.05f, 0.05f, 0.05f);
-	cRotate = VGet(0.0f, DX_PI_F, 0.0f);
+	cRotate = VGet(0.0f, 0.0f, 0.0f);
 
 	Life = 100;
+
+
 }
 
 //データ読み込み
@@ -33,47 +35,45 @@ void CAttacker::Load()
 	iHndl = MV1LoadModel(ATTACKER_PATH);
 }
 
+void CAttacker::Default()
+{
+	if (Id != STATE_DEFAULT)
+	{
+		ReqestLoop(STATE_DEFAULT, 0.8f);
+		Id = STATE_DEFAULT;
+	}
+}
+
+void CAttacker::Run()
+{
+	if (Id != STATE_RUN)
+	{
+		ReqestLoop(STATE_RUN, 0.7f);
+		Id = STATE_RUN;
+	}
+}
+
+void CAttacker::RunShot()
+{
+
+}
+
+
 //毎フレーム行う処理
 void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 {
 	switch (AnimData.m_AnimID)
 	{
-	case ANIMEID_DEFAULT:
+	case STATE_DEFAULT:
 		Default();
 		break;
 
-	case ANIMEID_WALK:
-		Walk();
-		break;
-
-	case ANIMEID_RUNSHOT:
-		RunShot();
-		break;
-
-	default:
-		break;
-	}
-
-	switch (State_Id)
-	{
-	case STATE_NORMAL:
-		if (ID != STATE_NORMAL)
-		{
-			ReqestLoop(ANIMEID_DEFAULT, 0.0f);
-			ID = STATE_NORMAL;
-		}
-		break;
-
 	case STATE_RUN:
-		if (ID != STATE_RUN)
-		{
-			ReqestLoop(ANIMEID_WALK, 0.7f);
-			ID = STATE_RUN;
-		}
+		Run();
 		break;
 
 	case STATE_SHOT:
-
+		RunShot();
 		break;
 
 	default:
@@ -84,17 +84,17 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	float fSpd = 0.0f;
 	if (CInput::IsKeyKeep(KEY_INPUT_W))
 	{
-		State_Id = STATE_RUN;
+		Id = STATE_RUN;
 		fSpd = -MOVESPEED;
 	}
 	else if (CInput::IsKeyKeep(KEY_INPUT_S))
 	{
-		State_Id = STATE_RUN;
+		Id = STATE_RUN;
 		fSpd = MOVESPEED;
 	}
 	else
 	{
-		State_Id = STATE_NORMAL;
+		Id = STATE_DEFAULT;
 	}
 
 	//入力したキー情報とプレイヤーの角度から、移動速度を求める
@@ -156,6 +156,8 @@ void CAttacker::Draw()
 	DrawFormatString(0, 100, GetColor(255, 0, 0), "アタッカーX座標:%f", cPos.x);
 	DrawFormatString(0, 115, GetColor(255, 0, 0), "アタッカーY座標:%f", cPos.y);
 	DrawFormatString(0, 130, GetColor(255, 0, 0), "アタッカーZ座標:%f", cPos.z);
+
+	DrawFormatString(0, 0, GetColor(255, 0, 0), "アタッカーY軸:%f", cRotate.y);
 
 }
 

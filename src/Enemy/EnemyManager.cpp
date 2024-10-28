@@ -1,8 +1,8 @@
 #include "EnemyManager.h"
 
 //定義
-static const char ENEMY_MODEL_PATH01[] = { "data/enemy/enemy01.x" };
-static const char Enemy_MODEL_PATH02[] = { "data/enemy/enemy02.x" };
+static const char ENEMY_MODEL_PATH01[] = { "data/enemy/Enemy01.x" };
+static const char Enemy_MODEL_PATH02[] = { "data/enemy/Enemy02.x" };
 static const int WAIT_TIME = 10;		//敵が再登場するまでの時間
 
 //コンストラクタ

@@ -1,24 +1,23 @@
 #pragma once
 #include "../Base/Base.h"
 
-enum ANIME_STATE
+enum PLAYER_STATE
 {
-	ANIMEID_DEFAULT = 0,//デフォルト(今はTポーズ)
-	ANIMEID_WALK,		//歩き
-	ANIMEID_RUNSHOT,	//走り撃ち
-
-
-	ANIME_NUM,			//アニメーションの総数
+	STATE_NONE = 0,
+	STATE_DEFAULT,
+	STATE_RUN,
+	STATE_SHOT,
 };
 
 //アタッカークラス
 class CAttacker : public CBase
 {
 private:
-	int ID;
-	void Default() {};
-	void Walk() {};
-	void RunShot() {};
+	PLAYER_STATE Id;
+
+	void Default();
+	void Run();
+	void RunShot();
 public:
 	//コンストラクタ・デストラクタ
 	CAttacker();
