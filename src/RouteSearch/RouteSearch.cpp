@@ -12,6 +12,7 @@ void CRoute_Search::Init()
 	List.clear();
 	Pos_List.clear();
 	ListCnt = 0;
+	IsFinish = false;
 }
 
 //描画
@@ -20,6 +21,8 @@ void CRoute_Search::Draw()
 	for (int a = 0; a < List.size(); a++)
 	{
 		CDraw3D::DrawBox3D(List[a].Pos, VGet(25.0f, 80.0f, 25.0f), GetColor(0, 255, 0));
+		DrawFormatString(400.0f, 400.0f, GetColor(255, 0, 0), "リスト番号:%d", ListCnt);
+		DrawFormatString(400.0f, 500.0f, GetColor(255, 0, 0), "距離:%f", tmp);
 	}
 }
 
@@ -222,60 +225,66 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMap& cMap)
 //移動処理
 void CRoute_Search::Go_Route(VECTOR& vPos, VECTOR& vRotate, float vSpeed)
 {
-	//リスト格納以上の処理はしない
-	if (ListCnt > Pos_List.size())
-		return;
-	
-	//進行方向のどちら側にいるのかを調べる
-	float Dir = 0.0f;
-
-	//ボットから指定の地点へ行くベクトルを計算
-	VECTOR Vtmp;
-	Vtmp.x = Pos_List[ListCnt].x - vPos.x;
-	Vtmp.y = 0.0f;
-	Vtmp.z = Pos_List[ListCnt].z - vPos.z;
-
-	VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ボットの移動ベクトル
-	vSpd.x = sinf(vRotate.y) * -vSpeed;
-	vSpd.y = 0.0f;
-	vSpd.z = cosf(vRotate.y) * -vSpeed;
-
-	//外積計算
-	Dir = (Vtmp.x * vSpd.z) - (vSpd.x * Vtmp.z);
-	//確認用
-
-	if (fabsf(Dir) < 1.0f)
+	if (!IsFinish)
 	{
-		float X = Vtmp.x = vPos.x - Pos_List[ListCnt].x;
-		float Z = Vtmp.x = vPos.z - Pos_List[ListCnt].z;
+		//進行方向のどちら側にいるのかを調べる
+		float Dir = 0.0f;
 
-		//指定の位置へ角度を変える
-		float NextRotY = atan2f(X, Z);
+		//ボットから指定の地点へ行くベクトルを計算
+		VECTOR Vtmp;
+		Vtmp.x = Pos_List[ListCnt].x - vPos.x;
+		Vtmp.y = 0.0f;
+		Vtmp.z = Pos_List[ListCnt].z - vPos.z;
 
-		vRotate.y = NextRotY;
+		VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ボットの移動ベクトル
+		vSpd.x = sinf(vRotate.y) * -vSpeed;
+		vSpd.y = 0.0f;
+		vSpd.z = cosf(vRotate.y) * -vSpeed;
+
+		//外積計算
+		Dir = (Vtmp.x * vSpd.z) - (vSpd.x * Vtmp.z);
+		//確認用
+
+		if (fabsf(Dir) < 1.0f)
+		{
+			float X = Vtmp.x = vPos.x - Pos_List[ListCnt].x;
+			float Z = Vtmp.x = vPos.z - Pos_List[ListCnt].z;
+
+			//指定の位置へ角度を変える
+			float NextRotY = atan2f(X, Z);
+
+			vRotate.y = NextRotY;
+		}
+		else if (Dir >= 0.0f)//それ以外は角度を変える
+		{
+			vRotate.y += 0.05f;
+		}
+		else if (Dir < 0.0f)
+		{
+			vRotate.y -= 0.05f;
+		}
+
+		//座標に速度を加算する
+		vPos.x += sinf(vRotate.y) * -MOVE_SPEED;
+		vPos.z += cosf(vRotate.y) * -MOVE_SPEED;
+
+		//プレイヤーとの距離を計算
+		float Range = (Pos_List[ListCnt].x - vPos.x) * (Pos_List[ListCnt].x - vPos.x) + (Pos_List[ListCnt].z - vPos.z) * (Pos_List[ListCnt].z - vPos.z);
+		Range = sqrt(Range);
+		tmp = Range;
+
+		//距離が一定値に達したらIdを変更する
+		if (Range < 0.5f)
+		{
+			if (ListCnt == Pos_List.size())
+			{
+				IsFinish = true;
+			}
+			else
+			{
+				ListCnt++;
+			}
+		}
 	}
-	else if (Dir >= 0.0f)//それ以外は角度を変える
-	{
-		vRotate.y += 0.05f;
-	}
-	else if (Dir < 0.0f)
-	{
-		vRotate.y -= 0.05f;
-	}
-
-	//座標に速度を加算する
-	vPos.x += sinf(vRotate.y) * -MOVE_SPEED;
-	vPos.z += cosf(vRotate.y) * -MOVE_SPEED;
-
-	//プレイヤーとの距離を計算
-	float Range = (Pos_List[ListCnt].x - vPos.x) * (Pos_List[ListCnt].x - vPos.x) + (Pos_List[ListCnt].z - vPos.z) * (Pos_List[ListCnt].z - vPos.z);
-	Range = sqrt(Range);
-
-	//距離が一定値に達したらIdを変更する
-	if (Range < 0.5f)
-	{
-		ListCnt++;
-	}
-	
 }
 

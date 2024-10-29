@@ -23,9 +23,7 @@ private:
 		STATE_NUM,
 	};
 
-
 	BOT_STATE State_Id;
-	CRoute_Search cRoute_Search;
 
 	float tmp_dir;
 	float tmp_Range;

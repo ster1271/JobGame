@@ -36,11 +36,13 @@ private:
 	vector<Info> List;			//格納用
 	vector<VECTOR> Pos_List;	//座標引き渡し用
 	int ListCnt;				//リストカウント
+	bool IsFinish;				//探索終了フラグ
 
 
 	VECTOR m_StartPos;	//保存用
 	VECTOR m_GoalPos;	//保存用
 
+	float tmp;
 
 public:
 	//初期化
@@ -48,6 +50,9 @@ public:
 
 	//経路探索の結果のリスト取得
 	vector<VECTOR> GetSearch_List() { return Pos_List; }
+
+	//フラグ取得
+	bool GetIsFinish() { return IsFinish; }
 
 	//ボットの経路探索
 	bool Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap& cMap);

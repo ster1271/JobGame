@@ -85,17 +85,13 @@ void CBot::Step(CMap &cMap)
 
 	case CBot::STATE_SEARCH:
 		//経路探索が終了したら
-		VECTOR GOAL = VGet(400.0f, 0.0f, 400.0f);
-		if (cRoute_Search.Route_Search(cPos, GOAL, cMap))
-		{
-			IsCalcu = false;
-			State_Id = STATE_MOVE;
-		}
+		
 
 
 		break;
 	case CBot::STATE_MOVE:
-		cRoute_Search.Go_Route(cPos, cRotate);
+		
+
 		break;
 
 	default:
