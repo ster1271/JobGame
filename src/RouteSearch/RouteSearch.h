@@ -11,19 +11,17 @@ enum NODE_STATE
 	CLOSE,		//判定終了
 };
 
-enum DIR
-{
-	DIR_UP = 0,
-	DIR_DOWN,
-	DIR_LEFT,
-	DIR_RIGHT,
-	DIR_NUM,
-};
-
 class CRoute_Search
 {
 private:
-	NODE_STATE State;
+	enum DIR
+	{
+		DIR_UP = 0,
+		DIR_DOWN,
+		DIR_LEFT,
+		DIR_RIGHT,
+		DIR_NUM,
+	};
 
 	struct Info
 	{
@@ -37,6 +35,7 @@ private:
 
 	vector<Info> List;			//格納用
 	vector<VECTOR> Pos_List;	//座標引き渡し用
+	int ListCnt;				//リストカウント
 
 
 	VECTOR m_StartPos;	//保存用
@@ -44,6 +43,9 @@ private:
 
 
 public:
+	//初期化
+	void Init();
+
 	//経路探索の結果のリスト取得
 	vector<VECTOR> GetSearch_List() { return Pos_List; }
 
@@ -52,6 +54,9 @@ public:
 
 	//評価計算
 	int Evaluat_Calc(Info info, int Info_Index, CMap& cMap);
+
+	//移動処理
+	void Go_Route(VECTOR& vPos, VECTOR& vRotate, float vSpeed = 5.0f);
 
 	void Draw();
 	

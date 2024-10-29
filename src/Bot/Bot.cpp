@@ -63,11 +63,11 @@ void CBot::Draw()
 	DrawFormatString(0, 195, GetColor(0, 0, 0), "Y軸角度:%f", cRotate.y);
 	DrawFormatString(0, 210, GetColor(0, 0, 0), "外積:%f", tmp_dir);
 	DrawFormatString(0, 225, GetColor(0, 0, 0), "距離:%2f", tmp_Range);
-	DrawFormatString(0, 300, GetColor(0, 0, 255), "今行ってる処理:%d", NUM);
+	//DrawFormatString(0, 300, GetColor(0, 0, 255), "今行ってる処理:%d", NUM);
 }
 
 //マイフレーム行う処理
-void CBot::Step(CRoute_Search& cRoute_Search, CMap &cMap)
+void CBot::Step(CMap &cMap)
 {
 	
 
@@ -95,8 +95,7 @@ void CBot::Step(CRoute_Search& cRoute_Search, CMap &cMap)
 
 		break;
 	case CBot::STATE_MOVE:
-		
-		Move_Bot(cRoute_Search.GetSearch_List());	//追尾処理
+		cRoute_Search.Go_Route(cPos, cRotate);
 		break;
 
 	default:
@@ -142,12 +141,12 @@ void CBot::Move_Bot(vector<VECTOR> List)
 	}
 	else if (Dir >= 0.0f)//それ以外は角度を変える
 	{
-		NUM = 1;
+		//NUM = 1;
 		cRotate.y += 0.05f;
 	}
 	else if (Dir < 0.0f)
 	{
-		NUM = 2;
+		//NUM = 2;
 		cRotate.y -= 0.05f;
 	}
 

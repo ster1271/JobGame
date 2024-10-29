@@ -25,6 +25,7 @@ private:
 
 
 	BOT_STATE State_Id;
+	CRoute_Search cRoute_Search;
 
 	float tmp_dir;
 	float tmp_Range;
@@ -48,7 +49,7 @@ public:
 	void Draw();
 
 	//毎フレーム行う処理
-	void Step(CRoute_Search& cRoute_Search, CMap& cMap);
+	void Step(CMap& cMap);
 
 	//指定の場所に動く処理
 	void Move_Bot(vector<VECTOR> List);

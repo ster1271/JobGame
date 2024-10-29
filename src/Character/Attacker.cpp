@@ -107,7 +107,7 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	}
 
 	//”­Ëˆ—
-	if (CInput::IsKeyPush(KEY_INPUT_SPACE))
+	if (CInput::IsKeyKeep(KEY_INPUT_SPACE))
 	{
 		Id = STATE_SHOT;
 		//’e‚ÌˆÊ’uŒˆ’è

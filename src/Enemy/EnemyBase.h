@@ -1,5 +1,6 @@
 #pragma once
 #include <DxLib.h>
+#include "../Common.h"
 #include <math.h>
 #include "../SoundManager/SoundManager.h"
 
@@ -8,11 +9,14 @@ class CEnemyBase
 protected:
 	enum ENEMY_STATE
 	{
-		STATE_MOVE = 0,	//移動
-		STATE_ATTACK,	//攻撃
+		STATE_SEARCH = 0,	//経路探索
+		STATE_MOVE,			//移動
+		STATE_ATTACK,		//攻撃
 
 		STATE_NUM,
 	};
+
+	ENEMY_STATE State_Id;
 
 	VECTOR cPos;		//座標
 	VECTOR cSize;		//サイズ
@@ -24,6 +28,8 @@ protected:
 	float Life;			//ライフ
 	int HitCount;		//弾の当たった回数
 	bool IsActive;		//生存フラグ
+
+	vector<VECTOR>List;	//座標格納用
 
 public:
 	//コンストラクタ・デストラクタ

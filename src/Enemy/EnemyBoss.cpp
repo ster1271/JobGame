@@ -36,7 +36,7 @@ void CEnemyBoss::Draw()
 }
 
 //–ˆƒtƒŒ[ƒ€s‚¤ˆ—
-void CEnemyBoss::Step()
+void CEnemyBoss::Step(CBot& cBot, CMap& cMap)
 {
 	if (!IsActive)
 	{

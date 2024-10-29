@@ -67,7 +67,7 @@ void CEnemyManager::Exit()
 }
 
 //毎フレーム呼ぶ処理
-void CEnemyManager::Step(CBot& cBot, CRoute_Search& cRoute_Search, CMap& cMap)
+void CEnemyManager::Step(CBot& cBot, CMap& cMap)
 {
 	VECTOR PastPos = VGet(0.0f, 0.0f, 0.0f);	//過去座標を格納する
 	VECTOR CurrentPos = cBot.GetPos();			//現在座標を格納する
@@ -84,10 +84,8 @@ void CEnemyManager::Step(CBot& cBot, CRoute_Search& cRoute_Search, CMap& cMap)
 
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
 	{
-		cEnemy_Normal[Enemy_Index].Step();
-		cEnemyBoss[Enemy_Index].Step();
-
-		
+		cEnemy_Normal[Enemy_Index].Step(cBot, cMap);
+		cEnemyBoss[Enemy_Index].Step(cBot, cMap);
 	}
 
 	//リクエスト
@@ -108,16 +106,14 @@ void CEnemyManager::Draw()
 //敵リクエスト
 void CEnemyManager::RequestEnemy()
 {
-	VECTOR vPos = VGet(0.0f, 0.0f, 0.0f);
-	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
 	{
-		vPos = VGet(GetRand(200.0f) - 100.0f, 5.0f, GetRand(200.0f) + 100.0f);
-		vSpeed = VGet(0.0f, 0.0f, 0.5f);
+		VECTOR vPos = VGet(100.0f, 5.0f, 100.0f);
+		VECTOR vSpeed = VGet(0.0f, 0.0f, 0.5f);
 		cEnemy_Normal[Enemy_Index].RequestEnemy(vPos, vSpeed);
 
 
-		vPos = VGet(GetRand(300.0f) - 100.0f, 5.0f, GetRand(200.0f) + 100.0f);
+		vPos = VGet(300.0f, 5.0f, 100.0f);
 		vSpeed = VGet(0.0f, 0.0f, 0.3f);
 		cEnemyBoss[Enemy_Index].RequestEnemy(vPos, vSpeed);
 	}

@@ -1,10 +1,15 @@
 #pragma once
 #include "EnemyBase.h"
+#include "../Map/Map.h"
+#include "../RouteSearch/RouteSearch.h"
+#include "../Bot/Bot.h"
 
 class CEnemy_Normal: public CEnemyBase
 {
 private:
+	CRoute_Search cRoute_Search;
 	VECTOR Respown_Pos;
+
 public:
 	//コンストラクタ・デストラクタ
 	CEnemy_Normal();
@@ -20,7 +25,7 @@ public:
 	void Draw();
 
 	//毎フレーム行う処理
-	void Step();
+	void Step(CBot& cBot, CMap& cMap);
 
 	//後処理
 	void Exit();

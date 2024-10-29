@@ -77,7 +77,7 @@ void CPlayScene::Draw()
 		//キャラクター描画
 		cCharacterManager.Draw();
 		//エネミー描画
-		//cEnemyManager.Draw();
+		cEnemyManager.Draw();
 		//タレット描画
 		//cTurretManager.Draw();
 		//弾描画
@@ -223,13 +223,13 @@ void CPlayScene::Step()
 		//キャラクター更新処理
 		cCharacterManager.Step(cShotManager, cTurretManager);
 		//エネミー更新処理
-		cEnemyManager.Step(cBot, cRoute_Search, cMap);
+		cEnemyManager.Step(cBot, cMap);
 		//タレット更新処理
 		cTurretManager.Step(cShotManager, cCharacterManager.GetPosition());
 		//弾更新処理
 		cShotManager.Step(cCharacterManager.GetPosition());
 		//ボット更新処理
-		cBot.Step(cRoute_Search, cMap);
+		cBot.Step(cMap);
 		//チェックポイント更新処理
 		cCheck_Manager.Step();
 	}

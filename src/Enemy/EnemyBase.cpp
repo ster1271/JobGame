@@ -16,6 +16,7 @@ CEnemyBase::CEnemyBase()
 	memset(&cRotate, 0, sizeof(VECTOR));
 	memset(&cSpeed, 0, sizeof(VECTOR));
 
+	State_Id = STATE_NUM;
 	Radius = NEMY_RADIUS;
 	Life = 0;			//ライフ
 	HitCount = 0;		//弾の当たった回数
@@ -45,7 +46,7 @@ void CEnemyBase::Init()
 	memset(&cRotate, 0, sizeof(VECTOR));
 	memset(&cSpeed, 0, sizeof(VECTOR));
 
-
+	State_Id = STATE_MOVE;
 	Life = 0;;			//ライフ
 	HitCount = 0;;		//弾の当たった回数
 	iHndl = -1;			//ハンドル

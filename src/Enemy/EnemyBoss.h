@@ -1,5 +1,8 @@
 #pragma once
 #include "EnemyBase.h"
+#include "../Map/Map.h"
+#include "../RouteSearch/RouteSearch.h"
+#include "../Bot/Bot.h"
 
 class CEnemyBoss :public CEnemyBase
 {
@@ -21,7 +24,7 @@ public:
 	void Draw();
 
 	//–ˆƒtƒŒ[ƒ€s‚¤ˆ—
-	void Step();
+	void Step(CBot& cBot, CMap& cMap);
 
 	//Œãˆ—
 	void Exit();

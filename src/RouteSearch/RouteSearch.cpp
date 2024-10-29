@@ -2,8 +2,17 @@
 
 const int MAX_COST = 999;
 const int MOVE_BLOKE = 1;
+const float MOVE_SPEED = 0.2f;
 const float RADIUS = 5.0f;
 
+
+//初期化
+void CRoute_Search::Init()
+{
+	List.clear();
+	Pos_List.clear();
+	ListCnt = 0;
+}
 
 //描画
 void CRoute_Search::Draw()
@@ -64,18 +73,6 @@ bool CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap& cMap)
 				CurrentCnt += Evaluat_Calc(List[i], i, cMap);
 			}
 		}
-
-		/*
-		//もしカウントが増加しない時に
-		if (CurrentCnt == 0)
-		{
-			//二番目の評価値を算出する
-			for (int i = 0; i < List.size() - 1; i++)
-			{
-				
-			}
-		}
-		*/
 		
 		//ゴール判定する
 		for (int i = List.size() - 1; i > List.size() - 1 - CurrentCnt; i--)
@@ -219,5 +216,66 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMap& cMap)
 	}
 
 	return cnt;
+}
+
+
+//移動処理
+void CRoute_Search::Go_Route(VECTOR& vPos, VECTOR& vRotate, float vSpeed)
+{
+	//リスト格納以上の処理はしない
+	if (ListCnt > Pos_List.size())
+		return;
+	
+	//進行方向のどちら側にいるのかを調べる
+	float Dir = 0.0f;
+
+	//ボットから指定の地点へ行くベクトルを計算
+	VECTOR Vtmp;
+	Vtmp.x = Pos_List[ListCnt].x - vPos.x;
+	Vtmp.y = 0.0f;
+	Vtmp.z = Pos_List[ListCnt].z - vPos.z;
+
+	VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ボットの移動ベクトル
+	vSpd.x = sinf(vRotate.y) * -vSpeed;
+	vSpd.y = 0.0f;
+	vSpd.z = cosf(vRotate.y) * -vSpeed;
+
+	//外積計算
+	Dir = (Vtmp.x * vSpd.z) - (vSpd.x * Vtmp.z);
+	//確認用
+
+	if (fabsf(Dir) < 1.0f)
+	{
+		float X = Vtmp.x = vPos.x - Pos_List[ListCnt].x;
+		float Z = Vtmp.x = vPos.z - Pos_List[ListCnt].z;
+
+		//指定の位置へ角度を変える
+		float NextRotY = atan2f(X, Z);
+
+		vRotate.y = NextRotY;
+	}
+	else if (Dir >= 0.0f)//それ以外は角度を変える
+	{
+		vRotate.y += 0.05f;
+	}
+	else if (Dir < 0.0f)
+	{
+		vRotate.y -= 0.05f;
+	}
+
+	//座標に速度を加算する
+	vPos.x += sinf(vRotate.y) * -MOVE_SPEED;
+	vPos.z += cosf(vRotate.y) * -MOVE_SPEED;
+
+	//プレイヤーとの距離を計算
+	float Range = (Pos_List[ListCnt].x - vPos.x) * (Pos_List[ListCnt].x - vPos.x) + (Pos_List[ListCnt].z - vPos.z) * (Pos_List[ListCnt].z - vPos.z);
+	Range = sqrt(Range);
+
+	//距離が一定値に達したらIdを変更する
+	if (Range < 0.5f)
+	{
+		ListCnt++;
+	}
+	
 }
 
