@@ -105,7 +105,7 @@ void CEnemy_Normal::Step(CBot& cBot, CMap& cMap)
 		break;
 
 	case CEnemyBase::STATE_ATTACK:
-		
+		 
 		break;
 	
 	default:
