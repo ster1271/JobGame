@@ -31,8 +31,8 @@ void CEnemy_Normal::Draw()
 {
 	if (IsActive == false)
 		return;
-
 	MV1DrawModel(iHndl);
+	cRoute_Search.Draw(GetColor(0, 0, 255));
 }
 
 //ñàÉtÉåÅ[ÉÄçsÇ§èàóù
@@ -46,17 +46,22 @@ void CEnemy_Normal::Step(CBot& cBot, CMap& cMap)
 	switch (State_Id)
 	{
 	case CEnemyBase::STATE_SEARCH:
-
+		List = cRoute_Search.Route_Search(cPos, cBot.GetPos(), cMap);
 		
 		State_Id = STATE_MOVE;
 		break;
 
 	case CEnemyBase::STATE_MOVE:
+		Enemy_Move(List, ListCnt);
 		
 		break;
 
 	case CEnemyBase::STATE_ATTACK:
-		 
+		if (ListCnt == List.size())
+		{
+			ListCnt = 0;
+			State_Id = STATE_SEARCH;
+		}
 		break;
 	
 	default:

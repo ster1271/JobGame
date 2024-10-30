@@ -84,8 +84,8 @@ void CEnemyManager::Step(CBot& cBot, CMap& cMap)
 
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
 	{
-	/*	cEnemy_Normal[Enemy_Index].Step(cBot, cMap);
-		cEnemyBoss[Enemy_Index].Step(cBot, cMap);*/
+		cEnemy_Normal[Enemy_Index].Step(cBot, cMap);
+		cEnemyBoss[Enemy_Index].Step(cBot, cMap);
 	}
 
 	//リクエスト
@@ -97,8 +97,8 @@ void CEnemyManager::Draw()
 {
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
 	{
-		/*cEnemy_Normal[Enemy_Index].Draw();
-		cEnemyBoss[Enemy_Index].Draw();*/
+		cEnemy_Normal[Enemy_Index].Draw();
+		//cEnemyBoss[Enemy_Index].Draw();
 	}
 }
 

@@ -71,32 +71,6 @@ void CMap::Load()
 //CSV読み込み
 void CMap::MapLoad()
 {
-	//ファイルを開く
-	//fopen_s(&fp_, "Data/Map/Place_Objects.txt", "r");
-	//MapInfo tmp;
-	//VECTOR LoadPos = VGet(0.0f, 0.0f, 0.0f);
-	//int num;
-	//if (fp_ != nullptr)
-	//{
-	//	while (fscanf_s(fp_, "%f, %f, %f, %d", &LoadPos.x, &LoadPos.y, &LoadPos.z, &num) != EOF)
-	//	{
-	//		tmp.vPos = LoadPos;
-	//		if (num == 1)
-	//		{
-	//			tmp.IsMap = true;
-	//		}
-	//		else
-	//		{
-	//			tmp.IsMap = false;
-	//		}
-	//		MapList.push_back(tmp);
-	//	}
-	//}
-	//fclose(fp_);
-
-
-
-
 
 	MapInfo tmp;
 	int cnt = 0;
@@ -115,11 +89,11 @@ void CMap::MapLoad()
 
 				if (num[i] == 0)
 				{
-					tmp.IsMap = false;
+					tmp.IsMap = false;	//何もなし
 				}
 				else if(num[i] == 1)
 				{
-					tmp.IsMap = true;
+					tmp.IsMap = true;	//壁
 				}
 				MapList.push_back(tmp);
 			}

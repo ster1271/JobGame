@@ -34,7 +34,6 @@ private:
 	};
 
 	vector<Info> List;			//格納用
-	vector<VECTOR> Pos_List;	//座標引き渡し用
 	int ListCnt;				//リストカウント
 	bool IsFinish;				//探索終了フラグ
 
@@ -48,14 +47,11 @@ public:
 	//初期化
 	void Init();
 
-	//経路探索の結果のリスト取得
-	vector<VECTOR> GetSearch_List() { return Pos_List; }
-
 	//フラグ取得
 	bool GetIsFinish() { return IsFinish; }
 
 	//ボットの経路探索
-	bool Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap& cMap);
+	vector<VECTOR> Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap& cMap);
 
 	//評価計算
 	int Evaluat_Calc(Info info, int Info_Index, CMap& cMap);
@@ -63,7 +59,7 @@ public:
 	//移動処理
 	void Go_Route(VECTOR& vPos, VECTOR& vRotate, float vSpeed = 5.0f);
 
-	void Draw();
+	void Draw(unsigned int Color);
 	
 };
 

@@ -81,13 +81,11 @@ void CPlayScene::Draw()
 		//タレット描画
 		//cTurretManager.Draw();
 		//弾描画
-		//cShotManager.Draw();
+		cShotManager.Draw();
 		//ボット描画
 		cBot.Draw();
 		//チェックポイント描画
 		cCheck_Manager.Draw();
-
-		cRoute_Search.Draw();
 	}
 	else if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_DEBUG)
 	{

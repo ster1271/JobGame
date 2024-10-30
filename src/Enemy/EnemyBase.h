@@ -30,6 +30,7 @@ protected:
 	bool IsActive;		//生存フラグ
 
 	vector<VECTOR>List;	//座標格納用
+	int ListCnt;
 
 public:
 	//コンストラクタ・デストラクタ
@@ -84,5 +85,8 @@ public:
 			IsActive = false;
 		}
 	}
+
+	//移動処理
+	void Enemy_Move(vector<VECTOR> List, int& Cnt);
 
 };

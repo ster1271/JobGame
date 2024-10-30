@@ -22,7 +22,7 @@ private:
 
 		STATE_NUM,
 	};
-
+	CRoute_Search cRoute;
 	BOT_STATE State_Id;
 
 	float tmp_dir;
@@ -31,6 +31,8 @@ private:
 	int NUM;
 	bool IsCalcu;
 	float NextRotY;
+
+	vector<VECTOR> Route_List;
 
 public:
 	//コンストラクタ・デストラクタ

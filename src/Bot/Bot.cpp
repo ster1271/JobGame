@@ -27,16 +27,15 @@ void CBot::Init()
 	cSize = VGet(0.1f, 0.1f, 0.1);
 	cRotate = VGet(0.0f, 0.0f, 0.0f);
 
-	tmp = 0;
+	Route_List.clear();
 
-	State_Id = STATE_NUM;
+	State_Id = STATE_STOP;
 }
 
 //読み込み
 bool CBot::Load()
 {
 	iHndl = MV1LoadModel(BOT_FILE_PATH);
-	State_Id = STATE_STOP;
 
 	if (iHndl != -1)
 		return true;
@@ -64,12 +63,13 @@ void CBot::Draw()
 	DrawFormatString(0, 210, GetColor(0, 0, 0), "外積:%f", tmp_dir);
 	DrawFormatString(0, 225, GetColor(0, 0, 0), "距離:%2f", tmp_Range);
 	//DrawFormatString(0, 300, GetColor(0, 0, 255), "今行ってる処理:%d", NUM);
+
+	cRoute.Draw(GetColor(0, 255, 0));
 }
 
 //マイフレーム行う処理
 void CBot::Step(CMap &cMap)
 {
-	
 
 	switch (State_Id)
 	{
@@ -84,13 +84,14 @@ void CBot::Step(CMap &cMap)
 		break;
 
 	case CBot::STATE_SEARCH:
-		//経路探索が終了したら
-		
-
+		VECTOR GoalPos = VGet(400.0f, 0.0f, 400.0f);
+		Route_List = cRoute.Route_Search(cPos, GoalPos, cMap);
+		State_Id = STATE_MOVE;
 
 		break;
+
 	case CBot::STATE_MOVE:
-		
+		Move_Bot(Route_List);
 
 		break;
 

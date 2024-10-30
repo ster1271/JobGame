@@ -50,6 +50,7 @@ void CEnemyBase::Init()
 	Life = 0;;			//ライフ
 	HitCount = 0;;		//弾の当たった回数
 	iHndl = -1;			//ハンドル
+	ListCnt = 0;
 
 	IsActive = false;	//生存フラグ
 }
@@ -173,5 +174,66 @@ void CEnemyBase::Update()
 }
 
 
+//移動処理
+void CEnemyBase::Enemy_Move(vector<VECTOR> List, int& Cnt)
+{
 
+	//進行方向のどちら側にいるのかを調べる
+	float Dir = 0.0f;
+
+	//ボットから指定の地点へ行くベクトルを計算
+	VECTOR Vtmp;
+	Vtmp.x = List[Cnt].x - cPos.x;
+	Vtmp.y = 0.0f;
+	Vtmp.z = List[Cnt].z - cPos.z;
+
+	VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ボットの移動ベクトル
+	vSpd.x = sinf(cRotate.y) * -SPEED;
+	vSpd.y = 0.0f;
+	vSpd.z = cosf(cRotate.y) * -SPEED;
+
+	//外積計算
+	Dir = (Vtmp.x * vSpd.z) - (vSpd.x * Vtmp.z);
+
+	if (fabsf(Dir) < 1.0f)
+	{
+		float X = Vtmp.x = cPos.x - List[Cnt].x;
+		float Z = Vtmp.x = cPos.z - List[Cnt].z;
+
+		//指定の位置へ角度を変える
+		float NextRotY = atan2f(X, Z);
+
+		cRotate.y = NextRotY;
+	}
+	else if (Dir >= 0.0f)//それ以外は角度を変える
+	{
+		//NUM = 1;
+		cRotate.y += 0.05f;
+	}
+	else if (Dir < 0.0f)
+	{
+		//NUM = 2;
+		cRotate.y -= 0.05f;
+	}
+
+	//座標に速度を加算する
+	cPos.x += sinf(cRotate.y) * -0.2f;
+	cPos.z += cosf(cRotate.y) * -0.2f;
+
+	//プレイヤーとの距離を計算
+	float Range = (List[Cnt].x - cPos.x) * (List[Cnt].x - cPos.x) + (List[Cnt].z - cPos.z) * (List[Cnt].z - cPos.z);
+	Range = sqrt(Range);
+
+	//距離が一定値に達したらIdを変更する
+	if (Range < 0.5f)
+	{
+		Cnt++;
+
+		if (Cnt == List.size())
+		{
+			State_Id = STATE_ATTACK;
+		}
+	}
+	
+}
 
