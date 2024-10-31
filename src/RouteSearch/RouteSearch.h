@@ -47,11 +47,14 @@ public:
 	//初期化
 	void Init();
 
+	//後処理
+	void Exit();
+
 	//フラグ取得
 	bool GetIsFinish() { return IsFinish; }
 
 	//ボットの経路探索
-	vector<VECTOR> Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap& cMap);
+	vector<VECTOR> Route_Search(VECTOR StartPos, VECTOR GoalPos, CMapManager& cMapManager);
 
 	//評価計算
 	int Evaluat_Calc(Info info, int Info_Index, CMap& cMap);
@@ -59,6 +62,7 @@ public:
 	//移動処理
 	void Go_Route(VECTOR& vPos, VECTOR& vRotate, float vSpeed = 5.0f);
 
+	//描画
 	void Draw(unsigned int Color);
 	
 };

@@ -37,7 +37,7 @@ void CGoal::Init()
 	iHndl = -1;
 
 	//変数の初期化
-	cPos = VGet(0.0f, 0.0f, 0.0f);
+	cPos = VGet(400.0f, 0.0f, 400.0f);
 	cRotate = VGet(0.0f, 0.0f, 0.0f);
 	cSize = VGet(0.0f, 0.0f, 0.0f);
 
@@ -57,6 +57,7 @@ void CGoal::Draw()
 		return;
 
 	MV1DrawModel(iHndl);
+	CDraw3D::DrawBox3D(cPos, VGet(25.0f, 25.0f, 25.0f), GetColor(255, 255, 0));
 }
 
 //毎フレーム行う処理
@@ -65,7 +66,6 @@ void CGoal::Step()
 	if (!IsActive)
 		return;
 
-	Update();
 }
 
 //更新処理

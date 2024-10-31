@@ -28,8 +28,24 @@ void CBot::Init()
 	cRotate = VGet(0.0f, 0.0f, 0.0f);
 
 	Route_List.clear();
-
+	IsFinish = false;
 	State_Id = STATE_STOP;
+}
+
+//後処理
+void CBot::Exit()
+{
+	memset(&cPos, 0, sizeof(VECTOR));
+	memset(&cRotate, 0, sizeof(VECTOR));
+	memset(&cSize, 0, sizeof(VECTOR));
+
+	iHndl = -1;
+	Route_List.clear();
+	IsFinish = false;
+
+	cRoute.Exit();
+
+	State_Id = STATE_NUM;
 }
 
 //読み込み
@@ -62,14 +78,14 @@ void CBot::Draw()
 	DrawFormatString(0, 195, GetColor(0, 0, 0), "Y軸角度:%f", cRotate.y);
 	DrawFormatString(0, 210, GetColor(0, 0, 0), "外積:%f", tmp_dir);
 	DrawFormatString(0, 225, GetColor(0, 0, 0), "距離:%2f", tmp_Range);
-	//DrawFormatString(0, 300, GetColor(0, 0, 255), "今行ってる処理:%d", NUM);
 
 	cRoute.Draw(GetColor(0, 255, 0));
 }
 
 //マイフレーム行う処理
-void CBot::Step(CMap &cMap)
+void CBot::Step(CMapManager& cMapManager)
 {
+	
 
 	switch (State_Id)
 	{
@@ -85,7 +101,7 @@ void CBot::Step(CMap &cMap)
 
 	case CBot::STATE_SEARCH:
 		VECTOR GoalPos = VGet(400.0f, 0.0f, 400.0f);
-		Route_List = cRoute.Route_Search(cPos, GoalPos, cMap);
+		Route_List = cRoute.Route_Search(cPos, GoalPos, cMapManager.GetMap());
 		State_Id = STATE_MOVE;
 
 		break;
@@ -164,7 +180,9 @@ void CBot::Move_Bot(vector<VECTOR> List)
 
 		if (tmp == List.size())
 		{
+			IsFinish = true;
 			State_Id = STATE_STOP;
+
 			tmp = 0;
 		}
 	}

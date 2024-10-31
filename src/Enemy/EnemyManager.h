@@ -45,7 +45,7 @@ public:
 	void Exit();
 
 	//–ˆƒtƒŒ[ƒ€ŒÄ‚Ôˆ—
-	void Step(CBot& cBot, CMap& cMap);
+	void Step(CBot& cBot, CMapManager cMapManager);
 
 	//•`‰æˆ—
 	void Draw();

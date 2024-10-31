@@ -1,4 +1,5 @@
 #include "RouteSearch.h"
+#include "../Map/MapManager.h"
 
 const int MAX_COST = 999;
 const int MOVE_BLOKE = 1;
@@ -8,6 +9,14 @@ const float RADIUS = 5.0f;
 
 //‰Šú‰»
 void CRoute_Search::Init()
+{
+	List.clear();
+	ListCnt = 0;
+	IsFinish = false;
+}
+
+//Œãˆ—
+void CRoute_Search::Exit()
 {
 	List.clear();
 	ListCnt = 0;
@@ -25,7 +34,7 @@ void CRoute_Search::Draw(unsigned int Color)
 
 
 //ƒ{ƒbƒg‚ÌŒo˜H’Tõ
-vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap& cMap)
+vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMapManager& cMapManager)
 {
 	
 	List.clear();	//”O‚Ì‚½‚ß

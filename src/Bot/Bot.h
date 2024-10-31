@@ -5,6 +5,8 @@
 #include "../Check_Point/Check_Point.h"
 #include "../RouteSearch/RouteSearch.h"
 #include "../CollisionManager/CollisionManager.h"
+#include "../Map/MapManager.h"
+
 
 
 using namespace std;
@@ -33,6 +35,7 @@ private:
 	float NextRotY;
 
 	vector<VECTOR> Route_List;
+	bool IsFinish;
 
 public:
 	//コンストラクタ・デストラクタ
@@ -42,14 +45,20 @@ public:
 	//初期化
 	void Init();
 
+	//後処理
+	void Exit();
+
 	//読み込み
 	bool Load();
 
 	//描画
 	void Draw();
 
+	//フラグ取得
+	bool GetFinish() { return IsFinish; }
+
 	//毎フレーム行う処理
-	void Step(CMap& cMap);
+	void Step(CMapManager& cMapManager);
 
 	//指定の場所に動く処理
 	void Move_Bot(vector<VECTOR> List);
