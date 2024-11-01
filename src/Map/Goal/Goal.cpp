@@ -1,6 +1,6 @@
 #include "Goal.h"
 
-const char MODEL_PATH[] = "";
+const char MODEL_PATH[] = "data/Map/door.x";
 
 //コンストラクタ
 CGoal::CGoal()
@@ -39,9 +39,9 @@ void CGoal::Init()
 	//変数の初期化
 	cPos = VGet(400.0f, 0.0f, 400.0f);
 	cRotate = VGet(0.0f, 0.0f, 0.0f);
-	cSize = VGet(0.0f, 0.0f, 0.0f);
+	cSize = VGet(0.2f, 0.2f, 0.2f);
 
-	IsActive = false;
+	IsActive = true;
 }
 
 //読み込み関連

@@ -1,7 +1,7 @@
 ﻿#include "Bot.h"
 #include "../Map/Map.h"
 
-const char BOT_FILE_PATH[] = { "data/enemy/Enemy01.x" };
+const char BOT_FILE_PATH[] = { "data/Bot/Bot.x" };
 const float MOVE_SPEED = 5.0f;
 const float SPERE_R = 10.0f;
 
