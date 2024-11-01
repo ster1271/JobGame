@@ -84,8 +84,8 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
 	{
-		cEnemy_Normal[Enemy_Index].Step(cBot, cMap);
-		cEnemyBoss[Enemy_Index].Step(cBot, cMap);
+		cEnemy_Normal[Enemy_Index].Step(cBot, cMapManager);
+		cEnemyBoss[Enemy_Index].Step(cBot, cMapManager);
 	}
 
 	//リクエスト

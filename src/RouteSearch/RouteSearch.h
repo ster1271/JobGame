@@ -1,7 +1,7 @@
 #pragma once
 #include "../Common.h"
 #include "../MyLibrary/MyLibrary.h"
-#include "../Map/Map.h"
+#include "../Map/MapManager.h"
 
 //ó‘Ô‘JˆÚ
 enum NODE_STATE
@@ -53,11 +53,11 @@ public:
 	//ƒtƒ‰ƒOæ“¾
 	bool GetIsFinish() { return IsFinish; }
 
-	//ƒ{ƒbƒg‚ÌŒo˜H’Tõ
+	//Œo˜H’Tõ
 	vector<VECTOR> Route_Search(VECTOR StartPos, VECTOR GoalPos, CMapManager& cMapManager);
 
 	//•]‰¿ŒvZ
-	int Evaluat_Calc(Info info, int Info_Index, CMap& cMap);
+	int Evaluat_Calc(Info info, int Info_Index, CMapManager& cMapManager);
 
 	//ˆÚ“®ˆ—
 	void Go_Route(VECTOR& vPos, VECTOR& vRotate, float vSpeed = 5.0f);

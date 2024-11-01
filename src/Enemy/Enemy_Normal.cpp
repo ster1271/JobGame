@@ -36,7 +36,7 @@ void CEnemy_Normal::Draw()
 }
 
 //–ˆƒtƒŒ[ƒ€s‚¤ˆ—
-void CEnemy_Normal::Step(CBot& cBot, CMap& cMap)
+void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 {
 	if (!IsActive)
 		return;
@@ -46,7 +46,7 @@ void CEnemy_Normal::Step(CBot& cBot, CMap& cMap)
 	switch (State_Id)
 	{
 	case CEnemyBase::STATE_SEARCH:
-		List = cRoute_Search.Route_Search(cPos, cBot.GetPos(), cMap);
+		List = cRoute_Search.Route_Search(cPos, cBot.GetPos(), cMapManager);
 		
 		State_Id = STATE_MOVE;
 		break;

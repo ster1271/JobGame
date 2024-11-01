@@ -1,6 +1,5 @@
 #pragma once
 #include "EnemyBase.h"
-#include "../Map/Map.h"
 #include "../RouteSearch/RouteSearch.h"
 #include "../Bot/Bot.h"
 
@@ -25,7 +24,7 @@ public:
 	void Draw();
 
 	//–ˆƒtƒŒ[ƒ€s‚¤ˆ—
-	void Step(CBot& cBot, CMap& cMap);
+	void Step(CBot& cBot, CMapManager& cMapManager);
 
 	//Œãˆ—
 	void Exit();

@@ -227,7 +227,7 @@ void CPlayScene::Step()
 		//弾更新処理
 		cShotManager.Step(cCharacterManager.GetPosition());
 		//ボット更新処理
-		cBot.Step();
+		cBot.Step(cMapManager);
 		//チェックポイント更新処理
 		cCheck_Manager.Step();
 	}

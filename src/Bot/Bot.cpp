@@ -101,7 +101,7 @@ void CBot::Step(CMapManager& cMapManager)
 
 	case CBot::STATE_SEARCH:
 		VECTOR GoalPos = VGet(400.0f, 0.0f, 400.0f);
-		Route_List = cRoute.Route_Search(cPos, GoalPos, cMapManager.GetMap());
+		Route_List = cRoute.Route_Search(cPos, GoalPos, cMapManager);
 		State_Id = STATE_MOVE;
 
 		break;

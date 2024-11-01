@@ -1,5 +1,4 @@
 #include "RouteSearch.h"
-#include "../Map/MapManager.h"
 
 const int MAX_COST = 999;
 const int MOVE_BLOKE = 1;
@@ -33,7 +32,7 @@ void CRoute_Search::Draw(unsigned int Color)
 }
 
 
-//ボットの経路探索
+//経路探索
 vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMapManager& cMapManager)
 {
 	
@@ -51,8 +50,8 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 	bool IsFinish = false;		//探索終了フラグ
 
 
-	int SaveCnt = 0;					//前回のループで増えた配列の個数
-	int CurrentCnt = Evaluat_Calc(tmp, -1, cMap);	//今回のループで増えた配列の個数(スタート地点の親番号を-1とする)
+	int SaveCnt = 0;			//前回のループで増えた配列の個数
+	int CurrentCnt = Evaluat_Calc(tmp, -1, cMapManager);	//今回のループで増えた配列の個数(スタート地点の親番号を-1とする)
 	
 	int LoopCount = 0;
 
@@ -79,7 +78,7 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 		{
 			if (List[i].Total_Cost == TotalMinCost)
 			{
-				CurrentCnt += Evaluat_Calc(List[i], i, cMap);
+				CurrentCnt += Evaluat_Calc(List[i], i, cMapManager);
 			}
 		}
 		
@@ -142,7 +141,7 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 
 
 //評価計算
-int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMap& cMap)
+int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMapManager& cMapManager)
 {
 	//のちにpush_backするやつがinfoになる
 	Info tmp[DIR_NUM];
@@ -194,13 +193,13 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMap& cMap)
 
 		//オブジェクトと当たっているか判定する
 		bool IsHit = false;
-		for (int i = 0; i < cMap.GetMapInfo().size(); i++)
+		for (int i = 0; i < cMapManager.GetMap().GetMapInfo().size(); i++)
 		{
-			if (tmp[Index].Pos.x == cMap.GetMapInfo()[i].vPos.x &&
+			if (tmp[Index].Pos.x == cMapManager.GetMap().GetMapInfo()[i].vPos.x &&
 				//tmp[Index].Pos.y == cMap.GetMapInfo()[i].vPos.y &&
-				tmp[Index].Pos.z == cMap.GetMapInfo()[i].vPos.z)
+				tmp[Index].Pos.z == cMapManager.GetMap().GetMapInfo()[i].vPos.z)
 			{
-				if (cMap.GetMapInfo()[i].IsMap == true)
+				if (cMapManager.GetMap().GetMapInfo()[i].IsMap == true)
 				{
 					IsHit = true;
 					break;
