@@ -4,7 +4,7 @@
 #include "../SoundManager/SoundManager.h"
 
 #define PL_SHOT_NUM	(5)
-#define TURRET_SHOT_NUM	(200)
+#define TURRET_SHOT_NUM	(10)
 
 class CShotManager
 {
@@ -33,8 +33,11 @@ public:
 	//描画処理
 	void Draw();
 
-	//プレイヤーのショット情報取得
-	//inline CShot& GetPlayerShot(int iID) { return cPlayerShot[iID]; }
+	//タレット弾情報取得
+	CTurretShot& GetTurretShotInfo(int Index) { return cTurretShot[Index]; }
+
+	//プレイヤー弾情報取得
+	CShot& GetPlayerShotInfo(int Index) { return cPlayerShot[Index]; }
 
 	//プレイヤーのショットリクエスト
 	void RequestPlayerShot(const VECTOR& vPos, const VECTOR& vSpeed);

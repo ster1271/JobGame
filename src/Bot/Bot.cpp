@@ -1,5 +1,4 @@
 ﻿#include "Bot.h"
-#include "../Map/Map.h"
 
 const char BOT_FILE_PATH[] = { "data/Bot/Bot.x" };
 const float MOVE_SPEED = 5.0f;
@@ -22,7 +21,7 @@ CBot::~CBot()
 //初期化
 void CBot::Init()
 {
-	CObject::Init();
+	
 	cPos = VGet(50, 0.0f, 400.0f);
 	cSize = VGet(0.1f, 0.1f, 0.1);
 	cRotate = VGet(0.0f, 0.0f, 0.0f);
@@ -59,6 +58,14 @@ bool CBot::Load()
 		return false;
 }
 
+//情報更新
+void CBot::Updata()
+{
+	MV1SetPosition(iHndl, cPos);		//座標の更新
+	MV1SetScale(iHndl, cSize);			//サイズの更新
+	MV1SetRotationXYZ(iHndl, cRotate);	//回転値の更新
+}
+
 //描画
 void CBot::Draw()
 {
@@ -72,14 +79,14 @@ void CBot::Draw()
 		DrawSphere3D(cPos, SPERE_R, 32, GetColor(255, 0, 0), GetColor(255, 0, 0), TRUE);
 	}
 
-	DrawFormatString(0, 150, GetColor(0, 0, 0), "ボットX座標:%f", cPos.x);
-	DrawFormatString(0, 165, GetColor(0, 0, 0), "ボットY座標:%f", cPos.y);
-	DrawFormatString(0, 180, GetColor(0, 0, 0), "ボットZ座標:%f", cPos.z);
-	DrawFormatString(0, 195, GetColor(0, 0, 0), "Y軸角度:%f", cRotate.y);
-	DrawFormatString(0, 210, GetColor(0, 0, 0), "外積:%f", tmp_dir);
-	DrawFormatString(0, 225, GetColor(0, 0, 0), "距離:%2f", tmp_Range);
+	//DrawFormatString(0, 150, GetColor(0, 0, 0), "ボットX座標:%f", cPos.x);
+	//DrawFormatString(0, 165, GetColor(0, 0, 0), "ボットY座標:%f", cPos.y);
+	//DrawFormatString(0, 180, GetColor(0, 0, 0), "ボットZ座標:%f", cPos.z);
+	//DrawFormatString(0, 195, GetColor(0, 0, 0), "Y軸角度:%f", cRotate.y);
+	//DrawFormatString(0, 210, GetColor(0, 0, 0), "外積:%f", tmp_dir);
+	//DrawFormatString(0, 225, GetColor(0, 0, 0), "距離:%2f", tmp_Range);
 
-	cRoute.Draw(GetColor(0, 255, 0));
+	//cRoute.Draw(GetColor(0, 255, 0));
 }
 
 //マイフレーム行う処理
@@ -116,7 +123,7 @@ void CBot::Step(CMapManager& cMapManager)
 	}
 	
 	//更新処理
-	Update();
+	Updata();
 }
 
 

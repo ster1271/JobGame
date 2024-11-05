@@ -1,18 +1,11 @@
 #pragma once 
 #include "../Common.h"
-#include "../Object/Object.h"
-#include "../Object/ObjectManager.h"
-#include "../Check_Point/Check_Point.h"
 #include "../RouteSearch/RouteSearch.h"
-#include "../CollisionManager/CollisionManager.h"
 #include "../Map/MapManager.h"
 
 
-
-using namespace std;
-
 //ボットクラス
-class CBot :public CObject
+class CBot
 {
 private:
 	//ボットの状態遷移
@@ -26,6 +19,12 @@ private:
 	};
 	CRoute_Search cRoute;
 	BOT_STATE State_Id;
+
+	VECTOR cPos;
+	VECTOR cRotate;
+	VECTOR cSize;
+
+	int iHndl;
 
 	float tmp_dir;
 	float tmp_Range;
@@ -53,6 +52,18 @@ public:
 
 	//描画
 	void Draw();
+
+	//情報更新
+	void Updata();
+
+	//座標取得
+	VECTOR GetPos() { return cPos; }
+
+	//サイズ取得
+	VECTOR GetSize() { return cSize; }
+
+	//回転地取得
+	VECTOR GetRotate() { return cRotate; }
 
 	//フラグ取得
 	bool GetFinish() { return IsFinish; }

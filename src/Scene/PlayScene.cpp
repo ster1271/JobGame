@@ -217,6 +217,9 @@ void CPlayScene::Step()
 		cBot.Step(cMapManager);
 		//チェックポイント更新処理
 		cCheck_Manager.Step();
+
+		//当たり判定処理
+		cCollisionManager.TurretToEnemy(cEnemyManager, cShotManager);
 	}
 
 	//デバック時処理

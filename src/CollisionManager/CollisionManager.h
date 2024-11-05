@@ -1,5 +1,7 @@
 #pragma once
 #include "Collision/Collision.h"
+#include "../Shot/ShotManager.h"
+#include "../Turret/TurretManager.h"
 
 
 
@@ -7,8 +9,8 @@
 class CCollisionManager
 {
 public:
-
-	void TurretToEnemy();
+	//ƒ^ƒŒƒbƒg‚Ì’e‚Æ“G‚Ì“–‚½‚è”»’è
+	void TurretToEnemy(CEnemyManager& cEnemyManager, CShotManager& cShotManager);
 
 	
 };

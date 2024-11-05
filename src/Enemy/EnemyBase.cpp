@@ -1,7 +1,6 @@
 #include"EnemyBase.h"
 
 
-const float NEMY_RADIUS	(5.0f);		//モデルの半径
 const int MAX_LIFE		(3);		//最大体力
 const float SPEED		(1.0f);		//移動速度
 
@@ -17,7 +16,7 @@ CEnemyBase::CEnemyBase()
 	memset(&cSpeed, 0, sizeof(VECTOR));
 
 	State_Id = STATE_NUM;
-	Radius = NEMY_RADIUS;
+	Radius = ENEMY_RADIUS;
 	Life = 0;			//ライフ
 	HitCount = 0;		//弾の当たった回数
 	iHndl = -1;			//ハンドル

@@ -1,6 +1,8 @@
 #pragma once
-#include <math.h>
-#include <DxLib.h>
+#include "../Common.h"
+
+#define SHOT_RADIUS	(3.0f)
+
 
 class CShotBase
 {
@@ -38,6 +40,9 @@ public:
 
 	//ƒtƒ‰ƒOî•ñŠ“¾
 	bool GetIsActive() { return IsActive; }
+
+	//”¼Œaæ“¾
+	float GetRadius() { return SHOT_RADIUS; }
 
 	//“–‚½‚è”»’è‚Ìˆ—
 	void HitCalc()

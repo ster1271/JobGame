@@ -1,7 +1,5 @@
 #pragma once
 #include "EnemyBase.h"
-#include "../RouteSearch/RouteSearch.h"
-#include "../Bot/Bot.h"
 
 class CEnemy_Normal: public CEnemyBase
 {

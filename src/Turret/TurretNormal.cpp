@@ -38,12 +38,12 @@ void CTurret_Normal::Draw()
 		MV1DrawModel(iHndl);
 	}
 
-	DrawFormatString(0, 500, GetColor(255, 255, 0), "タレットX座標:%f", cPos.x);
-	DrawFormatString(0, 515, GetColor(255, 255, 0), "タレットY座標:%f", cPos.y);
-	DrawFormatString(0, 530, GetColor(255, 255, 0), "タレットZ座標:%f", cPos.z);
+	//DrawFormatString(0, 500, GetColor(255, 255, 0), "タレットX座標:%f", cPos.x);
+	//DrawFormatString(0, 515, GetColor(255, 255, 0), "タレットY座標:%f", cPos.y);
+	//DrawFormatString(0, 530, GetColor(255, 255, 0), "タレットZ座標:%f", cPos.z);
 
 
-	DrawFormatString(0, 550, GetColor(255, 255, 0), "タレットY軸:%f", cRotate.y);
+	//DrawFormatString(0, 550, GetColor(255, 255, 0), "タレットY軸:%f", cRotate.y);
 
 }
 
@@ -52,36 +52,47 @@ void CTurret_Normal::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManag
 {
 	
 	if (!IsActive)return;
-	
+
 	//角度計算
+	float MIN_RANGE = 999.9f;
 	for (int i = 0; i < ENEMY_NUM; i++)
 	{
-		//多分このfor文が
+		//このfor文でExitが呼ばれてたら敵が描画されない
 		CEnemy_Normal cEnemy = cEnemyManager.GetEnemy(i);
-		Turret_Rotate(cEnemy.GetPosition());
+
+		if (CCollision::IsHitCircle(cPos.x, cPos.z, 50.0f, cEnemy.GetPosition().x, cEnemy.GetPosition().z, 50.0f))
+		{
+			float Range = (cEnemy.GetPosition().x - cPos.x) * (cEnemy.GetPosition().x - cPos.x) + (cEnemy.GetPosition().z - cPos.z) * (cEnemy.GetPosition().z - cPos.z);
+			Range = sqrt(Range);
+			if (Range < MIN_RANGE)
+			{
+				MIN_RANGE = Range;
+			}
+			else
+				continue;
+
+			Turret_Rotate(cEnemy.GetPosition());
+
+			//弾の位置決定
+			VECTOR BulletPos = cPos;
+
+			//弾のスピード
+			const float SHOT_SPEED = 5.0f;
+			VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);
+
+			vSpd.x = sinf(cRotate.y) * -SHOT_SPEED;
+			vSpd.z = cosf(cRotate.y) * -SHOT_SPEED;
+			vSpd.y = 0.0f;
+
+			CoolTime++;
+			if (CoolTime > MAX_COOL_TIME)
+			{
+				//タレットの弾リクエスト
+				cShotManager.RequestTurretShot(BulletPos, vSpd);
+				CoolTime = 0;
+			}
+		}
 	}
-	
-
-
-	//弾の位置決定
-	VECTOR BulletPos = cPos;
-
-	//弾のスピード
-	const float SHOT_SPEED = 2.0f;
-	VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);
-
-	vSpd.x = sinf(cRotate.y) * -SHOT_SPEED;
-	vSpd.z = cosf(cRotate.y) * -SHOT_SPEED;
-	vSpd.y = 0.0f;
-	
-	CoolTime++;
-	if (CoolTime > MAX_COOL_TIME)
-	{
-		//タレットの弾リクエスト
-		cShotManager.RequestTurretShot(BulletPos, vSpd);
-		CoolTime = 0;
-	}
-
 }
 
 //後処理
@@ -99,7 +110,6 @@ void CTurret_Normal::TurretSpawn(const VECTOR &vPos)
 	if (IsActive) return;
 
 	cPos = vPos;
-	cPos.y += 5.0f;
 	cRotate = VGet(0.0, 0.0f, 0.0f);
 	cSize = VGet(0.1f, 0.1f, 0.1f);
 

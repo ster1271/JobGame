@@ -1,13 +1,11 @@
 #pragma once
-#include "../Common.h"
-#include "EnemyBase.h"
 #include "Enemy_Normal.h"
 #include "EnemyBoss.h"
-#include "../RouteSearch/RouteSearch.h"
 #include "../Bot/Bot.h"
-#include "../Map/Map.h"
+#include "../Map/MapManager.h"
+#include "../RouteSearch/RouteSearch.h"
 
-#define ENEMY_NUM	(1)
+#define ENEMY_NUM	(2)
 
 //敵の種類
 enum TYPE_ENEMY
@@ -52,5 +50,5 @@ public:
 
 private:
 	//敵リクエスト
-	void RequestEnemy();
+	void RequestEnemy(int Index);
 };

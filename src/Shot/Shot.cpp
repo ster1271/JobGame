@@ -71,9 +71,9 @@ void CShot::Draw()
 	{
 		MV1DrawModel(iHndl);
 
-		DrawFormatString(500, 0, GetColor(255, 0, 0), "X座標：%f", cPos.x);
+		/*DrawFormatString(500, 0, GetColor(255, 0, 0), "X座標：%f", cPos.x);
 		DrawFormatString(500, 15, GetColor(255, 0, 0), "Y座標：%f", cPos.y);
-		DrawFormatString(500, 30, GetColor(255, 0, 0), "Z座標：%f", cPos.z);
+		DrawFormatString(500, 30, GetColor(255, 0, 0), "Z座標：%f", cPos.z);*/
 		/*DrawSphere3D(vPos, m_Radius, 16, GetColor(255, 255, 255), GetColor(255, 255, 255), FALSE);*/
 
 	}

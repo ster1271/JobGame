@@ -89,8 +89,11 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 		cEnemyBoss[Enemy_Index].Step(cBot, cMapManager);
 	}
 
-	//リクエスト
-	RequestEnemy();
+	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
+	{
+		//リクエスト
+		RequestEnemy(Enemy_Index);
+	}
 }
 
 //描画処理
@@ -105,18 +108,15 @@ void CEnemyManager::Draw()
 
 
 //敵リクエスト
-void CEnemyManager::RequestEnemy()
+void CEnemyManager::RequestEnemy(int Index)
 {
-	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
-	{
-		//敵1のスポーン
-		VECTOR vPos = VGet(300.0f, 5.0f, 100.0f);
-		VECTOR vSpeed = VGet(0.0f, 0.0f, 0.5f);
-		cEnemy_Normal[Enemy_Index].RequestEnemy(vPos, vSpeed);
+	//敵1のスポーン
+	VECTOR vPos = VGet(300.0f, 5.0f, 100.0f);
+	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.5f);
+	cEnemy_Normal[Index].RequestEnemy(vPos, vSpeed);
 
-		//敵2のスポーン
-		vPos = VGet(300.0f, 5.0f, 100.0f);
-		vSpeed = VGet(0.0f, 0.0f, 0.3f);
-		cEnemyBoss[Enemy_Index].RequestEnemy(vPos, vSpeed);
-	}
+	//敵2のスポーン
+	vPos = VGet(300.0f, 5.0f, 100.0f);
+	vSpeed = VGet(0.0f, 0.0f, 0.3f);
+	cEnemyBoss[Index].RequestEnemy(vPos, vSpeed);
 }

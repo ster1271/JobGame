@@ -1,8 +1,12 @@
 #pragma once
-#include <DxLib.h>
 #include "../Common.h"
-#include <math.h>
+#include "../CollisionManager/Collision/Collision.h"
+#include "../Bot/Bot.h"
+#include "../RouteSearch/RouteSearch.h"
 #include "../SoundManager/SoundManager.h"
+
+const float ENEMY_RADIUS	(10.0f);		//モデルの半径
+
 
 class CEnemyBase
 {
@@ -65,23 +69,21 @@ public:
 	VECTOR GetPosition() { return cPos; }
 
 	//モデルの半径取得
-	float GetRadius()
-	{
-		return Radius;
-	}
+	float GetRadius() {	return ENEMY_RADIUS;}
 
 	//当たり判定の処理
-	virtual void HitCalc()
+	void HitCalc()
 	{
 		CSoundManager::Play(CSoundManager::SOUNDID_SE_EXPLORE);
 		Life -= 1;
-		cPos.z += 2.0f;
 		HitCount++;
 
 		//ライフがなくなったらフラグをおる
 		if (Life <= 0)
 		{
 			HitCount = 0;
+			State_Id = STATE_SEARCH;
+			List.clear();
 			IsActive = false;
 		}
 	}

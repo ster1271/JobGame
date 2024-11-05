@@ -1,6 +1,6 @@
 #include "Enemy_Normal.h"
 
-const int MAX_LIFE = 3;		//最大体力
+const int MAX_LIFE = 20;		//最大体力
 const float SPEED = 5.0f;
 
 //コンストラクタ
@@ -32,13 +32,13 @@ void CEnemy_Normal::Draw()
 	if (IsActive == false)	return;
 
 	MV1DrawModel(iHndl);
-	CDraw3D::DrawBox3D(cPos, VGet(25.0f, 25.0f, 25.0f));
-	cRoute_Search.Draw(GetColor(0, 0, 255));
+	DrawSphere3D(cPos, Radius, 16, GetColor(255, 255, 255), GetColor(255, 255, 255), FALSE);
+	//cRoute_Search.Draw(GetColor(0, 0, 255));
 
-	DrawString(200, 200, "描画中", GetColor(0, 0, 255));
-	DrawFormatString(200, 215, GetColor(0, 0, 255), "X座標:%f", cPos.x);
-	DrawFormatString(200, 230, GetColor(0, 0, 255), "Y座標:%f", cPos.y);
-	DrawFormatString(200, 245, GetColor(0, 0, 255), "Z座標:%f", cPos.z);
+	//DrawString(200, 200, "描画中", GetColor(0, 0, 255));
+	//DrawFormatString(200, 215, GetColor(0, 0, 255), "X座標:%f", cPos.x);
+	//DrawFormatString(200, 230, GetColor(0, 0, 255), "Y座標:%f", cPos.y);
+	//DrawFormatString(200, 245, GetColor(0, 0, 255), "Z座標:%f", cPos.z);
 }
 
 //毎フレーム行う処理
@@ -101,6 +101,9 @@ bool CEnemy_Normal::RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed)
 	cRotate = VGet(0.0f, DX_PI_F / 2, 0.0f);
 	cSpeed = vSpeed;
 	Life = MAX_LIFE;
+	State_Id = STATE_SEARCH;
+	List.clear();
+	ListCnt = 0;
 	IsActive = true;
 
 	return true;
