@@ -76,10 +76,10 @@ void CPlayScene::Draw()
 		cMapManager.Draw();
 		//キャラクター描画
 		cCharacterManager.Draw();
+		//タレット描画
+		cTurretManager.Draw();
 		//エネミー描画
 		cEnemyManager.Draw();
-		//タレット描画
-		//cTurretManager.Draw();
 		//弾描画
 		cShotManager.Draw();
 		//ボット描画
@@ -201,19 +201,6 @@ void CPlayScene::Step()
 	//プレイ時処理
 	if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_PALY)
 	{
-		//メインキャラ視点変更
-		if (CInput::IsKeyPush(KEY_INPUT_UP))
-		{
-			//メインキャラへ変更
-			cCharacterManager.SetMainID(MainID_ATTACKER);
-		}
-		//else if (CInput::IsKeyPush(KEY_INPUT_DOWN))
-		//{
-		//	//CPUキャラへ変更
-		//	//cCharacterManager.SetMainID(MainID_TANK);
-		//	cCharacterManager.SetMainID(MainID_SUPPORT);
-		//}
-
 		//オブジェクト更新処理
 		cObjectManager.Step();
 		//マップ全般処理 
@@ -223,7 +210,7 @@ void CPlayScene::Step()
 		//エネミー更新処理
 		cEnemyManager.Step(cBot, cMapManager);
 		//タレット更新処理
-		cTurretManager.Step(cShotManager, cCharacterManager.GetPosition());
+		cTurretManager.Step(cShotManager, cEnemyManager);
 		//弾更新処理
 		cShotManager.Step(cCharacterManager.GetPosition());
 		//ボット更新処理

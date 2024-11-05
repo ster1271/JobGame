@@ -3,6 +3,7 @@
 #include "../MyLibrary/MyLibrary.h"
 #include "../Object/Object.h"
 #include "../Shot/ShotManager.h"
+#include "../Enemy/EnemyManager.h"
 
 //タレットベースクラス
 class CTurretBase
@@ -35,7 +36,7 @@ public:
 	virtual void Draw() = 0;
 
 	//毎フレーム行う処理
-	virtual void Step(CShotManager& cShotManager, const VECTOR PayerPos) = 0;
+	virtual void Step(CShotManager& cShotManager, CEnemyManager& cEnemyManager) = 0;
 
 	//情報更新
 	void Update();
@@ -62,7 +63,7 @@ public:
 	virtual void Turret_Power_Up();
 
 	//タレット回転処理
-	virtual void Turret_Rotate(const VECTOR vPos);
+	virtual void Turret_Rotate(VECTOR vPos);
 
 };
 

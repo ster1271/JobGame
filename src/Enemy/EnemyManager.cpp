@@ -79,7 +79,8 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 	{
 
 		
-	}*/
+	}
+	*/
 
 
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
@@ -108,12 +109,12 @@ void CEnemyManager::RequestEnemy()
 {
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
 	{
-		VECTOR vPos = VGet(GetRand(100.0f) + 100.0f, 5.0f, 100.0f);
+		//敵1のスポーン
+		VECTOR vPos = VGet(300.0f, 5.0f, 100.0f);
 		VECTOR vSpeed = VGet(0.0f, 0.0f, 0.5f);
 		cEnemy_Normal[Enemy_Index].RequestEnemy(vPos, vSpeed);
 
-		
-
+		//敵2のスポーン
 		vPos = VGet(300.0f, 5.0f, 100.0f);
 		vSpeed = VGet(0.0f, 0.0f, 0.3f);
 		cEnemyBoss[Enemy_Index].RequestEnemy(vPos, vSpeed);

@@ -48,13 +48,19 @@ void CTurret_Normal::Draw()
 }
 
 //毎フレーム行う処理
-void CTurret_Normal::Step(CShotManager& cShotManager, const VECTOR PayerPos)
+void CTurret_Normal::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManager)
 {
 	
 	if (!IsActive)return;
 	
 	//角度計算
-	Turret_Rotate(PayerPos);
+	for (int i = 0; i < ENEMY_NUM; i++)
+	{
+		//多分このfor文が
+		CEnemy_Normal cEnemy = cEnemyManager.GetEnemy(i);
+		Turret_Rotate(cEnemy.GetPosition());
+	}
+	
 
 
 	//弾の位置決定

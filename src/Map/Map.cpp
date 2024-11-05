@@ -87,13 +87,13 @@ void CMap::MapLoad()
 			{
 				tmp.vPos = VGet(i * MAP_SIZE, 0.0f, cnt * MAP_SIZE);
 
-				if (num[i] == 0)
-				{
-					tmp.IsMap = false;	//‰½‚à‚È‚µ
-				}
-				else if(num[i] == 1)
+				if (num[i] == 1)
 				{
 					tmp.IsMap = true;	//•Ç
+				}
+				else
+				{
+					tmp.IsMap = false;	//•Ç‚¶‚á‚È‚¢
 				}
 				MapList.push_back(tmp);
 			}

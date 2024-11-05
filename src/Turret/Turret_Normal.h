@@ -23,8 +23,7 @@ public:
 	void Draw();
 
 	//毎フレーム行う処理
-	void Step(CShotManager& cShotManager, const VECTOR PayerPos);
-
+	void Step(CShotManager& cShotManager, CEnemyManager& cEnemyManager);
 
 	//後処理
 	void Exit();
@@ -33,7 +32,6 @@ public:
 	void TurretSpawn(const VECTOR &vPos);
 
 	//タレット弾発射処理
-
 
 	//タレット強化
 	void Turret_Power_Up();

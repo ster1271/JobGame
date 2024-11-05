@@ -39,11 +39,11 @@ void CTurretManager::Exit()
 }
 
 //ŒJ‚è•Ô‚µs‚¤ˆ—
-void CTurretManager::Step(CShotManager& cShotManager, VECTOR PlayerPos)
+void CTurretManager::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManager)
 {
 	for (int TurretIndex = 0; TurretIndex < Turret_List.size(); TurretIndex++)
 	{
-		Turret_List[TurretIndex]->Step(cShotManager, PlayerPos);
+		Turret_List[TurretIndex]->Step(cShotManager, cEnemyManager);
 	}
 
 	Update();

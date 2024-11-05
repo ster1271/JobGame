@@ -57,10 +57,10 @@ public:
 	{
 		if (MainID == MainID_ATTACKER)
 			return cAttacker.GetPos();
-		else if (MainID == MainID_TANK)
+		/*else if (MainID == MainID_TANK)
 			return cTank.GetPos();
 		else if (MainID == MainID_SUPPORT)
-			return cSupport.GetPos();
+			return cSupport.GetPos();*/
 	}
 
 	//‘€ìƒLƒƒƒ‰‚ÌŠp“xæ“¾
@@ -68,10 +68,10 @@ public:
 	{
 		if (MainID == MainID_ATTACKER)
 			return cAttacker.GetRotate();
-		else if (MainID == MainID_TANK)
+		/*else if (MainID == MainID_TANK)
 			return cTank.GetRotate();
 		else if (MainID == MainID_SUPPORT)
-			return cSupport.GetRotate();
+			return cSupport.GetRotate();*/
 	}
 
 };

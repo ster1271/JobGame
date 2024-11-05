@@ -7,10 +7,7 @@
 #include "../Bot/Bot.h"
 #include "../Map/Map.h"
 
-
-using namespace std;
-
-#define ENEMY_NUM	(3)
+#define ENEMY_NUM	(1)
 
 //“G‚Ìí—Ş
 enum TYPE_ENEMY
@@ -49,6 +46,9 @@ public:
 
 	//•`‰æˆ—
 	void Draw();
+
+	//“G‚Ìî•ñæ“¾
+	CEnemy_Normal& GetEnemy(int id) { return cEnemy_Normal[id]; }
 
 private:
 	//“GƒŠƒNƒGƒXƒg

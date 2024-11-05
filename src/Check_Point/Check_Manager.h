@@ -3,7 +3,7 @@
 #include "Check_Point.h"
 #include "../Input/Input.h"
 
-#define MAX_NUM	(5)
+#define CHECK_MAX_NUM	(5)
 
 enum CHECK_ID
 {
@@ -24,7 +24,7 @@ private:
 
 	CHECK_ID Check_id;
 	int check_Hndl;
-	CCheck_Point cCheck_Point[MAX_NUM];
+	CCheck_Point cCheck_Point[CHECK_MAX_NUM];
 
 
 public:

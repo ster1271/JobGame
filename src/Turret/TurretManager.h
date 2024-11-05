@@ -31,7 +31,7 @@ public:
 	//終了処理
 	void Exit();
 	//繰り返し行う処理
-	void Step(CShotManager& cShotManager ,VECTOR PlayerPos);
+	void Step(CShotManager& cShotManager, CEnemyManager& cEnemyManager);
 	//更新処理
 	void Update();
 	//描画処理

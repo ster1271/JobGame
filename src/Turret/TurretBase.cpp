@@ -75,7 +75,7 @@ void CTurretBase::Turret_Power_Up()
 
 
 //タレット発射処理
-void CTurretBase::Turret_Rotate(const VECTOR vPos)
+void CTurretBase::Turret_Rotate(VECTOR vPos)
 {
 	//タレットと対象のベクトルを計算
 	VECTOR Vtmp;

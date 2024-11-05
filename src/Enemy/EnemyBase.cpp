@@ -61,11 +61,11 @@ void CEnemyBase::Init()
 void CEnemyBase::Exit()
 {
 	//ƒ‚ƒfƒ‹ƒnƒ“ƒhƒ‹‰ğ•ú
-	if (iHndl != -1)
+	/*if (iHndl != -1)
 	{
 		MV1DeleteModel(iHndl);
 		iHndl = -1;
-	}
+	}*/
 
 	//‚Ğ‚Æ‚Ü‚¸‰Šú‰»
 	memset(&cPos, 0, sizeof(VECTOR));
