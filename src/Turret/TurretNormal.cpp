@@ -38,13 +38,13 @@ void CTurret_Normal::Draw()
 		MV1DrawModel(iHndl);
 	}
 
-	//DrawFormatString(0, 500, GetColor(255, 255, 0), "タレットX座標:%f", cPos.x);
-	//DrawFormatString(0, 515, GetColor(255, 255, 0), "タレットY座標:%f", cPos.y);
-	//DrawFormatString(0, 530, GetColor(255, 255, 0), "タレットZ座標:%f", cPos.z);
-
-
-	//DrawFormatString(0, 550, GetColor(255, 255, 0), "タレットY軸:%f", cRotate.y);
-
+	if (IS_DEBUG)
+	{
+		DrawFormatString(0, 500, GetColor(255, 255, 0), "タレットX座標:%f", cPos.x);
+		DrawFormatString(0, 515, GetColor(255, 255, 0), "タレットY座標:%f", cPos.y);
+		DrawFormatString(0, 530, GetColor(255, 255, 0), "タレットZ座標:%f", cPos.z);
+		DrawFormatString(0, 550, GetColor(255, 255, 0), "タレットY軸:%f", cRotate.y);
+	}
 }
 
 //毎フレーム行う処理

@@ -1,4 +1,4 @@
-#include "Shot.h"
+#include "PlayerShot.h"
 #include "../Base/Base.h"
 #include "../Character/Attacker.h"
 #include "../Character/Tank.h"
@@ -7,14 +7,14 @@
 //----------------------------------------
 //コンストラクタ
 //----------------------------------------
-CShot::CShot()
+CPlayerShot::CPlayerShot()
 {
 }
 
 //----------------------------------------
 //デストラクタ
 //----------------------------------------
-CShot::~CShot()
+CPlayerShot::~CPlayerShot()
 {
 	//念のため
 	Exit();
@@ -23,7 +23,7 @@ CShot::~CShot()
 //----------------------------------------
 //初期化
 //----------------------------------------
-void CShot::Init()
+void CPlayerShot::Init()
 {
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
@@ -39,7 +39,7 @@ void CShot::Init()
 //----------------------------------------
 //終了処理
 //----------------------------------------
-void CShot::Exit()
+void CPlayerShot::Exit()
 {
 	//モデルハンドル解放
 	if (iHndl != -1)
@@ -53,7 +53,7 @@ void CShot::Exit()
 //----------------------------------------
 //データロード
 //----------------------------------------
-void CShot::Load(int iMdlHndl)
+void CPlayerShot::Load(int iMdlHndl)
 {
 	if (iHndl == -1)
 	{
@@ -65,17 +65,19 @@ void CShot::Load(int iMdlHndl)
 //----------------------------------------
 //描画処理
 //----------------------------------------
-void CShot::Draw()
+void CPlayerShot::Draw()
 {
 	if (IsActive)
 	{
 		MV1DrawModel(iHndl);
 
-		/*DrawFormatString(500, 0, GetColor(255, 0, 0), "X座標：%f", cPos.x);
-		DrawFormatString(500, 15, GetColor(255, 0, 0), "Y座標：%f", cPos.y);
-		DrawFormatString(500, 30, GetColor(255, 0, 0), "Z座標：%f", cPos.z);*/
-		/*DrawSphere3D(vPos, m_Radius, 16, GetColor(255, 255, 255), GetColor(255, 255, 255), FALSE);*/
-
+		if (IS_DEBUG)
+		{
+			DrawFormatString(500, 0, GetColor(255, 0, 0), "プレイヤー弾X座標：%f", cPos.x);
+			DrawFormatString(500, 15, GetColor(255, 0, 0), "プレイヤー弾Y座標：%f", cPos.y);
+			DrawFormatString(500, 30, GetColor(255, 0, 0), "プレイヤー弾Z座標：%f", cPos.z);
+			DrawSphere3D(cPos, SHOTRADIUS, 16, GetColor(255, 255, 255), GetColor(255, 255, 255), FALSE);
+		}
 	}
 
 }
@@ -84,7 +86,7 @@ void CShot::Draw()
 //----------------------------------------
 //毎フレーム呼ぶ処理
 //----------------------------------------
-void CShot::Step(VECTOR Pos)
+void CPlayerShot::Step(VECTOR Pos)
 {
 	if (!IsActive) return;
 
@@ -109,7 +111,7 @@ void CShot::Step(VECTOR Pos)
 //----------------------------------------
 //リクエスト
 //----------------------------------------
-bool CShot::RequestShot(const VECTOR &vPos, const VECTOR &vSpeed)
+bool CPlayerShot::RequestShot(const VECTOR &vPos, const VECTOR &vSpeed)
 {
 	//すでに発射されている
 	if (IsActive) return false;

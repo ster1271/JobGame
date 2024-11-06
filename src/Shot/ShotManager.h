@@ -1,5 +1,5 @@
 #pragma once
-#include "Shot.h"
+#include "PlayerShot.h"
 #include "TurretShot.h"
 #include "../SoundManager/SoundManager.h"
 
@@ -13,7 +13,7 @@ private:
 	int TurretHndl;
 	int Count;
 
-	CShot cPlayerShot[PL_SHOT_NUM];
+	CPlayerShot cPlayerShot[PL_SHOT_NUM];
 	CTurretShot cTurretShot[TURRET_SHOT_NUM];
 
 public:
@@ -37,7 +37,7 @@ public:
 	CTurretShot& GetTurretShotInfo(int Index) { return cTurretShot[Index]; }
 
 	//プレイヤー弾情報取得
-	CShot& GetPlayerShotInfo(int Index) { return cPlayerShot[Index]; }
+	CPlayerShot& GetPlayerShotInfo(int Index) { return cPlayerShot[Index]; }
 
 	//プレイヤーのショットリクエスト
 	void RequestPlayerShot(const VECTOR& vPos, const VECTOR& vSpeed);

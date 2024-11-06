@@ -219,7 +219,8 @@ void CPlayScene::Step()
 		cCheck_Manager.Step();
 
 		//当たり判定処理
-		cCollisionManager.TurretToEnemy(cEnemyManager, cShotManager);
+		cCollisionManager.TurretToEnemy(cShotManager, cEnemyManager);
+		cCollisionManager.PlayerToEnemy(cShotManager, cEnemyManager);
 	}
 
 	//デバック時処理

@@ -4,14 +4,14 @@
 const int SHOTRADIUS	(1);
 const float GRAVITY		(0.01f);
 
-class CShot:public CShotBase
+class CPlayerShot:public CShotBase
 {
 private:
 
 public:
 	//コンストラクタ・デストラクタ
-	CShot();
-	~CShot();
+	CPlayerShot();
+	~CPlayerShot();
 
 	//初期化
 	void Init();

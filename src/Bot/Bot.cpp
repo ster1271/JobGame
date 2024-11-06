@@ -79,14 +79,18 @@ void CBot::Draw()
 		DrawSphere3D(cPos, SPERE_R, 32, GetColor(255, 0, 0), GetColor(255, 0, 0), TRUE);
 	}
 
-	//DrawFormatString(0, 150, GetColor(0, 0, 0), "ボットX座標:%f", cPos.x);
-	//DrawFormatString(0, 165, GetColor(0, 0, 0), "ボットY座標:%f", cPos.y);
-	//DrawFormatString(0, 180, GetColor(0, 0, 0), "ボットZ座標:%f", cPos.z);
-	//DrawFormatString(0, 195, GetColor(0, 0, 0), "Y軸角度:%f", cRotate.y);
-	//DrawFormatString(0, 210, GetColor(0, 0, 0), "外積:%f", tmp_dir);
-	//DrawFormatString(0, 225, GetColor(0, 0, 0), "距離:%2f", tmp_Range);
 
-	//cRoute.Draw(GetColor(0, 255, 0));
+	if (IS_DEBUG)
+	{
+		DrawFormatString(0, 150, GetColor(0, 0, 0), "ボットX座標:%f", cPos.x);
+		DrawFormatString(0, 165, GetColor(0, 0, 0), "ボットY座標:%f", cPos.y);
+		DrawFormatString(0, 180, GetColor(0, 0, 0), "ボットZ座標:%f", cPos.z);
+		DrawFormatString(0, 195, GetColor(0, 0, 0), "Y軸角度:%f", cRotate.y);
+		DrawFormatString(0, 210, GetColor(0, 0, 0), "外積:%f", tmp_dir);
+		DrawFormatString(0, 225, GetColor(0, 0, 0), "距離:%2f", tmp_Range);
+
+		cRoute.Draw(GetColor(0, 255, 0));
+	}
 }
 
 //マイフレーム行う処理

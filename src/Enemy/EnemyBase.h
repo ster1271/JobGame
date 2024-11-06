@@ -75,7 +75,7 @@ public:
 	void HitCalc()
 	{
 		CSoundManager::Play(CSoundManager::SOUNDID_SE_EXPLORE);
-		Life -= 1;
+		Life--;
 		HitCount++;
 
 		//ライフがなくなったらフラグをおる
