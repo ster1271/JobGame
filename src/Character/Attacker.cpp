@@ -127,6 +127,7 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	//ƒ^ƒŒƒbƒg¶¬ˆ—
 	if (CInput::IsKeyPush(KEY_INPUT_P))
 	{
+
 		cTurretManager.TurretSpawn(cPos);
 	}
 
