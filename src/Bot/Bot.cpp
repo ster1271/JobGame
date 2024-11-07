@@ -23,7 +23,7 @@ void CBot::Init()
 {
 	
 	cPos = VGet(50, 0.0f, 400.0f);
-	cSize = VGet(0.1f, 0.1f, 0.1);
+	cSize = VGet(0.06f, 0.06f, 0.06f);
 	cRotate = VGet(0.0f, 0.0f, 0.0f);
 
 	Route_List.clear();

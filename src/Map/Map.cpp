@@ -85,7 +85,7 @@ void CMap::MapLoad()
 		{
 			for (int i = 0; i < MAP_MAX_NUM; i++)
 			{
-				tmp.vPos = VGet(i * MAP_SIZE, 0.0f, cnt * MAP_SIZE);
+				tmp.vPos = VGet(i * MAP_SIZE, 5.0f, cnt * MAP_SIZE);
 
 				if (num[i] == 1)
 				{
