@@ -16,6 +16,9 @@ private:
 	PLAYER_STATE Id;
 	PLAYER_STATE oldId;
 
+	DINPUT_JOYSTATE input;
+	int PadNum;		//ƒpƒbƒh‚Ì“ü—Íî•ñ
+
 	void Default();
 	void Run();
 	void RunShot();

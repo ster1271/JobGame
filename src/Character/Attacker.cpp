@@ -107,7 +107,7 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	}
 
 	//発射処理
-	if (CInput::IsKeyPush(KEY_INPUT_SPACE))
+	if (input.Buttons[0] == 128/*CInput::IsKeyPush(KEY_INPUT_SPACE)*/)
 	{
 		Id = STATE_SHOT;
 		//弾の位置決定
@@ -153,7 +153,25 @@ void CAttacker::Draw()
 		DrawFormatString(0, 115, GetColor(255, 0, 0), "アタッカーY座標:%f", cPos.y);
 		DrawFormatString(0, 130, GetColor(255, 0, 0), "アタッカーZ座標:%f", cPos.z);
 
-		DrawFormatString(0, 0, GetColor(255, 0, 0), "アタッカーY軸:%f", cRotate.y);
+		//DrawFormatString(0, 0, GetColor(255, 0, 0), "アタッカーY軸:%f", cRotate.y);
+		//DrawFormatString(0, 0, GetColor(255, 0, 0), "コントローラーの接続数:%d",	PadNum);
+
+		DrawFormatString(0, 16, GetColor(255, 0, 0), "X:%d Y:%d Z:%d",
+			input.X, input.Y, input.Z);
+		DrawFormatString(0, 32, GetColor(255, 0, 0), "Rx:%d Ry:%d Rz:%d",
+			input.Rx, input.Ry, input.Rz);
+		DrawFormatString(0, 48, GetColor(255, 0, 0), "Slider 0:%d 1:%d",
+			input.Slider[0], input.Slider[1]);
+		DrawFormatString(0, 64, GetColor(255, 0, 0), "POV 0:%d 1:%d 2:%d 3:%d",
+			input.POV[0], input.POV[1],
+			input.POV[2], input.POV[3]);
+
+		for (int i = 0; i < 32; i++)
+		{
+			DrawFormatString(300 + i % 8 * 64, 64 + i / 8 * 16, GetColor(255, 0, 0),
+				"%2d:%d", i, input.Buttons[i]);
+		}
+
 	}
 }
 

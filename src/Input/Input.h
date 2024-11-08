@@ -23,8 +23,6 @@ public:
 
 	//’Pƒ‚É‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
 	static bool IsKeyDown(int Key_code);
-
-	static bool IsMousePush();
 };
 
 

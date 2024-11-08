@@ -3,7 +3,7 @@
 //プレイヤーとマップの当たり判定
 void CCollisionManager::PlayerToMap(CCharacterManager& cCharaManager, CMapManager& cMapManager)
 {
-	CAttacker cPlayer = cCharaManager.
+	/*CAttacker cPlayer = cCharaManager.*/
 }
 
 
