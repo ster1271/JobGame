@@ -53,6 +53,8 @@ void CAttacker::RunShot()
 //毎フレーム行う処理
 void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 {
+	GetJoypadDirectInputState(DX_INPUT_PAD1, &pad);
+
 	switch (Id)
 	{
 	case STATE_DEFAULT:
@@ -73,12 +75,12 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 
 	//キャラクターの移動
 	float fSpd = 0.0f;
-	if (CInput::IsKeyKeep(KEY_INPUT_W))
+	if (/*CInput::IsKeyKeep(KEY_INPUT_W)*/ pad.Y == -1000)
 	{
 		Id = STATE_RUN;
 		fSpd = -MOVESPEED;
 	}
-	else if (CInput::IsKeyKeep(KEY_INPUT_S))
+	else if (/*CInput::IsKeyKeep(KEY_INPUT_S)*/pad.Y == 1000)
 	{
 		Id = STATE_RUN;
 		fSpd = MOVESPEED;
@@ -97,17 +99,18 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	cPos.x += vSpeed.x;
 	cPos.z += vSpeed.z;
 
-	if (CInput::IsKeyKeep(KEY_INPUT_A))
+	if (/*CInput::IsKeyKeep(KEY_INPUT_A)*/pad.Rx == -1000)
 	{
 		cRotate.y -= 0.05f;
 	}
-	if (CInput::IsKeyKeep(KEY_INPUT_D))
+	if (/*CInput::IsKeyKeep(KEY_INPUT_D)*/pad.Rx == 1000)
 	{
 		cRotate.y += 0.05f;
 	}
 
 	//発射処理
-	if (input.Buttons[0] == 128/*CInput::IsKeyPush(KEY_INPUT_SPACE)*/)
+	
+	if (/*CInput::IsKeyPush(KEY_INPUT_SPACE) || CGamePad::IsPadPush(DX_INPUT_PAD1, BUTTON_A) || */ pad.Z == -1000)
 	{
 		Id = STATE_SHOT;
 		//弾の位置決定
@@ -125,7 +128,7 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	}
 
 	//タレット生成処理
-	if (CInput::IsKeyPush(KEY_INPUT_P))
+	if (CInput::IsKeyPush(KEY_INPUT_P) || CGamePad::IsPadPush(DX_INPUT_PAD1, BUTTON_A))
 	{
 
 		cTurretManager.TurretSpawn(cPos);
@@ -156,22 +159,23 @@ void CAttacker::Draw()
 		//DrawFormatString(0, 0, GetColor(255, 0, 0), "アタッカーY軸:%f", cRotate.y);
 		//DrawFormatString(0, 0, GetColor(255, 0, 0), "コントローラーの接続数:%d",	PadNum);
 
-		DrawFormatString(0, 16, GetColor(255, 0, 0), "X:%d Y:%d Z:%d",
-			input.X, input.Y, input.Z);
-		DrawFormatString(0, 32, GetColor(255, 0, 0), "Rx:%d Ry:%d Rz:%d",
-			input.Rx, input.Ry, input.Rz);
-		DrawFormatString(0, 48, GetColor(255, 0, 0), "Slider 0:%d 1:%d",
-			input.Slider[0], input.Slider[1]);
-		DrawFormatString(0, 64, GetColor(255, 0, 0), "POV 0:%d 1:%d 2:%d 3:%d",
-			input.POV[0], input.POV[1],
-			input.POV[2], input.POV[3]);
-
+		// 画面に構造体の中身を描画
+		int Color = GetColor(0, 0, 0);
+		DrawFormatString(0, 0, Color, "X:%d Y:%d Z:%d",
+			pad.X, pad.Y, pad.Z);
+		DrawFormatString(0, 16, Color, "Rx:%d Ry:%d Rz:%d",
+			pad.Rx, pad.Ry, pad.Rz);
+		DrawFormatString(0, 32, Color, "Slider 0:%d 1:%d",
+			pad.Slider[0], pad.Slider[1]);
+		DrawFormatString(0, 48, Color, "POV 0:%d 1:%d 2:%d 3:%d",
+			pad.POV[0], pad.POV[1],
+			pad.POV[2], pad.POV[3]);
+		DrawString(0, 64, "Button", Color);
 		for (int i = 0; i < 32; i++)
 		{
-			DrawFormatString(300 + i % 8 * 64, 64 + i / 8 * 16, GetColor(255, 0, 0),
-				"%2d:%d", i, input.Buttons[i]);
+			DrawFormatString(64 + i % 8 * 64, 64 + i / 8 * 16, Color,
+				"%2d:%d", i, pad.Buttons[i]);
 		}
-
 	}
 }
 

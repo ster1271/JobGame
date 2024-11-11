@@ -1,5 +1,6 @@
 #pragma once
 #include "../Base/Base.h"
+#include "../GamePad/GamePad.h"
 
 enum PLAYER_STATE
 {
@@ -16,8 +17,7 @@ private:
 	PLAYER_STATE Id;
 	PLAYER_STATE oldId;
 
-	DINPUT_JOYSTATE input;
-	int PadNum;		//ƒpƒbƒh‚Ì“ü—Íî•ñ
+	DINPUT_JOYSTATE pad;
 
 	void Default();
 	void Run();

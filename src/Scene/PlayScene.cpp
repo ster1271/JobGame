@@ -70,23 +70,23 @@ void CPlayScene::Draw()
 	//プレイ時処理
 	if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_PALY)
 	{
+		
+		//オブジェクト描画
+		cObjectManager.Draw();
+		//マップ全般描画 
+		cMapManager.Draw();
 		//キャラクター描画
 		cCharacterManager.Draw();
-
-		////オブジェクト描画
-		cObjectManager.Draw();
-		////マップ全般描画 
-		cMapManager.Draw();
-		////タレット描画
-		//cTurretManager.Draw();
-		////エネミー描画
-		//cEnemyManager.Draw();
-		////弾描画
+		//タレット描画
+		cTurretManager.Draw();
+		//エネミー描画
+		cEnemyManager.Draw();
+		//弾描画
 		cShotManager.Draw();
-		////ボット描画
-		//cBot.Draw();
-		////チェックポイント描画
-		//cCheck_Manager.Draw();
+		//ボット描画
+		cBot.Draw();
+		//チェックポイント描画
+		cCheck_Manager.Draw();
 	}
 	else if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_DEBUG)
 	{

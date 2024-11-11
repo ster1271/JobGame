@@ -5,6 +5,7 @@
 #include <vector>
 #include "MyLibrary/MyLibrary.h"
 #include "Input/Input.h"
+#include "GamePad/GamePad.h"
 #include "Draw3D/Draw3D.h"
 
 #define SCREEN_SIZE_X 1280	//âÊñ ÉTÉCÉY â°

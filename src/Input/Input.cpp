@@ -6,7 +6,8 @@
 char currentKeyBuf[KEY_BUF_LEN] = { 0 };
 
 //前フレームのキー情報
-char preKeyBuf[KEY_BUF_LEN]= { 0 };
+char preKeyBuf[KEY_BUF_LEN] = { 0 };
+
 
 //入力制御初期化
 void CInput::InitInput()

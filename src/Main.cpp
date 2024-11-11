@@ -1,7 +1,5 @@
-#include "DxLib.h"
 #include "Common.h"
 #include "DrawFPS/fps.h"
-#include "Input/Input.h"
 #include "Scene/SceneManager.h"
 
 
@@ -27,6 +25,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	
 	//インプット初期化
 	CInput::InitInput();
+	CGamePad::InitGamePad();
 
 	//シーンマネージャー
 	SceneManager cSceneManager;
@@ -77,6 +76,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			ClearDrawScreen();
 
 			CInput::StepInput();
+			CGamePad::StepGamePad();
 
 			//-----------------------------------------
 			//ここからゲームの本体を書くことになる

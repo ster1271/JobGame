@@ -77,7 +77,7 @@ void CCharacterManager::Step(CShotManager& cShotManager, CTurretManager& cTurret
 void CCharacterManager::Draw()
 {
 	//ƒƒCƒ“ƒLƒƒƒ‰•`‰æ
-	switch (MainID)
+	/*switch (MainID)
 	{
 	case MainID_ATTACKER:
 		cAttacker.Draw();
@@ -96,5 +96,6 @@ void CCharacterManager::Draw()
 
 	default:
 		break;
-	}
+	}*/
+	cAttacker.Draw();
 }

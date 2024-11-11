@@ -4,6 +4,8 @@
 //インプットクラス
 class CInput
 {
+private:
+
 public:
 	//入力制御初期化
 	static void InitInput();
