@@ -99,17 +99,17 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	cPos.x += vSpeed.x;
 	cPos.z += vSpeed.z;
 
-	if (CInput::IsKeyKeep(KEY_INPUT_A) || pad.Rx == -1000)
+	if (CInput::IsKeyKeep(KEY_INPUT_A)/* || pad.Rx == -1000*/)
 	{
 		cRotate.y -= 0.05f;
 	}
-	if (CInput::IsKeyKeep(KEY_INPUT_D) || pad.Rx == 1000)
+	if (CInput::IsKeyKeep(KEY_INPUT_D)/* || pad.Rx == 1000*/)
 	{
 		cRotate.y += 0.05f;
 	}
 
 	//î≠éÀèàóù
-	if (CInput::IsKeyPush(KEY_INPUT_SPACE) || CGamePad::IsPadPush(DX_INPUT_PAD1, BUTTON_A) ||  pad.Z != 0)
+	if (CInput::IsKeyPush(KEY_INPUT_SPACE) ||CGamePad::IsPush_LR(RIGHT))
 	{
 		Id = STATE_SHOT;
 		//íeÇÃà íuåàíË

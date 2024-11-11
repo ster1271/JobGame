@@ -17,6 +17,20 @@ enum PAD_BUTTON
 	BUTTON_NUM,		//ボタンの総番号
 };
 
+//十字ボタンとLT、RTの判定用
+enum CHECK
+{
+	UP,		//上
+	UP_R,	//右上
+	RIGHT,	//右
+	DOWN_R,	//右下
+	DOWN,	//下
+	DOWN_L,	//左下
+	LEFT,	//左
+	UP_L,	//左上
+};
+
+
 class CGamePad
 {
 private:
@@ -40,7 +54,17 @@ public:
 	//単純に押されているか
 	static bool IsPadDown(int InputType, int Key_code);
 
-	//
+	//LTとRTの制御
+	static bool IsPush_LR(CHECK check);
+
+	//LTとRTの制御
+	static bool IsKeep_LR(CHECK check);
+
+	//十字キーの制御
+	static bool IsPush_Cross(CHECK check);
+
+	//十字キーの制御
+	static bool IsKeep_Cross(CHECK check);
 
 	//左スティック
 	static bool LStick();

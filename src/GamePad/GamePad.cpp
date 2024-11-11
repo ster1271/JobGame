@@ -4,6 +4,8 @@
 DINPUT_JOYSTATE PadcurrentBuf;	//パッドの現在フレーム情報格納変数
 DINPUT_JOYSTATE PadpreBuf;		//パッドの過去フレーム情報格納変数
 
+#define NUM		(4500)
+
 //初期化
 void CGamePad::InitGamePad()
 {
@@ -68,4 +70,102 @@ bool CGamePad::IsPadDown(int InputType, int Key_code)
 }
 
 
+//LTとRTの制御
+bool CGamePad::IsPush_LR(CHECK check)
+{
+	//過去フレームで押されていないか
+	if (PadpreBuf.Z == 0)
+	{
+		switch (check)
+		{
+		case LEFT:
+			//値が0より大きいとき
+			if (PadcurrentBuf.Z != 0 && PadcurrentBuf.Z > 0)
+			{
+				return true;
+			}
+			break;
 
+		case RIGHT:
+			//値が0より小さいとき
+			if (PadcurrentBuf.Z != 0 && PadcurrentBuf.Z < 0)
+			{
+				return true;
+			}
+			break;
+		default:
+			break;
+		}	
+	}
+
+	//押されていないので false
+	return false;
+}
+
+
+//LTとRTの制御(長押し)
+bool CGamePad::IsKeep_LR(CHECK check)
+{
+	//過去フレームで押されているか
+	if (PadpreBuf.Z != 0)
+	{
+		switch (check)
+		{
+		case LEFT:
+			//値が0より大きいとき
+			if (PadcurrentBuf.Z != 0 && PadcurrentBuf.Z > 0)
+			{
+				return true;
+			}
+			break;
+
+		case RIGHT:
+			//値が0より小さいとき
+			if (PadcurrentBuf.Z != 0 && PadcurrentBuf.Z < 0)
+			{
+				return true;
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	//押されていないので false
+	return false;
+}
+
+
+//十字キーの制御
+bool CGamePad::IsPush_Cross(CHECK check)
+{
+	int TOTAL = NUM * check;
+
+	//過去フレームで押されていないか
+	if(PadpreBuf.POV[0] == -1)
+	{
+		if (PadcurrentBuf.POV[0] == TOTAL)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+//十字キーの制御(長押し)
+bool CGamePad::IsKeep_Cross(CHECK check)
+{
+	int TOTAL = NUM * check;
+
+	//過去フレームで押されていないか
+	if (PadpreBuf.POV[0] != -1)
+	{
+		if (PadcurrentBuf.POV[0] == TOTAL)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
