@@ -109,7 +109,7 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	}
 
 	//”­Ëˆ—
-	if (CInput::IsKeyPush(KEY_INPUT_SPACE) || CGamePad::IsPadPush(DX_INPUT_PAD1, BUTTON_A) ||  pad.Z == -1000)
+	if (CInput::IsKeyPush(KEY_INPUT_SPACE) || CGamePad::IsPadPush(DX_INPUT_PAD1, BUTTON_A) ||  pad.Z != 0)
 	{
 		Id = STATE_SHOT;
 		//’e‚ÌˆÊ’uŒˆ’è

@@ -27,7 +27,7 @@ void CGamePad::StepGamePad()
 bool CGamePad::IsPadPush(int InputType, int Key_code)
 {
 	//前フレーム押されていないかつ現在フレームで押されている
-	if (PadpreBuf.Buttons[Key_code] == 0 && PadcurrentBuf.Buttons[Key_code] == 128)
+	if (PadpreBuf.Buttons[Key_code] == 0 && PadcurrentBuf.Buttons[Key_code] != 0)
 		return true;
 
 	//押されていないので false
@@ -38,7 +38,7 @@ bool CGamePad::IsPadPush(int InputType, int Key_code)
 bool CGamePad::IsPadKeep(int InputType, int Key_code)
 {
 	//前フレーム押されているかつ現在フレームで押されている
-	if (PadpreBuf.Buttons[Key_code] == 128 && PadcurrentBuf.Buttons[Key_code] == 128)
+	if (PadpreBuf.Buttons[Key_code] != 0 && PadcurrentBuf.Buttons[Key_code] != 0)
 		return true;
 
 	//押されていないので false
@@ -49,7 +49,7 @@ bool CGamePad::IsPadKeep(int InputType, int Key_code)
 bool CGamePad::IsPadRelease(int InputType, int Key_code)
 {
 	//前フレーム押されていないかつ現在フレームで押されていない
-	if (PadpreBuf.Buttons[Key_code] == 128 && PadcurrentBuf.Buttons[Key_code] == 0)
+	if (PadpreBuf.Buttons[Key_code] != 0 && PadcurrentBuf.Buttons[Key_code] == 0)
 		return true;
 
 	//押されていないので false
@@ -60,7 +60,7 @@ bool CGamePad::IsPadRelease(int InputType, int Key_code)
 bool CGamePad::IsPadDown(int InputType, int Key_code)
 {
 	//現在フレームで押されている(前フレームは関係ない)
-	if (PadcurrentBuf.Buttons[Key_code] == 128)
+	if (PadcurrentBuf.Buttons[Key_code] != 0)
 		return true;
 
 	//押されていないので false

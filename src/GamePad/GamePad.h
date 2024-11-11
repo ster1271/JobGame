@@ -40,6 +40,8 @@ public:
 	//単純に押されているか
 	static bool IsPadDown(int InputType, int Key_code);
 
+	//
+
 	//左スティック
 	static bool LStick();
 
