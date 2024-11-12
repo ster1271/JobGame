@@ -107,12 +107,12 @@ void CMap::MapLoad()
 void CMap::Draw()
 {
 	//MV1DrawModel(iHndl);
-	VECTOR vSize = VGet(50.0f, 50.0f, 50.0f);
+	cSize = VGet(50.0f, 50.0f, 50.0f);
 	for (int i = 0; i < MapList.size(); i++)
 	{
 		if (MapList[i].IsMap)
 		{
-			CDraw3D::DrawBox3D(MapList[i].vPos, vSize);
+			CDraw3D::DrawBox3D(MapList[i].vPos, cSize);
 		}
 	}
 }

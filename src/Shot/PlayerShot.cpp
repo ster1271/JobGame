@@ -1,8 +1,6 @@
 #include "PlayerShot.h"
 #include "../Base/Base.h"
-#include "../Character/Attacker.h"
-#include "../Character/Tank.h"
-#include "../Character/Support.h"
+#include "../Player/Player.h"
 
 //----------------------------------------
 //コンストラクタ

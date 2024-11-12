@@ -1,19 +1,18 @@
 #pragma once
 #include "../Object/Object.h"
 
+//マップ情報
+struct MapInfo
+{
+	VECTOR vPos;
+	bool IsMap;
+};
+
 class CMap :public CObject
 {
-	//マップ情報
-	struct MapInfo
-	{
-		VECTOR vPos;
-		bool IsMap;
-	};
-
 
 private:
 
-	MapInfo Mapinfo;
 	FILE* fp_;				//ファイル用
 	vector<MapInfo>MapList;	//マップ情報格納リスト
 
@@ -35,10 +34,11 @@ public:
 	//CSV読み込み
 	void MapLoad();
 
-	//書き込み
-
 	//マップ情報取得
 	vector<MapInfo> GetMapInfo() { return MapList; }
+
+	//マップサイズ取得
+	VECTOR GetMapSize() { return cSize; }
 };
 
 

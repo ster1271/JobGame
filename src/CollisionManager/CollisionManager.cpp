@@ -1,9 +1,22 @@
 #include "CollisionManager.h"
 
 //プレイヤーとマップの当たり判定
-void CCollisionManager::PlayerToMap(CCharacterManager& cCharaManager, CMapManager& cMapManager)
+void CCollisionManager::PlayerToMap(CPlayer& cPlayer, CMap& cMap)
 {
-	/*CAttacker cPlayer = cCharaManager.*/
+	VECTOR PlayerPos = cPlayer.GetPos();
+	VECTOR PlayerSize = cPlayer.GetSize();
+	VECTOR PlayerHarfSize = VScale(PlayerSize, 0.5f);
+
+	vector<MapInfo>MapList = cMap.GetMapInfo();
+
+
+	for (int MapIndex = 0; MapIndex < MapList.size(); MapIndex)
+	{
+		if (CCollision::CheckHitBoxToBox(PlayerPos, PlayerSize, MapList[MapIndex].vPos, cMap.GetMapSize()))
+		{
+
+		}
+	}
 }
 
 
@@ -15,7 +28,7 @@ void CCollisionManager::EnemyToMap(CEnemyManager& cEnemyManager, CMapManager& cM
 
 
 //タレットの弾と敵の当たり判定
-void CCollisionManager::TurretToEnemy(CShotManager& cShotManager, CEnemyManager& cEnemyManager)
+void CCollisionManager::TurretShotToEnemy(CShotManager& cShotManager, CEnemyManager& cEnemyManager)
 {
 	//弾の数分回す
 	for (int shotIndex = 0; shotIndex < TURRET_SHOT_NUM; shotIndex++)
@@ -52,7 +65,7 @@ void CCollisionManager::TurretToEnemy(CShotManager& cShotManager, CEnemyManager&
 
 
 //プレイヤーの弾と敵の当たり判定
-void CCollisionManager::PlayerToEnemy(CShotManager& cShotManager, CEnemyManager& cEnemyManager)
+void CCollisionManager::PlayerShotToEnemy(CShotManager& cShotManager, CEnemyManager& cEnemyManager)
 {
 	//弾の数分回す
 	for (int shotIndex = 0; shotIndex < PL_SHOT_NUM; shotIndex++)

@@ -4,7 +4,7 @@
 #include "../CollisionManager/CollisionManager.h"
 #include "../Camera/CameraManager.h"
 #include "../Shot/ShotManager.h"
-#include "../Character/CharacterManager.h"
+#include "../Player/Player.h"
 #include "../Enemy/EnemyManager.h"
 #include "../Turret/TurretManager.h"
 #include "../Object/ObjectManager.h"
@@ -32,7 +32,7 @@ private:
 
 	CCameraManager cCameraManager;			//カメラマネージャー
 	CShotManager cShotManager;				//ショットマネージャー
-	CCharacterManager cCharacterManager;	//キャラクターマネージャー
+	CPlayer cPlayer;						//プレイヤークラス
 	CEnemyManager cEnemyManager;			//エネミーマネージャー
 	CObjectManager cObjectManager;			//オブジェクトマネージャー
 	CTurretManager cTurretManager;			//タレットマネージャー

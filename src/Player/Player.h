@@ -11,9 +11,10 @@ enum PLAYER_STATE
 };
 
 //アタッカークラス
-class CAttacker : public CBase
+class CPlayer : public CBase
 {
 private:
+	VECTOR cNextPos;
 	PLAYER_STATE Id;
 	PLAYER_STATE oldId;
 
@@ -24,9 +25,11 @@ private:
 	void RunShot();
 
 public:
+	VECTOR GetNextPos() { return cNextPos; }
+
 	//コンストラクタ・デストラクタ
-	CAttacker();
-	~CAttacker();
+	CPlayer();
+	~CPlayer();
 
 	//初期化
 	void Init();

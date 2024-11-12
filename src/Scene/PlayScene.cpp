@@ -76,7 +76,7 @@ void CPlayScene::Draw()
 		//マップ全般描画 
 		cMapManager.Draw();
 		//キャラクター描画
-		cCharacterManager.Draw();
+		cPlayer.Draw();
 		//タレット描画
 		cTurretManager.Draw();
 		//エネミー描画
@@ -116,7 +116,7 @@ void CPlayScene::Init()
 	//マップ全般初期化
 	cMapManager.Init();
 	//キャラクター初期化
-	cCharacterManager.Init();
+	cPlayer.Init();
 	//エネミー初期化
 	cEnemyManager.Init();
 	//タレット初期化
@@ -144,8 +144,8 @@ void CPlayScene::Exit()
 	cObjectManager.Exit();
 	//マップ全般終了処理
 	cMapManager.Exit();
-	//キャラクターマネージャー終了処理
-	cCharacterManager.Exit();
+	//キャラクター終了処理
+	cPlayer.Exit();
 	//エネミーマネジャー終了処理
 	cEnemyManager.Exit();
 	//タレットマネージャー終了処理
@@ -172,7 +172,7 @@ void CPlayScene::Load()
 	//マップ全般データ読み込み
 	cMapManager.Load();
 	//キャラクターデータ読み込み
-	cCharacterManager.Load();
+	cPlayer.Load();
 	//エネミーデータ読み込み
 	cEnemyManager.Load();
 	//タレットデータ読み込み
@@ -207,21 +207,22 @@ void CPlayScene::Step()
 		//マップ全般処理 
 		cMapManager.Step();
 		//キャラクター更新処理
-		cCharacterManager.Step(cShotManager, cTurretManager);
+		cPlayer.Step(cShotManager, cTurretManager);
+		cPlayer.Update();
 		//エネミー更新処理
 		cEnemyManager.Step(cBot, cMapManager);
 		//タレット更新処理
 		cTurretManager.Step(cShotManager, cEnemyManager);
 		//弾更新処理
-		cShotManager.Step(cCharacterManager.GetPosition());
+		cShotManager.Step(cPlayer.GetPos());
 		//ボット更新処理
 		cBot.Step(cMapManager);
 		//チェックポイント更新処理
 		cCheck_Manager.Step();
 
 		//当たり判定処理
-		cCollisionManager.TurretToEnemy(cShotManager, cEnemyManager);
-		cCollisionManager.PlayerToEnemy(cShotManager, cEnemyManager);
+		cCollisionManager.TurretShotToEnemy(cShotManager, cEnemyManager);
+		cCollisionManager.PlayerShotToEnemy(cShotManager, cEnemyManager);
 	}
 
 	//デバック時処理
@@ -244,6 +245,6 @@ void CPlayScene::Step()
 	}
 
 	//カメラ更新処理
-	cCameraManager.Step(cCharacterManager.GetPosition(), cCharacterManager.GetRotate(), cGame_Pointer.GetPos());
+	cCameraManager.Step(cPlayer.GetPos(), cPlayer.GetRotate(), cGame_Pointer.GetPos());
 }
 

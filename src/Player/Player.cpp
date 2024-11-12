@@ -1,4 +1,4 @@
-#include "Attacker.h"
+#include "Player.h"
 
 
 const char ATTACKER_PATH[] = { "data/character/human.x" };
@@ -8,16 +8,16 @@ const float SPERE_R = 3.0f;
 #define ROT_SPEED	(0.05f)	
 
 //コンストラクタ・デストラクタ
-CAttacker::CAttacker()
+CPlayer::CPlayer()
 {
 }
 
-CAttacker::~CAttacker()
+CPlayer::~CPlayer()
 {
 }
 
 //初期化
-void CAttacker::Init()
+void CPlayer::Init()
 {
 	CBase::Init();
 	cPos = VGet(0.0f, 0.0f, 0.0f);
@@ -30,28 +30,28 @@ void CAttacker::Init()
 }
 
 //データ読み込み
-void CAttacker::Load()
+void CPlayer::Load()
 {
 	iHndl = MV1LoadModel(ATTACKER_PATH);
 }
 
-void CAttacker::Default()
+void CPlayer::Default()
 {
 	ReqestLoop(STATE_DEFAULT, 0.8f);
 }
 
-void CAttacker::Run()
+void CPlayer::Run()
 {
 	ReqestLoop(STATE_RUN, 0.7f);
 }
 
-void CAttacker::RunShot()
+void CPlayer::RunShot()
 {
 	ReqestLoop(STATE_SHOT, 0.1f);
 }
 
 //毎フレーム行う処理
-void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
+void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 {
 	GetJoypadDirectInputState(DX_INPUT_PAD1, &pad);
 
@@ -90,14 +90,15 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 		Id = STATE_DEFAULT;
 	}
 
+	cPos = cNextPos;
 	//入力したキー情報とプレイヤーの角度から、移動速度を求める
 	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
 	vSpeed.x = sin(cRotate.y) * fSpd;
 	vSpeed.z = cos(cRotate.y) * fSpd;
 
 	//移動速度を現在の座標に加算する
-	cPos.x += vSpeed.x;
-	cPos.z += vSpeed.z;
+	cNextPos.x += vSpeed.x;
+	cNextPos.z += vSpeed.z;
 
 	if (CInput::IsKeyKeep(KEY_INPUT_A)/* || pad.Rx == -1000*/)
 	{
@@ -137,7 +138,7 @@ void CAttacker::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 }
 
 //描画
-void CAttacker::Draw()
+void CPlayer::Draw()
 {
 	//条件式がtrueならモデルをfalseなら球を表示
 	if (iHndl != -1)
@@ -179,7 +180,7 @@ void CAttacker::Draw()
 }
 
 //終了処理
-void CAttacker::Exit()
+void CPlayer::Exit()
 {
 	CBase::Exit();
 }

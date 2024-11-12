@@ -60,6 +60,6 @@ public:
 
 	//èoóÕÉçÉOÇ…ï\é¶
 	void DrawLogString(string string);
-	void DrawLogFormatString(const char* format, ...)
+	void DrawLogFormatString(const char* format, ...);
 
 };

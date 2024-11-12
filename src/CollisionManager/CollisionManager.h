@@ -1,6 +1,6 @@
 #pragma once
 #include "Collision/Collision.h"
-#include "../Character/CharacterManager.h"
+#include "../Player/Player.h"
 #include "../Enemy/EnemyManager.h"
 #include "../Shot/ShotManager.h"
 #include "../Map/MapManager.h"
@@ -12,15 +12,15 @@ class CCollisionManager
 {
 public:
 	//プレイヤーとマップの当たり判定
-	void PlayerToMap(CCharacterManager& cCharaManager, CMapManager& cMapManager);
+	void PlayerToMap(CPlayer& cPlayer, CMap& cMap);
 
 	//敵とマップの当たり判定
 	void EnemyToMap(CEnemyManager& cEnemyManager, CMapManager& cMapManager);
 
 	//タレットの弾と敵の当たり判定
-	void TurretToEnemy(CShotManager& cShotManager, CEnemyManager& cEnemyManager);
+	void TurretShotToEnemy(CShotManager& cShotManager, CEnemyManager& cEnemyManager);
 
 	//プレイヤーの弾と敵の当たり判定
-	void PlayerToEnemy(CShotManager& cShotManager, CEnemyManager& cEnemyManager);
+	void PlayerShotToEnemy(CShotManager& cShotManager, CEnemyManager& cEnemyManager);
 
 };
