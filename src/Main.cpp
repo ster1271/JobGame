@@ -29,6 +29,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//シーンマネージャー
 	SceneManager cSceneManager;
+	CDebugString::GetInstance();
 
 	//FPS
 	CFps cFps;

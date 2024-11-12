@@ -3,6 +3,7 @@
 #include <math.h>
 #include <iostream>
 #include <vector>
+#include <list>
 #include "MyLibrary/MyLibrary.h"
 #include "Input/Input.h"
 #include "GamePad/GamePad.h"
