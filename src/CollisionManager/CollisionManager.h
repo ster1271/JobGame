@@ -10,6 +10,10 @@
 //コリジョンマネージャークラス
 class CCollisionManager
 {
+private:
+	float Tmp_OverRap;
+	bool IsCheck;
+
 public:
 	//プレイヤーとマップの当たり判定
 	void PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager);
@@ -22,5 +26,8 @@ public:
 
 	//プレイヤーの弾と敵の当たり判定
 	void PlayerShotToEnemy(CShotManager& cShotManager, CEnemyManager& cEnemyManager);
+
+	//描画
+	void Draw();
 
 };

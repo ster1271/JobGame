@@ -87,6 +87,8 @@ void CPlayScene::Draw()
 		cBot.Draw();
 		//チェックポイント描画
 		cCheck_Manager.Draw();
+
+		cCollisionManager.Draw();
 	}
 	else if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_DEBUG)
 	{
@@ -221,7 +223,7 @@ void CPlayScene::Step()
 		cCheck_Manager.Step();
 
 		//当たり判定処理
-		//cCollisionManager.PlayerToMap(cPlayer, cMapManager);
+		cCollisionManager.PlayerToMap(cPlayer, cMapManager);
 		cCollisionManager.TurretShotToEnemy(cShotManager, cEnemyManager);
 		cCollisionManager.PlayerShotToEnemy(cShotManager, cEnemyManager);
 	}

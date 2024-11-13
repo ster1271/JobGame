@@ -1,104 +1,107 @@
 #include "CollisionManager.h"
 
+void CCollisionManager::Draw()
+{
+	if (IsCheck == true)
+	{
+		DrawString(0, 285, "当たった", GetColor(255, 0, 0));
+	}
+
+	DrawFormatString(0, 300, GetColor(255, 0, 0), "めり込み量：%f", Tmp_OverRap);
+}
+
 //プレイヤーとマップの当たり判定
 void CCollisionManager::PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager)
 {
-	VECTOR PlayerPos = cPlayer.GetPos();
-	VECTOR PlayerNextPos = cPlayer.GetNextPos();
-	VECTOR PlayerSize = VGet(15.0f, 50.0f, 15.0f);;
-	VECTOR PlayerHarfSize = VScale(PlayerSize, 0.5f);
-
-	vector<MapInfo>MapList = cMapManager.GetMap().GetMapInfo();
-	VECTOR MapSize = VGet(50.0f, 50.0f, 50.0f);
-	VECTOR MapHarfSize = VScale(MapSize, 0.5f);
+	const int MAP_DIR = 6;
 
 	//めり込み量を格納する変数を生成
-	float Overlap;
+	float OverRap = 0.0f;
 
-	//X方向のみ調べる
-	PlayerPos.x = PlayerNextPos.x;
-	for (int MapIndex = 0; MapIndex < MapList.size(); MapIndex)
+	//プレイヤーの情報を格納する
+	VECTOR PlayerPos = cPlayer.GetPos();
+	VECTOR NextPlayerPos = cPlayer.GetNextPos();
+	VECTOR Player_Size = VGet(15.0f, 50.0f, 15.0f);
+	VECTOR Player_Harf_Size = VScale(Player_Size, 0.5f);
+
+	bool Dir[MAP_DIR] = { false };
+	if (NextPlayerPos.x > PlayerPos.x)
 	{
-		//オブジェクトが置かれてない場合は計算しない
-		if (MapList[MapIndex].IsMap == false)
-			continue;
-
-		if (CCollision::CheckHitBoxToBox(PlayerPos, PlayerSize, MapList[MapIndex].vPos, MapSize))
-		{
-			Overlap = 0.0f;
-
-			//左から当たった時
-			if (PlayerPos.x < MapList[MapIndex].vPos.x)
-			{
-				Overlap = (PlayerPos.x + PlayerHarfSize.x) - (MapList[MapIndex].vPos.x - MapHarfSize.x);
-			}
-			//右から当たった時
-			else
-			{
-				Overlap = (MapList[MapIndex].vPos.x + MapHarfSize.x) - (PlayerPos.x - PlayerHarfSize.x);
-			}
-
-			PlayerNextPos.x += Overlap;
-		}
+		//右に動いている
+		Dir[0] = true;
+	}
+	if (NextPlayerPos.x < PlayerPos.x)
+	{
+		//左に動いている
+		Dir[1] = true;
+	}
+	if (NextPlayerPos.y > PlayerPos.y)
+	{
+		//上に動いている
+		Dir[2] = true;
+	}
+	if (NextPlayerPos.y < PlayerPos.y)
+	{
+		//下に動いている
+		Dir[3] = true;
+	}
+	if (NextPlayerPos.z > PlayerPos.z)
+	{
+		//奥に動いている
+		Dir[4] = true;
+	}
+	if (NextPlayerPos.z < PlayerPos.z)
+	{
+		//手前に動いている
+		Dir[5] = true;
 	}
 
-	//Y方向のみ調べる
 
-	//PlayerPos.y = cPlayer.GetNextPos().y;
-	//for (int MapIndex = 0; MapIndex < MapList.size(); MapIndex)
-	//{
-	//	オブジェクトが置かれてない場合は計算しない
-	//	if (MapList[MapIndex].IsMap == false)
-	//		continue;
+	//マップの情報を格納する
+	vector<MapInfo> MapInfoList = cMapManager.GetMap().GetMapInfo();
+	VECTOR Map_Size = VGet(50.0f, 50.0f, 50.0f);
+	VECTOR Map_Harf_Size = VScale(Map_Size, 0.5f);
 
-	//	if (CCollision::CheckHitBoxToBox(PlayerPos, PlayerSize, MapList[MapIndex].vPos, MapSize))
-	//	{
-	//		Overlap = 0.0f;
+	//リストのサイズ分回す
+	for (int MapIndex = 0; MapIndex < MapInfoList.size(); MapIndex++)
+	{
+		//もしフラグがfalseなら計算しない
+		if (!MapInfoList[MapIndex].IsMap)
+			continue;
 
-	//		下から当たった時
-	//		if (PlayerPos.y < MapList[MapIndex].vPos.y)
-	//		{
-	//			Overlap = (PlayerPos.y + PlayerHarfSize.y) - (MapList[MapIndex].vPos.y - MapHarfSize.y);
-	//		}
-	//		上から当たった時
-	//		else
-	//		{
-	//			Overlap = (MapList[MapIndex].vPos.y + MapHarfSize.y) - (PlayerPos.y - PlayerHarfSize.y);
-	//		}
+		//X軸のみで計算する
+		PlayerPos.x = NextPlayerPos.x;
+		if (CCollision::CheckHitBoxToBox(PlayerPos, Player_Size, MapInfoList[MapIndex].vPos, Map_Size))
+		{
+			IsCheck = true;
+			
+			//初期化しておく
+			OverRap = 0.0f;
 
-	//		PlayerNextPos.y += Overlap;
-	//	}
-	//}
-	//
+			/*どちら側から当たったかを判定する*/
+			//右から当たった場合
+			if (Dir[0] == true)
+			{
+				OverRap = (MapInfoList[MapIndex].vPos.x + Map_Harf_Size.x) - (PlayerPos.x - Player_Harf_Size.x);
+				Tmp_OverRap = OverRap;
+			}
+			//左から当たった場合
+			if(Dir[1] == true)
+			{
+				OverRap = (MapInfoList[MapIndex].vPos.x - Map_Harf_Size.x) - (PlayerPos.x + Player_Harf_Size.x);
+				Tmp_OverRap = OverRap;
+			}
 
-	//Z方向のみ調べる
-	//PlayerPos.z = cPlayer.GetNextPos().z;
-	//for (int MapIndex = 0; MapIndex < MapList.size(); MapIndex)
-	//{
-	//	オブジェクトが置かれてない場合は計算しない
-	//	if (MapList[MapIndex].IsMap == false)
-	//		continue;
+			NextPlayerPos.x -= OverRap;
+			
+		}
+		else
+		{
+			IsCheck = false;
+		}
 
-	//	if (CCollision::CheckHitBoxToBox(PlayerPos, PlayerSize, MapList[MapIndex].vPos, MapSize))
-	//	{
-	//		Overlap = 0.0f;
-
-	//		左から当たった時
-	//		if (PlayerPos.z < MapList[MapIndex].vPos.z)
-	//		{
-	//			Overlap = (PlayerPos.z + PlayerHarfSize.z) - (MapList[MapIndex].vPos.z - MapHarfSize.z);
-	//		}
-	//		右から当たった時
-	//		else
-	//		{
-	//			Overlap = (MapList[MapIndex].vPos.z + MapHarfSize.z) - (PlayerPos.z - PlayerHarfSize.z);
-	//		}
-
-	//		PlayerNextPos.z += Overlap;
-	//	}
-	//}
-
-	cPlayer.SetNextPos(PlayerNextPos);
+		cPlayer.SetNextPos(NextPlayerPos);
+	}
 }
 
 

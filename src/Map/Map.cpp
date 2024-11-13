@@ -107,6 +107,7 @@ void CMap::Draw()
 		if (MapList[i].IsMap)
 		{
 			CDraw3D::DrawBox3D(MapList[i].vPos, cSize);
+			DrawSphere3D(MapList[i].vPos, 1.0f, 32, GetColor(255, 0, 0), GetColor(255, 0, 0), TRUE);
 		}
 	}
 }
