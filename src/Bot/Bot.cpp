@@ -180,8 +180,13 @@ void CBot::Move_Bot(vector<VECTOR> List)
 	cPos.z += cosf(cRotate.y) * -0.2f;
 
 	//プレイヤーとの距離を計算
-	float Range = (List[tmp].x - cPos.x) * (List[tmp].x - cPos.x) + (List[tmp].z - cPos.z) * (List[tmp].z - cPos.z);
-	Range = sqrt(Range);
+	VECTOR v_tmp;
+	v_tmp.x = List[tmp].x - cPos.x;
+	v_tmp.y = 0.0f;
+	v_tmp.z = List[tmp].z - cPos.z;
+
+	float Range = VSize(v_tmp);
+
 	//確認用
 	tmp_Range = Range;
 

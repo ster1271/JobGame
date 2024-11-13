@@ -36,9 +36,9 @@ void CMap::Init()
 	iHndl = -1;
 
 	//各変数の初期化
-	cPos = VGet(0.0f, -20.0f, 0.0f);
-	cSize = VGet(1.0f, 1.0f, 1.0f);
-	cRotate = VGet(0.0f, 0.0f, 0.0f);
+	cPos = VECTOR_ZERO;
+	cSize = VECTOR_ZERO;
+	cRotate = VECTOR_ZERO;
 
 	//マップ情報の書き込み
 	/*for (int i = 0; i < 10; i++)
@@ -63,11 +63,6 @@ void CMap::Init()
 //モデル読み込み
 void CMap::Load()
 {
-	/*iHndl = MV1LoadModel("data/Map/Map01.x");*/
-
-	//コリジョン情報を取得する
-	//MV1SetupCollInfo(iHndl);
-	
 	//ファイル読み込み
 	MapLoad();
 }
@@ -94,12 +89,8 @@ void CMap::MapLoad()
 				if (num[i] == 1)
 				{
 					tmp.IsMap = true;	//壁
+					MapList.push_back(tmp);
 				}
-				else
-				{
-					tmp.IsMap = false;	//壁じゃない
-				}
-				MapList.push_back(tmp);
 			}
 			cnt++;
 		}
@@ -110,7 +101,6 @@ void CMap::MapLoad()
 
 void CMap::Draw()
 {
-	//MV1DrawModel(iHndl);
 	cSize = VGet(50.0f, 50.0f, 50.0f);
 	for (int i = 0; i < MapList.size(); i++)
 	{

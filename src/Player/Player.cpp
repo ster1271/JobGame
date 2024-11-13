@@ -7,6 +7,7 @@ const float SPERE_R = 3.0f;
 #define MOVESPEED	(1.0f)
 #define ROT_SPEED	(0.05f)	
 
+
 //コンストラクタ・デストラクタ
 CPlayer::CPlayer()
 {
@@ -100,11 +101,11 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	cNextPos.x += vSpeed.x;
 	cNextPos.z += vSpeed.z;
 
-	if (CInput::IsKeyKeep(KEY_INPUT_A)/* || pad.Rx == -1000*/)
+	if (CInput::IsKeyKeep(KEY_INPUT_A) || pad.Rx == -1000)
 	{
 		cRotate.y -= 0.05f;
 	}
-	if (CInput::IsKeyKeep(KEY_INPUT_D)/* || pad.Rx == 1000*/)
+	if (CInput::IsKeyKeep(KEY_INPUT_D) || pad.Rx == 1000)
 	{
 		cRotate.y += 0.05f;
 	}
@@ -144,6 +145,7 @@ void CPlayer::Draw()
 	if (iHndl != -1)
 	{
 		MV1DrawModel(iHndl);
+		CDraw3D::DrawBox3D(cPos, PLAYER_SIZE);
 	}
 	else
 	{
@@ -156,10 +158,8 @@ void CPlayer::Draw()
 		DrawFormatString(0, 115, GetColor(255, 0, 0), "アタッカーY座標:%f", cPos.y);
 		DrawFormatString(0, 130, GetColor(255, 0, 0), "アタッカーZ座標:%f", cPos.z);
 
-		//DrawFormatString(0, 0, GetColor(255, 0, 0), "アタッカーY軸:%f", cRotate.y);
-		//DrawFormatString(0, 0, GetColor(255, 0, 0), "コントローラーの接続数:%d",	PadNum);
-
 		// 画面に構造体の中身を描画
+		/*
 		int Color = GetColor(0, 0, 0);
 		DrawFormatString(0, 0, Color, "X:%d Y:%d Z:%d",
 			pad.X, pad.Y, pad.Z);
@@ -176,6 +176,7 @@ void CPlayer::Draw()
 			DrawFormatString(64 + i % 8 * 64, 64 + i / 8 * 16, Color,
 				"%2d:%d", i, pad.Buttons[i]);
 		}
+		*/
 	}
 }
 

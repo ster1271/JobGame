@@ -2,6 +2,9 @@
 #include "../Base/Base.h"
 #include "../GamePad/GamePad.h"
 
+const VECTOR PLAYER_SIZE = VGet(15.0f, 50.0f, 15.0f);
+
+
 enum PLAYER_STATE
 {
 	STATE_NONE = 0,
@@ -28,6 +31,8 @@ public:
 	//座標の取得・設定
 	VECTOR GetNextPos() { return cNextPos; }
 	void SetNextPos(VECTOR NewPos) { cNextPos = NewPos; }
+
+	VECTOR GetModelSize() { return PLAYER_SIZE; }
 
 	//コンストラクタ・デストラクタ
 	CPlayer();
