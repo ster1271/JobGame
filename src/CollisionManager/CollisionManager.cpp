@@ -1,22 +1,102 @@
 #include "CollisionManager.h"
 
 //プレイヤーとマップの当たり判定
-void CCollisionManager::PlayerToMap(CPlayer& cPlayer, CMap& cMap)
+void CCollisionManager::PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager)
 {
 	VECTOR PlayerPos = cPlayer.GetPos();
+	VECTOR PlayerNextPos = cPlayer.GetNextPos();
 	VECTOR PlayerSize = cPlayer.GetSize();
 	VECTOR PlayerHarfSize = VScale(PlayerSize, 0.5f);
 
-	vector<MapInfo>MapList = cMap.GetMapInfo();
+	vector<MapInfo>MapList = cMapManager.GetMap().GetMapInfo();
+	VECTOR MapSize = cMapManager.GetMap().GetMapSize();
+	VECTOR MapHarfSize = VScale(cMapManager.GetMap().GetMapSize(), 0.5f);
 
+	//めり込み量を格納する変数を生成
+	float Overlap;
 
+	//X方向のみ調べる
+	PlayerPos.x = PlayerNextPos.x;
 	for (int MapIndex = 0; MapIndex < MapList.size(); MapIndex)
 	{
-		if (CCollision::CheckHitBoxToBox(PlayerPos, PlayerSize, MapList[MapIndex].vPos, cMap.GetMapSize()))
-		{
+		//オブジェクトが置かれてない場合は計算しない
+		if (MapList[MapIndex].IsMap == false)
+			continue;
 
+		if (CCollision::CheckHitBoxToBox(PlayerPos, PlayerSize, MapList[MapIndex].vPos, MapSize))
+		{
+			Overlap = 0.0f;
+
+			//左から当たった時
+			if (PlayerPos.x < MapList[MapIndex].vPos.x)
+			{
+				Overlap = (PlayerPos.x + PlayerHarfSize.x) - (MapList[MapIndex].vPos.x - MapHarfSize.x);
+			}
+			//右から当たった時
+			else
+			{
+				Overlap = (MapList[MapIndex].vPos.x + MapHarfSize.x) - (PlayerPos.x - PlayerHarfSize.x);
+			}
+
+			PlayerNextPos.x += Overlap;
 		}
 	}
+
+	//Y方向のみ調べる
+	PlayerPos.y = cPlayer.GetNextPos().y;
+	for (int MapIndex = 0; MapIndex < MapList.size(); MapIndex)
+	{
+		//オブジェクトが置かれてない場合は計算しない
+		if (MapList[MapIndex].IsMap == false)
+			continue;
+
+		if (CCollision::CheckHitBoxToBox(PlayerPos, PlayerSize, MapList[MapIndex].vPos, MapSize))
+		{
+			Overlap = 0.0f;
+
+			//左から当たった時
+			if (PlayerPos.y < MapList[MapIndex].vPos.y)
+			{
+				Overlap = (PlayerPos.y + PlayerHarfSize.y) - (MapList[MapIndex].vPos.y - MapHarfSize.y);
+			}
+			//右から当たった時
+			else
+			{
+				Overlap = (MapList[MapIndex].vPos.y + MapHarfSize.y) - (PlayerPos.y - PlayerHarfSize.y);
+			}
+
+			PlayerNextPos.y += Overlap;
+		}
+	}
+
+	//Z方向のみ調べる
+	PlayerPos.z = cPlayer.GetNextPos().z;
+	for (int MapIndex = 0; MapIndex < MapList.size(); MapIndex)
+	{
+		//オブジェクトが置かれてない場合は計算しない
+		if (MapList[MapIndex].IsMap == false)
+			continue;
+
+		if (CCollision::CheckHitBoxToBox(PlayerPos, PlayerSize, MapList[MapIndex].vPos, MapSize))
+		{
+			Overlap = 0.0f;
+
+			//左から当たった時
+			if (PlayerPos.z < MapList[MapIndex].vPos.z)
+			{
+				Overlap = (PlayerPos.z + PlayerHarfSize.z) - (MapList[MapIndex].vPos.z - MapHarfSize.z);
+			}
+			//右から当たった時
+			else
+			{
+				Overlap = (MapList[MapIndex].vPos.z + MapHarfSize.z) - (PlayerPos.z - PlayerHarfSize.z);
+			}
+
+			PlayerNextPos.z += Overlap;
+		}
+	}
+
+	cPlayer.SetNextPos(PlayerNextPos);
 }
 
 

@@ -12,7 +12,7 @@ class CCollisionManager
 {
 public:
 	//プレイヤーとマップの当たり判定
-	void PlayerToMap(CPlayer& cPlayer, CMap& cMap);
+	void PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager);
 
 	//敵とマップの当たり判定
 	void EnemyToMap(CEnemyManager& cEnemyManager, CMapManager& cMapManager);

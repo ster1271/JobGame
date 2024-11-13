@@ -221,6 +221,7 @@ void CPlayScene::Step()
 		cCheck_Manager.Step();
 
 		//“–‚½‚è”»’èˆ—
+		//cCollisionManager.PlayerToMap(cPlayer, cMapManager);
 		cCollisionManager.TurretShotToEnemy(cShotManager, cEnemyManager);
 		cCollisionManager.PlayerShotToEnemy(cShotManager, cEnemyManager);
 	}

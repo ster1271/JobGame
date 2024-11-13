@@ -25,7 +25,9 @@ private:
 	void RunShot();
 
 public:
+	//座標の取得・設定
 	VECTOR GetNextPos() { return cNextPos; }
+	void SetNextPos(VECTOR NewPos) { cNextPos = NewPos; }
 
 	//コンストラクタ・デストラクタ
 	CPlayer();

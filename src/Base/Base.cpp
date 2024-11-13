@@ -78,6 +78,9 @@ void CBase::Update()
 	MV1SetPosition(iHndl, cPos);		//座標の更新
 	MV1SetScale(iHndl, cSize);			//サイズの更新
 	MV1SetRotationXYZ(iHndl, cRotate);	//回転値の更新
+
+	//アニメーションの更新
+	UpdateAnim();
 }
 
 //後処理

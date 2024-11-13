@@ -1,6 +1,10 @@
 #pragma once
 #include "Map.h"
 
+#define MAP_SIZE		50	//マップのサイズ
+#define MAP_MAX_NUM		10	//マップの縦横
+
+
 //コンストラクタ
 CMap::CMap()
 {
