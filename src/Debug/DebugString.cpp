@@ -84,6 +84,7 @@ void CDebugString::AddFormatString(int x, int y, const char* format, ...)
 	va_end(args);
 
 	TextInfo tmp = { x, y, buffer, DEFAULT_COLOR, format };
+	AddTextInfo(tmp);
 }
 
 //listÇ…ÉfÅ[É^Çí«â¡

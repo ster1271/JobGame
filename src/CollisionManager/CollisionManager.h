@@ -5,7 +5,7 @@
 #include "../Shot/ShotManager.h"
 #include "../Map/MapManager.h"
 
-
+#include "../Debug/DebugString.h"
 
 //コリジョンマネージャークラス
 class CCollisionManager
@@ -13,6 +13,8 @@ class CCollisionManager
 private:
 	float Tmp_OverRap;
 	bool IsCheck;
+
+	VECTOR _VEC;
 
 public:
 	//プレイヤーとマップの当たり判定

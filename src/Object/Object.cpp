@@ -11,6 +11,7 @@ CObject::CObject()
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
+	memset(&cScale, 0, sizeof(VECTOR));
 
 	IsActive = false;
 }
@@ -26,6 +27,8 @@ CObject::~CObject()
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
+	memset(&cScale, 0, sizeof(VECTOR));
+
 
 	IsActive = false;
 }
@@ -38,9 +41,10 @@ void CObject::Init()
 	iHndl = -1;
 
 	//変数の初期化
-	memset(&cPos, 0, sizeof(VECTOR));
-	memset(&cSize, 0, sizeof(VECTOR));
-	memset(&cRotate, 0, sizeof(VECTOR));
+	cPos = VECTOR_ZERO;
+	cRotate = VECTOR_ZERO;
+	cScale = VECTOR_ZERO;
+	cSize = VECTOR_ZERO;
 
 	IsActive = false;
 }
@@ -70,7 +74,7 @@ void CObject::Step() {};
 void CObject::Update()
 {
 	MV1SetPosition(iHndl, cPos);		//座標の更新
-	MV1SetScale(iHndl, cSize);			//サイズの更新
+	MV1SetScale(iHndl, cScale);			//サイズの更新
 	MV1SetRotationXYZ(iHndl, cRotate);	//回転値の更新
 }
 
@@ -85,9 +89,10 @@ void CObject::Exit()
 	}
 
 	//変数の初期化
-	memset(&cPos, 0, sizeof(VECTOR));
-	memset(&cSize, 0, sizeof(VECTOR));
-	memset(&cRotate, 0, sizeof(VECTOR));
+	cPos = VECTOR_ZERO;
+	cRotate = VECTOR_ZERO;
+	cScale = VECTOR_ZERO;
+	cSize = VECTOR_ZERO;
 }
 
 //設置処理

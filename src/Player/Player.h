@@ -2,9 +2,9 @@
 #include "../Base/Base.h"
 #include "../GamePad/GamePad.h"
 
-const VECTOR PLAYER_SIZE = VGet(15.0f, 50.0f, 15.0f);
+const VECTOR PLAYER_SIZE = VGet(15.0f, 30.0f, 15.0f);
 
-
+//アニメーション状態
 enum PLAYER_STATE
 {
 	STATE_NONE = 0,
@@ -13,11 +13,25 @@ enum PLAYER_STATE
 	STATE_SHOT,		//走撃ちモーション
 };
 
+//プレイヤー方向
+enum PLAYER_DIR
+{
+	DIR_RIGHT = 0,	//右
+	DIR_LEFT,		//左
+	DIR_UP,			//上
+	DIR_DOWN,		//下
+	DIR_BACK,		//奥
+	DIR_NEAR,		//手前
+
+	DIR_NUM,		//総番号
+};
+
 //アタッカークラス
 class CPlayer : public CBase
 {
 private:
-	VECTOR cNextPos;
+	VECTOR cNextPos;		//1フレーム後の座標
+	bool IsDir[DIR_NUM];	//方向フラグ
 	PLAYER_STATE Id;
 	PLAYER_STATE oldId;
 
@@ -28,11 +42,14 @@ private:
 	void RunShot();
 
 public:
-	//座標の取得・設定
-	VECTOR GetNextPos() { return cNextPos; }
-	void SetNextPos(VECTOR NewPos) { cNextPos = NewPos; }
+	
+	VECTOR GetNextPos() { return cNextPos; }				//座標の取得
+	void SetNextPos(VECTOR NewPos) { cNextPos = NewPos;	}	//座標の設定
 
-	VECTOR GetModelSize() { return PLAYER_SIZE; }
+	VECTOR GetModelSize() { return PLAYER_SIZE; }			//プレイヤーのサイズ取得
+
+	bool GetDir(int dir) { return IsDir[dir]; }				//方向フラグ取得
+	void SetDir();											//方向フラグ設定
 
 	//コンストラクタ・デストラクタ
 	CPlayer();

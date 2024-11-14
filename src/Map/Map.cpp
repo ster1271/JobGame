@@ -8,25 +8,11 @@
 //コンストラクタ
 CMap::CMap()
 {
-	//ハンドルの初期化
-	iHndl = -1;
-
-	//変数の初期化
-	memset(&cPos, 0, sizeof(VECTOR));
-	memset(&cSize, 0, sizeof(VECTOR));
-	memset(&cRotate, 0, sizeof(VECTOR));
 }
 
 //デストラクタ
 CMap::~CMap()
 {
-	//ハンドルの初期化
-	iHndl = -1;
-
-	//変数の初期化
-	memset(&cPos, 0, sizeof(VECTOR));
-	memset(&cSize, 0, sizeof(VECTOR));
-	memset(&cRotate, 0, sizeof(VECTOR));
 }
 
 //初期化
@@ -37,8 +23,9 @@ void CMap::Init()
 
 	//各変数の初期化
 	cPos = VECTOR_ZERO;
-	cSize = VECTOR_ZERO;
+	cScale = VECTOR_ZERO;
 	cRotate = VECTOR_ZERO;
+	cSize = VECTOR_ZERO;
 
 	//マップ情報の書き込み
 	/*for (int i = 0; i < 10; i++)
@@ -107,7 +94,6 @@ void CMap::Draw()
 		if (MapList[i].IsMap)
 		{
 			CDraw3D::DrawBox3D(MapList[i].vPos, cSize);
-			DrawSphere3D(MapList[i].vPos, 1.0f, 32, GetColor(255, 0, 0), GetColor(255, 0, 0), TRUE);
 		}
 	}
 }

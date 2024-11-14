@@ -6,8 +6,9 @@ class CObject
 {
 protected:
 	VECTOR cPos;		//座標
-	VECTOR cSize;		//サイズ
+	VECTOR cSize;		//サイズ(縦幅、横幅、奥行)
 	VECTOR cRotate;		//回転値
+	VECTOR cScale;		//倍率
 	
 	int Org_Hndl;		
 	int iHndl;			//ハンドル

@@ -12,7 +12,7 @@ constexpr bool isDebug = true;
 #define DEFAULT_COLOR	GetColor(255, 255, 255)
 
 //リストのサイズ
-constexpr int TEXTINFO_LIST_SIZE = 50;
+constexpr int TEXTINFO_LIST_SIZE = 100;
 
 //表示文字列のサイズ
 constexpr int CHAR_SIZE = 512;

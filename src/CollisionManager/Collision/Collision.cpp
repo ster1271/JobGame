@@ -26,17 +26,18 @@ bool CCollision::IsHitCircle(int PosX, int PosY, int circle1, int aPosX, int aPo
 		return false;
 }
 
-// ボックス同士の当たり判定(3D)
-bool CCollision::CheckHitBoxToBox(VECTOR APos, VECTOR ASize, VECTOR BPos, VECTOR BSize)
+// ボックス同士の当たり判定
+bool CCollision::CheckHitBoxToBox(VECTOR ACenterPos, VECTOR ASize, VECTOR BCenterPos, VECTOR BSize)
 {
-	if (APos.x < BPos.x + BSize.x &&
-		APos.x + ASize.x > BPos.x &&
-		APos.y + ASize.y > BPos.y &&
-		APos.y < BPos.y + BSize.y &&
-		APos.x < BPos.x + BSize.x &&
-		APos.x + ASize.x > BPos.x &&
-		APos.z + ASize.z > BPos.z &&
-		APos.z < BPos.z + BSize.z)
+	VECTOR AHalfSize = VScale(ASize, 0.5f);
+	VECTOR BHalfSize = VScale(BSize, 0.5f);
+
+	if (ACenterPos.x - AHalfSize.x < BCenterPos.x + BHalfSize.x &&
+		ACenterPos.x + AHalfSize.x > BCenterPos.x - BHalfSize.x &&
+		ACenterPos.y - AHalfSize.y < BCenterPos.y + BHalfSize.y &&
+		ACenterPos.y + AHalfSize.y > BCenterPos.y - BHalfSize.y &&
+		ACenterPos.z - AHalfSize.z < BCenterPos.z + BHalfSize.z &&
+		ACenterPos.z + AHalfSize.z > BCenterPos.z - BHalfSize.z)
 	{
 		return true;
 	}

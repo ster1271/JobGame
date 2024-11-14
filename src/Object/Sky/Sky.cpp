@@ -14,9 +14,10 @@ CSky::~CSky()
 //èâä˙âª
 void CSky::Init()
 {
-	cPos = VGet(0.0f, 0.0f, 0.0f);
-	cSize = VGet(2.0f, 2.0f, 2.0f);
-	cRotate = VGet(0.0f, 0.0f, 0.0f);
+	cPos = VECTOR_ZERO;
+	cScale = VGet(2.0f, 2.0f, 2.0f);
+	cRotate = VECTOR_ZERO;
+	cSize = VECTOR_ZERO;
 }
 
 

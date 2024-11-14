@@ -21,13 +21,12 @@ CPlayer::~CPlayer()
 void CPlayer::Init()
 {
 	CBase::Init();
-	cPos = VGet(0.0f, 0.0f, 0.0f);
+	cPos = VGet(200.0f, 0.0f, 100.0f);
+	cNextPos = cPos;
 	cSize = VGet(0.05f, 0.05f, 0.05f);
 	cRotate = VGet(0.0f, 0.0f, 0.0f);
 
 	Life = 100;
-
-
 }
 
 //データ読み込み
@@ -55,6 +54,12 @@ void CPlayer::RunShot()
 void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 {
 	GetJoypadDirectInputState(DX_INPUT_PAD1, &pad);
+
+	//方向フラグを毎フレームfalseにする
+	for (int Dir_Index = 0; Dir_Index < DIR_NUM; Dir_Index++)
+	{
+		IsDir[Dir_Index] = false;
+	}
 
 	switch (Id)
 	{
@@ -135,6 +140,11 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 		cTurretManager.TurretSpawn(cPos);
 	}
 
+
+	//方向のチェック
+	SetDir();
+
+	//過去のアニメーションIDに現在アニメーションを代入
 	oldId = Id;
 }
 
@@ -145,7 +155,6 @@ void CPlayer::Draw()
 	if (iHndl != -1)
 	{
 		MV1DrawModel(iHndl);
-		CDraw3D::DrawBox3D(cPos, PLAYER_SIZE);
 	}
 	else
 	{
@@ -184,4 +193,40 @@ void CPlayer::Draw()
 void CPlayer::Exit()
 {
 	CBase::Exit();
+}
+
+
+//方向フラグ設定
+void CPlayer::SetDir()
+{
+	if (cNextPos.x > cPos.x)
+	{
+		//右に動いている
+		IsDir[DIR_RIGHT] = true;
+	}
+	if (cNextPos.x < cPos.x)
+	{
+		//左に動いている
+		IsDir[DIR_LEFT] = true;
+	}
+	if (cNextPos.y > cPos.y)
+	{
+		//上に動いている
+		IsDir[DIR_UP] = true;
+	}
+	if (cNextPos.y < cPos.y)
+	{
+		//下に動いている
+		IsDir[DIR_DOWN] = true;
+	}
+	if (cNextPos.z > cPos.z)
+	{
+		//奥に動いている
+		IsDir[DIR_BACK] = true;
+	}
+	if (cNextPos.z < cPos.z)
+	{
+		//手前に動いている
+		IsDir[DIR_NEAR] = true;
+	}
 }

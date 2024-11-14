@@ -1,6 +1,7 @@
 #include "Common.h"
 #include "DrawFPS/fps.h"
 #include "Scene/SceneManager.h"
+#include "Debug/DebugString.h"
 
 
 // Win32アプリケーションは WinMain関数 から始まる
@@ -19,6 +20,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//描画するスクリーンを設定する
 	SetDrawScreen(DX_SCREEN_BACK);
+
+	//ライト設定
+	SetUseLighting(TRUE);
 	
 	//-----------------------------------------
 	//一番最初に１回だけやる処理をここに書く
@@ -88,6 +92,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 			//描画処理
 			cSceneManager.Draw();
+
+			CDebugString::GetInstance()->Draw();
 
 			//FPS計算
 			cFps.CalcFPS();

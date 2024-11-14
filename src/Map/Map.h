@@ -14,7 +14,7 @@ class CMap :public CObject
 {
 
 private:
-
+	
 	FILE* fp_;				//ファイル用
 	vector<MapInfo>MapList;	//マップ情報格納リスト
 
