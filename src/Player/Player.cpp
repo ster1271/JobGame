@@ -3,14 +3,11 @@
 
 const char ATTACKER_PATH[] = { "data/character/human.x" };
 
-const float SPERE_R = 3.0f;
-#define MOVESPEED	(1.0f)
-#define ROT_SPEED	(0.05f)	
-
-
 //コンストラクタ・デストラクタ
 CPlayer::CPlayer()
 {
+	IsDir[DIR_NUM] = { false };
+	memset(&Id, 0, sizeof(PLAYER_STATE));
 }
 
 CPlayer::~CPlayer()
@@ -20,11 +17,11 @@ CPlayer::~CPlayer()
 //初期化
 void CPlayer::Init()
 {
-	CBase::Init();
 	cPos = VGet(200.0f, 0.0f, 100.0f);
 	cNextPos = cPos;
-	cSize = VGet(0.05f, 0.05f, 0.05f);
-	cRotate = VGet(0.0f, 0.0f, 0.0f);
+	cRotate = VECTOR_ZERO;
+	cScale = VGet(0.05f, 0.05f, 0.05f);
+	cSize = PLAYER_SIZE;
 
 	Life = 100;
 }
@@ -54,12 +51,6 @@ void CPlayer::RunShot()
 void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 {
 	GetJoypadDirectInputState(DX_INPUT_PAD1, &pad);
-
-	//方向フラグを毎フレームfalseにする
-	for (int Dir_Index = 0; Dir_Index < DIR_NUM; Dir_Index++)
-	{
-		IsDir[Dir_Index] = false;
-	}
 
 	switch (Id)
 	{
@@ -192,41 +183,6 @@ void CPlayer::Draw()
 //終了処理
 void CPlayer::Exit()
 {
-	CBase::Exit();
+	CHumanBase::Exit();
 }
 
-
-//方向フラグ設定
-void CPlayer::SetDir()
-{
-	if (cNextPos.x > cPos.x)
-	{
-		//右に動いている
-		IsDir[DIR_RIGHT] = true;
-	}
-	if (cNextPos.x < cPos.x)
-	{
-		//左に動いている
-		IsDir[DIR_LEFT] = true;
-	}
-	if (cNextPos.y > cPos.y)
-	{
-		//上に動いている
-		IsDir[DIR_UP] = true;
-	}
-	if (cNextPos.y < cPos.y)
-	{
-		//下に動いている
-		IsDir[DIR_DOWN] = true;
-	}
-	if (cNextPos.z > cPos.z)
-	{
-		//奥に動いている
-		IsDir[DIR_BACK] = true;
-	}
-	if (cNextPos.z < cPos.z)
-	{
-		//手前に動いている
-		IsDir[DIR_NEAR] = true;
-	}
-}

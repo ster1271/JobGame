@@ -5,7 +5,7 @@
 #include "../Map/MapManager.h"
 #include "../RouteSearch/RouteSearch.h"
 
-#define ENEMY_NUM	(2)
+#define ENEMY_MAXNUM	(2)
 
 //敵の種類
 enum TYPE_ENEMY
@@ -22,8 +22,8 @@ private:
 	//モデルのコピー元
 	int Org_Hndl;
 	TYPE_ENEMY type_id;
-	CEnemy_Normal cEnemy_Normal[ENEMY_NUM];
-	CEnemyBoss cEnemyBoss[ENEMY_NUM];
+	CEnemy_Normal cEnemy_Normal[ENEMY_MAXNUM];
+	CEnemyBoss cEnemyBoss[ENEMY_MAXNUM];
 
 public:
 	//コンストラクタ・デストラクタ

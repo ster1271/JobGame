@@ -1,4 +1,5 @@
 #include "Turret_Normal.h"
+#include "../CollisionManager/Collision/Collision.h"
 
 const float MAX_LIFE = 50.0f;
 const float ATTACK = 5.0f;
@@ -55,7 +56,7 @@ void CTurret_Normal::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManag
 
 	//äpìxåvéZ
 	float MIN_RANGE = 999.9f;
-	for (int i = 0; i < ENEMY_NUM; i++)
+	for (int i = 0; i < ENEMY_MAXNUM; i++)
 	{
 		//Ç±ÇÃforï∂Ç≈ExitÇ™åƒÇŒÇÍÇƒÇΩÇÁìGÇ™ï`âÊÇ≥ÇÍÇ»Ç¢
 		CEnemy_Normal cEnemy = cEnemyManager.GetEnemy(i);

@@ -1,6 +1,9 @@
 #pragma once
 #include "EnemyBase.h"
 
+//ìGÇÃÉTÉCÉY
+const VECTOR ENEMY_BOSS_SIZE = VGet(0.0f, 0.0f, 0.0f);
+
 class CEnemyBoss :public CEnemyBase
 {
 private:

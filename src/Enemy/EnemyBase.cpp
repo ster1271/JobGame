@@ -11,8 +11,10 @@ CEnemyBase::CEnemyBase()
 {
 	//ひとまず初期化
 	memset(&cPos, 0, sizeof(VECTOR));
-	memset(&cSize, 0, sizeof(VECTOR));
+	memset(&cNextPos, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
+	memset(&cScale, 0, sizeof(VECTOR));
+	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cSpeed, 0, sizeof(VECTOR));
 
 	State_Id = STATE_NUM;
@@ -41,8 +43,10 @@ void CEnemyBase::Init()
 {
 	//ひとまず初期化
 	memset(&cPos, 0, sizeof(VECTOR));
-	memset(&cSize, 0, sizeof(VECTOR));
+	memset(&cNextPos, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
+	memset(&cScale, 0, sizeof(VECTOR));
+	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cSpeed, 0, sizeof(VECTOR));
 
 	State_Id = STATE_MOVE;
@@ -68,8 +72,10 @@ void CEnemyBase::Exit()
 
 	//ひとまず初期化
 	memset(&cPos, 0, sizeof(VECTOR));
-	memset(&cSize, 0, sizeof(VECTOR));
+	memset(&cNextPos, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
+	memset(&cScale, 0, sizeof(VECTOR));
+	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cSpeed, 0, sizeof(VECTOR));
 
 	Life = 0;;			//ライフ
@@ -150,6 +156,7 @@ bool CEnemyBase::RequestEnemy(const VECTOR &vPos, const VECTOR &vSpeed)
 	}
 
 	cPos = vPos;
+	cNextPos = cPos;
 	cSpeed = vSpeed;
 	Life = MAX_LIFE;
 	IsActive = true;
@@ -168,7 +175,7 @@ void CEnemyBase::Step()
 void CEnemyBase::Update()
 {
 	MV1SetPosition(iHndl, cPos);		//座標の更新
-	MV1SetScale(iHndl, cSize);			//サイズの更新
+	MV1SetScale(iHndl, cScale);			//サイズの更新
 	MV1SetRotationXYZ(iHndl, cRotate);	//回転値の更新
 }
 
@@ -176,7 +183,7 @@ void CEnemyBase::Update()
 //移動処理
 void CEnemyBase::Enemy_Move(vector<VECTOR> List, int& Cnt)
 {
-
+	cPos = cNextPos;
 	//進行方向のどちら側にいるのかを調べる
 	float Dir = 0.0f;
 
@@ -215,9 +222,10 @@ void CEnemyBase::Enemy_Move(vector<VECTOR> List, int& Cnt)
 		cRotate.y -= 0.05f;
 	}
 
+
 	//座標に速度を加算する
-	cPos.x += sinf(cRotate.y) * -0.2f;
-	cPos.z += cosf(cRotate.y) * -0.2f;
+	cNextPos.x += sinf(cRotate.y) * -0.2f;
+	cNextPos.z += cosf(cRotate.y) * -0.2f;
 
 	//プレイヤーとの距離を計算
 	float Range = (List[Cnt].x - cPos.x) * (List[Cnt].x - cPos.x) + (List[Cnt].z - cPos.z) * (List[Cnt].z - cPos.z);
@@ -235,4 +243,70 @@ void CEnemyBase::Enemy_Move(vector<VECTOR> List, int& Cnt)
 	}
 	
 }
+
+
+//方向フラグ設定
+void CEnemyBase::SetDir()
+{
+	if (cNextPos.x > cPos.x)
+	{
+		//右に動いている
+		IsDir[ENEMY_DIR_RIGHT] = true;
+	}
+	else
+	{
+		IsDir[ENEMY_DIR_RIGHT] = false;
+	}
+
+	if (cNextPos.x < cPos.x)
+	{
+		//左に動いている
+		IsDir[ENEMY_DIR_LEFT] = true;
+	}
+	else
+	{
+		IsDir[ENEMY_DIR_LEFT] = false;
+	}
+
+	if (cNextPos.y > cPos.y)
+	{
+		//上に動いている
+		IsDir[ENEMY_DIR_UP] = true;
+	}
+	else
+	{
+		IsDir[ENEMY_DIR_UP] = false;
+	}
+
+	if (cNextPos.y < cPos.y)
+	{
+		//下に動いている
+		IsDir[ENEMY_DIR_DOWN] = true;
+	}
+	else
+	{
+		IsDir[ENEMY_DIR_DOWN] = false;
+	}
+
+	if (cNextPos.z > cPos.z)
+	{
+		//奥に動いている
+		IsDir[ENEMY_DIR_BACK] = true;
+	}
+	else
+	{
+		IsDir[ENEMY_DIR_BACK] = false;
+	}
+
+	if (cNextPos.z < cPos.z)
+	{
+		//手前に動いている
+		IsDir[ENEMY_DIR_NEAR] = true;
+	}
+	else
+	{
+		IsDir[ENEMY_DIR_NEAR] = false;
+	}
+}
+
 

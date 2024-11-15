@@ -2,13 +2,6 @@
 
 void CCollisionManager::Draw()
 {
-	if (IsCheck == true)
-	{
-		DrawString(0, 285, "当たった", GetColor(255, 0, 0));
-	}
-
-	DrawFormatString(0, 300, GetColor(255, 0, 0), "めり込み量：%f", Tmp_OverRap);
-	
 }
 
 //プレイヤーとマップの当たり判定
@@ -20,7 +13,7 @@ void CCollisionManager::PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager)
 	//プレイヤーの情報を格納する
 	VECTOR PlayerPos = cPlayer.GetPos();					//座標
 	VECTOR NextPlayerPos = cPlayer.GetNextPos();			//1フレーム後の座標
-	VECTOR Player_Size = VGet(15.0f, 30.0f, 15.0f);			//プレイヤーのサイズ
+	VECTOR Player_Size = PLAYER_SIZE;						//プレイヤーのサイズ
 	VECTOR Player_Harf_Size = VScale(Player_Size, 0.5f);	//プレイヤーのハーフサイズ
 
 	bool Dir[DIR_NUM] = { false };
@@ -33,7 +26,7 @@ void CCollisionManager::PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager)
 	//マップの情報を格納する
 	vector<MapInfo> MapInfoList = cMapManager.GetMap().GetMapInfo();	//リストをもらう
 
-	VECTOR Map_Size = VGet(50.0f, 50.0f, 50.0f);	//1ブロックのサイズ
+	VECTOR Map_Size = MAP_SIZE;						//1ブロックのサイズ
 	VECTOR Map_Harf_Size = VScale(Map_Size, 0.5f);	//1ブロックのハーフサイズ
 
 	//リストのサイズ分回す
@@ -47,9 +40,7 @@ void CCollisionManager::PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager)
 		PlayerPos.x = NextPlayerPos.x;
 
 		if (CCollision::CheckHitBoxToBox(PlayerPos, Player_Size, MapInfoList[MapIndex].vPos, Map_Size))
-		{
-			IsCheck = true;
-			
+		{			
 			//初期化しておく
 			OverRap = 0.0f;
 
@@ -82,8 +73,6 @@ void CCollisionManager::PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager)
 
 		if (CCollision::CheckHitBoxToBox(PlayerPos, Player_Size, MapInfoList[MapIndex].vPos, Map_Size))
 		{
-			IsCheck = true;
-
 			//初期化しておく
 			OverRap = 0.0f;
 
@@ -116,8 +105,6 @@ void CCollisionManager::PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager)
 
 		if (CCollision::CheckHitBoxToBox(PlayerPos, Player_Size, MapInfoList[MapIndex].vPos, Map_Size))
 		{
-			IsCheck = true;
-
 			//初期化しておく
 			OverRap = 0.0f;
 
@@ -141,9 +128,145 @@ void CCollisionManager::PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager)
 
 
 //敵とマップの当たり判定
-void CCollisionManager::EnemyToMap(CEnemyManager& cEnemyManager, CMapManager& cMapManager)
+void CCollisionManager::Enemy1ToMap(CEnemyManager& cEnemyManager, CMapManager& cMapManager)
 {
+	//マップの情報を格納する
+	vector<MapInfo> MapInfoList = cMapManager.GetMap().GetMapInfo();	//リストをもらう
+	VECTOR Map_Size = MAP_SIZE;						//1ブロックのサイズ
+	VECTOR Map_Harf_Size = VScale(Map_Size, 0.5f);	//1ブロックのハーフサイズ
 
+	for (int enemyIndex = 0; enemyIndex < ENEMY_MAXNUM; enemyIndex++)
+	{
+		//めり込み量を格納する変数を生成
+		float OverRap = 0.0f;
+
+		//敵情報を格納する
+		CEnemy_Normal& cENormal = cEnemyManager.GetEnemy(enemyIndex);	//情報をもらう
+		VECTOR EnemyPos = cENormal.GetPosition();						//座標
+		VECTOR NextEnemyPos = cENormal.GetNextPosision();				//1フレーム後の座標
+		VECTOR EnemySize = ENEMY_NORMAL_SIZE;							//サイズ
+		VECTOR Enemy_Harf_Size = VScale(EnemySize, 0.5f);				//ハーフサイズ
+		bool Dir[DIR_NUM] = { false };									//方向フラグ
+		for (int Index = 0; Index < DIR_NUM; Index++)
+		{
+			//方向フラグを取得してくる
+			Dir[Index] = cENormal.GetDir(Index);
+		}
+
+
+		//フラグがfalseならfor文を次に変更する
+		if (!cENormal.GetActive())
+			continue;
+
+		//リストのサイズ分回す
+		for (int MapIndex = 0; MapIndex < MapInfoList.size(); MapIndex++)
+		{
+			//もしフラグがfalseなら計算しない
+			if (!MapInfoList[MapIndex].IsMap)
+				continue;
+
+			//X軸のみで計算する
+			EnemyPos.x = NextEnemyPos.x;
+			if (CCollision::CheckHitBoxToBox(EnemyPos, EnemySize, MapInfoList[MapIndex].vPos, Map_Size))
+			{
+
+				//初期化しておく
+				OverRap = 0.0f;
+
+				/*どちら側から当たったかを判定する*/
+				//右から当たった場合
+				if (Dir[ENEMY_DIR_RIGHT] == true)
+				{
+					OverRap = (MapInfoList[MapIndex].vPos.x - Map_Harf_Size.x) - (EnemyPos.x + Enemy_Harf_Size.x);
+				}
+				//左から当たった場合
+				if (Dir[ENEMY_DIR_LEFT] == true)
+				{
+					OverRap = (MapInfoList[MapIndex].vPos.x + Map_Harf_Size.x) - (EnemyPos.x - Enemy_Harf_Size.x);
+				}
+
+				NextEnemyPos.x += OverRap;
+			}
+		}
+
+		//リストのサイズ分回す
+		for (int MapIndex = 0; MapIndex < MapInfoList.size(); MapIndex++)
+		{
+			//もしフラグがfalseなら計算しない
+			if (!MapInfoList[MapIndex].IsMap)
+				continue;
+
+			//X軸のみで計算する
+			EnemyPos.y = NextEnemyPos.y;
+			if (CCollision::CheckHitBoxToBox(EnemyPos, EnemySize, MapInfoList[MapIndex].vPos, Map_Size))
+			{
+
+				//初期化しておく
+				OverRap = 0.0f;
+
+				/*どちら側から当たったかを判定する*/
+				//右から当たった場合
+				if (Dir[ENEMY_DIR_UP] == true)
+				{
+					OverRap = (MapInfoList[MapIndex].vPos.y - Map_Harf_Size.y) - (EnemyPos.y + Enemy_Harf_Size.y);
+				}
+				//左から当たった場合
+				if (Dir[ENEMY_DIR_DOWN] == true)
+				{
+					OverRap = (MapInfoList[MapIndex].vPos.y + Map_Harf_Size.y) - (EnemyPos.y - Enemy_Harf_Size.y);
+				}
+
+				NextEnemyPos.y += OverRap;
+			}
+		}
+
+		//リストのサイズ分回す
+		for (int MapIndex = 0; MapIndex < MapInfoList.size(); MapIndex++)
+		{
+			//もしフラグがfalseなら計算しない
+			if (!MapInfoList[MapIndex].IsMap)
+				continue;
+
+			//X軸のみで計算する
+			EnemyPos.z = NextEnemyPos.z;
+			if (CCollision::CheckHitBoxToBox(EnemyPos, EnemySize, MapInfoList[MapIndex].vPos, Map_Size))
+			{
+
+				//初期化しておく
+				OverRap = 0.0f;
+
+				/*どちら側から当たったかを判定する*/
+				//右から当たった場合
+				if (Dir[ENEMY_DIR_BACK] == true)
+				{
+					OverRap = (MapInfoList[MapIndex].vPos.z - Map_Harf_Size.z) - (EnemyPos.z + Enemy_Harf_Size.z);
+				}
+				//左から当たった場合
+				if (Dir[ENEMY_DIR_NEAR] == true)
+				{
+					OverRap = (MapInfoList[MapIndex].vPos.z + Map_Harf_Size.z) - (EnemyPos.z - Enemy_Harf_Size.z);
+				}
+
+				NextEnemyPos.z += OverRap;
+			}
+		}
+		
+		//Next座標の更新
+		cENormal.SetNextPosision(NextEnemyPos);
+	}
+}
+
+
+//敵2とマップの当たり判定
+void CCollisionManager::Enemy2ToMap(CEnemyManager& cEnemyManager, CMapManager& cMapManager)
+{
+	//敵の情報を格納する
+
+
+	//マップの情報を格納する
+	vector<MapInfo> MapInfoList = cMapManager.GetMap().GetMapInfo();	//リストをもらう
+	VECTOR Map_Size = MAP_SIZE;						//1ブロックのサイズ
+	VECTOR Map_Harf_Size = VScale(Map_Size, 0.5f);	//1ブロックのハーフサイズ
 }
 
 
@@ -163,7 +286,7 @@ void CCollisionManager::TurretShotToEnemy(CShotManager& cShotManager, CEnemyMana
 
 
 		//敵の数分回す
-		for (int enemyIndex = 0; enemyIndex < ENEMY_NUM; enemyIndex++)
+		for (int enemyIndex = 0; enemyIndex < ENEMY_MAXNUM; enemyIndex++)
 		{
 			//敵情報を格納する
 			CEnemy_Normal& cENormal = cEnemyManager.GetEnemy(enemyIndex);
@@ -200,7 +323,7 @@ void CCollisionManager::PlayerShotToEnemy(CShotManager& cShotManager, CEnemyMana
 
 
 		//敵の数分回す
-		for (int enemyIndex = 0; enemyIndex < ENEMY_NUM; enemyIndex++)
+		for (int enemyIndex = 0; enemyIndex < ENEMY_MAXNUM; enemyIndex++)
 		{
 			//敵情報を格納する
 			CEnemy_Normal& cENormal = cEnemyManager.GetEnemy(enemyIndex);

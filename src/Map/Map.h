@@ -1,7 +1,7 @@
 #pragma once
 #include "../Object/Object.h"
 
-const VECTOR BLOCK_SIZE = VGet(50.0f, 50.0f, 50.0f);
+const VECTOR MAP_SIZE = VGet(50.0f, 50.0f, 50.0f);
 
 //マップ情報
 struct MapInfo
@@ -38,9 +38,6 @@ public:
 
 	//マップ情報取得
 	vector<MapInfo> GetMapInfo() { return MapList; }
-
-	//マップサイズ取得
-	VECTOR GetMapSize() { return BLOCK_SIZE; }
 };
 
 

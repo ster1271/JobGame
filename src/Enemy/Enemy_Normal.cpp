@@ -77,8 +77,13 @@ void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 		break;
 	}
 
+	//方向設定
+	SetDir();
+
 	//更新処理
 	Update();
+
+
 }
 
 //後処理
@@ -86,7 +91,6 @@ void CEnemy_Normal::Exit()
 {
 	CEnemyBase::Exit();
 	memset(&Respown_Pos, 0, sizeof(VECTOR));
-
 }
 
 //リクエスト
@@ -99,15 +103,18 @@ bool CEnemy_Normal::RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed)
 	}
 
 	cPos = vPos;
+	cNextPos = cPos;
 	Respown_Pos = vPos;
-	cSize = VGet(0.1f, 0.1f, 0.1f);
+	cScale = VGet(0.1f, 0.1f, 0.1f);
+	cSize = ENEMY_NORMAL_SIZE;
 	cRotate = VGet(0.0f, DX_PI_F / 2, 0.0f);
 	cSpeed = vSpeed;
 	Life = MAX_LIFE;
-	State_Id = STATE_SEARCH;
 	List.clear();
 	ListCnt = 0;
 	IsActive = true;
+
+	State_Id = STATE_SEARCH;
 
 	return true;
 }

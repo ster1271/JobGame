@@ -1,6 +1,9 @@
 #pragma once
 #include "EnemyBase.h"
 
+//ìGÇÃÉTÉCÉY
+const VECTOR ENEMY_NORMAL_SIZE = VGet(0.0f, 0.0f, 0.0f);
+
 class CEnemy_Normal: public CEnemyBase
 {
 private:

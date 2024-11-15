@@ -20,7 +20,7 @@ CEnemyManager::~CEnemyManager()
 //初期化
 void CEnemyManager::Init()
 {
-	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
+	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Init();
 		cEnemyBoss[Enemy_Index].Init();
@@ -36,13 +36,13 @@ void CEnemyManager::Load()
 		Org_Hndl = MV1LoadModel(ENEMY_MODEL_PATH01);
 	}
 
-	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
+	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Load(Org_Hndl);
 	}
 
 	Org_Hndl = MV1LoadModel(Enemy_MODEL_PATH02);
-	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
+	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		cEnemyBoss[Enemy_Index].Load(Org_Hndl);
 	}
@@ -53,7 +53,7 @@ void CEnemyManager::Load()
 void CEnemyManager::Exit()
 {
 
-	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
+	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Exit();
 		cEnemyBoss[Enemy_Index].Exit();
@@ -83,13 +83,13 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 	*/
 
 
-	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
+	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Step(cBot, cMapManager);
 		cEnemyBoss[Enemy_Index].Step(cBot, cMapManager);
 	}
 
-	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
+	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		//リクエスト
 		RequestEnemy(Enemy_Index);
@@ -99,7 +99,7 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 //描画処理
 void CEnemyManager::Draw()
 {
-	for (int Enemy_Index = 0; Enemy_Index < ENEMY_NUM; Enemy_Index++)
+	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Draw();
 		//cEnemyBoss[Enemy_Index].Draw();

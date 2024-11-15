@@ -11,17 +11,16 @@
 class CCollisionManager
 {
 private:
-	float Tmp_OverRap;
-	bool IsCheck;
-
-	VECTOR _VEC;
 
 public:
 	//プレイヤーとマップの当たり判定
 	void PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager);
 
-	//敵とマップの当たり判定
-	void EnemyToMap(CEnemyManager& cEnemyManager, CMapManager& cMapManager);
+	//敵1とマップの当たり判定
+	void Enemy1ToMap(CEnemyManager& cEnemyManager, CMapManager& cMapManager);
+
+	//敵2とマップの当たり判定
+	void Enemy2ToMap(CEnemyManager& cEnemyManager, CMapManager& cMapManager);
 
 	//タレットの弾と敵の当たり判定
 	void TurretShotToEnemy(CShotManager& cShotManager, CEnemyManager& cEnemyManager);

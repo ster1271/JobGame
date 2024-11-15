@@ -1,8 +1,14 @@
 #pragma once
-#include "../Base/Base.h"
 #include "../GamePad/GamePad.h"
+#include "../HumanBase/HumanBase.h"
+#include "../Shot/ShotManager.h"
+#include "../Turret/TurretManager.h"
 
 const VECTOR PLAYER_SIZE = VGet(15.0f, 30.0f, 15.0f);
+const float SPERE_R = 3.0f;
+const float MOVESPEED = 1.0f;
+const float ROT_SPEED = 0.05f;
+
 
 //アニメーション状態
 enum PLAYER_STATE
@@ -13,24 +19,10 @@ enum PLAYER_STATE
 	STATE_SHOT,		//走撃ちモーション
 };
 
-//プレイヤー方向
-enum PLAYER_DIR
-{
-	DIR_RIGHT = 0,	//右
-	DIR_LEFT,		//左
-	DIR_UP,			//上
-	DIR_DOWN,		//下
-	DIR_BACK,		//奥
-	DIR_NEAR,		//手前
-
-	DIR_NUM,		//総番号
-};
-
 //アタッカークラス
-class CPlayer : public CBase
+class CPlayer : public CHumanBase
 {
 private:
-	VECTOR cNextPos;		//1フレーム後の座標
 	bool IsDir[DIR_NUM];	//方向フラグ
 	PLAYER_STATE Id;
 	PLAYER_STATE oldId;
@@ -42,14 +34,6 @@ private:
 	void RunShot();
 
 public:
-	
-	VECTOR GetNextPos() { return cNextPos; }				//座標の取得
-	void SetNextPos(VECTOR NewPos) { cNextPos = NewPos;	}	//座標の設定
-
-	VECTOR GetModelSize() { return PLAYER_SIZE; }			//プレイヤーのサイズ取得
-
-	bool GetDir(int dir) { return IsDir[dir]; }				//方向フラグ取得
-	void SetDir();											//方向フラグ設定
 
 	//コンストラクタ・デストラクタ
 	CPlayer();

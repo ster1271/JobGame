@@ -43,8 +43,9 @@ void CEnemyBoss::Step(CBot& cBot, CMapManager& cMapManager)
 		return;
 	}
 
+	cPos = cNextPos;
 	//座標に速度を加算
-	cPos = VSub(cPos, cSpeed);
+	cNextPos = VSub(cPos, cSpeed);
 	//一定範囲を超えたら消す
 	float fLength = 100.0f;
 	if (cPos.x > Respown_Pos.x + fLength || cPos.x < Respown_Pos.x - fLength
@@ -52,6 +53,9 @@ void CEnemyBoss::Step(CBot& cBot, CMapManager& cMapManager)
 	{
 		IsActive = false;
 	}
+
+	//方向設定
+	SetDir();
 
 	//更新処理
 	Update();
@@ -69,15 +73,16 @@ bool CEnemyBoss::RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed)
 {
 	//すでに出現している
 	if (IsActive)
-	{
 		return false;
-	}
 
 	cPos = vPos;
 	Respown_Pos = vPos;
-	cSize = VGet(0.2f, 0.2f, 0.2f);
+	cScale = VGet(0.2f, 0.2f, 0.2f);
+	cSize = ENEMY_BOSS_SIZE;
 	cRotate = VGet(0.0f, DX_PI_F / 2, 0.0f);
 	cSpeed = vSpeed;
 	Life = MAX_LIFE;
 	IsActive = true;
+
+	return true;
 }
