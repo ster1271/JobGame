@@ -71,4 +71,6 @@ public:
 
 	//右スティック
 	static bool RStick();
+
+
 };

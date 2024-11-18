@@ -70,7 +70,8 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 		break;
 	}
 
-	/*
+	cPos = cNextPos;
+	
 	//キャラクターの移動
 	float fSpd = 0.0f;
 	if (CInput::IsKeyKeep(KEY_INPUT_W) || pad.Y == -1000)
@@ -103,9 +104,7 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	{
 		Id = STATE_DEFAULT;
 	}
-	*/
-	cPos = cNextPos;
-
+	
 	/*
 	//入力したキー情報とプレイヤーの角度から、移動速度を求める
 	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
@@ -198,10 +197,7 @@ void CPlayer::Draw()
 			DrawFormatString(64 + i % 8 * 64, 64 + i / 8 * 16, Color,
 				"%2d:%d", i, pad.Buttons[i]);
 		}
-		
 
-
-		//aaaaaaaaaaaaa
 	}
 }
 

@@ -7,7 +7,7 @@
 #define CAMERA_LENGTH	(80.0f)
 
 //éãì_ÇÃçÇÇ≥
-#define CAMERA_OFFSET_Y	(50.0f)
+#define CAMERA_OFFSET_Y	(150.0f)
 
 //íçéãì_ÇÃçÇÇ≥
 #define FORCUS_OFFSET_Y	(30.0f)
@@ -50,8 +50,8 @@ void CPlayCamera::Init(VECTOR vPos, VECTOR vForcusPos, VECTOR vUp)
 void CPlayCamera::Step(VECTOR vForcus, VECTOR fRot)
 {
 	VECTOR vDir;
-	vDir.x = sinf(fRot.y) * CAMERA_LENGTH;
-	vDir.z = cosf(fRot.y) * CAMERA_LENGTH;
+	vDir.x = sinf(0.0f) * CAMERA_LENGTH;
+	vDir.z = cosf(0.0f) * CAMERA_LENGTH;
 
 	//éãì_ÇÃçÇÇ≥ÇÕå≈íË
 	vDir.y = CAMERA_OFFSET_Y;

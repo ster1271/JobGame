@@ -176,7 +176,8 @@ bool CGamePad::LStick()
 {
 	if (PadcurrentBuf.X != 0 || PadcurrentBuf.Y != 0)
 	{
-		true;
+
+		return true;
 	}
 
 	return false;
