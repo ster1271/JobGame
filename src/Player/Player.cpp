@@ -199,6 +199,9 @@ void CPlayer::Draw()
 				"%2d:%d", i, pad.Buttons[i]);
 		}
 		
+
+
+		//aaaaaaaaaaaaa
 	}
 }
 
