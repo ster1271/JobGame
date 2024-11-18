@@ -169,3 +169,21 @@ bool CGamePad::IsKeep_Cross(CHECK check)
 
 	return false;
 }
+
+
+//左スティック
+bool CGamePad::LStick()
+{
+	if (PadcurrentBuf.X != 0 || PadcurrentBuf.Y != 0)
+	{
+		true;
+	}
+
+	return false;
+}
+
+//右スティック
+bool CGamePad::RStick()
+{
+	return true;
+}

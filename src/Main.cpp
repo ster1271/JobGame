@@ -93,8 +93,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			//•`‰æˆ—
 			cSceneManager.Draw();
 
-			CDebugString::GetInstance()->Draw();
-
 			//FPSŒvŽZ
 			cFps.CalcFPS();
 
