@@ -72,6 +72,8 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 
 	cPos = cNextPos;
 	
+
+
 	
 	//キャラクターの移動
 	float fSpd = 0.0f;
@@ -83,26 +85,20 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	else if (CInput::IsKeyKeep(KEY_INPUT_S) || pad.Y > 0 && pad.Y <= 1000)
 	{
 		Id = STATE_RUN;
-		fSpd = MOVESPEED;
+		fSpd = -MOVESPEED;
 	}
-	/*if (CInput::IsKeyKeep(KEY_INPUT_A) || pad.X < 0 && pad.X >= -1000)
+	else if (CInput::IsKeyKeep(KEY_INPUT_W) || pad.X < 0 && pad.X >= -1000)
 	{
 		Id = STATE_RUN;
-		cNextPos.x += MOVESPEED;
+		fSpd = -MOVESPEED;
 	}
-	if (CInput::IsKeyKeep(KEY_INPUT_D) || pad.X > 0 && pad.X <= 1000)
+	else if (CInput::IsKeyKeep(KEY_INPUT_S) || pad.X > 0 && pad.X <= 1000)
 	{
 		Id = STATE_RUN;
-		cNextPos.x -= MOVESPEED;
-	}*/
-	else
-	{
-		Id = STATE_DEFAULT;
+		fSpd = -MOVESPEED;
 	}
 	
-	//cRotate.y = 
-
-	
+	cRotate.y = atan2(pad.X, pad.Y * -1);
 	
 	//入力したキー情報とプレイヤーの角度から、移動速度を求める
 	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
@@ -112,6 +108,8 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	//移動速度を現在の座標に加算する
 	cNextPos.x += vSpeed.x;
 	cNextPos.z += vSpeed.z;
+
+
 
 	//発射処理
 	if (CInput::IsKeyPush(KEY_INPUT_SPACE) ||CGamePad::IsPush_LR(RIGHT))

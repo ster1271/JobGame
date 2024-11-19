@@ -95,11 +95,11 @@ void CTurretBase::Turret_Rotate(VECTOR vPos)
 	//‰ñ“]‚·‚éŠp“x‚ðŒˆ‚ß‚é
 	if (Dir >= 0.0f)
 	{
-		cRotate.y += 0.01f;
+		cRotate.y += 0.05f;
 	}
 	else if (Dir < 0.0f)
 	{
-		cRotate.y -= 0.01f;
+		cRotate.y -= 0.05f;
 	}
 }
 
