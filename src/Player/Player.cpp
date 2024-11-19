@@ -72,40 +72,38 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 
 	cPos = cNextPos;
 	
+	
 	//キャラクターの移動
 	float fSpd = 0.0f;
-	if (CInput::IsKeyKeep(KEY_INPUT_W) || pad.Y == -1000)
+	if (CInput::IsKeyKeep(KEY_INPUT_W) || pad.Y < 0 && pad.Y >= -1000)
 	{
 		Id = STATE_RUN;
 		fSpd = -MOVESPEED;
-		cNextPos.z -= MOVESPEED;
-		cRotate.y = 0.0f;
 	}
-	else if (CInput::IsKeyKeep(KEY_INPUT_S) || pad.Y == 1000)
+	else if (CInput::IsKeyKeep(KEY_INPUT_S) || pad.Y > 0 && pad.Y <= 1000)
 	{
 		Id = STATE_RUN;
 		fSpd = MOVESPEED;
-		cNextPos.z += MOVESPEED;
-		cRotate.y = DX_PI_F;
 	}
-	else if (CInput::IsKeyKeep(KEY_INPUT_A) || CGamePad::LStick())
+	/*if (CInput::IsKeyKeep(KEY_INPUT_A) || pad.X < 0 && pad.X >= -1000)
 	{
 		Id = STATE_RUN;
 		cNextPos.x += MOVESPEED;
-		cRotate.y = -DX_PI_F / 2;
 	}
-	else if (CInput::IsKeyKeep(KEY_INPUT_D) || CGamePad::LStick())
+	if (CInput::IsKeyKeep(KEY_INPUT_D) || pad.X > 0 && pad.X <= 1000)
 	{
 		Id = STATE_RUN;
 		cNextPos.x -= MOVESPEED;
-		cRotate.y = DX_PI_F / 2;
-	}
+	}*/
 	else
 	{
 		Id = STATE_DEFAULT;
 	}
 	
-	/*
+	//cRotate.y = 
+
+	
+	
 	//入力したキー情報とプレイヤーの角度から、移動速度を求める
 	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
 	vSpeed.x = sin(cRotate.y) * fSpd;
@@ -114,16 +112,6 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	//移動速度を現在の座標に加算する
 	cNextPos.x += vSpeed.x;
 	cNextPos.z += vSpeed.z;
-	*/
-
-	/*if (CInput::IsKeyKeep(KEY_INPUT_A) || pad.Rx == -1000)
-	{
-		cRotate.y -= 0.05f;
-	}
-	if (CInput::IsKeyKeep(KEY_INPUT_D) || pad.Rx == 1000)
-	{
-		cRotate.y += 0.05f;
-	}*/
 
 	//発射処理
 	if (CInput::IsKeyPush(KEY_INPUT_SPACE) ||CGamePad::IsPush_LR(RIGHT))
@@ -176,7 +164,7 @@ void CPlayer::Draw()
 		DrawFormatString(0, 100, GetColor(255, 0, 0), "アタッカーX座標:%f", cPos.x);
 		DrawFormatString(0, 115, GetColor(255, 0, 0), "アタッカーY座標:%f", cPos.y);
 		DrawFormatString(0, 130, GetColor(255, 0, 0), "アタッカーZ座標:%f", cPos.z);
-		CDebugString::GetInstance()->AddFormatString(0, 0, "プレイヤーY軸：%f", cRotate.y);
+		CDebugString::GetInstance()->AddFormatString(300, 300, "プレイヤーY軸：%f", cRotate.y);
 		CDebugString::GetInstance()->Draw();
 
 		// 画面に構造体の中身を描画
