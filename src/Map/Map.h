@@ -1,5 +1,6 @@
 #pragma once
 #include "../Object/Object.h"
+#include "block/block.h"
 
 const VECTOR MAP_SIZE = VGet(50.0f, 50.0f, 50.0f);
 
@@ -8,6 +9,7 @@ struct MapInfo
 {
 	VECTOR vPos;
 	bool IsMap;
+	int iHndl;
 };
 
 class CMap :public CObject

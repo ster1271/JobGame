@@ -4,6 +4,7 @@
 #define MAP_SIZE		50	//マップのサイズ
 #define MAP_MAX_NUM		10	//マップの縦横
 
+const char BLOCK_MODEL_PATH[] = "data/Map/block.x";
 
 //コンストラクタ
 CMap::CMap()
@@ -57,6 +58,7 @@ void CMap::Load()
 //CSV読み込み
 void CMap::MapLoad()
 {
+	iHndl = MV1LoadModel(BLOCK_MODEL_PATH);
 
 	MapInfo tmp;
 	int cnt = 0;
@@ -75,6 +77,7 @@ void CMap::MapLoad()
 
 				if (num[i] == 1)
 				{
+					tmp.iHndl = MV1DuplicateModel(iHndl);
 					tmp.IsMap = true;	//壁
 					MapList.push_back(tmp);
 				}
@@ -93,7 +96,8 @@ void CMap::Draw()
 	{
 		if (MapList[i].IsMap)
 		{
-			CDraw3D::DrawBox3D(MapList[i].vPos, cSize);
+			MV1DrawModel(MapList[i].iHndl);
+			//CDraw3D::DrawBox3D(MapList[i].vPos, cSize);
 		}
 	}
 }
