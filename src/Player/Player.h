@@ -6,7 +6,7 @@
 
 const VECTOR PLAYER_SIZE = VGet(15.0f, 30.0f, 15.0f);
 const float SPERE_R = 3.0f;
-const float MOVESPEED = 1.0f;
+const float MOVESPEED = 2.0f;
 const float ROT_SPEED = 0.05f;
 
 

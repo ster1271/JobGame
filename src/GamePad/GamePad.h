@@ -1,5 +1,6 @@
 #pragma once
 #include "DxLib.h"
+#include "math.h"
 
 //コントローラーボタン
 enum PAD_BUTTON
@@ -15,6 +16,19 @@ enum PAD_BUTTON
 	BUTTON_RSTICK,	//右スティック押し込み
 
 	BUTTON_NUM,		//ボタンの総番号
+};
+
+//スティックの詳細
+enum STICK
+{
+	STICK_LX_POS,	//左スティックX軸(正)
+	STICK_LX_NEG,	//左スティックX軸(負)
+	STICK_LY_POS,	//左スティックY軸(正)
+	STICK_LY_NEG,	//左スティックY軸(負)
+	STICK_RX_POS,	//右スティックX軸(正)
+	STICK_RX_NEG,	//右スティックX軸(負)
+	STICK_RY_POS,	//右スティックY軸(正)
+	STICK_RY_NEG,	//右スティックY軸(負)
 };
 
 //十字ボタンとLT、RTの判定用
@@ -66,11 +80,10 @@ public:
 	//十字キーの制御
 	static bool IsKeep_Cross(CHECK check);
 
-	//左スティック
-	static bool LStick();
+	//スティック操作
+	static bool Stick(STICK stick);
 
-	//右スティック
-	static bool RStick();
-
+	//スティック角度計算
+	static float StickRot();
 
 };

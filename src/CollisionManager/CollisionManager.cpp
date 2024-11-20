@@ -24,7 +24,7 @@ void CCollisionManager::PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager)
 	}
 
 	//マップの情報を格納する
-	vector<MapInfo> MapInfoList = cMapManager.GetMap().GetMapInfo();	//リストをもらう
+	vector<WallInfo> MapInfoList = cMapManager.GetMap().GetWallList();	//リストをもらう
 
 	VECTOR Map_Size = MAP_SIZE;						//1ブロックのサイズ
 	VECTOR Map_Harf_Size = VScale(Map_Size, 0.5f);	//1ブロックのハーフサイズ
@@ -131,7 +131,7 @@ void CCollisionManager::PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager)
 void CCollisionManager::Enemy1ToMap(CEnemyManager& cEnemyManager, CMapManager& cMapManager)
 {
 	//マップの情報を格納する
-	vector<MapInfo> MapInfoList = cMapManager.GetMap().GetMapInfo();	//リストをもらう
+	vector<WallInfo> MapInfoList = cMapManager.GetMap().GetWallList();	//リストをもらう
 	VECTOR Map_Size = MAP_SIZE;						//1ブロックのサイズ
 	VECTOR Map_Harf_Size = VScale(Map_Size, 0.5f);	//1ブロックのハーフサイズ
 
@@ -264,7 +264,7 @@ void CCollisionManager::Enemy2ToMap(CEnemyManager& cEnemyManager, CMapManager& c
 
 
 	//マップの情報を格納する
-	vector<MapInfo> MapInfoList = cMapManager.GetMap().GetMapInfo();	//リストをもらう
+	vector<WallInfo> MapInfoList = cMapManager.GetMap().GetWallList();	//リストをもらう
 	VECTOR Map_Size = MAP_SIZE;						//1ブロックのサイズ
 	VECTOR Map_Harf_Size = VScale(Map_Size, 0.5f);	//1ブロックのハーフサイズ
 }

@@ -5,6 +5,7 @@
 #define MAP_MAX_NUM		10	//マップの縦横
 
 const char BLOCK_MODEL_PATH[] = "data/Map/block.x";
+const char FLOAR_MODEL_PATH[] = "data/Map/floar.x";
 
 //コンストラクタ
 CMap::CMap()
@@ -24,28 +25,12 @@ void CMap::Init()
 
 	//各変数の初期化
 	cPos = VECTOR_ZERO;
-	cScale = VECTOR_ZERO;
+	cScale = VGet(2.5f, 2.5f, 2.5f);
 	cRotate = VECTOR_ZERO;
 	cSize = VECTOR_ZERO;
 
-	//マップ情報の書き込み
-	/*for (int i = 0; i < 10; i++)
-	{
-		for (int a = 0; a < 10; a++)
-		{
-			fopen_s(&fp_, "Data/Map/Place_Objects.txt", "a");
-
-			if (fp_ != nullptr)
-			{
-				VECTOR vPos = VGet(-200.0f + a * 50.0f, 0.0f, -200.0f + i * 50.0f);
-				fprintf(fp_, "%.1f, %.1f, %.1f, %d \n", vPos.x, vPos.y, vPos.z, matrix[i][a]);
-
-				fclose(fp_);
-			}
-		}
-	}*/
-
-
+	WallList.clear();
+	FloarList.clear();
 }
 
 //モデル読み込み
@@ -55,12 +40,34 @@ void CMap::Load()
 	MapLoad();
 }
 
+//更新
+void CMap::Updata()
+{
+	for (int i = 0; i < WallList.size(); i++)
+	{
+		MV1SetPosition(WallList[i].iHndl, WallList[i].vPos);		//座標の更新
+		MV1SetScale(WallList[i].iHndl, cScale);					//サイズの更新
+		MV1SetRotationXYZ(WallList[i].iHndl, cRotate);			//回転値の更新
+	}
+
+	for (int i = 0; i < FloarList.size(); i++)
+	{
+		MV1SetPosition(FloarList[i].iHndl, FloarList[i].vPos);		//座標の更新
+		MV1SetScale(FloarList[i].iHndl, cScale);					//サイズの更新
+		MV1SetRotationXYZ(FloarList[i].iHndl, cRotate);				//回転値の更新
+	}
+
+}
+
 //CSV読み込み
 void CMap::MapLoad()
 {
-	iHndl = MV1LoadModel(BLOCK_MODEL_PATH);
+	int WallHndl = MV1LoadModel(BLOCK_MODEL_PATH);
+	int FloarHndl = MV1LoadModel(FLOAR_MODEL_PATH);
 
-	MapInfo tmp;
+	WallInfo Walltmp;
+	FloarInfo Floartmp;
+
 	int cnt = 0;
 	int num[MAP_MAX_NUM] = { 0 };
 	fopen_s(&fp_, "Data/Map/Maptest.csv", "r");
@@ -73,15 +80,23 @@ void CMap::MapLoad()
 		{
 			for (int i = 0; i < MAP_MAX_NUM; i++)
 			{
-				tmp.vPos = VGet(i * MAP_SIZE, 5.0f, cnt * MAP_SIZE);
-
 				if (num[i] == 1)
 				{
-					tmp.iHndl = MV1DuplicateModel(iHndl);
-					tmp.IsMap = true;	//壁
-					MapList.push_back(tmp);
+					Walltmp.vPos = VGet(i * MAP_SIZE, 5.0f, cnt * MAP_SIZE);
+					Walltmp.IsMap = true;
+					Walltmp.iHndl = MV1DuplicateModel(WallHndl);	//壁
+					WallList.push_back(Walltmp);
+				}
+				else if (num[i] == 0)
+				{
+					Floartmp.vPos = VGet(i * MAP_SIZE, -40.0f, cnt * MAP_SIZE);
+					Floartmp.IsMap = false;
+					Floartmp.iHndl = MV1DuplicateModel(FloarHndl);	//床
+					FloarList.push_back(Floartmp);
 				}
 			}
+
+
 			cnt++;
 		}
 	}
@@ -92,12 +107,13 @@ void CMap::MapLoad()
 void CMap::Draw()
 {
 	cSize = VGet(50.0f, 50.0f, 50.0f);
-	for (int i = 0; i < MapList.size(); i++)
+	for (int i = 0; i < WallList.size(); i++)
 	{
-		if (MapList[i].IsMap)
-		{
-			MV1DrawModel(MapList[i].iHndl);
-			//CDraw3D::DrawBox3D(MapList[i].vPos, cSize);
-		}
+		MV1DrawModel(WallList[i].iHndl);
+	}
+
+	for (int i = 0; i < FloarList.size(); i++)
+	{
+		MV1DrawModel(FloarList[i].iHndl);
 	}
 }

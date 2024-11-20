@@ -77,28 +77,37 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	
 	//キャラクターの移動
 	float fSpd = 0.0f;
-	if (CInput::IsKeyKeep(KEY_INPUT_W) || pad.Y < 0 && pad.Y >= -1000)
+	if (CInput::IsKeyKeep(KEY_INPUT_W) || CGamePad::Stick(STICK_LY_NEG))
 	{
 		Id = STATE_RUN;
 		fSpd = -MOVESPEED;
+		cRotate.y = CGamePad::StickRot();
+
 	}
-	else if (CInput::IsKeyKeep(KEY_INPUT_S) || pad.Y > 0 && pad.Y <= 1000)
+	else if (CInput::IsKeyKeep(KEY_INPUT_S) || CGamePad::Stick(STICK_LY_POS))
 	{
 		Id = STATE_RUN;
 		fSpd = -MOVESPEED;
+		cRotate.y = CGamePad::StickRot();
+
 	}
-	else if (CInput::IsKeyKeep(KEY_INPUT_W) || pad.X < 0 && pad.X >= -1000)
+	else if (CInput::IsKeyKeep(KEY_INPUT_A) || CGamePad::Stick(STICK_LX_NEG))
 	{
 		Id = STATE_RUN;
 		fSpd = -MOVESPEED;
+		cRotate.y = CGamePad::StickRot();
 	}
-	else if (CInput::IsKeyKeep(KEY_INPUT_S) || pad.X > 0 && pad.X <= 1000)
+	else if (CInput::IsKeyKeep(KEY_INPUT_D) || CGamePad::Stick(STICK_LX_POS))
 	{
 		Id = STATE_RUN;
 		fSpd = -MOVESPEED;
+		cRotate.y = CGamePad::StickRot();
+	}
+	else
+	{
+		Id = STATE_DEFAULT;
 	}
 	
-	cRotate.y = atan2(pad.X, pad.Y * -1);
 	
 	//入力したキー情報とプレイヤーの角度から、移動速度を求める
 	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);

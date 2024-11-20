@@ -193,13 +193,13 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMapManager& cMapMana
 
 		//オブジェクトと当たっているか判定する
 		bool IsHit = false;
-		for (int i = 0; i < cMapManager.GetMap().GetMapInfo().size(); i++)
+		for (int i = 0; i < cMapManager.GetMap().GetWallList().size(); i++)
 		{
-			if (tmp[Index].Pos.x == cMapManager.GetMap().GetMapInfo()[i].vPos.x &&
+			if (tmp[Index].Pos.x == cMapManager.GetMap().GetWallList()[i].vPos.x &&
 				//tmp[Index].Pos.y == cMap.GetMapInfo()[i].vPos.y &&
-				tmp[Index].Pos.z == cMapManager.GetMap().GetMapInfo()[i].vPos.z)
+				tmp[Index].Pos.z == cMapManager.GetMap().GetWallList()[i].vPos.z)
 			{
-				if (cMapManager.GetMap().GetMapInfo()[i].IsMap == true)
+				if (cMapManager.GetMap().GetWallList()[i].IsMap == true)
 				{
 					IsHit = true;
 					break;

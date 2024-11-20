@@ -45,7 +45,7 @@ void CMapManager::Step()
 //î•ñXV
 void CMapManager::Updata()
 {
-	cMap.Update();
+	cMap.Updata();
 	cGoal.Update();
 }
 

@@ -172,19 +172,77 @@ bool CGamePad::IsKeep_Cross(CHECK check)
 
 
 //左スティック
-bool CGamePad::LStick()
+bool CGamePad::Stick(STICK stick)
 {
-	if (PadcurrentBuf.X != 0 || PadcurrentBuf.Y != 0)
+	switch (stick)
 	{
+	case STICK_LX_POS:
+		if (PadcurrentBuf.X > 0 && PadcurrentBuf.X <= 1000)
+		{
+			return true;
+		}
+		break;
 
-		return true;
+	case STICK_LX_NEG:
+		if (PadcurrentBuf.X < 0 && PadcurrentBuf.X >= -1000)
+		{
+			return true;
+		}
+		break;
+
+	case STICK_LY_POS:
+		if (PadcurrentBuf.Y > 0 && PadcurrentBuf.Y <= 1000)
+		{
+			return true;
+		}
+		break;
+
+	case STICK_LY_NEG:
+		if (PadcurrentBuf.Y < 0 && PadcurrentBuf.Y >= -1000)
+		{
+			return true;
+		}
+		break;
+
+	case STICK_RX_POS:
+		if (PadcurrentBuf.Rx > 0 && PadcurrentBuf.Rx <= 1000)
+		{
+			return true;
+		}
+		break;
+
+	case STICK_RX_NEG:
+		if (PadcurrentBuf.Rx < 0 && PadcurrentBuf.Rx >= -1000)
+		{
+			return true;
+		}
+		break;
+
+	case STICK_RY_POS:
+		if (PadcurrentBuf.Ry > 0 && PadcurrentBuf.Ry <= 1000)
+		{
+			return true;
+		}
+		break;
+
+
+	case STICK_RY_NEG:
+		if (PadcurrentBuf.Ry < 0 && PadcurrentBuf.Ry >= -1000)
+		{
+			return true;
+		}
+		break;
+
+	default:
+		break;
 	}
 
 	return false;
 }
 
-//右スティック
-bool CGamePad::RStick()
+//スティック角度計算
+float CGamePad::StickRot()
 {
-	return true;
+	return (float)atan2(PadcurrentBuf.X, PadcurrentBuf.Y * -1);
 }
+
