@@ -71,6 +71,8 @@ void CMap::MapLoad()
 	int cnt = 0;
 	int num[MAP_MAX_NUM] = { 0 };
 	fopen_s(&fp_, "Data/Map/Maptest.csv", "r");
+
+	/*
 	if (fp_ != nullptr)
 	{
 	
@@ -100,6 +102,18 @@ void CMap::MapLoad()
 			cnt++;
 		}
 	}
+	*/
+
+	if (fp_ != nullptr)
+	{
+		
+		num[0] = fgetc(fp_);
+		fgetc(fp_);
+		num[0] = fgetc(fp_);
+
+
+	}
+
 	fclose(fp_);
 }
 
