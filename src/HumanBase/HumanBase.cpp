@@ -8,6 +8,7 @@ CHumanBase::CHumanBase()
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cNextPos, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
+	memset(&cMoveRotate, 0, sizeof(VECTOR));
 	memset(&cScale, 0, sizeof(VECTOR));
 	memset(&cSize, 0, sizeof(VECTOR));
 
@@ -30,6 +31,7 @@ void CHumanBase::Init()
 	cPos = VECTOR_ZERO;
 	cNextPos = VECTOR_ZERO;
 	cRotate = VECTOR_ZERO;
+	cMoveRotate = VECTOR_ZERO;
 	cScale = VECTOR_ZERO;
 	cSize = VECTOR_ZERO;
 
@@ -80,6 +82,7 @@ void CHumanBase::Exit()
 	cPos = VECTOR_ZERO;
 	cNextPos = VECTOR_ZERO;
 	cRotate = VECTOR_ZERO;
+	cMoveRotate = VECTOR_ZERO;
 	cScale = VECTOR_ZERO;
 	cSize = VECTOR_ZERO;
 

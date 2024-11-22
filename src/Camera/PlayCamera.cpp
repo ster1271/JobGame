@@ -7,7 +7,7 @@
 #define CAMERA_LENGTH	(80.0f)
 
 //‹“_‚Ì‚‚³
-#define CAMERA_OFFSET_Y	(150.0f)
+#define CAMERA_OFFSET_Y	(185.0f)
 
 //’‹“_‚Ì‚‚³
 #define FORCUS_OFFSET_Y	(30.0f)

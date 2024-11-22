@@ -2,7 +2,7 @@
 #include "Map.h"
 
 #define MAP_SIZE		50	//マップのサイズ
-#define MAP_MAX_NUM		10	//マップの縦横
+#define MAP_MAX_NUM		14	//マップの縦横
 
 const char BLOCK_MODEL_PATH[] = "data/Map/block.x";
 const char FLOAR_MODEL_PATH[] = "data/Map/floar.x";
@@ -70,15 +70,17 @@ void CMap::MapLoad()
 
 	int cnt = 0;
 	int num[MAP_MAX_NUM] = { 0 };
-	fopen_s(&fp_, "Data/Map/Maptest.csv", "r");
+	fopen_s(&fp_, "Data/Map/Maptest.csv", "r");		//CSVファイル読み込み
 
+	//方法1
 	/*
 	if (fp_ != nullptr)
 	{
 	
-		while (fscanf_s(fp_, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d",
+		while (fscanf_s(fp_, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d",
 			&num[0], &num[1], &num[2], &num[3], &num[4],
-			&num[5], &num[6], &num[7], &num[8], &num[9]) != EOF)
+			&num[5], &num[6], &num[7], &num[8], &num[9],
+			&num[10], &num[11], &num[12], &num[13]) != EOF)
 		{
 			for (int i = 0; i < MAP_MAX_NUM; i++)
 			{
@@ -103,16 +105,56 @@ void CMap::MapLoad()
 		}
 	}
 	*/
-
+	
+	//方法2
 	if (fp_ != nullptr)
 	{
-		
-		num[0] = fgetc(fp_);
-		fgetc(fp_);
-		num[0] = fgetc(fp_);
+		int FileIndexX = 0;
+		int FileIndexY = 0;
+		int cnt = 0;
 
+		while (true) {
+			// 数値部分を読み込む
+			char FileNum = fgetc(fp_);
+			cnt++;
 
+			if (FileNum == '0')
+			{
+				//床
+				Floartmp.vPos = VGet(FileIndexX * MAP_SIZE, -40.0f, FileIndexY * MAP_SIZE);
+				Floartmp.IsMap = false;
+				Floartmp.iHndl = MV1DuplicateModel(FloarHndl);	
+				FloarList.push_back(Floartmp);
+			}
+			else if (FileNum == '1')
+			{
+				//壁
+				Walltmp.vPos = VGet(FileIndexX * MAP_SIZE, 5.0f, FileIndexY * MAP_SIZE);
+				Walltmp.IsMap = true;
+				Walltmp.iHndl = MV1DuplicateModel(WallHndl);	
+				WallList.push_back(Walltmp);
+			}
+
+			FileIndexX++;
+
+			// 「,」を飛ばすために読み込みを実行
+			FileNum = fgetc(fp_);
+
+			// EOFの場合は読み込み終了
+			if (FileNum == EOF)
+			{
+				break;
+			}
+
+			// 改行コードの場合は保存先を変更する
+			if (FileNum == '\n')
+			{
+				FileIndexY++;
+				FileIndexX = 0;
+			}
+		}
 	}
+	
 
 	fclose(fp_);
 }

@@ -17,10 +17,11 @@ CPlayer::~CPlayer()
 //初期化
 void CPlayer::Init()
 {
-	cPos = VGet(200.0f, 0.0f, 100.0f);
+	cPos = PLAYER_POS;
 	cNextPos = cPos;
 	cRotate = VECTOR_ZERO;
-	cScale = VGet(0.05f, 0.05f, 0.05f);
+	cMoveRotate = VECTOR_ZERO;
+	cScale = PLAYER_SCALE;
 	cSize = PLAYER_SIZE;
 
 	Life = 100;
@@ -50,8 +51,6 @@ void CPlayer::RunShot()
 //毎フレーム行う処理
 void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 {
-	GetJoypadDirectInputState(DX_INPUT_PAD1, &pad);
-
 	switch (Id)
 	{
 	case STATE_DEFAULT:
@@ -72,47 +71,79 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 
 	cPos = cNextPos;
 	
-
-
-	
 	//キャラクターの移動
 	float fSpd = 0.0f;
 	if (CInput::IsKeyKeep(KEY_INPUT_W) || CGamePad::Stick(STICK_LY_NEG))
 	{
-		Id = STATE_RUN;
-		fSpd = -MOVESPEED;
-		cRotate.y = CGamePad::StickRot();
-
+		//射撃中に移動
+		if (CGamePad::IsKeep_LR(RIGHT))
+		{
+			Id = STATE_SHOT;
+			fSpd = -0.5f;
+		}
+		else
+		{
+			Id = STATE_RUN;
+			fSpd = -MOVESPEED;
+			cRotate.y = cMoveRotate.y;
+		}
 	}
 	else if (CInput::IsKeyKeep(KEY_INPUT_S) || CGamePad::Stick(STICK_LY_POS))
 	{
-		Id = STATE_RUN;
-		fSpd = -MOVESPEED;
-		cRotate.y = CGamePad::StickRot();
-
+		//射撃中に移動
+		if (CGamePad::IsKeep_LR(RIGHT))
+		{
+			Id = STATE_SHOT;
+			fSpd = -0.5f;
+		}
+		else
+		{
+			Id = STATE_RUN;
+			fSpd = -MOVESPEED;
+			cRotate.y = cMoveRotate.y;
+		}
 	}
 	else if (CInput::IsKeyKeep(KEY_INPUT_A) || CGamePad::Stick(STICK_LX_NEG))
 	{
-		Id = STATE_RUN;
-		fSpd = -MOVESPEED;
-		cRotate.y = CGamePad::StickRot();
+		//射撃中に移動
+		if (CGamePad::IsKeep_LR(RIGHT))
+		{
+			Id = STATE_SHOT;
+			fSpd = -0.5f;
+		}
+		else
+		{
+			Id = STATE_RUN;
+			fSpd = -MOVESPEED;
+			cRotate.y = cMoveRotate.y;
+		}
 	}
 	else if (CInput::IsKeyKeep(KEY_INPUT_D) || CGamePad::Stick(STICK_LX_POS))
 	{
-		Id = STATE_RUN;
-		fSpd = -MOVESPEED;
-		cRotate.y = CGamePad::StickRot();
+		//射撃中に移動
+		if (CGamePad::IsKeep_LR(RIGHT))
+		{
+			Id = STATE_SHOT;
+			fSpd = -0.5f;
+		}
+		else
+		{
+			Id = STATE_RUN;
+			fSpd = -MOVESPEED;
+			cRotate.y = cMoveRotate.y;
+		}
 	}
 	else
 	{
 		Id = STATE_DEFAULT;
 	}
 	
+	cMoveRotate.y = CGamePad::StickRot();
 	
 	//入力したキー情報とプレイヤーの角度から、移動速度を求める
 	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
-	vSpeed.x = sin(cRotate.y) * fSpd;
-	vSpeed.z = cos(cRotate.y) * fSpd;
+	vSpeed.x = sin(cMoveRotate.y) * fSpd;
+	vSpeed.z = cos(cMoveRotate.y) * fSpd;
 
 	//移動速度を現在の座標に加算する
 	cNextPos.x += vSpeed.x;
@@ -121,7 +152,7 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 
 
 	//発射処理
-	if (CInput::IsKeyPush(KEY_INPUT_SPACE) ||CGamePad::IsPush_LR(RIGHT))
+	if (CInput::IsKeyPush(KEY_INPUT_SPACE) ||CGamePad::IsKeep_LR(RIGHT))
 	{
 		Id = STATE_SHOT;
 		//弾の位置決定
@@ -173,26 +204,6 @@ void CPlayer::Draw()
 		DrawFormatString(0, 130, GetColor(255, 0, 0), "アタッカーZ座標:%f", cPos.z);
 		CDebugString::GetInstance()->AddFormatString(300, 300, "プレイヤーY軸：%f", cRotate.y);
 		CDebugString::GetInstance()->Draw();
-
-		// 画面に構造体の中身を描画
-		
-		int Color = GetColor(0, 0, 0);
-		DrawFormatString(0, 0, Color, "X:%d Y:%d Z:%d",
-			pad.X, pad.Y, pad.Z);
-		DrawFormatString(0, 16, Color, "Rx:%d Ry:%d Rz:%d",
-			pad.Rx, pad.Ry, pad.Rz);
-		DrawFormatString(0, 32, Color, "Slider 0:%d 1:%d",
-			pad.Slider[0], pad.Slider[1]);
-		DrawFormatString(0, 48, Color, "POV 0:%d 1:%d 2:%d 3:%d",
-			pad.POV[0], pad.POV[1],
-			pad.POV[2], pad.POV[3]);
-		DrawString(0, 64, "Button", Color);
-		for (int i = 0; i < 32; i++)
-		{
-			DrawFormatString(64 + i % 8 * 64, 64 + i / 8 * 16, Color,
-				"%2d:%d", i, pad.Buttons[i]);
-		}
-
 	}
 }
 

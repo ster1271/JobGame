@@ -40,7 +40,8 @@ protected:
 
 	VECTOR cPos;				//座標
 	VECTOR cNextPos;			//1フレーム後の座標
-	VECTOR cRotate;				//回転軸
+	VECTOR cRotate;				//キャラクターの向きの回転軸
+	VECTOR cMoveRotate;			//キャラクターの方向指定の回転軸
 	VECTOR cScale;				//サイズ
 	VECTOR cSize;				//モデルの幅
 

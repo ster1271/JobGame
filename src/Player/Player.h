@@ -4,7 +4,9 @@
 #include "../Shot/ShotManager.h"
 #include "../Turret/TurretManager.h"
 
+const VECTOR PLAYER_POS = VGet(50.0f, 0.0f, 50.0f);
 const VECTOR PLAYER_SIZE = VGet(15.0f, 30.0f, 15.0f);
+const VECTOR PLAYER_SCALE = VGet(0.05f, 0.05f, 0.05f);
 const float SPERE_R = 3.0f;
 const float MOVESPEED = 2.0f;
 const float ROT_SPEED = 0.05f;
@@ -26,8 +28,6 @@ private:
 	bool IsDir[DIR_NUM];	//•ûŒüƒtƒ‰ƒO
 	PLAYER_STATE Id;
 	PLAYER_STATE oldId;
-
-	DINPUT_JOYSTATE pad;
 
 	void Default();
 	void Run();
