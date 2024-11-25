@@ -71,13 +71,38 @@ void CTurretManager::Draw()
 //タレット設置処理
 void CTurretManager::TurretSpawn(const VECTOR& vPos)
 {
-	//変数代入用クラス
-	CTurretBase* cTurretBase =  new CTurret_Normal;
-	cTurretBase->Init();
-	cTurretBase->Load(TurretN_Hndl);
-	cTurretBase->TurretSpawn(vPos);
-	
-	//リストに追加
-	Turret_List.push_back(cTurretBase);
+	VECTOR vSize = VGet(30.0f, 30.0f, 30.0f);
 
+	if (Turret_List.size() != 0)
+	{
+		for (int Turret_Index = 0; Turret_Index < Turret_List.size(); Turret_Index++)
+		{
+			if (CCollision::CheckHitBoxToBox(vPos, vSize, Turret_List[Turret_Index]->GetPos(), vSize))
+			{
+				return;
+			}
+
+			//変数代入用クラス
+			CTurretBase* cTurretBase = new CTurret_Normal;
+			cTurretBase->Init();
+			cTurretBase->Load(TurretN_Hndl);
+			cTurretBase->TurretSpawn(vPos);
+
+
+			//リストに追加
+			Turret_List.push_back(cTurretBase);
+		}
+	}
+	else
+	{
+		//変数代入用クラス
+		CTurretBase* cTurretBase = new CTurret_Normal;
+		cTurretBase->Init();
+		cTurretBase->Load(TurretN_Hndl);
+		cTurretBase->TurretSpawn(vPos);
+
+
+		//リストに追加
+		Turret_List.push_back(cTurretBase);
+	}
 }

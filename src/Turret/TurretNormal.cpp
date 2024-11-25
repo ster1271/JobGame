@@ -37,6 +37,7 @@ void CTurret_Normal::Draw()
 	if (IsActive)
 	{
 		MV1DrawModel(iHndl);
+		CDraw3D::DrawBox3D(cPos, VGet(30.0f, 30.0f, 30.0f));
 	}
 
 	if (IS_DEBUG)
