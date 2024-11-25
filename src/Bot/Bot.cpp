@@ -156,8 +156,8 @@ void CBot::Move_Bot(vector<VECTOR> List)
 
 	if (fabsf(Dir) < 1.0f)
 	{
-		float X = Vtmp.x = cPos.x - List[tmp].x;
-		float Z = Vtmp.x = cPos.z - List[tmp].z;
+		float X = cPos.x - List[tmp].x;
+		float Z = cPos.z - List[tmp].z;
 
 		//指定の位置へ角度を変える
 		float NextRotY = atan2f(X, Z);
@@ -166,12 +166,10 @@ void CBot::Move_Bot(vector<VECTOR> List)
 	}
 	else if (Dir >= 0.0f)//それ以外は角度を変える
 	{
-		//NUM = 1;
 		cRotate.y += 0.05f;
 	}
 	else if (Dir < 0.0f)
 	{
-		//NUM = 2;
 		cRotate.y -= 0.05f;
 	}
 

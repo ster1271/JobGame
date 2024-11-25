@@ -77,6 +77,9 @@ void CTurretBase::Turret_Power_Up()
 //タレット発射処理
 void CTurretBase::Turret_Rotate(VECTOR vPos)
 {
+	//進行方向用変数
+	float Dir = 0.0f;
+
 	//タレットと対象のベクトルを計算
 	VECTOR Vtmp;
 	Vtmp.x = vPos.x - cPos.x;
@@ -84,16 +87,26 @@ void CTurretBase::Turret_Rotate(VECTOR vPos)
 	Vtmp.z = vPos.z - cPos.z;
 
 	//タレットの仮の移動ベクトルを計算
-	VECTOR Turret_Vec;
+	VECTOR Turret_Vec = VGet(0.0f, 0.0f, 0.0f);
 	Turret_Vec.x = sinf(cRotate.y) * 1.0f;
 	Turret_Vec.y = 0.0f;
 	Turret_Vec.z = cosf(cRotate.y) * 1.0f;
 
 	//外積計算
-	float Dir = Vtmp.x * Turret_Vec.z - Vtmp.z * Turret_Vec.x;
+	Dir = (Vtmp.x * Turret_Vec.z) - (Turret_Vec.x * Vtmp.z);
 
+	if (fabsf(Dir) < 1.0f)
+	{
+		float X = vPos.x - cPos.x;
+		float Z = vPos.z - cPos.z;
+
+		//指定の位置へ角度を変える
+		float NextRotY = atan2f(X, Z);
+
+		cRotate.y = NextRotY;
+	}
 	//回転する角度を決める
-	if (Dir >= 0.0f)
+	else if (Dir >= 0.0f)
 	{
 		cRotate.y += 0.05f;
 	}

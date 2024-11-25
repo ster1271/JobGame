@@ -28,6 +28,7 @@ private:
 	bool IsDir[DIR_NUM];	//方向フラグ
 	PLAYER_STATE Id;
 	PLAYER_STATE oldId;
+	float fSpd;
 
 	void Default();
 	void Run();
@@ -53,4 +54,8 @@ public:
 
 	//終了処理
 	void Exit();
+
+	//コントローラー移動処理
+	void Move_CON();
+
 };

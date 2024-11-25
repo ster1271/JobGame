@@ -23,6 +23,7 @@ void CPlayer::Init()
 	cMoveRotate = VECTOR_ZERO;
 	cScale = PLAYER_SCALE;
 	cSize = PLAYER_SIZE;
+	fSpd = 0.0f;
 
 	Life = 100;
 }
@@ -51,6 +52,8 @@ void CPlayer::RunShot()
 //毎フレーム行う処理
 void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 {
+	fSpd = 0.0f;
+
 	switch (Id)
 	{
 	case STATE_DEFAULT:
@@ -72,71 +75,7 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	cPos = cNextPos;
 	
 	//キャラクターの移動
-	float fSpd = 0.0f;
-	if (CInput::IsKeyKeep(KEY_INPUT_W) || CGamePad::Stick(STICK_LY_NEG))
-	{
-		//射撃中に移動
-		if (CGamePad::IsKeep_LR(RIGHT))
-		{
-			Id = STATE_SHOT;
-			fSpd = -0.5f;
-		}
-		else
-		{
-			Id = STATE_RUN;
-			fSpd = -MOVESPEED;
-			cRotate.y = cMoveRotate.y;
-		}
-	}
-	else if (CInput::IsKeyKeep(KEY_INPUT_S) || CGamePad::Stick(STICK_LY_POS))
-	{
-		//射撃中に移動
-		if (CGamePad::IsKeep_LR(RIGHT))
-		{
-			Id = STATE_SHOT;
-			fSpd = -0.5f;
-		}
-		else
-		{
-			Id = STATE_RUN;
-			fSpd = -MOVESPEED;
-			cRotate.y = cMoveRotate.y;
-		}
-	}
-	else if (CInput::IsKeyKeep(KEY_INPUT_A) || CGamePad::Stick(STICK_LX_NEG))
-	{
-		//射撃中に移動
-		if (CGamePad::IsKeep_LR(RIGHT))
-		{
-			Id = STATE_SHOT;
-			fSpd = -0.5f;
-		}
-		else
-		{
-			Id = STATE_RUN;
-			fSpd = -MOVESPEED;
-			cRotate.y = cMoveRotate.y;
-		}
-	}
-	else if (CInput::IsKeyKeep(KEY_INPUT_D) || CGamePad::Stick(STICK_LX_POS))
-	{
-		//射撃中に移動
-		if (CGamePad::IsKeep_LR(RIGHT))
-		{
-			Id = STATE_SHOT;
-			fSpd = -0.5f;
-		}
-		else
-		{
-			Id = STATE_RUN;
-			fSpd = -MOVESPEED;
-			cRotate.y = cMoveRotate.y;
-		}
-	}
-	else
-	{
-		Id = STATE_DEFAULT;
-	}
+	Move_CON();
 	
 	cMoveRotate.y = CGamePad::StickRot();
 	
@@ -211,5 +150,77 @@ void CPlayer::Draw()
 void CPlayer::Exit()
 {
 	CHumanBase::Exit();
+}
+
+
+
+//コントローラー処理
+void CPlayer::Move_CON()
+{
+	if (CGamePad::Stick(STICK_LY_NEG))
+	{
+		//射撃中に移動
+		if (CGamePad::IsKeep_LR(RIGHT))
+		{
+			Id = STATE_SHOT;
+			fSpd = -0.5f;
+		}
+		else
+		{
+			Id = STATE_RUN;
+			fSpd = -MOVESPEED;
+			cRotate.y = cMoveRotate.y;
+		}
+	}
+	else if (CGamePad::Stick(STICK_LY_POS))
+	{
+		//射撃中に移動
+		if (CGamePad::IsKeep_LR(RIGHT))
+		{
+			Id = STATE_SHOT;
+			fSpd = -0.5f;
+		}
+		else
+		{
+			Id = STATE_RUN;
+			fSpd = -MOVESPEED;
+			cRotate.y = cMoveRotate.y;
+		}
+	}
+	else if (CGamePad::Stick(STICK_LX_NEG))
+	{
+		//射撃中に移動
+		if (CGamePad::IsKeep_LR(RIGHT))
+		{
+			Id = STATE_SHOT;
+			fSpd = -0.5f;
+		}
+		else
+		{
+			Id = STATE_RUN;
+			fSpd = -MOVESPEED;
+			cRotate.y = cMoveRotate.y;
+		}
+	}
+	else if (CGamePad::Stick(STICK_LX_POS))
+	{
+		//射撃中に移動
+		if (CGamePad::IsKeep_LR(RIGHT))
+		{
+			Id = STATE_SHOT;
+			fSpd = -0.5f;
+		}
+		else
+		{
+			Id = STATE_RUN;
+			fSpd = -MOVESPEED;
+			cRotate.y = cMoveRotate.y;
+		}
+	}
+	else
+	{
+		Id = STATE_DEFAULT;
+	}
+	
 }
 
