@@ -16,6 +16,8 @@ protected:
 	VECTOR cRotate;		//回転値
 	VECTOR cSize;		//拡縮値
 	float ShotRenge;	//射程距離
+	float Dir;			//進行方向用変数
+
 
 	float Hp;			//タレットのHP
 	int Power_Up_Count;	//強化回数

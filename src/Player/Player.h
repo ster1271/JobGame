@@ -10,6 +10,7 @@ const VECTOR PLAYER_SCALE = VGet(0.05f, 0.05f, 0.05f);
 const float SPERE_R = 3.0f;
 const float MOVESPEED = 2.0f;
 const float ROT_SPEED = 0.05f;
+const int SHOT_COOL_TIME = 15;
 
 
 //アニメーション状態
@@ -29,6 +30,7 @@ private:
 	PLAYER_STATE Id;
 	PLAYER_STATE oldId;
 	float fSpd;
+	int ShotCoolCount;			//弾クールタイム用変数
 
 	void Default();
 	void Run();

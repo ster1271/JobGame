@@ -1,5 +1,7 @@
 #pragma once
-
+#include "DxLib.h"
+#include "../Input/Input.h"
+#include "../GamePad/GamePad.h"
 
 class CResultScene
 {

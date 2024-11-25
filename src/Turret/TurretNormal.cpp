@@ -88,6 +88,9 @@ void CTurret_Normal::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManag
 			CoolTime++;
 			if (CoolTime > MAX_COOL_TIME)
 			{
+				if (Dir > 1.0f)
+					return;
+
 				//タレットの弾リクエスト
 				cShotManager.RequestTurretShot(BulletPos, vSpd);
 				CoolTime = 0;

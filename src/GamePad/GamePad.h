@@ -11,7 +11,7 @@ enum PAD_BUTTON
 	BUTTON_Y,		//Y
 	BUTTON_LB,		//LB
 	BUTTON_RB,		//RB
-	BUTTON_START,	//スタートボタン
+	BUTTON_BACK,	//スタートボタン
 	BUTTON_LSTICK,	//左スティック押し込み
 	BUTTON_RSTICK,	//右スティック押し込み
 
@@ -21,6 +21,8 @@ enum PAD_BUTTON
 //スティックの詳細
 enum STICK
 {
+	STICK_LEFT,
+	STICK_RIGHT,
 	STICK_LX_POS,	//左スティックX軸(正)
 	STICK_LX_NEG,	//左スティックX軸(負)
 	STICK_LY_POS,	//左スティックY軸(正)
@@ -84,6 +86,6 @@ public:
 	static bool Stick(STICK stick);
 
 	//スティック角度計算
-	static float StickRot();
+	static float StickRot(STICK stick);
 
 };

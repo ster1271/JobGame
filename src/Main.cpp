@@ -27,17 +27,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//-----------------------------------------
 	//一番最初に１回だけやる処理をここに書く
 	
-	//インプット初期化
+	//キーボード初期化
 	CInput::InitInput();
+	//ゲームパッド初期化	
 	CGamePad::InitGamePad();
 
 	//シーンマネージャー
 	SceneManager cSceneManager;
 
-	//FPS
+	//FPSの宣言と初期化
 	CFps cFps;
-
-	//初期化
 	cFps.Init();
 
 	
@@ -70,17 +69,18 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			//フレーム数をカウント
 			cFps.frameRateInfo.g_count++;
 
-			if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
-			{
-				//エスケープキーが押されたら終了
+
+			//キーボード情報更新
+			CInput::StepInput();
+			//ゲームパッド情報更新
+			CGamePad::StepGamePad();
+
+			//エスケープキーまたはスタートボタンが押されたら終了
+			if (CInput::IsKeyPush(KEY_INPUT_ESCAPE) || CGamePad::IsPadPush(DX_INPUT_PAD1, BUTTON_BACK))
 				break;
-			}
 
 			//画面に表示されたものを初期化
 			ClearDrawScreen();
-
-			CInput::StepInput();
-			CGamePad::StepGamePad();
 
 			//-----------------------------------------
 			//ここからゲームの本体を書くことになる
@@ -88,7 +88,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 			//計算処理
 			cSceneManager.Loop();
-
 
 			//描画処理
 			cSceneManager.Draw();

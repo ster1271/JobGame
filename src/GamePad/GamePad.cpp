@@ -241,8 +241,15 @@ bool CGamePad::Stick(STICK stick)
 }
 
 //スティック角度計算
-float CGamePad::StickRot()
+float CGamePad::StickRot(STICK stick)
 {
-	return (float)atan2(PadcurrentBuf.X, PadcurrentBuf.Y * -1);
+	if (stick == STICK_LEFT)
+	{
+		return (float)atan2(PadcurrentBuf.X, PadcurrentBuf.Y * -1);
+	}
+	else if (stick == STICK_RIGHT)
+	{
+		return (float)atan2(PadcurrentBuf.Rx, PadcurrentBuf.Ry * -1);
+	}
 }
 

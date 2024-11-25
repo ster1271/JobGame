@@ -36,7 +36,7 @@ void CTurretBase::Init()
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
 	ShotRenge = 0.0f;
-
+	Dir = 0.0f;
 	Hp = 0.0f;
 	Power_Up_Count = 0;
 	IsActive = false;
@@ -78,7 +78,7 @@ void CTurretBase::Turret_Power_Up()
 void CTurretBase::Turret_Rotate(VECTOR vPos)
 {
 	//進行方向用変数
-	float Dir = 0.0f;
+	Dir = 0.0f;
 
 	//タレットと対象のベクトルを計算
 	VECTOR Vtmp;

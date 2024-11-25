@@ -24,6 +24,7 @@ void CPlayer::Init()
 	cScale = PLAYER_SCALE;
 	cSize = PLAYER_SIZE;
 	fSpd = 0.0f;
+	ShotCoolCount = 0;
 
 	Life = 100;
 }
@@ -77,7 +78,8 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	//キャラクターの移動
 	Move_CON();
 	
-	cMoveRotate.y = CGamePad::StickRot();
+	//キャラクターの移動角度計算
+	cMoveRotate.y = CGamePad::StickRot(STICK_LEFT);
 	
 	//入力したキー情報とプレイヤーの角度から、移動速度を求める
 	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
@@ -91,9 +93,14 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 
 
 	//発射処理
-	if (CInput::IsKeyPush(KEY_INPUT_SPACE) ||CGamePad::IsKeep_LR(RIGHT))
+	ShotCoolCount++;
+	if (CInput::IsKeyKeep(KEY_INPUT_SPACE) ||CGamePad::IsKeep_LR(RIGHT))
 	{
 		Id = STATE_SHOT;
+
+		if (ShotCoolCount < SHOT_COOL_TIME)
+			return;
+
 		//弾の位置決定
 		VECTOR BulletPos = cPos;
 
@@ -106,12 +113,12 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 		vSpd.y = 0.0f;
 
 		cShotManager.RequestPlayerShot(BulletPos, vSpd);
+		ShotCoolCount = 0;
 	}
 
 	//タレット生成処理
 	if (CInput::IsKeyPush(KEY_INPUT_P) || CGamePad::IsPadPush(DX_INPUT_PAD1, BUTTON_A))
 	{
-
 		cTurretManager.TurretSpawn(cPos);
 	}
 

@@ -1,4 +1,5 @@
 #pragma once
+#include "../GamePad/GamePad.h"
 
 class CTitleScene
 {

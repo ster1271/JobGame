@@ -80,7 +80,7 @@ int CTitleScene::Loop()
 void CTitleScene::Step()
 {
 	//シーン遷移処理(仮)
-	if (CInput::IsKeyPush(KEY_INPUT_RETURN))
+	if (CInput::IsKeyPush(KEY_INPUT_RETURN) || CGamePad::IsPadPush(DX_INPUT_PAD1,BUTTON_Y))
 	{
 		eSceneID = TITLE_SCENE_END;
 	}
@@ -92,7 +92,7 @@ void CTitleScene::Step()
 void CTitleScene::Draw()
 {
 	DrawString(0, 0, "タイトル画面です", GetColor(255, 255, 255));
-	DrawString(0, 15, "Enterでシーン移動", GetColor(255, 255, 255));
+	DrawString(0, 15, "EnterまたはYボタンでシーン移動", GetColor(255, 255, 255));
 }
 
 //-------------------------------------

@@ -1,6 +1,5 @@
-#include "DxLib.h"
 #include "ResultScene.h"
-#include "../Input/Input.h"
+
 
 //-------------------------------------
 //コンストラクタ
@@ -77,7 +76,7 @@ int CResultScene::Loop()
 void CResultScene::Step()
 {
 	//シーン遷移処理(仮)
-	if (CInput::IsKeyPush(KEY_INPUT_RETURN))
+	if (CInput::IsKeyPush(KEY_INPUT_RETURN) || CGamePad::IsPadPush(DX_INPUT_PAD1, BUTTON_Y))
 	{
 		eSceneID = RESULT_SCENE_END;
 	}
@@ -89,7 +88,7 @@ void CResultScene::Step()
 void CResultScene::Draw()
 {
 	DrawString(0, 0, "リザルト画面です", GetColor(255, 255, 255));
-	DrawString(0, 15, "Enterでシーン移動", GetColor(255, 255, 255));
+	DrawString(0, 15, "EnterまたはYボタンでシーン移動", GetColor(255, 255, 255));
 
 }
 
