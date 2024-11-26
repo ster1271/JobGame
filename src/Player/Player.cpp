@@ -26,7 +26,7 @@ void CPlayer::Init()
 	fSpd = 0.0f;
 	ShotCoolCount = 0;
 
-	Life = 100;
+	Life = PLAYER_MAX_LIFE;
 }
 
 //データ読み込み
@@ -35,17 +35,20 @@ void CPlayer::Load()
 	iHndl = MV1LoadModel(ATTACKER_PATH);
 }
 
+//デフォルトモーション
 void CPlayer::Default()
 {
 	ReqestLoop(STATE_DEFAULT, 0.8f);
 }
 
+//走りモーション
 void CPlayer::Run()
 {
 	ReqestLoop(STATE_RUN, 0.7f);
 }
 
-void CPlayer::RunShot()
+//撃つモーション
+void CPlayer::Shot()
 {
 	ReqestLoop(STATE_SHOT, 0.1f);
 }
@@ -66,7 +69,7 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 		break;
 
 	case STATE_SHOT:
-		RunShot();
+		Shot();
 		break;
 
 	default:

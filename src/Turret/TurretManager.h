@@ -14,11 +14,11 @@ using namespace std;
 class CTurretManager
 {
 private:
-	//モデルのコピー元
-	int TurretN_Hndl;
 	
-	//CTurretBase型のList配列
-	vector<CTurretBase*> Turret_List;
+	int Turret_Normal_Hndl;				//ノーマルタレットモデルのコピー元
+	
+	vector<CTurretBase*> Turret_List;	//CTurretBase型のList配列
+
 
 public:
 	//コンストラクタ・デストラクタ

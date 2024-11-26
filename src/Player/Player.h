@@ -11,6 +11,7 @@ const float SPERE_R = 3.0f;
 const float MOVESPEED = 2.0f;
 const float ROT_SPEED = 0.05f;
 const int SHOT_COOL_TIME = 15;
+const int PLAYER_MAX_LIFE = 100;
 
 
 //アニメーション状態
@@ -34,7 +35,7 @@ private:
 
 	void Default();
 	void Run();
-	void RunShot();
+	void Shot();
 
 public:
 

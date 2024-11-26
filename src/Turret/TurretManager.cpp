@@ -1,12 +1,14 @@
 #include "TurretManager.h"
 #include "../Debug/DebugString.h"
 
-static const char TURRET_NORMAL_PATH[] = { "data/Turret/Turret_Normal.x" };
+const char TURRET_NORMAL_PATH[] = { "data/Turret/Turret_Normal.x" };	//タレットのモデルパス
+const VECTOR TURRET_SIZE = VGet(30.0f, 30.0f, 30.0f);					//タレットのサイズ
+
 
 //コンストラクタ
 CTurretManager::CTurretManager()
 {
-	TurretN_Hndl = -1;
+	Turret_Normal_Hndl = -1;
 }
 
 //デストラクタ
@@ -24,9 +26,9 @@ void CTurretManager::Init()
 void CTurretManager::Load()
 {
 	//オリジナルハンドルにロード
-	if (TurretN_Hndl == -1)
+	if (Turret_Normal_Hndl == -1)
 	{
-		TurretN_Hndl = MV1LoadModel(TURRET_NORMAL_PATH);
+		Turret_Normal_Hndl = MV1LoadModel(TURRET_NORMAL_PATH);
 	}
 }
 
@@ -76,43 +78,33 @@ void CTurretManager::Draw()
 //タレット設置処理
 void CTurretManager::TurretSpawn(const VECTOR& vPos)
 {
-	VECTOR vSize = VGet(30.0f, 30.0f, 30.0f);
-	bool IsPossible = false;
-	int size = 0;
+	
+	int NotHitCnt = 0;
 
-	//タレットの設置数が0個じゃないとき
+	//タレットの設置数が0個じゃない時
 	if (Turret_List.size() != 0)
 	{
-
+		//当たってないときにカウントをプラスする
 		for (int Turret_Index = 0; Turret_Index < Turret_List.size(); Turret_Index++)
 		{
-			if (!CCollision::CheckHitBoxToBox(vPos, vSize, Turret_List[Turret_Index]->GetPos(), vSize))
+			if (!CCollision::CheckHitBoxToBox(vPos, TURRET_SIZE, Turret_List[Turret_Index]->GetPos(), TURRET_SIZE))
 			{
-				size++;
-				IsPossible = true;	//設置可能フラグをtrueにする
-			}
-			
-			if (IsPossible)
-			{
-				
+				NotHitCnt++;
+			}		
+		}
 
-				//現在のサイズを格納
-				int cnt = Turret_List.size();
+		//カウントがリストのサイズと同じ(誰とも当たってない場合)なら生成する
+		if (NotHitCnt == Turret_List.size())
+		{
+			//変数代入用クラス
+			CTurretBase* cTurretBase = new CTurret_Normal;
+			//基本情報を格納する
+			cTurretBase->Init();
+			cTurretBase->Load(Turret_Normal_Hndl);
+			cTurretBase->TurretSpawn(vPos);
 
-				//変数代入用クラス
-				CTurretBase* cTurretBase = new CTurret_Normal;
-				cTurretBase->Init();
-				cTurretBase->Load(TurretN_Hndl);
-				cTurretBase->TurretSpawn(vPos);
-
-				//リストに追加
-				Turret_List.push_back(cTurretBase);
-
-				if (cnt != Turret_List.size())
-				{
-					return;
-				}
-			}
+			//リストに追加
+			Turret_List.push_back(cTurretBase);
 		}
 	}
 	//タレットの設置数が0個の時
@@ -121,22 +113,10 @@ void CTurretManager::TurretSpawn(const VECTOR& vPos)
 		//変数代入用クラス
 		CTurretBase* cTurretBase = new CTurret_Normal;
 		cTurretBase->Init();
-		cTurretBase->Load(TurretN_Hndl);
+		cTurretBase->Load(Turret_Normal_Hndl);
 		cTurretBase->TurretSpawn(vPos);
 
 		//リストに追加
 		Turret_List.push_back(cTurretBase);
 	}
-
-
-	/*
-	//変数代入用クラス
-	CTurretBase* cTurretBase = new CTurret_Normal;
-	cTurretBase->Init();
-	cTurretBase->Load(TurretN_Hndl);
-	cTurretBase->TurretSpawn(vPos);
-
-	//リストに追加
-	Turret_List.push_back(cTurretBase);
-	*/
 }
