@@ -5,6 +5,7 @@
 #include "../Shot/ShotManager.h"
 #include "../Enemy/EnemyManager.h"
 
+
 //タレットベースクラス
 class CTurretBase
 {

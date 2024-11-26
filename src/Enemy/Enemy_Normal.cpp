@@ -32,7 +32,7 @@ void CEnemy_Normal::Draw()
 	if (IsActive == false)	return;
 
 	MV1DrawModel(iHndl);
-	DrawSphere3D(cPos, Radius, 16, GetColor(255, 255, 255), GetColor(255, 255, 255), FALSE);
+	//DrawSphere3D(cPos, Radius, 16, GetColor(255, 255, 255), GetColor(255, 255, 255), FALSE);
 
 	if (IS_DEBUG)
 	{
@@ -62,6 +62,7 @@ void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 
 	case CEnemyBase::STATE_MOVE:
 		Enemy_Move(List, ListCnt);
+
 		
 		break;
 

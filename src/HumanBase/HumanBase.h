@@ -100,6 +100,9 @@ public:
 	//アニメをデタッチ
 	void DetachAnim();
 
+	//キャラクター回転処理
+	void Player_Rotation();
+
 	//方向フラグ設定
 	void SetDir();											
 

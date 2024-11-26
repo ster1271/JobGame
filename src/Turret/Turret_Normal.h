@@ -1,6 +1,7 @@
 #pragma once
 #include "TurretBase.h"
 
+
 //タレットクラス(通常)
 class CTurret_Normal: public CTurretBase
 {
@@ -30,6 +31,9 @@ public:
 
 	//タレット設置処理
 	void TurretSpawn(const VECTOR &vPos);
+
+	//弾の発射リクエスト
+	void TurretShot(CShotManager& cShotManager);
 
 	//タレット強化
 	void Turret_Power_Up();

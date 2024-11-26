@@ -87,7 +87,7 @@ void CTurretBase::Turret_Rotate(VECTOR vPos)
 	Vtmp.z = vPos.z - cPos.z;
 
 	//タレットの仮の移動ベクトルを計算
-	VECTOR Turret_Vec = VGet(0.0f, 0.0f, 0.0f);
+	VECTOR Turret_Vec = VECTOR_ZERO;
 	Turret_Vec.x = sinf(cRotate.y) * 1.0f;
 	Turret_Vec.y = 0.0f;
 	Turret_Vec.z = cosf(cRotate.y) * 1.0f;
@@ -95,12 +95,13 @@ void CTurretBase::Turret_Rotate(VECTOR vPos)
 	//外積計算
 	Dir = (Vtmp.x * Turret_Vec.z) - (Turret_Vec.x * Vtmp.z);
 
+	//絶対値が1.0fより小さかったら
 	if (fabsf(Dir) < 1.0f)
 	{
 		float X = vPos.x - cPos.x;
 		float Z = vPos.z - cPos.z;
 
-		//指定の位置へ角度を変える
+		//強制的に角度を変える
 		float NextRotY = atan2f(X, Z);
 
 		cRotate.y = NextRotY;

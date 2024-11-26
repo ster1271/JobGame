@@ -1,14 +1,16 @@
 #include "Turret_Normal.h"
 #include "../CollisionManager/Collision/Collision.h"
 
-const float MAX_LIFE = 50.0f;
-const float ATTACK = 5.0f;
-const int MAX_COOL_TIME = 30;
+const float MAX_LIFE = 50.0f;		//最大体力
+const float ATTACK = 5.0f;			//攻撃力
+const int MAX_COOL_TIME = 30;		//弾の発射間隔
+const float SET_RANGE = 80.0f;		//最大直線距離
 
 //コンストラクタ
 CTurret_Normal::CTurret_Normal()
 {
 	Attack = 0.0f;
+	CoolTime = 0;
 }
 
 //デストラクタ
@@ -55,48 +57,22 @@ void CTurret_Normal::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManag
 	
 	if (!IsActive)return;
 
-	//角度計算
-	float MIN_RANGE = 999.9f;
+	
 	for (int i = 0; i < ENEMY_MAXNUM; i++)
 	{
 		//このfor文でExitが呼ばれてたら敵が描画されない
 		CEnemy_Normal cEnemy = cEnemyManager.GetEnemy(i);
 
-		if (CCollision::IsHitCircle(cPos.x, cPos.z, 50.0f, cEnemy.GetPosition().x, cEnemy.GetPosition().z, 50.0f))
-		{
-			float Range = (cEnemy.GetPosition().x - cPos.x) * (cEnemy.GetPosition().x - cPos.x) + (cEnemy.GetPosition().z - cPos.z) * (cEnemy.GetPosition().z - cPos.z);
-			Range = sqrt(Range);
-			if (Range < MIN_RANGE)
-			{
-				MIN_RANGE = Range;
-			}
-			else
-				continue;
+		VECTOR Reng_Vec = VSub(cEnemy.GetPosition(), cPos);		//敵とタレットの距離を引いたVECTORを作る	
+		float Range = CMyLibrary::VecLong(Reng_Vec);			//距離を求める
 
-			Turret_Rotate(cEnemy.GetPosition());
+		//直線距離が設定値よりも大きかったら下の処理をしない
+		if(Range >= SET_RANGE)
+			continue;
 
-			//弾の位置決定
-			VECTOR BulletPos = cPos;
+		Turret_Rotate(cEnemy.GetPosition());					//角度処理
 
-			//弾のスピード
-			const float SHOT_SPEED = 5.0f;
-			VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);
-
-			vSpd.x = sinf(cRotate.y) * -SHOT_SPEED;
-			vSpd.z = cosf(cRotate.y) * -SHOT_SPEED;
-			vSpd.y = 0.0f;
-
-			CoolTime++;
-			if (CoolTime > MAX_COOL_TIME)
-			{
-				if (Dir > 1.0f)
-					return;
-
-				//タレットの弾リクエスト
-				cShotManager.RequestTurretShot(BulletPos, vSpd);
-				CoolTime = 0;
-			}
-		}
+		TurretShot(cShotManager);								//弾の発射リクエスト
 	}
 }
 
@@ -115,10 +91,9 @@ void CTurret_Normal::TurretSpawn(const VECTOR &vPos)
 	if (IsActive) return;
 
 	cPos = vPos;
-	cRotate = VGet(0.0, 0.0f, 0.0f);
+	cRotate = VECTOR_ZERO;
 	cSize = VGet(0.1f, 0.1f, 0.1f);
 
-	ShotRenge = 0.0f;
 	Hp = MAX_LIFE;
 	Power_Up_Count = 0;
 	Attack = ATTACK;
@@ -126,6 +101,33 @@ void CTurret_Normal::TurretSpawn(const VECTOR &vPos)
 
 	IsActive = true;
 }
+
+//弾発射処理
+void CTurret_Normal::TurretShot(CShotManager& cShotManager)
+{
+	//弾の位置決定
+	VECTOR BulletPos = cPos;
+
+	//弾のスピード
+	const float SHOT_SPEED = 5.0f;
+	VECTOR vSpd = VECTOR_ZERO;
+
+	vSpd.x = sinf(cRotate.y) * -SHOT_SPEED;
+	vSpd.z = cosf(cRotate.y) * -SHOT_SPEED;
+	vSpd.y = 0.0f;
+
+	CoolTime++;
+	if (CoolTime > MAX_COOL_TIME)
+	{
+		if (Dir > 1.0f)
+			return;
+
+		//タレットの弾リクエスト
+		cShotManager.RequestTurretShot(BulletPos, vSpd);
+		CoolTime = 0;
+	}
+}
+
 
 
 //タレット強化
