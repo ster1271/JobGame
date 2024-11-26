@@ -80,6 +80,14 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 	
 	//キャラクターの移動角度計算
 	cMoveRotate.y = CGamePad::StickRot(STICK_LEFT);
+	if (CGamePad::Stick(STICK_RX_POS))
+	{
+		cRotate.y -= 0.03f;
+	}
+	else if (CGamePad::Stick(STICK_RX_NEG))
+	{
+		cRotate.y += 0.03f;
+	}
 	
 	//入力したキー情報とプレイヤーの角度から、移動速度を求める
 	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);

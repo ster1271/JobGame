@@ -1,4 +1,5 @@
 #include "TurretManager.h"
+#include "../Debug/DebugString.h"
 
 static const char TURRET_NORMAL_PATH[] = { "data/Turret/Turret_Normal.x" };
 
@@ -57,6 +58,10 @@ void CTurretManager::Update()
 	{
 		Turret_List[TurretIndex]->Update();
 	}
+
+
+	CDebugString::GetInstance()->AddFormatString(500, 500, "リストの個数：%d", Turret_List.size());
+
 }
 
 //描画処理
@@ -72,28 +77,46 @@ void CTurretManager::Draw()
 void CTurretManager::TurretSpawn(const VECTOR& vPos)
 {
 	VECTOR vSize = VGet(30.0f, 30.0f, 30.0f);
+	bool IsPossible = false;
+	int size = 0;
 
+	//タレットの設置数が0個じゃないとき
 	if (Turret_List.size() != 0)
 	{
+
 		for (int Turret_Index = 0; Turret_Index < Turret_List.size(); Turret_Index++)
 		{
-			if (CCollision::CheckHitBoxToBox(vPos, vSize, Turret_List[Turret_Index]->GetPos(), vSize))
+			if (!CCollision::CheckHitBoxToBox(vPos, vSize, Turret_List[Turret_Index]->GetPos(), vSize))
 			{
-				return;
+				size++;
+				IsPossible = true;	//設置可能フラグをtrueにする
 			}
+			
+			if (IsPossible)
+			{
+				
 
-			//変数代入用クラス
-			CTurretBase* cTurretBase = new CTurret_Normal;
-			cTurretBase->Init();
-			cTurretBase->Load(TurretN_Hndl);
-			cTurretBase->TurretSpawn(vPos);
+				//現在のサイズを格納
+				int cnt = Turret_List.size();
 
+				//変数代入用クラス
+				CTurretBase* cTurretBase = new CTurret_Normal;
+				cTurretBase->Init();
+				cTurretBase->Load(TurretN_Hndl);
+				cTurretBase->TurretSpawn(vPos);
 
-			//リストに追加
-			Turret_List.push_back(cTurretBase);
+				//リストに追加
+				Turret_List.push_back(cTurretBase);
+
+				if (cnt != Turret_List.size())
+				{
+					return;
+				}
+			}
 		}
 	}
-	else
+	//タレットの設置数が0個の時
+	else if(Turret_List.size() == 0)
 	{
 		//変数代入用クラス
 		CTurretBase* cTurretBase = new CTurret_Normal;
@@ -101,8 +124,19 @@ void CTurretManager::TurretSpawn(const VECTOR& vPos)
 		cTurretBase->Load(TurretN_Hndl);
 		cTurretBase->TurretSpawn(vPos);
 
-
 		//リストに追加
 		Turret_List.push_back(cTurretBase);
 	}
+
+
+	/*
+	//変数代入用クラス
+	CTurretBase* cTurretBase = new CTurret_Normal;
+	cTurretBase->Init();
+	cTurretBase->Load(TurretN_Hndl);
+	cTurretBase->TurretSpawn(vPos);
+
+	//リストに追加
+	Turret_List.push_back(cTurretBase);
+	*/
 }

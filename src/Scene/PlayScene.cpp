@@ -102,6 +102,9 @@ void CPlayScene::Draw()
 
 	//ƒJƒƒ‰î•ñ•\Ž¦
 	cCameraManager.Draw();
+
+	CDebugString::GetInstance()->Draw();
+
 }
 
 
