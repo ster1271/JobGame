@@ -171,7 +171,7 @@ bool CGamePad::IsKeep_Cross(CHECK check)
 }
 
 
-//左スティック
+//スティック
 bool CGamePad::Stick(STICK stick)
 {
 	switch (stick)

@@ -184,11 +184,11 @@ void CHumanBase::Player_Rotation()
 {
 	if (CGamePad::Stick(STICK_RX_POS))
 	{
-		cRotate.y += 0.03f;
+		cRotate.y -= 0.03f;
 	}
 	else if (CGamePad::Stick(STICK_RX_NEG))
 	{
-		cRotate.y -= 0.03f;
+		cRotate.y += 0.03f;
 	}
 }
 
