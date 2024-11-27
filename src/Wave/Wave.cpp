@@ -1,2 +1,60 @@
 #include "Wave.h"
 
+CWave* CWave::cInstance = NULL;
+
+//コンストラクタ
+CWave::CWave()
+{
+	Wave_ID = STATE_WAVE_NONE;
+	IsWave = false;
+}
+
+//デストラクタ
+CWave::~CWave() {}
+
+//CWaveを取得
+CWave* CWave::GetInstance()
+{
+	//まだ生成されていないなら
+	if (cInstance == NULL)
+	{
+		cInstance = new CWave();
+	}
+
+	return cInstance;
+}
+
+//CWaveを削除
+void CWave::DeleteInstance()
+{
+	//インスタンスがNULLでないなら
+	if (cInstance != NULL)
+	{
+		delete cInstance;
+		cInstance = NULL;	//削除してNULL代入
+	}
+}
+
+//ウェーブ開始
+void CWave::WaveStart(WAVE_STATE id)
+{
+	if (Wave_ID != STATE_WAVE_NONE)
+		return;
+
+	if (Wave_ID == STATE_WAVE_START)
+	{
+		IsWave = true;
+	}
+}
+
+//ウェーブ終了
+void CWave::WaveEnd(WAVE_STATE id)
+{
+	if (Wave_ID != STATE_WAVE_NONE)
+		return;
+
+	if (Wave_ID == STATE_WAVE_END)
+	{
+		IsWave = false;
+	}
+}

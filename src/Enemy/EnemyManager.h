@@ -4,6 +4,7 @@
 #include "../Bot/Bot.h"
 #include "../Map/MapManager.h"
 #include "../RouteSearch/RouteSearch.h"
+#include "../Wave/Wave.h"
 
 #define ENEMY_MAXNUM	(2)
 

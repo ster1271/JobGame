@@ -72,16 +72,6 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 	VECTOR PastPos = VGet(0.0f, 0.0f, 0.0f);	//過去座標を格納する
 	VECTOR CurrentPos = cBot.GetPos();			//現在座標を格納する
 
-	//ボットの座標が変わったら経路探索をしなおす
-	/*if (PastPos.x != CurrentPos.x ||
-		PastPos.y != CurrentPos.y ||
-		PastPos.z != CurrentPos.z)
-	{
-
-		
-	}
-	*/
-
 
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
@@ -89,10 +79,13 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 		cEnemyBoss[Enemy_Index].Step(cBot, cMapManager);
 	}
 
-	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
+	if (CWave::GetInstance()->GetIsWave())
 	{
-		//リクエスト
-		RequestEnemy(Enemy_Index);
+		for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
+		{
+			//リクエスト
+			RequestEnemy(Enemy_Index);
+		}
 	}
 }
 

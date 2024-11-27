@@ -112,6 +112,11 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 		cTurretManager.TurretSpawn(cPos);
 	}
 
+	if (CGamePad::IsPadPush(DX_INPUT_PAD1, BUTTON_LB))
+	{
+		CWave::GetInstance()->WaveStart(STATE_WAVE_START);
+	}
+
 	//方向のチェック
 	SetDir();
 
