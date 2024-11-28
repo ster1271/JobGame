@@ -72,15 +72,15 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 	VECTOR PastPos = VGet(0.0f, 0.0f, 0.0f);	//過去座標を格納する
 	VECTOR CurrentPos = cBot.GetPos();			//現在座標を格納する
 
-
-	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
+	if (CWave::GetInstance()->GetIsWave() == true)
 	{
-		cEnemy_Normal[Enemy_Index].Step(cBot, cMapManager);
-		cEnemyBoss[Enemy_Index].Step(cBot, cMapManager);
-	}
 
-	if (CWave::GetInstance()->GetIsWave())
-	{
+		for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
+		{
+			cEnemy_Normal[Enemy_Index].Step(cBot, cMapManager);
+			cEnemyBoss[Enemy_Index].Step(cBot, cMapManager);
+		}
+
 		for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 		{
 			//リクエスト

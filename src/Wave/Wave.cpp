@@ -38,23 +38,25 @@ void CWave::DeleteInstance()
 //ウェーブ開始
 void CWave::WaveStart(WAVE_STATE id)
 {
-	if (Wave_ID != STATE_WAVE_NONE)
+	if (id == STATE_WAVE_NONE)
 		return;
 
-	if (Wave_ID == STATE_WAVE_START)
+	if (id == STATE_WAVE_START)
 	{
-		IsWave = true;
+		IsWave = true;					//フラグをtrueに
+		Wave_ID = STATE_WAVE_NORMAL;	//状態をウェーブ中に
 	}
 }
 
 //ウェーブ終了
 void CWave::WaveEnd(WAVE_STATE id)
 {
-	if (Wave_ID != STATE_WAVE_NONE)
+	if (id == STATE_WAVE_NONE)
 		return;
 
-	if (Wave_ID == STATE_WAVE_END)
+	if (id == STATE_WAVE_END)
 	{
-		IsWave = false;
+		IsWave = false;				//フラグをfalseに
+		Wave_ID = STATE_WAVE_NONE;	//状態を何もしていないに
 	}
 }

@@ -25,6 +25,7 @@ void CPlayer::Init()
 	cSize = PLAYER_SIZE;
 	fSpd = 0.0f;
 	ShotCoolCount = 0;
+	PushCnt = 0;
 
 	Life = PLAYER_MAX_LIFE;
 }
@@ -112,9 +113,11 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 		cTurretManager.TurretSpawn(cPos);
 	}
 
-	if (CGamePad::IsPadPush(DX_INPUT_PAD1, BUTTON_LB))
+
+	//ウェーブ開始
+	if (!CWave::GetInstance()->GetIsWave())
 	{
-		CWave::GetInstance()->WaveStart(STATE_WAVE_START);
+		StartWave();
 	}
 
 	//方向のチェック
@@ -143,8 +146,10 @@ void CPlayer::Draw()
 		DrawFormatString(0, 115, GetColor(255, 0, 0), "アタッカーY座標:%f", cPos.y);
 		DrawFormatString(0, 130, GetColor(255, 0, 0), "アタッカーZ座標:%f", cPos.z);
 		CDebugString::GetInstance()->AddFormatString(300, 300, "プレイヤーY軸：%f", cRotate.y);
+		CDebugString::GetInstance()->AddFormatString(400, 400, "LBを押した時間：%d", PushCnt);
 		CDebugString::GetInstance()->Draw();
 	}
+
 }
 
 //終了処理
@@ -244,3 +249,22 @@ void CPlayer::PlayerShot(CShotManager& cShotManager)
 	ShotCoolCount = 0;
 }
 
+
+//ウェーブ開始処理
+void CPlayer::StartWave()
+{
+	if (CGamePad::IsPadKeep(DX_INPUT_PAD1, BUTTON_LB))
+	{
+		PushCnt++;
+
+		if (PushCnt > 50)
+		{
+			CWave::GetInstance()->WaveStart(STATE_WAVE_START);
+			PushCnt = 0;
+		}
+	}
+	else
+	{
+		PushCnt = 0;
+	}
+}

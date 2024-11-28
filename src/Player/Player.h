@@ -65,4 +65,7 @@ public:
 	//発射リクエスト処理
 	void PlayerShot(CShotManager& cShotManager);
 
+	//ウェーブ開始処理
+	void StartWave();
+
 };

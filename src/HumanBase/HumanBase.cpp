@@ -16,6 +16,7 @@ CHumanBase::CHumanBase()
 
 	Life = -1;
 	iHndl = -1;
+	PushCnt = 0;
 }
 
 //デストラクタ
@@ -39,6 +40,7 @@ void CHumanBase::Init()
 
 	Life = 0;
 	iHndl = 0;
+	PushCnt = 0;
 }
 
 //データ読み込み
@@ -90,6 +92,7 @@ void CHumanBase::Exit()
 
 	Life = -1;
 	iHndl = -1;
+	PushCnt = 0;
 }
 
 

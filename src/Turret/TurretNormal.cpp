@@ -70,9 +70,13 @@ void CTurret_Normal::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManag
 		if(Range >= SET_RANGE)
 			continue;
 
-		Turret_Rotate(cEnemy.GetPosition());					//角度処理
 
-		TurretShot(cShotManager);								//弾の発射リクエスト
+		if (cEnemy.GetActive())
+		{
+			Turret_Rotate(cEnemy.GetPosition());					//角度処理
+
+			TurretShot(cShotManager);								//弾の発射リクエスト
+		}
 	}
 }
 

@@ -48,6 +48,7 @@ protected:
 	bool IsActive;				//生存フラグ
 	int iHndl;					//ハンドル
 	float Life;					//ライフ
+	int PushCnt;				//ボタン押している時間
 
 	bool IsDir[DIR_NUM];	//方向フラグ
 

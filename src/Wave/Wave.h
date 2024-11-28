@@ -4,9 +4,11 @@
 //ウェーブの状態
 enum WAVE_STATE
 {
-	STATE_WAVE_NONE,	//何もしてない
-	STATE_WAVE_START,	//ウェーブ開始
-	STATE_WAVE_END,		//ウェーブ終了
+	STATE_WAVE_NONE,		//何もしてない
+	STATE_WAVE_START,		//ウェーブ開始
+	STATE_WAVE_NORMAL,		//ノーマルウェーブ中
+	STATE_WAVE_BOTMOVE,		//ボット移動ウェーブ中
+	STATE_WAVE_END,			//ウェーブ終了
 };
 
 //ウェーブクラス
@@ -17,7 +19,8 @@ private:
 	static CWave* cInstance;
 
 	WAVE_STATE Wave_ID;		//ウェーブの状態
-	bool IsWave;				//ウェーブフラグ
+
+	bool IsWave;			//ウェーブフラグ
 
 public:
 	//コンストラクタ・デストラクタ
