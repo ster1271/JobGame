@@ -25,6 +25,7 @@ private:
 	TYPE_ENEMY type_id;
 	CEnemy_Normal cEnemy_Normal[ENEMY_MAXNUM];
 	CEnemyBoss cEnemyBoss[ENEMY_MAXNUM];
+	int cnt;
 
 public:
 	//コンストラクタ・デストラクタ

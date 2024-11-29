@@ -1,6 +1,6 @@
 #include "GameData.h"
 
-CGameData* CGameData::cInstance = NULL;
+CGameData* CGameData::cInstance = nullptr;
 
 //コンストラクタ
 CGameData::CGameData()
@@ -24,7 +24,7 @@ CGameData::~CGameData(){}
 CGameData* CGameData::GetInstance()
 {
 	//まだ生成されていないなら
-	if (cInstance == NULL)
+	if (cInstance == nullptr)
 	{
 		cInstance = new CGameData();
 	}
@@ -36,9 +36,9 @@ CGameData* CGameData::GetInstance()
 void CGameData::DeleteInstance()
 {
 	//インスタンスがNULLでないなら
-	if (cInstance != NULL)
+	if (cInstance != nullptr)
 	{
 		delete cInstance;
-		cInstance = NULL;	//削除してNULL代入
+		cInstance = nullptr;	//削除してnullptr代入
 	}
 }

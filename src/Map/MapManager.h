@@ -35,4 +35,7 @@ public:
 	//マップクラス取得
 	CMap GetMap() { return cMap; }
 
+	//ゴールクラス取得
+	CGoal GetGoal() { return cGoal; }
+
 };

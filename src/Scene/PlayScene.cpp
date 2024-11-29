@@ -86,7 +86,7 @@ void CPlayScene::Draw()
 		//ボット描画
 		cBot.Draw();
 		//チェックポイント描画
-		cCheck_Manager.Draw();
+		//cCheck_Manager.Draw();
 
 		cCollisionManager.Draw();
 	}
@@ -223,12 +223,14 @@ void CPlayScene::Step()
 		//ボット更新処理
 		cBot.Step(cMapManager);
 		//チェックポイント更新処理
-		cCheck_Manager.Step();
+		//cCheck_Manager.Step();
 
 		//当たり判定処理
 		cCollisionManager.PlayerToMap(cPlayer, cMapManager);
 		cCollisionManager.TurretShotToEnemy(cShotManager, cEnemyManager);
 		cCollisionManager.PlayerShotToEnemy(cShotManager, cEnemyManager);
+		cCollisionManager.PlayerShotToMap(cShotManager, cMapManager);
+		cCollisionManager.TurretShotToMap(cShotManager, cMapManager);
 	}
 
 	//デバック時処理

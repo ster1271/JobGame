@@ -127,7 +127,7 @@ void CCollisionManager::PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager)
 }
 
 
-//敵とマップの当たり判定
+//敵1とマップの当たり判定
 void CCollisionManager::Enemy1ToMap(CEnemyManager& cEnemyManager, CMapManager& cMapManager)
 {
 	//マップの情報を格納する
@@ -270,6 +270,64 @@ void CCollisionManager::Enemy2ToMap(CEnemyManager& cEnemyManager, CMapManager& c
 }
 
 
+//敵1同士の当たり判定
+void CCollisionManager::CheckEnemy1(CEnemyManager& cEnemyManager)
+{
+	for (int enemyIndex = 0; enemyIndex < ENEMY_MAXNUM; enemyIndex++)
+	{
+		//めり込み量を格納する変数を生成
+		float OverRap = 0.0f;
+
+		//敵情報を格納する
+		CEnemy_Normal& cENormal01 = cEnemyManager.GetEnemy(enemyIndex);	//情報をもらう
+		VECTOR EnemyPos01 = cENormal01.GetPosition();					//座標
+		VECTOR NextEnemyPos01 = cENormal01.GetNextPosision();			//1フレーム後の座標
+		VECTOR EnemySize01 = ENEMY_NORMAL_SIZE;							//サイズ
+		VECTOR Enemy_Harf_Size01 = VScale(EnemySize01, 0.5f);			//ハーフサイズ
+		bool Dir01[DIR_NUM] = { false };								//方向フラグ
+		for (int Index = 0; Index < DIR_NUM; Index++)
+		{
+			//方向フラグを取得してくる
+			Dir01[Index] = cENormal01.GetDir(Index);
+		}
+
+		//フラグがfalseならfor文を次に変更する
+		if (!cENormal01.GetActive())
+			continue;
+
+
+		for (int enemyIndex = 0; enemyIndex < ENEMY_MAXNUM; enemyIndex++)
+		{
+			//敵情報を格納する
+			CEnemy_Normal& cENormal02 = cEnemyManager.GetEnemy(enemyIndex);	//情報をもらう
+			VECTOR EnemyPos02 = cENormal02.GetPosition();						//座標
+			VECTOR NextEnemyPos02 = cENormal02.GetNextPosision();				//1フレーム後の座標
+			VECTOR EnemySize02 = ENEMY_NORMAL_SIZE;							//サイズ
+			VECTOR Enemy_Harf_Size02 = VScale(EnemySize02, 0.5f);				//ハーフサイズ
+			bool Dir02[DIR_NUM] = { false };									//方向フラグ
+			for (int Index = 0; Index < DIR_NUM; Index++)
+			{
+				//方向フラグを取得してくる
+				Dir02[Index] = cENormal02.GetDir(Index);
+			}
+
+			//フラグがfalseならfor文を次に変更する
+			if (!cENormal02.GetActive())
+				continue;
+
+
+		}
+
+	}
+}
+
+//敵2同士の当たり判定
+void CCollisionManager::CheckEnemy2(CEnemyManager& cEnemyManager)
+{
+
+}
+
+
 //タレットの弾と敵の当たり判定
 void CCollisionManager::TurretShotToEnemy(CShotManager& cShotManager, CEnemyManager& cEnemyManager)
 {
@@ -338,6 +396,78 @@ void CCollisionManager::PlayerShotToEnemy(CShotManager& cShotManager, CEnemyMana
 			{
 				cPShot.HitCalc();	//弾のフラグをおる
 				cENormal.HitCalc();	//敵のHPを減らす
+			}
+		}
+	}
+}
+
+
+//プレイヤーの弾とマップの当たり判定
+void CCollisionManager::PlayerShotToMap(CShotManager& cShotManager, CMapManager& cMapManager)
+{
+	//弾の数分回す
+	for (int shotIndex = 0; shotIndex < PL_SHOT_NUM; shotIndex++)
+	{
+		//弾情報を格納する
+		CPlayerShot& cPShot = cShotManager.GetPlayerShotInfo(shotIndex);
+		float ShotRadius = cPShot.GetRadius();
+
+		//フラグがfalseならfor文を次に変更する
+		if (!cPShot.GetIsActive())
+			continue;
+
+
+		//マップの情報を格納する
+		vector<WallInfo> MapInfoList = cMapManager.GetMap().GetWallList();	//リストをもらう
+
+		VECTOR Map_Size = MAP_SIZE;						//1ブロックのサイズ
+		VECTOR Map_Harf_Size = VScale(Map_Size, 0.5f);	//1ブロックのハーフサイズ
+
+		//リストのサイズ分回す
+		for (int MapIndex = 0; MapIndex < MapInfoList.size(); MapIndex++)
+		{
+			//もしフラグがfalseなら計算しない
+			if (!MapInfoList[MapIndex].IsMap)
+				continue;
+
+			if (CCollision::CheckHitSphereToSphere(cPShot.GetPos(), SHOT_RADIUS, MapInfoList[MapIndex].vPos, MAP_R))
+			{
+				cPShot.HitCalc();
+			}
+		}
+	}
+}
+
+//タレットの弾とマップの当たり判定
+void CCollisionManager::TurretShotToMap(CShotManager& cShotManager, CMapManager& cMapManager)
+{
+	//弾の数分回す
+	for (int shotIndex = 0; shotIndex < TURRET_SHOT_NUM; shotIndex++)
+	{
+		//弾情報を格納する
+		CTurretShot& cTShot = cShotManager.GetTurretShotInfo(shotIndex);
+		float ShotRadius = cTShot.GetRadius();
+
+		//フラグがfalseならfor文を次に変更する
+		if (!cTShot.GetIsActive())
+			continue;
+
+		//マップの情報を格納する
+		vector<WallInfo> MapInfoList = cMapManager.GetMap().GetWallList();	//リストをもらう
+
+		VECTOR Map_Size = MAP_SIZE;						//1ブロックのサイズ
+		VECTOR Map_Harf_Size = VScale(Map_Size, 0.5f);	//1ブロックのハーフサイズ
+
+		//リストのサイズ分回す
+		for (int MapIndex = 0; MapIndex < MapInfoList.size(); MapIndex++)
+		{
+			//もしフラグがfalseなら計算しない
+			if (!MapInfoList[MapIndex].IsMap)
+				continue;
+
+			if (CCollision::CheckHitSphereToSphere(cTShot.GetPos(), SHOT_RADIUS, MapInfoList[MapIndex].vPos, MAP_R))
+			{
+				cTShot.HitCalc();	//弾のフラグをおる
 			}
 		}
 	}

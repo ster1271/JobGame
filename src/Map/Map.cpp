@@ -162,10 +162,10 @@ void CMap::MapLoad()
 
 void CMap::Draw()
 {
-	cSize = VGet(50.0f, 50.0f, 50.0f);
 	for (int i = 0; i < WallList.size(); i++)
 	{
 		MV1DrawModel(WallList[i].iHndl);
+		//DrawSphere3D(WallList[i].vPos, MAP_R, 16, DEFAULT_COLOR, DEFAULT_COLOR, false);
 	}
 
 	for (int i = 0; i < FloarList.size(); i++)

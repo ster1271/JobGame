@@ -213,23 +213,26 @@ void CEnemyBase::Enemy_Move(vector<VECTOR> List, int& Cnt)
 	}
 	else if (Dir >= 0.0f)//それ以外は角度を変える
 	{
-		//NUM = 1;
-		cRotate.y += 0.05f;
+		cRotate.y += 0.08f;
 	}
 	else if (Dir < 0.0f)
 	{
-		//NUM = 2;
-		cRotate.y -= 0.05f;
+		cRotate.y -= 0.08f;
 	}
 
 
 	//座標に速度を加算する
-	cNextPos.x += sinf(cRotate.y) * -0.2f;
-	cNextPos.z += cosf(cRotate.y) * -0.2f;
+	cNextPos.x += sinf(cRotate.y) * -0.4f;
+	cNextPos.z += cosf(cRotate.y) * -0.4f;
 
 	//プレイヤーとの距離を計算
-	float Range = (List[Cnt].x - cPos.x) * (List[Cnt].x - cPos.x) + (List[Cnt].z - cPos.z) * (List[Cnt].z - cPos.z);
-	Range = sqrt(Range);
+	//プレイヤーとの距離を計算
+	VECTOR v_tmp;
+	v_tmp.x = List[Cnt].x - cPos.x;
+	v_tmp.y = 0.0f;
+	v_tmp.z = List[Cnt].z - cPos.z;
+
+	float Range = VSize(v_tmp);
 
 	//距離が一定値に達したらIdを変更する
 	if (Range < 0.5f)

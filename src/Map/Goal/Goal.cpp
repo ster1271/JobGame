@@ -37,7 +37,7 @@ void CGoal::Init()
 	iHndl = -1;
 
 	//•Ï”‚Ì‰Šú‰»
-	cPos = VGet(400.0f, 0.0f, 400.0f);
+	cPos = VGet(600.0f, -20.0f, 900.0f);
 	cRotate = VGet(0.0f, 0.0f, 0.0f);
 	cSize = VGet(0.2f, 0.2f, 0.2f);
 
