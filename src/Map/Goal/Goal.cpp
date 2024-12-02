@@ -38,7 +38,8 @@ void CGoal::Init()
 
 	//•Ï”‚Ì‰Šú‰»
 	cPos = VGet(600.0f, -20.0f, 900.0f);
-	cRotate = VGet(0.0f, 0.0f, 0.0f);
+	cPos = VGet(100.0f, -20.0f, 100.0f);
+	cRotate = VGet(0.0f, DX_PI / 2, 0.0f);
 	cSize = VGet(0.2f, 0.2f, 0.2f);
 
 	IsActive = true;
@@ -57,7 +58,7 @@ void CGoal::Draw()
 		return;
 
 	MV1DrawModel(iHndl);
-	//CDraw3D::DrawBox3D(cPos, VGet(25.0f, 25.0f, 25.0f), GetColor(255, 255, 0));
+	CDraw3D::DrawBox3D(cPos, VGet(80.0f, 80.0f, 80.0f), GetColor(255, 255, 0));
 }
 
 //–ˆƒtƒŒ[ƒ€s‚¤ˆ—

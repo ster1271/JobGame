@@ -1,11 +1,12 @@
 #pragma once
+#include "../Debug/DebugString.h"
+
 #include "Collision/Collision.h"
 #include "../Player/Player.h"
 #include "../Enemy/EnemyManager.h"
 #include "../Shot/ShotManager.h"
 #include "../Map/MapManager.h"
 
-#include "../Debug/DebugString.h"
 
 //コリジョンマネージャークラス
 class CCollisionManager
@@ -39,6 +40,9 @@ public:
 
 	//タレットの弾とマップの当たり判定
 	void TurretShotToMap(CShotManager& cShotManager, CMapManager& cMapManager);
+
+	//ゴールとプレイヤーの当たり判定
+	void PlayerToGoal(CPlayer& cPlayer, CMapManager& cMapManager);
 
 	//描画
 	void Draw();

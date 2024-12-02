@@ -1,6 +1,7 @@
 #include "TurretManager.h"
 #include "../Debug/DebugString.h"
 
+const int TURRET_MAX_NUM = 10;		//タレットの最大設置数
 const char TURRET_NORMAL_PATH[] = { "data/Turret/Turret_Normal.x" };	//タレットのモデルパス
 const VECTOR TURRET_SIZE = VGet(30.0f, 30.0f, 30.0f);					//タレットのサイズ
 
@@ -63,6 +64,7 @@ void CTurretManager::Update()
 
 
 	CDebugString::GetInstance()->AddFormatString(500, 500, "リストの個数：%d", Turret_List.size());
+	CDebugString::GetInstance()->AddFormatString(500, 525, "設置できる数残り：%d", TURRET_MAX_NUM - Turret_List.size());
 
 }
 
@@ -84,6 +86,10 @@ void CTurretManager::TurretSpawn(const VECTOR& vPos)
 	//タレットの設置数が0個じゃない時
 	if (Turret_List.size() != 0)
 	{
+		//最大数以上は生成しない
+		if (Turret_List.size() >= TURRET_MAX_NUM)
+			return;
+
 		//当たってないときにカウントをプラスする
 		for (int Turret_Index = 0; Turret_Index < Turret_List.size(); Turret_Index++)
 		{
