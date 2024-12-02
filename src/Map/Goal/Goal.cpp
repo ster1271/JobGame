@@ -58,7 +58,7 @@ void CGoal::Draw()
 		return;
 
 	MV1DrawModel(iHndl);
-	CDraw3D::DrawBox3D(cPos, VGet(80.0f, 80.0f, 80.0f), GetColor(255, 255, 0));
+	CDraw3D::DrawBox3D(cPos, GOAL_SIZE, GetColor(255, 255, 0));
 }
 
 //–ˆƒtƒŒ[ƒ€s‚¤ˆ—

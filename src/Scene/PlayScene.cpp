@@ -231,6 +231,7 @@ void CPlayScene::Step()
 		cCollisionManager.PlayerShotToEnemy(cShotManager, cEnemyManager);
 		cCollisionManager.PlayerShotToMap(cShotManager, cMapManager);
 		cCollisionManager.TurretShotToMap(cShotManager, cMapManager);
+		cCollisionManager.PlayerToGoal(cPlayer, cMapManager);
 	}
 
 	//デバック時処理

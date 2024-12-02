@@ -1,6 +1,9 @@
 #pragma once
 #include "../../Common.h"
 
+const VECTOR GOAL_SIZE = VGet(50.0f, 50.0f, 50.0f);
+
+
 class CGoal
 {
 private:
