@@ -226,7 +226,6 @@ void CEnemyBase::Enemy_Move(vector<VECTOR> List, int& Cnt)
 	cNextPos.z += cosf(cRotate.y) * -0.4f;
 
 	//プレイヤーとの距離を計算
-	//プレイヤーとの距離を計算
 	VECTOR v_tmp;
 	v_tmp.x = List[Cnt].x - cPos.x;
 	v_tmp.y = 0.0f;

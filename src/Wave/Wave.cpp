@@ -31,7 +31,7 @@ void CWave::DeleteInstance()
 	if (cInstance != NULL)
 	{
 		delete cInstance;
-		cInstance = NULL;	//íœ‚µ‚ÄNULL‘ã“ü
+		cInstance = NULL;				//íœ‚µ‚ÄNULL‘ã“ü
 	}
 }
 

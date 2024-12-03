@@ -62,6 +62,91 @@ void CMap::Updata()
 //CSV読み込み
 void CMap::MapLoad()
 {
+	//方法1(1文字読み込み)
+	LoadMap1();
+
+	//方法2(1行読み込み)
+	//LoadMap2();		
+}
+
+
+void CMap::Draw()
+{
+	for (int i = 0; i < WallList.size(); i++)
+	{
+		MV1DrawModel(WallList[i].iHndl);
+	}
+
+	for (int i = 0; i < FloarList.size(); i++)
+	{
+		MV1DrawModel(FloarList[i].iHndl);
+	}
+}
+
+//マップの読み込み1
+void CMap::LoadMap1()
+{
+	int WallHndl = MV1LoadModel(BLOCK_MODEL_PATH);
+	int FloarHndl = MV1LoadModel(FLOAR_MODEL_PATH);
+
+	WallInfo Walltmp;
+	FloarInfo Floartmp;
+
+	fopen_s(&fp_, "Data/Map/Maptest.csv", "r");		//CSVファイル読み込み
+
+	if (fp_ != nullptr)
+	{
+		int FileIndexX = 0;
+		int FileIndexY = 0;
+		int cnt = 0;
+
+		while (true) {
+			// 数値部分を読み込む
+			char FileNum = fgetc(fp_);
+			cnt++;
+
+			if (FileNum == '0')
+			{
+				//床
+				Floartmp.vPos = VGet(FileIndexX * MAP_SIZE, -40.0f, FileIndexY * MAP_SIZE);
+				Floartmp.IsMap = false;
+				Floartmp.iHndl = MV1DuplicateModel(FloarHndl);
+				FloarList.push_back(Floartmp);
+			}
+			else if (FileNum == '1')
+			{
+				//壁
+				Walltmp.vPos = VGet(FileIndexX * MAP_SIZE, 5.0f, FileIndexY * MAP_SIZE);
+				Walltmp.IsMap = true;
+				Walltmp.iHndl = MV1DuplicateModel(WallHndl);
+				WallList.push_back(Walltmp);
+			}
+
+			FileIndexX++;
+
+			// 「,」を飛ばすために読み込みを実行
+			FileNum = fgetc(fp_);
+
+			// EOFの場合は読み込み終了
+			if (FileNum == EOF)
+			{
+				break;
+			}
+
+			// 改行コードの場合は保存先を変更する
+			if (FileNum == '\n')
+			{
+				FileIndexY++;
+				FileIndexX = 0;
+			}
+		}
+	}
+	fclose(fp_);
+}
+
+//マップの読み込み2
+void CMap::LoadMap2()
+{
 	int WallHndl = MV1LoadModel(BLOCK_MODEL_PATH);
 	int FloarHndl = MV1LoadModel(FLOAR_MODEL_PATH);
 
@@ -73,10 +158,9 @@ void CMap::MapLoad()
 	fopen_s(&fp_, "Data/Map/Maptest.csv", "r");		//CSVファイル読み込み
 
 	//方法1
-	/*
 	if (fp_ != nullptr)
 	{
-	
+
 		while (fscanf_s(fp_, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d",
 			&num[0], &num[1], &num[2], &num[3], &num[4],
 			&num[5], &num[6], &num[7], &num[8], &num[9],
@@ -103,73 +187,5 @@ void CMap::MapLoad()
 
 			cnt++;
 		}
-	}
-	*/
-	
-	//方法2
-	if (fp_ != nullptr)
-	{
-		int FileIndexX = 0;
-		int FileIndexY = 0;
-		int cnt = 0;
-
-		while (true) {
-			// 数値部分を読み込む
-			char FileNum = fgetc(fp_);
-			cnt++;
-
-			if (FileNum == '0')
-			{
-				//床
-				Floartmp.vPos = VGet(FileIndexX * MAP_SIZE, -40.0f, FileIndexY * MAP_SIZE);
-				Floartmp.IsMap = false;
-				Floartmp.iHndl = MV1DuplicateModel(FloarHndl);	
-				FloarList.push_back(Floartmp);
-			}
-			else if (FileNum == '1')
-			{
-				//壁
-				Walltmp.vPos = VGet(FileIndexX * MAP_SIZE, 5.0f, FileIndexY * MAP_SIZE);
-				Walltmp.IsMap = true;
-				Walltmp.iHndl = MV1DuplicateModel(WallHndl);	
-				WallList.push_back(Walltmp);
-			}
-
-			FileIndexX++;
-
-			// 「,」を飛ばすために読み込みを実行
-			FileNum = fgetc(fp_);
-
-			// EOFの場合は読み込み終了
-			if (FileNum == EOF)
-			{
-				break;
-			}
-
-			// 改行コードの場合は保存先を変更する
-			if (FileNum == '\n')
-			{
-				FileIndexY++;
-				FileIndexX = 0;
-			}
-		}
-	}
-	
-
-	fclose(fp_);
-}
-
-
-void CMap::Draw()
-{
-	for (int i = 0; i < WallList.size(); i++)
-	{
-		MV1DrawModel(WallList[i].iHndl);
-		//DrawSphere3D(WallList[i].vPos, MAP_R, 16, DEFAULT_COLOR, DEFAULT_COLOR, false);
-	}
-
-	for (int i = 0; i < FloarList.size(); i++)
-	{
-		MV1DrawModel(FloarList[i].iHndl);
 	}
 }

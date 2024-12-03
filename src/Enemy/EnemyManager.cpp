@@ -85,8 +85,6 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 		cnt++;
 		for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 		{
-			
-
 			//リクエスト
 			RequestEnemy(Enemy_Index);
 			cnt = 0;

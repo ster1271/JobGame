@@ -1,7 +1,8 @@
 #include "Enemy_Normal.h"
 
 const int MAX_LIFE = 20;		//最大体力
-const float SPEED = 5.0f;
+const float SPEED = 5.0f;		//移動速度
+const int RESEARCH_TIME = 300;	//経路探索し直し時間
 
 //コンストラクタ
 CEnemy_Normal::CEnemy_Normal()
@@ -17,6 +18,7 @@ CEnemy_Normal::~CEnemy_Normal()
 void CEnemy_Normal::Init()
 {
 	CEnemyBase::Init();
+	ReSeachTime = 0;
 	State_Id = STATE_SEARCH;
 }
 
@@ -61,17 +63,40 @@ void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 		break;
 
 	case CEnemyBase::STATE_MOVE:
-		Enemy_Move(List, ListCnt);
 
-		
-		break;
+		ReSeachTime++;
 
-	case CEnemyBase::STATE_ATTACK:
-		if (ListCnt == List.size())
+		//時間経過で経路探索し直し
+		if (ReSeachTime >= RESEARCH_TIME)
 		{
+			List.clear();
+			ReSeachTime = 0;
 			ListCnt = 0;
 			State_Id = STATE_SEARCH;
+
+			break;
 		}
+
+		//移動処理
+		Enemy_Move(List, ListCnt);
+
+		////ボットとの距離を計算
+		//VECTOR v_tmp;
+		//v_tmp.x = cPos.x - cBot.GetPos().x;
+		//v_tmp.y = 0.0f;
+		//v_tmp.z = cPos.z - cBot.GetPos().z;
+		//Range = VSize(v_tmp);
+
+		//if (Range < 50.0f)
+		//{
+		//	State_Id = STATE_ATTACK;
+		//}
+
+		break;
+	case CEnemyBase::STATE_ATTACK:
+		
+
+
 		break;
 	
 	default:
@@ -83,7 +108,6 @@ void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 
 	//更新処理
 	Update();
-
 
 }
 
@@ -119,3 +143,4 @@ bool CEnemy_Normal::RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed)
 
 	return true;
 }
+

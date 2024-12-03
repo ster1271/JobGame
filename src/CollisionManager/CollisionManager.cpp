@@ -38,7 +38,6 @@ void CCollisionManager::PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager)
 
 		//Xé≤ÇÃÇ›Ç≈åvéZÇ∑ÇÈ
 		PlayerPos.x = NextPlayerPos.x;
-
 		if (CCollision::CheckHitBoxToBox(PlayerPos, Player_Size, MapInfoList[MapIndex].vPos, Map_Size))
 		{			
 			//èâä˙âªÇµÇƒÇ®Ç≠
@@ -57,6 +56,7 @@ void CCollisionManager::PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager)
 			}
 
 			NextPlayerPos.x += OverRap;	
+			PlayerPos.x = NextPlayerPos.x;
 		}
 	}
 
@@ -89,6 +89,7 @@ void CCollisionManager::PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager)
 			}
 
 			NextPlayerPos.y += OverRap;
+			PlayerPos.y = NextPlayerPos.y;
 		}
 	}
 
@@ -517,6 +518,7 @@ void CCollisionManager::PlayerToGoal(CPlayer& cPlayer, CMapManager& cMapManager)
 		}
 
 		NextPlayerPos.x += OverRap;
+		PlayerPos.x = NextPlayerPos.x;
 	}
 
 	
@@ -540,6 +542,7 @@ void CCollisionManager::PlayerToGoal(CPlayer& cPlayer, CMapManager& cMapManager)
 		}
 
 		NextPlayerPos.y += OverRap;
+		PlayerPos.y = NextPlayerPos.y;
 	}
 
 	//Zé≤ÇÃÇ›Ç≈åvéZÇ∑ÇÈ
@@ -563,6 +566,7 @@ void CCollisionManager::PlayerToGoal(CPlayer& cPlayer, CMapManager& cMapManager)
 
 		NextPlayerPos.z += OverRap;
 	}
+
 	cPlayer.SetNextPos(NextPlayerPos);
 
 }

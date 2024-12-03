@@ -54,6 +54,12 @@ public:
 	
 	//床情報取得
 	vector<FloarInfo> GetFloarList() { return FloarList; }
+
+	//マップの読み込み1
+	void LoadMap1();
+
+	//マップの読み込み2
+	void LoadMap2();
 };
 
 

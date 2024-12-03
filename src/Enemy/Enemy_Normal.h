@@ -9,6 +9,7 @@ class CEnemy_Normal: public CEnemyBase
 private:
 	CRoute_Search cRoute_Search;
 	VECTOR Respown_Pos;
+	int ReSeachTime;
 
 public:
 	//コンストラクタ・デストラクタ
@@ -32,4 +33,5 @@ public:
 
 	//リクエスト
 	virtual bool RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed);
+
 };

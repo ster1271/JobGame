@@ -253,8 +253,6 @@ void CPlayer::PlayerShot(CShotManager& cShotManager)
 //ウェーブ開始処理
 void CPlayer::StartWave()
 {
-
-
 	if (CGamePad::IsPadKeep(DX_INPUT_PAD1, BUTTON_LB))
 	{
 		PushCnt++;
