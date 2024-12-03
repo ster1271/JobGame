@@ -1,7 +1,7 @@
 #pragma once
 #include "../../Common.h"
 
-const VECTOR GOAL_SIZE = VGet(50.0f, 50.0f, 50.0f);
+const VECTOR GOAL_SIZE = VGet(70.0f, 50.0f, 50.0f);
 
 
 class CGoal

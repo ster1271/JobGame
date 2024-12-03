@@ -1,4 +1,5 @@
 #include "Goal.h"
+#include "../../Debug/DebugString.h"
 
 const char MODEL_PATH[] = "data/Map/door.x";
 
@@ -39,7 +40,7 @@ void CGoal::Init()
 	//変数の初期化
 	cPos = VGet(600.0f, -20.0f, 900.0f);
 	cPos = VGet(100.0f, -20.0f, 100.0f);
-	cRotate = VGet(0.0f, DX_PI / 2, 0.0f);
+	cRotate = VGet(0.0f, 0.0f, 0.0f);
 	cSize = VGet(0.2f, 0.2f, 0.2f);
 
 	IsActive = true;
@@ -59,6 +60,9 @@ void CGoal::Draw()
 
 	MV1DrawModel(iHndl);
 	CDraw3D::DrawBox3D(cPos, GOAL_SIZE, GetColor(255, 255, 0));
+	CDebugString::GetInstance()->AddFormatString(600, 400, "ゴールX座標：%f", cPos.x);
+	CDebugString::GetInstance()->AddFormatString(600, 415, "ゴールY座標：%f", cPos.y);
+	CDebugString::GetInstance()->AddFormatString(600, 430, "ゴールZ座標：%f", cPos.z);
 }
 
 //毎フレーム行う処理
@@ -66,7 +70,6 @@ void CGoal::Step()
 {
 	if (!IsActive)
 		return;
-
 }
 
 //更新処理

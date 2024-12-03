@@ -483,8 +483,8 @@ void CCollisionManager::PlayerToGoal(CPlayer& cPlayer, CMapManager& cMapManager)
 	//プレイヤーの情報を格納する
 	VECTOR PlayerPos = cPlayer.GetPos();					//座標
 	VECTOR NextPlayerPos = cPlayer.GetNextPos();			//1フレーム後の座標
-	VECTOR Player_Size = PLAYER_SIZE;						//プレイヤーのサイズ
-	VECTOR Player_Harf_Size = VScale(Player_Size, 0.5f);	//プレイヤーのハーフサイズ
+	VECTOR PlayerSize = PLAYER_SIZE;						//プレイヤーのサイズ
+	VECTOR PlayerHarfSize = VScale(PlayerSize, 0.5f);		//プレイヤーのハーフサイズ
 
 	bool Dir[DIR_NUM] = { false };
 	for (int Index = 0; Index < DIR_NUM; Index++)
@@ -499,8 +499,7 @@ void CCollisionManager::PlayerToGoal(CPlayer& cPlayer, CMapManager& cMapManager)
 
 	//X軸のみで計算する
 	PlayerPos.x = NextPlayerPos.x;
-
-	if (CCollision::CheckHitBoxToBox(PlayerPos, Player_Size, GoalPos, GoalSize))
+	if (CCollision::CheckHitBoxToBox(PlayerPos, PlayerSize, GoalPos, GoalSize))
 	{
 		//初期化しておく
 		OverRap = 0.0f;
@@ -509,12 +508,12 @@ void CCollisionManager::PlayerToGoal(CPlayer& cPlayer, CMapManager& cMapManager)
 		//右から当たった場合
 		if (Dir[DIR_RIGHT] == true)
 		{
-			OverRap = (GoalPos.x - GoalHarfSize.x) - (PlayerPos.x + Player_Harf_Size.x);
+			OverRap = (GoalPos.x - GoalHarfSize.x) - (PlayerPos.x + PlayerHarfSize.x);
 		}
 		//左から当たった場合
 		if (Dir[DIR_LEFT] == true)
 		{
-			OverRap = (GoalPos.x + GoalHarfSize.x) - (PlayerPos.x - Player_Harf_Size.x);
+			OverRap = (GoalPos.x + GoalHarfSize.x) - (PlayerPos.x - PlayerHarfSize.x);
 		}
 
 		NextPlayerPos.x += OverRap;
@@ -523,8 +522,7 @@ void CCollisionManager::PlayerToGoal(CPlayer& cPlayer, CMapManager& cMapManager)
 	
 	//Y軸のみで計算する
 	PlayerPos.y = NextPlayerPos.y;
-
-	if (CCollision::CheckHitBoxToBox(PlayerPos, Player_Size, GoalPos, GoalSize))
+	if (CCollision::CheckHitBoxToBox(PlayerPos, PlayerSize, GoalPos, GoalSize))
 	{
 		//初期化しておく
 		OverRap = 0.0f;
@@ -533,12 +531,12 @@ void CCollisionManager::PlayerToGoal(CPlayer& cPlayer, CMapManager& cMapManager)
 		//上から当たった場合
 		if (Dir[DIR_UP] == true)
 		{
-			OverRap = (GoalPos.y - GoalHarfSize.y) - (PlayerPos.y + Player_Harf_Size.y);
+			OverRap = (GoalPos.y - GoalHarfSize.y) - (PlayerPos.y + PlayerHarfSize.y);
 		}
 		//下から当たった場合
 		if (Dir[DIR_DOWN] == true)
 		{
-			OverRap = (GoalPos.y + GoalHarfSize.y) - (PlayerPos.y - Player_Harf_Size.y);
+			OverRap = (GoalPos.y + GoalHarfSize.y) - (PlayerPos.y - PlayerHarfSize.y);
 		}
 
 		NextPlayerPos.y += OverRap;
@@ -546,8 +544,7 @@ void CCollisionManager::PlayerToGoal(CPlayer& cPlayer, CMapManager& cMapManager)
 
 	//Z軸のみで計算する
 	PlayerPos.z = NextPlayerPos.z;
-
-	if (CCollision::CheckHitBoxToBox(PlayerPos, Player_Size, GoalPos, GoalSize))
+	if (CCollision::CheckHitBoxToBox(PlayerPos, PlayerSize, GoalPos, GoalSize))
 	{
 		//初期化しておく
 		OverRap = 0.0f;
@@ -556,18 +553,18 @@ void CCollisionManager::PlayerToGoal(CPlayer& cPlayer, CMapManager& cMapManager)
 		//奥から当たった場合
 		if (Dir[DIR_BACK] == true)
 		{
-			OverRap = (GoalPos.z - GoalHarfSize.z) - (PlayerPos.z + Player_Harf_Size.z);
+			OverRap = (GoalPos.z - GoalHarfSize.z) - (PlayerPos.z + PlayerHarfSize.z);
 		}
 		//手前から当たった場合
 		if (Dir[DIR_NEAR] == true)
 		{
-			OverRap = (GoalPos.z + GoalHarfSize.z) - (PlayerPos.z - Player_Harf_Size.z);
+			OverRap = (GoalPos.z + GoalHarfSize.z) - (PlayerPos.z - PlayerHarfSize.z);
 		}
 
 		NextPlayerPos.z += OverRap;
 	}
-
 	cPlayer.SetNextPos(NextPlayerPos);
+
 }
 
 
