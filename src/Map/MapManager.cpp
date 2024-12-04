@@ -7,10 +7,7 @@ CMapManager::CMapManager()
 }
 
 //デストラクタ
-CMapManager::~CMapManager()
-{
-
-}
+CMapManager::~CMapManager() {}
 
 //初期化
 void CMapManager::Init()

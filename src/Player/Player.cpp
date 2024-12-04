@@ -55,7 +55,7 @@ void CPlayer::Shot()
 }
 
 //毎フレーム行う処理
-void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
+void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, CMapManager& cMapManager)
 {
 	fSpd = 0.0f;
 
@@ -113,11 +113,15 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager)
 		cTurretManager.TurretSpawn(cPos);
 	}
 
-
 	//ウェーブ開始
 	if (!CWave::GetInstance()->GetIsWave())
 	{
-		StartWave();
+		VECTOR GoalPos = cMapManager.GetGoal().GetPos();
+		GoalPos.z -= 10.0f;
+		if (CCollision::CheckHitBoxToBox(cPos, PLAYER_SIZE, GoalPos, GOAL_SIZE))
+		{
+			StartWave();
+		}
 	}
 
 	//方向のチェック

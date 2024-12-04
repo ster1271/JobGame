@@ -6,6 +6,7 @@
 class CMapManager
 {
 private:
+
 	CMap cMap;
 	CGoal cGoal;
 

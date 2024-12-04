@@ -571,4 +571,3 @@ void CCollisionManager::PlayerToGoal(CPlayer& cPlayer, CMapManager& cMapManager)
 
 }
 
-

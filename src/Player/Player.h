@@ -4,6 +4,7 @@
 #include "../Shot/ShotManager.h"
 #include "../Turret/TurretManager.h"
 #include "../Wave/Wave.h"
+#include "../Map/MapManager.h"
 
 const VECTOR PLAYER_POS = VGet(50.0f, 0.0f, 50.0f);		//初期座標
 const VECTOR PLAYER_SIZE = VGet(15.0f, 30.0f, 15.0f);	//プレイヤーサイズ
@@ -51,7 +52,7 @@ public:
 	void Load();
 
 	//毎フレーム行う処理
-	void Step(CShotManager& cShotManager, CTurretManager& cTurretManager);
+	void Step(CShotManager& cShotManager, CTurretManager& cTurretManager, CMapManager& cMapManager);
 
 	//描画
 	void Draw();
