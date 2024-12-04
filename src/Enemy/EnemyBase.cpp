@@ -240,10 +240,55 @@ void CEnemyBase::Enemy_Move(vector<VECTOR> List, int& Cnt)
 
 		if (Cnt == List.size())
 		{
-			State_Id = STATE_ATTACK;
+			State_Id = STATE_SEARCH;
 		}
 	}
 	
+}
+
+//自動追尾処理
+void CEnemyBase::Out_Move(VECTOR vPos)
+{
+	//進行方向のどちら側にいるのかを調べる
+	float Dir = 0.0f;
+
+	//ボットから指定の地点へ行くベクトルを計算
+	VECTOR Vtmp;
+	Vtmp.x = vPos.x - cPos.x;
+	Vtmp.y = 0.0f;
+	Vtmp.z = vPos.z - cPos.z;
+
+	float Speed = 1.0f;
+	VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ボットの移動ベクトル
+	vSpd.x = sinf(cRotate.y) * -Speed;
+	vSpd.y = 0.0f;
+	vSpd.z = cosf(cRotate.y) * -Speed;
+
+	//外積計算
+	Dir = (Vtmp.x * vSpd.z) - (vSpd.x * Vtmp.z);
+
+	if (fabsf(Dir) < 1.0f)
+	{
+		float X = cPos.x - vPos.x;
+		float Z = cPos.z - vPos.z;
+
+		//指定の位置へ角度を変える
+		float NextRotY = atan2f(X, Z);
+
+		cRotate.y = NextRotY;
+	}
+	else if (Dir >= 0.0f)//それ以外は角度を変える
+	{
+		cRotate.y += 0.05f;
+	}
+	else if (Dir < 0.0f)
+	{
+		cRotate.y -= 0.05f;
+	}
+
+	//座標に速度を加算する
+	cPos.x += sinf(cRotate.y) * -0.5f;
+	cPos.z += cosf(cRotate.y) * -0.5f;
 }
 
 

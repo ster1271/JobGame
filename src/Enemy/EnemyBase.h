@@ -105,8 +105,11 @@ public:
 		}
 	}
 
-	//ˆÚ“®ˆ—
+	//Œo˜HˆÚ“®ˆ—
 	void Enemy_Move(vector<VECTOR> List, int& Cnt);
+
+	//©“®’Ç”öˆ—
+	void Out_Move(VECTOR vPos);
 
 	//•ûŒüƒtƒ‰ƒOİ’è
 	void SetDir();

@@ -64,33 +64,38 @@ void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 
 	case CEnemyBase::STATE_MOVE:
 
-		ReSeachTime++;
+		//プレイヤーとの距離を計算
+		VECTOR v_tmp;
+		v_tmp.x = cBot.GetPos().x - cPos.x;
+		v_tmp.y = 0.0f;
+		v_tmp.z = cBot.GetPos().z - cPos.z;
 
-		//時間経過で経路探索し直し
-		if (ReSeachTime >= RESEARCH_TIME)
+		Range = VSize(v_tmp);
+
+		if (Range >= 50.0f)
 		{
-			List.clear();
-			ReSeachTime = 0;
-			ListCnt = 0;
-			State_Id = STATE_SEARCH;
+			ReSeachTime++;
 
-			break;
+			//時間経過で経路探索し直し
+			if (ReSeachTime >= RESEARCH_TIME)
+			{
+				List.clear();
+				ReSeachTime = 0;
+				ListCnt = 0;
+				State_Id = STATE_SEARCH;
+
+				break;
+			}
+
+			//経路移動処理
+			Enemy_Move(List, ListCnt);
+		}
+		else
+		{
+			//追尾移動
+			Out_Move(cBot.GetPos());
 		}
 
-		//移動処理
-		Enemy_Move(List, ListCnt);
-
-		////ボットとの距離を計算
-		//VECTOR v_tmp;
-		//v_tmp.x = cPos.x - cBot.GetPos().x;
-		//v_tmp.y = 0.0f;
-		//v_tmp.z = cPos.z - cBot.GetPos().z;
-		//Range = VSize(v_tmp);
-
-		//if (Range < 50.0f)
-		//{
-		//	State_Id = STATE_ATTACK;
-		//}
 
 		break;
 	case CEnemyBase::STATE_ATTACK:

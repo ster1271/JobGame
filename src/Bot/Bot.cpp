@@ -103,7 +103,7 @@ void CBot::Step(CMapManager& cMapManager)
 	case CBot::STATE_STOP:
 
 		//テスト用処理
-		if (CInput::IsKeyPush(KEY_INPUT_1) || CGamePad::IsPadPush(DX_INPUT_PAD1, BUTTON_B))
+		if (CWave::GetInstance()->GetIsWave())
 		{
 			//Idを変更する
 			State_Id = STATE_SEARCH;

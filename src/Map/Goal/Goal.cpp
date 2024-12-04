@@ -59,8 +59,7 @@ void CGoal::Draw()
 
 	MV1DrawModel(iHndl);
 
-	VECTOR vPos = VGet(100.0f, -20.0f, 80.0f);
-	CDraw3D::DrawBox3D(vPos, GOAL_SIZE, GetColor(255, 255, 0));
+	CDraw3D::DrawBox3D(cPos, GOAL_SIZE, GetColor(255, 255, 0));
 }
 
 //–ˆƒtƒŒ[ƒ€s‚¤ˆ—
