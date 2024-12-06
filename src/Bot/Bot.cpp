@@ -197,6 +197,7 @@ void CBot::Move_Bot(vector<VECTOR> List)
 		{
 			IsFinish = true;
 			State_Id = STATE_STOP;
+			CWave::GetInstance()->WaveEnd(STATE_WAVE_END);
 
 			tmp = 0;
 		}

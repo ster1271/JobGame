@@ -3,7 +3,7 @@
 //定義
 static const char ENEMY_MODEL_PATH01[] = { "data/enemy/Enemy01.x" };
 static const char Enemy_MODEL_PATH02[] = { "data/enemy/Enemy02.x" };
-static const int WAIT_TIME = 10;		//敵が再登場するまでの時間
+static const int WAIT_TIME = 120;		//敵が再登場するまでの時間
 
 //コンストラクタ
 CEnemyManager::CEnemyManager()
@@ -20,7 +20,7 @@ CEnemyManager::~CEnemyManager()
 //初期化
 void CEnemyManager::Init()
 {
-	cnt = 0;
+	Coolcnt = WAIT_TIME;
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Init();
@@ -73,6 +73,7 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 	VECTOR PastPos = VGet(0.0f, 0.0f, 0.0f);	//過去座標を格納する
 	VECTOR CurrentPos = cBot.GetPos();			//現在座標を格納する
 
+	//ウェーブ中のみ処理を行う
 	if (CWave::GetInstance()->GetIsWave() == true)
 	{
 
@@ -82,13 +83,24 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 			cEnemyBoss[Enemy_Index].Step(cBot, cMapManager);
 		}
 
-		cnt++;
+		int iEnemyCnt = 0;	//敵の出現数
 		for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 		{
-			//リクエスト
-			RequestEnemy(Enemy_Index);
-			cnt = 0;
+			cEnemy_Normal[Enemy_Index].Step(cBot, cMapManager);
+			if (cEnemy_Normal[Enemy_Index].GetActive())
+			{
+				iEnemyCnt++;
+			}
 		}
+
+		//敵の出現
+		Coolcnt--;
+		if (Coolcnt < 0 || iEnemyCnt == 0)
+		{
+			RequestEnemy();
+			Coolcnt = WAIT_TIME;
+		}
+
 	}
 }
 
@@ -104,20 +116,17 @@ void CEnemyManager::Draw()
 
 
 //敵リクエスト
-void CEnemyManager::RequestEnemy(int Index)
+void CEnemyManager::RequestEnemy()
 {
-	if (cnt > WAIT_TIME)		//クールタイム中なら処理しない
-		return;
-
 	//敵1のスポーン
 	VECTOR vPos = VGet(300.0f, 5.0f, 100.0f);
 	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
-	cEnemy_Normal[Index].RequestEnemy(vPos, vSpeed);
+	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
+	{
+		if (cEnemy_Normal[Enemy_Index].RequestEnemy(vPos, vSpeed))
+		{
+			break;
+		}
 
-	//敵2のスポーン
-	vPos = VGet(300.0f, 5.0f, 100.0f);
-	vSpeed = VGet(0.0f, 0.0f, 0.0f);
-	cEnemyBoss[Index].RequestEnemy(vPos, vSpeed);
-	
-	cnt = 0;
+	}
 }

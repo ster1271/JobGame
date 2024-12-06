@@ -212,7 +212,7 @@ void CPlayScene::Step()
 		//マップ全般処理 
 		cMapManager.Step();
 		//キャラクター更新処理
-		cPlayer.Step(cShotManager, cTurretManager, cMapManager);
+		cPlayer.Step(cShotManager, cTurretManager, cMapManager, cBot.GetPos());
 		cPlayer.UpData();
 		//エネミー更新処理
 		cEnemyManager.Step(cBot, cMapManager);

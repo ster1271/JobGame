@@ -32,6 +32,7 @@ private:
 	bool IsDir[DIR_NUM];	//方向フラグ
 	PLAYER_STATE Id;
 	PLAYER_STATE oldId;
+	float StoreRot;			//角度保存
 	float fSpd;
 	int ShotCoolCount;			//弾クールタイム用変数
 
@@ -52,7 +53,7 @@ public:
 	void Load();
 
 	//毎フレーム行う処理
-	void Step(CShotManager& cShotManager, CTurretManager& cTurretManager, CMapManager& cMapManager);
+	void Step(CShotManager& cShotManager, CTurretManager& cTurretManager, CMapManager& cMapManager, VECTOR BotPos);
 
 	//描画
 	void Draw();
@@ -68,5 +69,8 @@ public:
 
 	//ウェーブ開始処理
 	void StartWave();
+
+	//ボットの位置に移動
+	void BackBotPosition(VECTOR vPos);
 
 };

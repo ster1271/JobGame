@@ -38,11 +38,11 @@ void CEnemy_Normal::Draw()
 
 	if (IS_DEBUG)
 	{
-		cRoute_Search.Draw(GetColor(0, 0, 255));
-		DrawString(200, 200, "描画中", GetColor(0, 0, 255));
-		DrawFormatString(200, 215, GetColor(0, 0, 255), "X座標:%f", cPos.x);
-		DrawFormatString(200, 230, GetColor(0, 0, 255), "Y座標:%f", cPos.y);
-		DrawFormatString(200, 245, GetColor(0, 0, 255), "Z座標:%f", cPos.z);
+		//cRoute_Search.Draw(GetColor(0, 0, 255));
+		//DrawString(200, 200, "描画中", GetColor(0, 0, 255));
+		//DrawFormatString(200, 215, GetColor(0, 0, 255), "X座標:%f", cPos.x);
+		//DrawFormatString(200, 230, GetColor(0, 0, 255), "Y座標:%f", cPos.y);
+		//DrawFormatString(200, 245, GetColor(0, 0, 255), "Z座標:%f", cPos.z);
 	}
 }
 

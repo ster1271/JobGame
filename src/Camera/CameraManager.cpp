@@ -51,6 +51,8 @@ void CCameraManager::Init(VECTOR vPos, VECTOR vForcus, VECTOR vUp)
 //-------------------------
 void CCameraManager::Exit()
 {
+	cPlayCam.Exit();
+	cDebugCam.Exit();
 }
 
 //-------------------------

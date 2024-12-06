@@ -26,4 +26,7 @@ public:
 
 	//デバックカメラ時の表示
 	void Draw();
+
+	//後処理
+	void Exit();
 };

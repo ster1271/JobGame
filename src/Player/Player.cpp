@@ -24,6 +24,7 @@ void CPlayer::Init()
 	cScale = PLAYER_SCALE;
 	cSize = PLAYER_SIZE;
 	fSpd = 0.0f;
+	StoreRot = 0.0f;
 	ShotCoolCount = 0;
 	PushCnt = 0;
 
@@ -55,7 +56,7 @@ void CPlayer::Shot()
 }
 
 //毎フレーム行う処理
-void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, CMapManager& cMapManager)
+void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, CMapManager& cMapManager, VECTOR BotPos)
 {
 	fSpd = 0.0f;
 
@@ -84,7 +85,6 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 	
 	//キャラクターの移動角度計算
 	cMoveRotate.y = CGamePad::StickRot(STICK_LEFT);
-	Player_Rotation();
 	
 	//入力したキー情報とプレイヤーの角度から、移動速度を求める
 	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
@@ -105,6 +105,7 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 			return;
 
 		PlayerShot(cShotManager);				//リクエスト処理
+		Player_Rotation();
 	}
 
 	//タレット生成処理
@@ -123,6 +124,9 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 			StartWave();
 		}
 	}
+
+	//ボットの場所に移動
+	BackBotPosition(BotPos);
 
 	//方向のチェック
 	SetDir();
@@ -149,10 +153,17 @@ void CPlayer::Draw()
 		DrawFormatString(0, 100, GetColor(255, 0, 0), "アタッカーX座標:%f", cPos.x);
 		DrawFormatString(0, 115, GetColor(255, 0, 0), "アタッカーY座標:%f", cPos.y);
 		DrawFormatString(0, 130, GetColor(255, 0, 0), "アタッカーZ座標:%f", cPos.z);
-		CDebugString::GetInstance()->AddFormatString(300, 300, "プレイヤーY軸：%f", cRotate.y);
-		CDebugString::GetInstance()->AddFormatString(400, 400, "LBを押した時間：%d", PushCnt);
-		CDebugString::GetInstance()->Draw();
 	}
+
+	CDebugString::GetInstance()->AddString(0, 300, "Aボタンでタレット設置");
+	CDebugString::GetInstance()->AddString(0, 315, "Bボタン長押しでボットにワープ");
+	CDebugString::GetInstance()->AddString(0, 330, "ゴールにLBボタン長押しでウェーブスタート");
+	CDebugString::GetInstance()->AddString(0, 345, "RTボタン長押しで射撃");
+	CDebugString::GetInstance()->AddString(0, 360, "左スティックで移動");
+	CDebugString::GetInstance()->AddString(0, 375, "右スティックで角度変更");
+	CDebugString::GetInstance()->AddFormatString(0, 460, "LBを押した時間：%d", PushCnt);
+
+	CDebugString::GetInstance()->Draw();
 
 }
 
@@ -270,5 +281,26 @@ void CPlayer::StartWave()
 	else
 	{
 		PushCnt = 0;
+	}
+}
+
+
+//ボットの位置に移動
+void CPlayer::BackBotPosition(VECTOR vPos)
+{
+	if (CGamePad::IsPadKeep(DX_INPUT_PAD1, BUTTON_B))
+	{
+		ReturnCnt++;
+
+		if (ReturnCnt > 50)
+		{
+			cPos = vPos;
+			cNextPos = cPos;
+			ReturnCnt = 0;
+		}
+	}
+	else
+	{
+		ReturnCnt = 0;
 	}
 }

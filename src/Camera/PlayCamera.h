@@ -32,6 +32,9 @@ public:
 
 	//カメラの上方向ベクトルを取得
 	VECTOR GetCameraUp() { return Up; }
+
+	//後処理
+	void Exit();
 };
 
 

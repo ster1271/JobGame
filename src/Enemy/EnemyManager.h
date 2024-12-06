@@ -6,7 +6,7 @@
 #include "../RouteSearch/RouteSearch.h"
 #include "../Wave/Wave.h"
 
-#define ENEMY_MAXNUM	(2)
+#define ENEMY_MAXNUM	(1)
 
 //敵の種類
 enum TYPE_ENEMY
@@ -25,7 +25,7 @@ private:
 	TYPE_ENEMY type_id;
 	CEnemy_Normal cEnemy_Normal[ENEMY_MAXNUM];
 	CEnemyBoss cEnemyBoss[ENEMY_MAXNUM];
-	int cnt;
+	int Coolcnt;
 
 public:
 	//コンストラクタ・デストラクタ
@@ -52,5 +52,5 @@ public:
 
 private:
 	//敵リクエスト
-	void RequestEnemy(int Index);
+	void RequestEnemy();
 };

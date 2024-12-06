@@ -70,3 +70,11 @@ void CPlayCamera::Update()
 	SetCameraPositionAndTargetAndUpVec(CameraPos, ForcusPos, Up);
 }
 
+
+//å„èàóù
+void CPlayCamera::Exit()
+{
+	memset(&CameraPos, 0, sizeof(VECTOR));
+	memset(&ForcusPos, 0, sizeof(VECTOR));
+	memset(&Up, 0, sizeof(VECTOR));
+}

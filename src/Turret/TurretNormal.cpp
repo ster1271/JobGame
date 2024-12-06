@@ -4,7 +4,7 @@
 const float MAX_LIFE = 50.0f;		//最大体力
 const float ATTACK = 5.0f;			//攻撃力
 const int MAX_COOL_TIME = 30;		//弾の発射間隔
-const float SET_RANGE = 80.0f;		//最大直線距離
+const float SET_RANGE = 150.0f;		//最大直線距離
 
 //コンストラクタ
 CTurret_Normal::CTurret_Normal()
@@ -61,22 +61,22 @@ void CTurret_Normal::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManag
 	for (int i = 0; i < ENEMY_MAXNUM; i++)
 	{
 		//このfor文でExitが呼ばれてたら敵が描画されない
-		CEnemy_Normal cEnemy = cEnemyManager.GetEnemy(i);
+		CEnemy_Normal& cEnemy = cEnemyManager.GetEnemy(i);
+
+		//敵のフラグがfalseなら以降の処理をしない
+		if (!cEnemy.GetActive())
+			return;
 
 		VECTOR Reng_Vec = VSub(cEnemy.GetPosition(), cPos);		//敵とタレットの距離を引いたVECTORを作る	
 		float Range = CMyLibrary::VecLong(Reng_Vec);			//距離を求める
 
 		//直線距離が設定値よりも大きかったら下の処理をしない
-		if(Range >= SET_RANGE)
+		if (Range >= SET_RANGE)
 			continue;
 
+		Turret_Rotate(cEnemy.GetPosition());					//角度処理
 
-		if (cEnemy.GetActive())
-		{
-			Turret_Rotate(cEnemy.GetPosition());					//角度処理
-
-			TurretShot(cShotManager);								//弾の発射リクエスト
-		}
+		TurretShot(cShotManager);								//弾の発射リクエスト
 	}
 }
 

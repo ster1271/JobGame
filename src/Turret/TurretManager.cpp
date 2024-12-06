@@ -1,7 +1,7 @@
 #include "TurretManager.h"
 #include "../Debug/DebugString.h"
 
-const int TURRET_MAX_NUM = 10;		//タレットの最大設置数
+const int TURRET_MAX_NUM = 1;		//タレットの最大設置数
 const char TURRET_NORMAL_PATH[] = { "data/Turret/Turret_Normal.x" };	//タレットのモデルパス
 const VECTOR TURRET_SIZE = VGet(30.0f, 30.0f, 30.0f);					//タレットのサイズ
 
@@ -21,6 +21,7 @@ CTurretManager::~CTurretManager()
 //初期化
 void CTurretManager::Init()
 {
+	Turret_List.clear();
 }
 
 //データロード
@@ -40,6 +41,8 @@ void CTurretManager::Exit()
 	{
 		Turret_List[TurretIndex]->Exit();
 	}
+
+	Turret_List.clear();
 }
 
 //繰り返し行う処理

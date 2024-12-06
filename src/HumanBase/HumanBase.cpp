@@ -17,6 +17,7 @@ CHumanBase::CHumanBase()
 	Life = -1;
 	iHndl = -1;
 	PushCnt = 0;
+	ReturnCnt = 0;
 }
 
 //デストラクタ
@@ -41,6 +42,7 @@ void CHumanBase::Init()
 	Life = 0;
 	iHndl = 0;
 	PushCnt = 0;
+	ReturnCnt = 0;
 }
 
 //データ読み込み
@@ -93,6 +95,7 @@ void CHumanBase::Exit()
 	Life = -1;
 	iHndl = -1;
 	PushCnt = 0;
+	ReturnCnt = 0;
 }
 
 
@@ -193,6 +196,8 @@ void CHumanBase::Player_Rotation()
 	{
 		cRotate.y += 0.03f;
 	}
+
+	
 }
 
 //方向フラグ設定

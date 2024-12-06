@@ -222,8 +222,8 @@ void CEnemyBase::Enemy_Move(vector<VECTOR> List, int& Cnt)
 
 
 	//座標に速度を加算する
-	cNextPos.x += sinf(cRotate.y) * -0.4f;
-	cNextPos.z += cosf(cRotate.y) * -0.4f;
+	cNextPos.x += sinf(cRotate.y) * -0.2f;
+	cNextPos.z += cosf(cRotate.y) * -0.2f;
 
 	//プレイヤーとの距離を計算
 	VECTOR v_tmp;
@@ -287,8 +287,8 @@ void CEnemyBase::Out_Move(VECTOR vPos)
 	}
 
 	//座標に速度を加算する
-	cPos.x += sinf(cRotate.y) * -0.5f;
-	cPos.z += cosf(cRotate.y) * -0.5f;
+	cPos.x += sinf(cRotate.y) * -0.2f;
+	cPos.z += cosf(cRotate.y) * -0.2f;
 }
 
 
