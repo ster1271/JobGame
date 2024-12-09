@@ -100,12 +100,12 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 	if (CInput::IsKeyKeep(KEY_INPUT_SPACE) ||CGamePad::IsKeep_LR(RIGHT))
 	{
 		Id = STATE_SHOT;						//アニメーションを変更する
+		Player_Rotation();
 
 		if (ShotCoolCount < SHOT_COOL_TIME)		//クールタイム中なら処理しない
 			return;
 
 		PlayerShot(cShotManager);				//リクエスト処理
-		Player_Rotation();
 	}
 
 	//タレット生成処理
@@ -150,9 +150,10 @@ void CPlayer::Draw()
 
 	if (IS_DEBUG)
 	{
-		DrawFormatString(0, 100, GetColor(255, 0, 0), "アタッカーX座標:%f", cPos.x);
-		DrawFormatString(0, 115, GetColor(255, 0, 0), "アタッカーY座標:%f", cPos.y);
-		DrawFormatString(0, 130, GetColor(255, 0, 0), "アタッカーZ座標:%f", cPos.z);
+		DrawFormatString(0, 0, GetColor(255, 0, 0), "アタッカーX座標:%f", cPos.x);
+		DrawFormatString(0, 15, GetColor(255, 0, 0), "アタッカーY座標:%f", cPos.y);
+		DrawFormatString(0, 30, GetColor(255, 0, 0), "アタッカーZ座標:%f", cPos.z);
+		DrawFormatString(0, 45, GetColor(255, 0, 0), "プレイヤーY軸:%f", cRotate.y);
 	}
 
 	CDebugString::GetInstance()->AddString(0, 300, "Aボタンでタレット設置");

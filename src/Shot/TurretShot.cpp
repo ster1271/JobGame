@@ -1,4 +1,6 @@
 #include "TurretShot.h"
+#include "../Debug/DebugString.h"
+
 
 //コンストラクタ・デストラクタ
 CTurretShot::CTurretShot()

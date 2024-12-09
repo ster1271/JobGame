@@ -97,7 +97,6 @@ void CPlayScene::Draw()
 		//デバック時描画
 		cCheck_Manager.DebugDraw();
 
-		cGame_Pointer.Draw(cCheck_Manager.GetID());
 	}
 
 	//カメラ情報表示
@@ -133,8 +132,6 @@ void CPlayScene::Init()
 	//チェックポイント初期化
 	cCheck_Manager.Init();
 
-	cGame_Pointer.Init();
-
 }
 
 
@@ -161,8 +158,6 @@ void CPlayScene::Exit()
 	cBot.Exit();
 	//チェックポイント終了処理
 	cCheck_Manager.Exit();
-
-	cGame_Pointer.Exit();
 
 }
 
@@ -237,10 +232,8 @@ void CPlayScene::Step()
 	//デバック時処理
 	if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_DEBUG)
 	{
-		cGame_Pointer.Step(cCheck_Manager.GetID());
-
 		//デバック時更新処理
-		cCheck_Manager.DebugStep(cGame_Pointer.GetPos());
+		cCheck_Manager.DebugStep(VGet(0.0f, 0.0f, 0.0f));
 	}
 
 	//デバックカメラとの切り替え処理
@@ -254,6 +247,6 @@ void CPlayScene::Step()
 	}
 
 	//カメラ更新処理
-	cCameraManager.Step(cPlayer.GetPos(), cPlayer.GetRotate(), cGame_Pointer.GetPos());
+	cCameraManager.Step(cPlayer.GetPos(), cPlayer.GetRotate(), VGet(0.0f,0.0f,0.0f));
 }
 

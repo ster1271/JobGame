@@ -50,6 +50,7 @@ protected:
 	float Life;					//ライフ
 	int PushCnt;				//ボタン押している時間
 	int ReturnCnt;				//ボットに戻るための時間
+	float StoreRot;			//角度保存
 
 	bool IsDir[DIR_NUM];	//方向フラグ
 

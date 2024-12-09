@@ -32,7 +32,6 @@ private:
 	bool IsDir[DIR_NUM];	//方向フラグ
 	PLAYER_STATE Id;
 	PLAYER_STATE oldId;
-	float StoreRot;			//角度保存
 	float fSpd;
 	int ShotCoolCount;			//弾クールタイム用変数
 

@@ -1,6 +1,5 @@
 #include "ShotManager.h"
 
-
 //’è‹`
 static const char PLSHOT_MODEL_PATH[] = { "data/shot/plshot.x" };
 static const char TURRETSHOT_MODEL_PATH[] = { "data/shot/plshot.x" };
@@ -110,7 +109,7 @@ void CShotManager::Step(VECTOR Pos)
 
 	for (int i = 0; i < TURRET_SHOT_NUM; i++)
 	{
-		cTurretShot[i].Step();
+		cTurretShot[i].Step();	
 	}
 }
 
@@ -129,6 +128,7 @@ void CShotManager::Draw()
 	{
 		cTurretShot[i].Draw();
 	}
+
 }
 
 

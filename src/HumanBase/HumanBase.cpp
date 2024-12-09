@@ -188,16 +188,14 @@ void CHumanBase::UpdateAnim()
 //キャラクター回転処理
 void CHumanBase::Player_Rotation()
 {
-	if (CGamePad::Stick(STICK_RX_POS))
+	StoreRot = cRotate.y;
+	cRotate.y = CGamePad::StickRot(STICK_RIGHT);
+
+	if (cRotate.y == 0.0f)
 	{
-		cRotate.y -= 0.03f;
-	}
-	else if (CGamePad::Stick(STICK_RX_NEG))
-	{
-		cRotate.y += 0.03f;
+		cRotate.y = StoreRot;
 	}
 
-	
 }
 
 //方向フラグ設定
