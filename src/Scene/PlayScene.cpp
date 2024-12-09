@@ -82,11 +82,9 @@ void CPlayScene::Draw()
 		//エネミー描画
 		cEnemyManager.Draw();
 		//弾描画
-		cShotManager.Draw();
+		//cShotManager.Draw();
 		//ボット描画
 		cBot.Draw();
-		//チェックポイント描画
-		//cCheck_Manager.Draw();
 
 		cCollisionManager.Draw();
 	}
@@ -95,8 +93,6 @@ void CPlayScene::Draw()
 		//オブジェクト描画
 		cObjectManager.Draw();
 		//デバック時描画
-		cCheck_Manager.DebugDraw();
-
 	}
 
 	//カメラ情報表示
@@ -126,11 +122,9 @@ void CPlayScene::Init()
 	//タレット初期化
 	cTurretManager.Init();
 	//弾初期化
-	cShotManager.Init();
+	//cShotManager.Init();
 	//ボット初期化
 	cBot.Init();
-	//チェックポイント初期化
-	cCheck_Manager.Init();
 
 }
 
@@ -153,11 +147,9 @@ void CPlayScene::Exit()
 	//タレットマネージャー終了処理
 	cTurretManager.Exit();
 	//弾終了処理
-	cShotManager.Exit();
+	//cShotManager.Exit();
 	//ボットクラス終了処理
 	cBot.Exit();
-	//チェックポイント終了処理
-	cCheck_Manager.Exit();
 
 }
 
@@ -181,8 +173,6 @@ void CPlayScene::Load()
 	cShotManager.Load();
 	//ボットデータ読み込み
 	cBot.Load();
-	//チェックポイントデータ読み込み
-	cCheck_Manager.Load();
 
 }
 
@@ -217,8 +207,7 @@ void CPlayScene::Step()
 		cShotManager.Step(cPlayer.GetPos());
 		//ボット更新処理
 		cBot.Step(cMapManager);
-		//チェックポイント更新処理
-		//cCheck_Manager.Step();
+
 
 		//当たり判定処理
 		cCollisionManager.PlayerToMap(cPlayer, cMapManager);
@@ -232,8 +221,7 @@ void CPlayScene::Step()
 	//デバック時処理
 	if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_DEBUG)
 	{
-		//デバック時更新処理
-		cCheck_Manager.DebugStep(VGet(0.0f, 0.0f, 0.0f));
+
 	}
 
 	//デバックカメラとの切り替え処理

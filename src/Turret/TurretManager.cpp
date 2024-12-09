@@ -1,7 +1,7 @@
 #include "TurretManager.h"
 #include "../Debug/DebugString.h"
 
-const int TURRET_MAX_NUM = 1;		//タレットの最大設置数
+const int TURRET_MAX_NUM = 5;		//タレットの最大設置数
 const char TURRET_NORMAL_PATH[] = { "data/Turret/Turret_Normal.x" };	//タレットのモデルパス
 const VECTOR TURRET_SIZE = VGet(30.0f, 30.0f, 30.0f);					//タレットのサイズ
 

@@ -9,7 +9,6 @@
 #include "../Turret/TurretManager.h"
 #include "../Object/ObjectManager.h"
 #include "../Bot/Bot.h"
-#include "../Check_Point/Check_Manager.h"
 #include "../RouteSearch/RouteSearch.h"
 #include "../Map/MapManager.h"
 
@@ -36,7 +35,6 @@ private:
 	CObjectManager cObjectManager;			//オブジェクトマネージャー
 	CTurretManager cTurretManager;			//タレットマネージャー
 	CBot cBot;								//ボットクラス
-	CChecck_Manager cCheck_Manager;			//チェックポイントマネジャー
 	CRoute_Search cRoute_Search;			//経路探索クラス
 	CCollisionManager cCollisionManager;	//コリジョンマネージャー
 	CMapManager cMapManager;				//マップマネージャー

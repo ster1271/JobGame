@@ -141,7 +141,6 @@ void CShotManager::RequestPlayerShot(const VECTOR& vPos, const VECTOR& vSpeed)
 	{
 		if (cPlayerShot[i].RequestShot(vPos, vSpeed))
 		{
-			//CSoundManager::Play(CSoundManager::SOUNDID_SE_PLSHOT);
 			break;
 		}
 	}
@@ -156,7 +155,6 @@ void CShotManager::RequestTurretShot(const VECTOR& vPos, const VECTOR& vSpeed)
 	{
 		if (cTurretShot[i].RequestShot(vPos, vSpeed))
 		{
-
 			break;
 		}
 	}

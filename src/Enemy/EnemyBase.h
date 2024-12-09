@@ -98,8 +98,16 @@ public:
 		//ライフがなくなったらフラグをおる
 		if (Life <= 0)
 		{
+			//ひとまず初期化
+			memset(&cPos, 0, sizeof(VECTOR));
+			memset(&cNextPos, 0, sizeof(VECTOR));
+			memset(&cRotate, 0, sizeof(VECTOR));
+			memset(&cScale, 0, sizeof(VECTOR));
+			memset(&cSize, 0, sizeof(VECTOR));
+			memset(&cSpeed, 0, sizeof(VECTOR));
+
 			HitCount = 0;
-			State_Id = STATE_SEARCH;
+			State_Id = STATE_NUM;
 			List.clear();
 			IsActive = false;
 		}

@@ -42,11 +42,11 @@ void CEnemyManager::Load()
 		cEnemy_Normal[Enemy_Index].Load(Org_Hndl);
 	}
 
-	Org_Hndl = MV1LoadModel(Enemy_MODEL_PATH02);
+	/*Org_Hndl = MV1LoadModel(Enemy_MODEL_PATH02);
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		cEnemyBoss[Enemy_Index].Load(Org_Hndl);
-	}
+	}*/
 
 }
 
@@ -76,25 +76,20 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 	//ウェーブ中のみ処理を行う
 	if (CWave::GetInstance()->GetIsWave() == true)
 	{
-
-		for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
-		{
-			cEnemy_Normal[Enemy_Index].Step(cBot, cMapManager);
-			cEnemyBoss[Enemy_Index].Step(cBot, cMapManager);
-		}
-
 		int iEnemyCnt = 0;	//敵の出現数
 		for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 		{
-			cEnemy_Normal[Enemy_Index].Step(cBot, cMapManager);
 			if (cEnemy_Normal[Enemy_Index].GetActive())
 			{
 				iEnemyCnt++;
 			}
+			cEnemy_Normal[Enemy_Index].Step(cBot, cMapManager);
 		}
 
 		//敵の出現
 		Coolcnt--;
+
+		//一定期間出現していないか、生存数が0の時リクエストさせる
 		if (Coolcnt < 0 || iEnemyCnt == 0)
 		{
 			RequestEnemy();
