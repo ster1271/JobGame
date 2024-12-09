@@ -1,0 +1,28 @@
+#pragma once
+
+//UIマネージャー
+class CUIManager
+{
+private:
+
+
+public:
+	//コンストラクタ・デストラクタ
+	CUIManager();
+	~CUIManager();
+
+	//初期化
+	void Init();
+
+	//読み込み
+	void Load();
+
+	//毎フレーム行う処理
+	void Step();
+
+	//情報更新
+	void Updata();
+
+	//後処理
+	void Exit();
+};
