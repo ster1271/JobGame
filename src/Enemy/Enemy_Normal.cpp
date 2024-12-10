@@ -38,7 +38,7 @@ void CEnemy_Normal::Draw()
 
 	if (IS_DEBUG)
 	{
-		//cRoute_Search.Draw(GetColor(0, 0, 255));
+		cRoute_Search.Draw(GetColor(0, 0, 255));
 		//DrawString(200, 200, "ï`âÊíÜ", GetColor(0, 0, 255));
 		//DrawFormatString(200, 215, GetColor(0, 0, 255), "Xç¿ïW:%f", cPos.x);
 		//DrawFormatString(200, 230, GetColor(0, 0, 255), "Yç¿ïW:%f", cPos.y);

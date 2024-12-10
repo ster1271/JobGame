@@ -82,7 +82,7 @@ void CPlayScene::Draw()
 		//エネミー描画
 		cEnemyManager.Draw();
 		//弾描画
-		//cShotManager.Draw();
+		cShotManager.Draw();
 		//ボット描画
 		cBot.Draw();
 
@@ -122,7 +122,7 @@ void CPlayScene::Init()
 	//タレット初期化
 	cTurretManager.Init();
 	//弾初期化
-	//cShotManager.Init();
+	cShotManager.Init();
 	//ボット初期化
 	cBot.Init();
 
