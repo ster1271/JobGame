@@ -209,7 +209,7 @@ void CPlayScene::Step()
 		cBot.Step(cMapManager);
 
 
-		//“–‚½‚è”»’èˆ—
+		//=======“–‚½‚è”»’èˆ—==========//
 		cCollisionManager.PlayerToMap(cPlayer, cMapManager);
 		cCollisionManager.TurretShotToEnemy(cShotManager, cEnemyManager);
 		cCollisionManager.PlayerShotToEnemy(cShotManager, cEnemyManager);

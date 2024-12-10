@@ -91,7 +91,6 @@ public:
 	//“–‚½‚è”»’è‚Ìˆ—
 	void HitCalc()
 	{
-		CSoundManager::Play(CSoundManager::SOUNDID_SE_EXPLORE);
 		Life--;
 		HitCount++;
 
