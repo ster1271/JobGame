@@ -47,34 +47,36 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 	m_GoalPos.y = (int)GoalPos.y;
 	m_GoalPos.z = (int)GoalPos.z;
 
-	//ç¿ïWÇåvéZÇµÇ‚Ç∑Ç¢ÇÊÇ§Ç…Ç∑ÇÈ
-	if (Remain((int)m_StartPos.x, CALC_DIS) <= 30)
+	//Xç¿ïWÇ™50Ç≈äÑÇËêÿÇÍÇ»Ç¢Ç∆Ç´
+	int Result = Remain((int)m_StartPos.x, CALC_DIS);
+	if (Result != 0)
 	{
-		m_StartPos.x += (int)m_StartPos.x % CALC_DIS;
-	}
-	else
-	{
-		m_StartPos.x -= (int)m_StartPos.x % CALC_DIS;
-	}
-
-	if (Remain((int)m_StartPos.y, CALC_DIS) <= 30)
-	{
-		m_StartPos.y += (int)m_StartPos.y % CALC_DIS;
-	}
-	else
-	{
-		m_StartPos.y -= (int)m_StartPos.y % CALC_DIS;
+		//åvéZåãâ Ç™ãKíËílÇÊÇËè¨Ç≥Ç¢Ç∆Ç´
+		if (Result <= 25)
+		{
+			m_StartPos.x -= Result;
+		}
+		else
+		{
+			Result = CALC_DIS - Result;
+			m_StartPos.x += Result;
+		}
 	}
 
-	if (Remain((int)m_StartPos.z, CALC_DIS) <= 30)
+	Result = Remain((int)m_StartPos.z, CALC_DIS);
+	if (Result != 0)
 	{
-		m_StartPos.z += (int)m_StartPos.z % CALC_DIS;
+		//åvéZåãâ Ç™ãKíËílÇÊÇËè¨Ç≥Ç¢Ç∆Ç´
+		if (Result < 25)
+		{
+			m_StartPos.z -= Result;
+		}
+		else
+		{
+			Result = CALC_DIS - Result;
+			m_StartPos.z += Result;
+		}
 	}
-	else
-	{
-		m_StartPos.z -= (int)m_StartPos.z % CALC_DIS;
-	}
-
 
 	Info tmp;
 	memset(&tmp, -1, sizeof(Info));
@@ -223,6 +225,7 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMapManager& cMapMana
 				break;
 			}
 		}
+		//trueÇ»ÇÁÇ±ÇÍà»ç~åvéZÇπÇ∏forï∂ÇâÒÇ∑
 		if (IsMatch)
 			continue;
 
@@ -241,6 +244,7 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMapManager& cMapMana
 				}
 			}
 		}
+		//trueÇ»ÇÁÇ±ÇÍà»ç~åvéZÇπÇ∏forï∂ÇâÒÇ∑
 		if (IsHit)
 			continue;
 

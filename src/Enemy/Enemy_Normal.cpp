@@ -58,7 +58,7 @@ void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 	switch (State_Id)
 	{
 	case CEnemyBase::STATE_SEARCH:
-		List = cRoute_Search.Route_Search(cPos, cBot.GetPos(), cMapManager);
+		List = cRoute_Search.Route_Search(cPos, /*cBot.GetPos()*/VGet(600.0f, -20.0f, 100.0f), cMapManager);
 		
 		State_Id = STATE_MOVE;
 		break;
