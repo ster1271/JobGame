@@ -26,6 +26,8 @@ VECTOR CMyLibrary::SubVec(VECTOR _vec1, VECTOR _vec2)
 	return ret;
 }
 
+
+
 //ƒxƒNƒgƒ‹‚ğ¶¬‚·‚éŠÖ”
 VECTOR CMyLibrary::VecCreate(VECTOR start, VECTOR end)
 {

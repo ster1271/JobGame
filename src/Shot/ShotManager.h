@@ -4,7 +4,7 @@
 #include "../SoundManager/SoundManager.h"
 
 #define PL_SHOT_NUM	(5)
-#define TURRET_SHOT_NUM	(1)
+#define TURRET_SHOT_NUM	(5)
 
 class CShotManager
 {

@@ -1,6 +1,7 @@
 #include "RouteSearch.h"
 
 const int MAX_COST = 999;
+const int CALC_DIS = 50;
 const int MOVE_BLOKE = 1;
 const float MOVE_SPEED = 0.2f;
 const float RADIUS = 5.0f;
@@ -38,8 +39,42 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 	
 	List.clear();	//念のため
 
-	m_StartPos = StartPos;
-	m_GoalPos = GoalPos;
+	m_StartPos.x = (int)StartPos.x;
+	m_StartPos.y = (int)StartPos.y;
+	m_StartPos.z = (int)StartPos.z;
+
+	m_GoalPos.x = (int)GoalPos.x;
+	m_GoalPos.y = (int)GoalPos.y;
+	m_GoalPos.z = (int)GoalPos.z;
+
+	//座標を計算しやすいようにする
+	if (Remain((int)m_StartPos.x, CALC_DIS) <= 30)
+	{
+		m_StartPos.x += (int)m_StartPos.x % CALC_DIS;
+	}
+	else
+	{
+		m_StartPos.x -= (int)m_StartPos.x % CALC_DIS;
+	}
+
+	if (Remain((int)m_StartPos.y, CALC_DIS) <= 30)
+	{
+		m_StartPos.y += (int)m_StartPos.y % CALC_DIS;
+	}
+	else
+	{
+		m_StartPos.y -= (int)m_StartPos.y % CALC_DIS;
+	}
+
+	if (Remain((int)m_StartPos.z, CALC_DIS) <= 30)
+	{
+		m_StartPos.z += (int)m_StartPos.z % CALC_DIS;
+	}
+	else
+	{
+		m_StartPos.z -= (int)m_StartPos.z % CALC_DIS;
+	}
+
 
 	Info tmp;
 	memset(&tmp, -1, sizeof(Info));
@@ -160,10 +195,10 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMapManager& cMapMana
 	
 	
 	//上下左右に計算する
-	tmp[DIR_UP].Pos.z += 50.0f;
-	tmp[DIR_DOWN].Pos.z -= 50.0f;
-	tmp[DIR_LEFT].Pos.x += 50.0f;
-	tmp[DIR_RIGHT].Pos.x -= 50.0f;
+	tmp[DIR_UP].Pos.z += CALC_DIS;
+	tmp[DIR_DOWN].Pos.z -= CALC_DIS;
+	tmp[DIR_LEFT].Pos.x += CALC_DIS;
+	tmp[DIR_RIGHT].Pos.x -= CALC_DIS;
 
 	
 	for (int Index = 0; Index < DIR_NUM; Index++)
@@ -210,8 +245,8 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMapManager& cMapMana
 			continue;
 
 		//移動コストを求める
-		int _X = (int)fabs((m_GoalPos.x / 50.0f) - (tmp[Index].Pos.x / 50.0f));
-		int _Z = (int)fabs((m_GoalPos.z / 50.0f) - (tmp[Index].Pos.z / 50.0f));
+		int _X = (int)fabs((m_GoalPos.x / CALC_DIS) - (tmp[Index].Pos.x / CALC_DIS));
+		int _Z = (int)fabs((m_GoalPos.z / CALC_DIS) - (tmp[Index].Pos.z / CALC_DIS));
 		tmp[Index].Renge_To_Goal = _X + _Z;
 
 		//合計コストを求める(実コスト + 移動コスト)
@@ -228,70 +263,3 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMapManager& cMapMana
 	return cnt;
 }
 
-
-////移動処理
-//void CRoute_Search::Go_Route(VECTOR& vPos, VECTOR& vRotate, float vSpeed)
-//{
-//	if (!IsFinish)
-//	{
-//		//進行方向のどちら側にいるのかを調べる
-//		float Dir = 0.0f;
-//
-//		//ボットから指定の地点へ行くベクトルを計算
-//		VECTOR Vtmp;
-//		Vtmp.x = Pos_List[ListCnt].x - vPos.x;
-//		Vtmp.y = 0.0f;
-//		Vtmp.z = Pos_List[ListCnt].z - vPos.z;
-//
-//		VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ボットの移動ベクトル
-//		vSpd.x = sinf(vRotate.y) * -vSpeed;
-//		vSpd.y = 0.0f;
-//		vSpd.z = cosf(vRotate.y) * -vSpeed;
-//
-//		//外積計算
-//		Dir = (Vtmp.x * vSpd.z) - (vSpd.x * Vtmp.z);
-//		//確認用
-//
-//		if (fabsf(Dir) < 1.0f)
-//		{
-//			float X = Vtmp.x = vPos.x - Pos_List[ListCnt].x;
-//			float Z = Vtmp.x = vPos.z - Pos_List[ListCnt].z;
-//
-//			//指定の位置へ角度を変える
-//			float NextRotY = atan2f(X, Z);
-//
-//			vRotate.y = NextRotY;
-//		}
-//		else if (Dir >= 0.0f)//それ以外は角度を変える
-//		{
-//			vRotate.y += 0.05f;
-//		}
-//		else if (Dir < 0.0f)
-//		{
-//			vRotate.y -= 0.05f;
-//		}
-//
-//		//座標に速度を加算する
-//		vPos.x += sinf(vRotate.y) * -MOVE_SPEED;
-//		vPos.z += cosf(vRotate.y) * -MOVE_SPEED;
-//
-//		//プレイヤーとの距離を計算
-//		float Range = (Pos_List[ListCnt].x - vPos.x) * (Pos_List[ListCnt].x - vPos.x) + (Pos_List[ListCnt].z - vPos.z) * (Pos_List[ListCnt].z - vPos.z);
-//		Range = sqrt(Range);
-//		tmp = Range;
-//
-//		//距離が一定値に達したらIdを変更する
-//		if (Range < 0.5f)
-//		{
-//			if (ListCnt == Pos_List.size())
-//			{
-//				IsFinish = true;
-//			}
-//			else
-//			{
-//				ListCnt++;
-//			}
-//		}
-//	}
-//}
-//

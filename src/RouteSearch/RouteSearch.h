@@ -65,6 +65,9 @@ public:
 	//•`‰æ
 	void Draw(unsigned int Color);
 	
+	//Š„‚èZ
+	int Remain(int A, int B){ return A % B; }
+
 };
 
 

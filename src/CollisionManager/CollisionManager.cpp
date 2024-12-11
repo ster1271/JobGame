@@ -2,6 +2,7 @@
 
 void CCollisionManager::Draw()
 {
+	CDebugString::GetInstance()->AddFormatString(0, 700, "倒した敵の数：%d", Cnt);
 }
 
 //プレイヤーとマップの当たり判定
@@ -360,6 +361,11 @@ void CCollisionManager::TurretShotToEnemy(CShotManager& cShotManager, CEnemyMana
 			{
 				cTShot.HitCalc();	//弾のフラグをおる
 				cENormal.HitCalc();	//敵のHPを減らす
+
+				if (!cENormal.GetActive())
+				{
+					Cnt++;
+				}
 			}
 		}
 	}
@@ -397,9 +403,15 @@ void CCollisionManager::PlayerShotToEnemy(CShotManager& cShotManager, CEnemyMana
 			{
 				cPShot.HitCalc();	//弾のフラグをおる
 				cENormal.HitCalc();	//敵のHPを減らす
+
+				if (!cENormal.GetActive())
+				{
+					Cnt++;
+				}
 			}
 		}
 	}
+
 }
 
 
