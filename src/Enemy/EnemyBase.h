@@ -3,6 +3,7 @@
 #include "../Bot/Bot.h"
 #include "../RouteSearch/RouteSearch.h"
 #include "../SoundManager/SoundManager.h"
+#include "../Debug/DebugString.h"
 
 const float ENEMY_RADIUS(10.0f);		//モデルの半径
 
@@ -53,6 +54,8 @@ protected:
 	vector<VECTOR>List;	//座標格納用
 	int ListCnt;
 
+	int DeathCnt;
+
 public:
 	VECTOR GetPosition() { return cPos; }						//座標取得
 	VECTOR GetNextPosision() { return cNextPos; }				//座標取得
@@ -79,7 +82,7 @@ public:
 	void Update();
 
 	//描画処理
-	virtual void Draw();
+	void Draw();
 
 	//リクエスト
 	virtual bool RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed);
@@ -105,10 +108,13 @@ public:
 			memset(&cSize, 0, sizeof(VECTOR));
 			memset(&cSpeed, 0, sizeof(VECTOR));
 
+			DeathCnt++;
 			HitCount = 0;
 			State_Id = STATE_NUM;
 			List.clear();
 			IsActive = false;
+
+			CDebugString::GetInstance()->AddFormatString(100, 0, "敵を倒した数：%d", DeathCnt);
 		}
 	}
 

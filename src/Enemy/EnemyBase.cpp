@@ -54,6 +54,7 @@ void CEnemyBase::Init()
 	HitCount = 0;;		//弾の当たった回数
 	iHndl = -1;			//ハンドル
 	ListCnt = 0;
+	DeathCnt = 0;
 
 	IsActive = false;	//生存フラグ
 }
@@ -80,6 +81,7 @@ void CEnemyBase::Exit()
 
 	Life = 0;;			//ライフ
 	HitCount = 0;;		//弾の当たった回数
+
 
 	IsActive = false;	//生存フラグ
 }
