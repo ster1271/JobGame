@@ -114,6 +114,8 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 		cTurretManager.TurretSpawn(cPos);
 	}
 
+	StartWave();
+
 	//ウェーブ開始
 	if (!CWave::GetInstance()->GetIsWave())
 	{

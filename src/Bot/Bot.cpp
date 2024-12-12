@@ -106,15 +106,15 @@ void CBot::Step(CMapManager& cMapManager)
 		if (CWave::GetInstance()->GetIsWave())
 		{
 			//Idを変更する
-			//State_Id = STATE_SEARCH;
+			State_Id = STATE_SEARCH;
 		}
 		break;
 
 	case CBot::STATE_SEARCH:
 		
-		//Route_List = cRoute.Route_Search(cPos, cMapManager.GetGoal().GetPos(), cMapManager);
-		//tmp = 0;
-		//State_Id = STATE_MOVE;
+		Route_List = cRoute.Route_Search(cPos, cMapManager.GetGoal().GetPos(), cMapManager);
+		tmp = 0;
+		State_Id = STATE_MOVE;
 
 		break;
 

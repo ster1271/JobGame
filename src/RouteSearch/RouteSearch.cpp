@@ -28,7 +28,16 @@ void CRoute_Search::Draw(unsigned int Color)
 {
 	for (int a = 0; a < List.size(); a++)
 	{
+		/*if (a == 28|| a == 27|| a == 23|| a == 21|| a == 20|| a == 18|| a == 13|| a == 11|| a == 9|| a == 8 || a == 4 || a == 2)
+		{
+			CDraw3D::DrawBox3D(List[a].Pos, VGet(25.0f, 80.0f, 25.0f));
+		}
+		else
+		{
+			CDraw3D::DrawBox3D(List[a].Pos, VGet(25.0f, 80.0f, 25.0f), Color);
+		}*/
 		CDraw3D::DrawBox3D(List[a].Pos, VGet(25.0f, 80.0f, 25.0f), Color);
+
 	}
 }
 
@@ -38,6 +47,7 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 {
 	
 	List.clear();	//念のため
+	List.shrink_to_fit();	//念のため
 
 	m_StartPos.x = (int)StartPos.x;
 	m_StartPos.y = (int)StartPos.y;
@@ -93,7 +103,7 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 	int LoopCount = 0;
 
 	//フラグがfalseなら計算を行う
-	while (!IsFinish)
+	while (/*!IsFinish*/LoopCount != 8)
 	{
 		int TotalMinCost = MAX_COST;	//最少評価コスト
 		int vectorSize = List.size();	//リスト格納サイズ
@@ -110,8 +120,6 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 			}
 		}
 
-		//評価がすべて並んだ時
-
 
 		//評価値が一番低いものを新たに計算する
 		for (int i = vectorSize - 1; i > vectorSize - 1 - SaveCnt; i--)
@@ -119,6 +127,32 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 			if (List[i].Total_Cost == TotalMinCost)
 			{
 				CurrentCnt += Evaluat_Calc(List[i], i, cMapManager);
+			}
+		}
+
+		//増えなかったらリストの中で結果がいいのを計算する
+		if (CurrentCnt == 0)
+		{
+			TotalMinCost = MAX_COST;	//最少評価コスト再設定
+			//評価がすべて並んだ時
+			for (int i = vectorSize - 1; i > vectorSize - 1 - SaveCnt; i--)
+			{
+				if (List[i].Total_Cost < TotalMinCost)
+				{
+					if (List[i].Total_Cost < TotalMinCost)
+					{
+						TotalMinCost = List[i].Total_Cost;
+					}
+				}
+			}
+
+			//評価値が一番低いものを新たに計算する
+			for (int i = vectorSize - 1; i > vectorSize - 1 - SaveCnt; i--)
+			{
+				if (List[i].Total_Cost == TotalMinCost)
+				{
+					CurrentCnt += Evaluat_Calc(List[i], i, cMapManager);
+				}
 			}
 		}
 		
@@ -134,39 +168,44 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 		}
 
 		LoopCount++;
+		if (LoopCount == 7)
+			LoopCount = 7;
+		else if (LoopCount == 8)
+			LoopCount = 8;
 	}
 
-	//ゴールからスタートまでの軌跡をたどる
-	for (int i = List.size() - 1; i >= 0; i--)
-	{
 
-		//まずゴールと同座標を見つける
-		if (List[i].Renge_To_Goal == 0)
-		{
-			List[i].IsFast = true;
-		}
+	////ゴールからスタートまでの軌跡をたどる
+	//for (int i = List.size() - 1; i >= 0; i--)
+	//{
 
-		//最初に見つけた配列の親番号をたどっていく
-		if (List[i].IsFast == true)
-		{
-			List[List[i].Source_Num].IsFast = true;
+	//	//まずゴールと同座標を見つける
+	//	if (List[i].Renge_To_Goal == 0)
+	//	{
+	//		List[i].IsFast = true;
+	//	}
 
-			//親番号が-1(スタート番号)になったらこの処理をやめる
-			if (List[List[i].Source_Num].Source_Num == -1)
-			{
-				break;
-			}
-		}
-	}
+	//	//最初に見つけた配列の親番号をたどっていく
+	//	if (List[i].IsFast == true)
+	//	{
+	//		List[List[i].Source_Num].IsFast = true;
 
-	//フラグがfalseの配列番号を削除する
-	for (int i = List.size() - 1; i >= 0; i--)
-	{
-		if (List[i].IsFast == false)
-		{
-			List.erase(List.begin() + i);
-		}
-	}
+	//		//親番号が-1(スタート番号)になったらこの処理をやめる
+	//		if (List[List[i].Source_Num].Source_Num == -1)
+	//		{
+	//			break;
+	//		}
+	//	}
+	//}
+
+	////フラグがfalseの配列番号を削除する
+	//for (int i = List.size() - 1; i >= 0; i--)
+	//{
+	//	if (List[i].IsFast == false)
+	//	{
+	//		List.erase(List.begin() + i);
+	//	}
+	//}
 
 	vector<VECTOR>Pos_List;
 	Pos_List.clear();

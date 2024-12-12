@@ -2,6 +2,8 @@
 #include "../Common.h"
 #include "../MyLibrary/MyLibrary.h"
 #include "../Map/MapManager.h"
+#include "../Debug/DebugString.h"
+
 
 //ó‘Ô‘JˆÚ
 enum NODE_STATE

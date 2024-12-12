@@ -122,7 +122,7 @@ void CEnemyManager::Draw()
 void CEnemyManager::RequestEnemy()
 {
 	//ìG1ÇÃÉXÉ|Å[Éì
-	VECTOR vPos = VGet(300.0f, 5.0f, 100.0f);
+	VECTOR vPos = VGet(300.0f, 5.0f, 50.0f);
 	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{

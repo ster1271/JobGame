@@ -18,7 +18,10 @@ CEnemy_Normal::~CEnemy_Normal()
 void CEnemy_Normal::Init()
 {
 	CEnemyBase::Init();
+
+	List.clear();
 	ReSeachTime = 0;
+	ListCnt = 0;
 	State_Id = STATE_SEARCH;
 }
 
@@ -77,18 +80,18 @@ void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 
 		if (Range >= 50.0f)
 		{
-			ReSeachTime++;
+			//ReSeachTime++;
 
-			//ŠÔŒo‰ß‚ÅŒo˜H’Tõ‚µ’¼‚µ
-			if (ReSeachTime >= RESEARCH_TIME)
-			{
-				List.clear();
-				ReSeachTime = 0;
-				ListCnt = 0;
-				State_Id = STATE_SEARCH;
+			////ŠÔŒo‰ß‚ÅŒo˜H’Tõ‚µ’¼‚µ
+			//if (ReSeachTime >= RESEARCH_TIME)
+			//{
+			//	List.clear();
+			//	ReSeachTime = 0;
+			//	ListCnt = 0;
+			//	State_Id = STATE_SEARCH;
 
-				break;
-			}
+			//	break;
+			//}
 
 			//Œo˜HˆÚ“®ˆ—
 			Enemy_Move(List, ListCnt);
