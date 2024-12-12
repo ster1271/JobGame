@@ -31,6 +31,8 @@ void CEnemy_Normal::Load(int Hndl)
 //•`‰æ
 void CEnemy_Normal::Draw()
 {
+	CDraw3D::DrawBox3D(VGet(300.0f, 5.0f, 100.0f), VGet(20.0f, 20.0f, 20.0f));
+
 	if (IsActive == false)	return;
 
 	MV1DrawModel(iHndl);
@@ -58,7 +60,7 @@ void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 	switch (State_Id)
 	{
 	case CEnemyBase::STATE_SEARCH:
-		List = cRoute_Search.Route_Search(cPos, /*cBot.GetPos()*/VGet(600.0f, -20.0f, 100.0f), cMapManager);
+		List = cRoute_Search.Route_Search(cPos, /*cBot.GetPos()*/cMapManager.GetGoal().GetPos(), cMapManager);
 		
 		State_Id = STATE_MOVE;
 		break;

@@ -3,6 +3,8 @@
 
 const char MODEL_PATH[] = "data/Map/door.x";
 
+const VECTOR POSITION = VGet(500.0f, -20.0f, 150.0f);
+
 //コンストラクタ
 CGoal::CGoal()
 {
@@ -38,7 +40,7 @@ void CGoal::Init()
 	iHndl = -1;
 
 	//変数の初期化
-	cPos = VGet(600.0f, -20.0f, 100.0f);
+	cPos = POSITION;
 	cRotate = VGet(0.0f, 0.0f, 0.0f);
 	cSize = VGet(0.2f, 0.2f, 0.2f);
 

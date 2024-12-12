@@ -110,7 +110,10 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 			}
 		}
 
-		//•]‰¿’l‚ªˆê”Ô’á‚¢‚à‚Ì‚ÅŒvŽZ‚·‚é
+		//•]‰¿‚ª‚·‚×‚Ä•À‚ñ‚¾Žž
+
+
+		//•]‰¿’l‚ªˆê”Ô’á‚¢‚à‚Ì‚ðV‚½‚ÉŒvŽZ‚·‚é
 		for (int i = vectorSize - 1; i > vectorSize - 1 - SaveCnt; i--)
 		{
 			if (List[i].Total_Cost == TotalMinCost)
