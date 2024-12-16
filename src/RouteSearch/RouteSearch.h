@@ -61,9 +61,6 @@ public:
 	//•]‰¿ŒvZ
 	int Evaluat_Calc(Info info, int Info_Index, CMapManager& cMapManager);
 
-	//ˆÚ“®ˆ—
-	void Go_Route(VECTOR& vPos, VECTOR& vRotate, float vSpeed = 5.0f);
-
 	//•`‰æ
 	void Draw(unsigned int Color);
 	

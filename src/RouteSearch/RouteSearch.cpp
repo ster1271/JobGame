@@ -57,36 +57,36 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 	m_GoalPos.y = (int)GoalPos.y;
 	m_GoalPos.z = (int)GoalPos.z;
 
-	//X座標が50で割り切れないとき
-	int Result = Remain((int)m_StartPos.x, CALC_DIS);
-	if (Result != 0)
-	{
-		//計算結果が規定値より小さいとき
-		if (Result <= 25)
-		{
-			m_StartPos.x -= Result;
-		}
-		else
-		{
-			Result = CALC_DIS - Result;
-			m_StartPos.x += Result;
-		}
-	}
+	////X座標が50で割り切れないとき
+	//int Result = Remain((int)m_StartPos.x, CALC_DIS);
+	//if (Result != 0)
+	//{
+	//	//計算結果が規定値より小さいとき
+	//	if (Result <= 25)
+	//	{
+	//		m_StartPos.x -= Result;
+	//	}
+	//	else
+	//	{
+	//		Result = CALC_DIS - Result;
+	//		m_StartPos.x += Result;
+	//	}
+	//}
 
-	Result = Remain((int)m_StartPos.z, CALC_DIS);
-	if (Result != 0)
-	{
-		//計算結果が規定値より小さいとき
-		if (Result < 25)
-		{
-			m_StartPos.z -= Result;
-		}
-		else
-		{
-			Result = CALC_DIS - Result;
-			m_StartPos.z += Result;
-		}
-	}
+	//Result = Remain((int)m_StartPos.z, CALC_DIS);
+	//if (Result != 0)
+	//{
+	//	//計算結果が規定値より小さいとき
+	//	if (Result < 25)
+	//	{
+	//		m_StartPos.z -= Result;
+	//	}
+	//	else
+	//	{
+	//		Result = CALC_DIS - Result;
+	//		m_StartPos.z += Result;
+	//	}
+	//}
 
 	Info tmp;
 	memset(&tmp, -1, sizeof(Info));
@@ -103,7 +103,7 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 	int LoopCount = 0;
 
 	//フラグがfalseなら計算を行う
-	while (/*!IsFinish*/LoopCount != 8)
+	while (/*!IsFinish*/LoopCount != 6)
 	{
 		int TotalMinCost = MAX_COST;	//最少評価コスト
 		int vectorSize = List.size();	//リスト格納サイズ
@@ -230,13 +230,11 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMapManager& cMapMana
 	
 	for (int i = 0; i < DIR_NUM; i++)
 	{
-		tmp[i].Renge_form_Start = info.Renge_form_Start + 1;
+		//ゴールからスタートまでの距離を求める
 		tmp[i].Pos = info.Pos;
-
 		//配列の親番号を格納する
 		tmp[i].Source_Num = Info_Index;
 	}
-	
 	
 	//上下左右に計算する
 	tmp[DIR_UP].Pos.z += CALC_DIS;
@@ -244,6 +242,11 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMapManager& cMapMana
 	tmp[DIR_LEFT].Pos.x += CALC_DIS;
 	tmp[DIR_RIGHT].Pos.x -= CALC_DIS;
 
+	for (int i = 0; i < DIR_NUM; i++)
+	{
+		//スタートからの距離
+		tmp[i].Renge_form_Start = (int)fabs((tmp[i].Pos.x - m_StartPos.x) / CALC_DIS) + (int)fabs((tmp[i].Pos.z - m_StartPos.z) / CALC_DIS)/* = info.Renge_form_Start + 1*/;
+	}
 	
 	for (int Index = 0; Index < DIR_NUM; Index++)
 	{
