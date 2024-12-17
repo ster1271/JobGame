@@ -1,7 +1,7 @@
 #include "Turret_Normal.h"
 #include "../CollisionManager/Collision/Collision.h"
 
-const float MAX_LIFE = 50.0f;		//最大体力
+const float MAX_LIFE = 0.0f;		//最大体力
 const float ATTACK = 5.0f;			//攻撃力
 const int MAX_COOL_TIME = 30;		//弾の発射間隔
 const float SET_RANGE = 150.0f;		//最大直線距離
@@ -54,29 +54,32 @@ void CTurret_Normal::Draw()
 //毎フレーム行う処理
 void CTurret_Normal::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManager)
 {
-	
+	//タレットが生成されていなかったら処理を行わない
 	if (!IsActive)return;
 
-	
-	for (int i = 0; i < ENEMY_MAXNUM; i++)
+	//HPが0より大きいときに処理を行う
+	if (Hp > 0.0f)
 	{
-		//このfor文でExitが呼ばれてたら敵が描画されない
-		CEnemy_Normal& cEnemy = cEnemyManager.GetEnemy(i);
+		for (int i = 0; i < ENEMY_MAXNUM; i++)
+		{
+			//このfor文でExitが呼ばれてたら敵が描画されない
+			CEnemy_Normal& cEnemy = cEnemyManager.GetEnemy(i);
 
-		//敵のフラグがfalseなら以降の処理をしない
-		if (!cEnemy.GetActive())
-			return;
+			//敵のフラグがfalseなら以降の処理をしない
+			if (!cEnemy.GetActive())
+				return;
 
-		VECTOR Reng_Vec = VSub(cEnemy.GetPosition(), cPos);		//敵とタレットの距離を引いたVECTORを作る	
-		float Range = CMyLibrary::VecLong(Reng_Vec);			//距離を求める
+			VECTOR Reng_Vec = VSub(cEnemy.GetPosition(), cPos);		//敵とタレットの距離を引いたVECTORを作る	
+			float Range = CMyLibrary::VecLong(Reng_Vec);			//距離を求める
 
-		//直線距離が設定値よりも大きかったら下の処理をしない
-		if (Range >= SET_RANGE)
-			continue;
+			//直線距離が設定値よりも大きかったら下の処理をしない
+			if (Range >= SET_RANGE)
+				continue;
 
-		Turret_Rotate(cEnemy.GetPosition());					//角度処理
+			Turret_Rotate(cEnemy.GetPosition());					//角度処理
 
-		TurretShot(cShotManager);								//弾の発射リクエスト
+			TurretShot(cShotManager);								//弾の発射リクエスト
+		}
 	}
 }
 

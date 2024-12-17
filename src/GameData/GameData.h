@@ -22,11 +22,6 @@ public:
 		int CurrentFloar;	//現在階層
 	};
 
-	
-	/*struct TureetData
-	{
-
-	};*/
 
 private:
 	//CDataクラスのポインタ変数
