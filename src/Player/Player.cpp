@@ -82,20 +82,11 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 	
 	//キャラクターの移動
 	Move_CON();
-	
-	//キャラクターの移動角度計算
-	cMoveRotate.y = CGamePad::StickRot(STICK_LEFT);
-	
-	//入力したキー情報とプレイヤーの角度から、移動速度を求める
-	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
-	vSpeed.x = sin(cMoveRotate.y) * fSpd;
-	vSpeed.z = cos(cMoveRotate.y) * fSpd;
 
-	//移動速度を現在の座標に加算する
-	cNextPos.x += vSpeed.x;
-	cNextPos.z += vSpeed.z;
+	Move_KEY();
 
 	
+	//弾発射処理
 	ShotCoolCount++;
 	if (CInput::IsKeyKeep(KEY_INPUT_SPACE) ||CGamePad::IsKeep_LR(RIGHT))
 	{
@@ -109,12 +100,10 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 	}
 
 	//タレット生成処理
-	if (CInput::IsKeyPush(KEY_INPUT_P) || CGamePad::IsPadPush(DX_INPUT_PAD1, BUTTON_A))
+	if (CInput::IsKeyPush(KEY_INPUT_E) || CGamePad::IsPadPush(DX_INPUT_PAD1, BUTTON_A))
 	{
 		cTurretManager.TurretSpawn(cPos);
 	}
-
-	StartWave();
 
 	//ウェーブ開始
 	if (!CWave::GetInstance()->GetIsWave())
@@ -126,6 +115,8 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 			StartWave();
 		}
 	}
+	//仮のウェーブ開始処理
+	StartWave();
 
 	//ボットの場所に移動
 	BackBotPosition(BotPos);
@@ -158,13 +149,13 @@ void CPlayer::Draw()
 		DrawFormatString(0, 45, GetColor(255, 0, 0), "プレイヤーY軸:%f", cRotate.y);
 	}
 
-	CDebugString::GetInstance()->AddString(0, 300, "Aボタンでタレット設置");
-	CDebugString::GetInstance()->AddString(0, 315, "Bボタン長押しでボットにワープ");
-	CDebugString::GetInstance()->AddString(0, 330, "ゴールにLBボタン長押しでウェーブスタート");
-	CDebugString::GetInstance()->AddString(0, 345, "RTボタン長押しで射撃");
+	CDebugString::GetInstance()->AddString(0, 300, "AボタンかEキーでタレット設置");
+	CDebugString::GetInstance()->AddString(0, 315, "BボタンかQキー長押しでボットにワープ");
+	CDebugString::GetInstance()->AddString(0, 330, "ゴールにLBボタンか1キー長押しでウェーブスタート");
+	CDebugString::GetInstance()->AddString(0, 345, "RTボタンかSPACEキー長押しで射撃");
 	CDebugString::GetInstance()->AddString(0, 360, "左スティックで移動");
 	CDebugString::GetInstance()->AddString(0, 375, "右スティックで角度変更");
-	CDebugString::GetInstance()->AddFormatString(0, 460, "LBを押した時間：%d", PushCnt);
+	CDebugString::GetInstance()->AddFormatString(0, 460, "LBか1キーを押した時間：%d", PushCnt);
 
 	CDebugString::GetInstance()->Draw();
 
@@ -183,10 +174,9 @@ void CPlayer::Move_CON()
 {
 	if (CGamePad::Stick(STICK_LY_NEG))
 	{
-		//射撃中に移動
+		//射撃中は移動速度を下げる
 		if (CGamePad::IsKeep_LR(RIGHT))
 		{
-			Id = STATE_SHOT;
 			fSpd = -0.5f;
 		}
 		else
@@ -198,10 +188,9 @@ void CPlayer::Move_CON()
 	}
 	else if (CGamePad::Stick(STICK_LY_POS))
 	{
-		//射撃中に移動
+		//射撃中は移動速度を下げる
 		if (CGamePad::IsKeep_LR(RIGHT))
 		{
-			Id = STATE_SHOT;
 			fSpd = -0.5f;
 		}
 		else
@@ -213,10 +202,9 @@ void CPlayer::Move_CON()
 	}
 	else if (CGamePad::Stick(STICK_LX_NEG))
 	{
-		//射撃中に移動
+		//射撃中は移動速度を下げる
 		if (CGamePad::IsKeep_LR(RIGHT))
 		{
-			Id = STATE_SHOT;
 			fSpd = -0.5f;
 		}
 		else
@@ -228,10 +216,9 @@ void CPlayer::Move_CON()
 	}
 	else if (CGamePad::Stick(STICK_LX_POS))
 	{
-		//射撃中に移動
+		//射撃中は移動速度を下げる
 		if (CGamePad::IsKeep_LR(RIGHT))
 		{
-			Id = STATE_SHOT;
 			fSpd = -0.5f;
 		}
 		else
@@ -245,11 +232,57 @@ void CPlayer::Move_CON()
 	{
 		Id = STATE_DEFAULT;
 	}
-	
+
+
+	//キャラクターの移動角度計算
+	cMoveRotate.y = CGamePad::StickRot(STICK_LEFT);
+
+	//入力したキー情報とプレイヤーの角度から、移動速度を求める
+	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
+	vSpeed.x = sin(cMoveRotate.y) * fSpd;
+	vSpeed.z = cos(cMoveRotate.y) * fSpd;
+
+	//移動速度を現在の座標に加算する
+	cNextPos.x += vSpeed.x;
+	cNextPos.z += vSpeed.z;
+}
+
+//キーボード移動処理
+void CPlayer::Move_KEY()
+{
+	float XSpd = 0.0f;
+	float ZSpd = 0.0f;
+
+	if (CInput::IsKeyKeep(KEY_INPUT_W))
+	{
+		Id = STATE_RUN;
+		ZSpd = -MOVESPEED;
+	}
+	if (CInput::IsKeyKeep(KEY_INPUT_S))
+	{
+		Id = STATE_RUN;
+		ZSpd = MOVESPEED;
+	}
+	if (CInput::IsKeyKeep(KEY_INPUT_A))
+	{
+		Id = STATE_RUN;
+		XSpd = MOVESPEED;
+	}
+	if (CInput::IsKeyKeep(KEY_INPUT_D))
+	{
+		Id = STATE_RUN;
+		XSpd = -MOVESPEED;
+	}
+
+	//キャラクターの移動角度計算
+	cMoveRotate.y = atan2(XSpd, ZSpd * -1);
+
+	VECTOR MoveVec = VGet(XSpd, 0.0f, ZSpd);
+	cNextPos = VAdd(cPos, MoveVec);
 }
 
 
-//発射リクエスト処理
+//発射リクエスト処理W
 void CPlayer::PlayerShot(CShotManager& cShotManager)
 {
 	//弾の位置決定
@@ -271,7 +304,7 @@ void CPlayer::PlayerShot(CShotManager& cShotManager)
 //ウェーブ開始処理
 void CPlayer::StartWave()
 {
-	if (CGamePad::IsPadKeep(DX_INPUT_PAD1, BUTTON_LB))
+	if (CGamePad::IsPadKeep(DX_INPUT_PAD1, BUTTON_LB) || CInput::IsKeyKeep(KEY_INPUT_1))
 	{
 		PushCnt++;
 
@@ -291,7 +324,7 @@ void CPlayer::StartWave()
 //ボットの位置に移動
 void CPlayer::BackBotPosition(VECTOR vPos)
 {
-	if (CGamePad::IsPadKeep(DX_INPUT_PAD1, BUTTON_B))
+	if (CGamePad::IsPadKeep(DX_INPUT_PAD1, BUTTON_B) || CInput::IsKeyKeep(KEY_INPUT_Q))
 	{
 		ReturnCnt++;
 

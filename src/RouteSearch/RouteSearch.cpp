@@ -263,7 +263,6 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMapManager& cMapMana
 		for (int i = 0; i < List.size(); i++)
 		{
 			if (tmp[Index].Pos.x == List[i].Pos.x &&
-				//tmp[Index].Pos.y == List[i].Pos.y &&
 				tmp[Index].Pos.z == List[i].Pos.z)
 			{
 				IsMatch = true;

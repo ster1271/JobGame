@@ -63,6 +63,9 @@ public:
 	//コントローラー移動処理
 	void Move_CON();
 
+	//キーボード移動処理
+	void Move_KEY();
+
 	//発射リクエスト処理
 	void PlayerShot(CShotManager& cShotManager);
 
