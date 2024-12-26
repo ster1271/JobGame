@@ -37,7 +37,6 @@ private:
 	CBot cBot;								//ボットクラス
 	CRoute_Search cRoute_Search;			//経路探索クラス
 	CCollisionManager cCollisionManager;	//コリジョンマネージャー
-	CMapManager cMapManager;				//マップマネージャー
 	
 
 public:
