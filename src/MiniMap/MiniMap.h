@@ -1,11 +1,17 @@
 #pragma once
 #include "../Common.h"
+#include "../Player/Player.h"
+#include "../Enemy/EnemyManager.h"
+#include "../Map/MapManager.h"
 
 //ミニマップクラス
 class CMiniMap
 {
 private:
-
+	VECTOR PlayerPos;
+	VECTOR PlayerRot;
+	vector<WallInfo> WallInfoList;
+	vector<FloarInfo> FloarInfoList;
 
 public:
 	//コンストラクタ・デストラクタ
@@ -22,7 +28,7 @@ public:
 	void Draw();
 
 	//毎フレーム行う処理
-	void Step();
+	void Step(VECTOR vPos, VECTOR vRot, CMapManager& cMapManager);
 
 	//情報更新
 	void UpData();
