@@ -85,8 +85,8 @@ void CPlayScene::Draw()
 		cShotManager.Draw();
 		//ボット描画
 		cBot.Draw();
-
-		cCollisionManager.Draw();
+		//ミニマップ描画
+		cMiniMap.Draw();
 	}
 	else if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_DEBUG)
 	{

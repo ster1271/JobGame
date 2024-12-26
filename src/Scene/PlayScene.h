@@ -11,6 +11,7 @@
 #include "../Bot/Bot.h"
 #include "../RouteSearch/RouteSearch.h"
 #include "../Map/MapManager.h"
+#include "../MiniMap/MiniMap.h"
 
 class CPlayScene
 {
@@ -37,6 +38,8 @@ private:
 	CBot cBot;								//ボットクラス
 	CRoute_Search cRoute_Search;			//経路探索クラス
 	CCollisionManager cCollisionManager;	//コリジョンマネージャー
+	CMapManager cMapManager;				//マップマネージャー
+	CMiniMap cMiniMap;						//ミニマップクラス
 	
 
 public:
