@@ -4,6 +4,8 @@
 #include "../Enemy/EnemyManager.h"
 #include "../Map/MapManager.h"
 
+
+
 //ミニマップクラス
 class CMiniMap
 {
@@ -12,6 +14,8 @@ private:
 	VECTOR PlayerRot;
 	vector<WallInfo> WallInfoList;
 	vector<FloarInfo> FloarInfoList;
+
+	int PlayerHndl;
 
 public:
 	//コンストラクタ・デストラクタ

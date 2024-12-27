@@ -173,7 +173,8 @@ void CPlayScene::Load()
 	cShotManager.Load();
 	//ボットデータ読み込み
 	cBot.Load();
-
+	//ミニマップ描画
+	cMiniMap.Load();
 }
 
 
@@ -196,6 +197,8 @@ void CPlayScene::Step()
 		cObjectManager.Step();
 		//マップ全般処理 
 		cMapManager.Step();
+		//ミニマップ描画
+		cMiniMap.Step(cPlayer.GetPos(), cPlayer.GetRotate(), cMapManager);
 		//キャラクター更新処理
 		cPlayer.Step(cShotManager, cTurretManager, cMapManager, cBot.GetPos());
 		cPlayer.UpData();
@@ -207,6 +210,7 @@ void CPlayScene::Step()
 		cShotManager.Step(cPlayer.GetPos());
 		//ボット更新処理
 		cBot.Step(cMapManager);
+
 
 
 		//=======当たり判定処理==========//
