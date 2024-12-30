@@ -8,6 +8,7 @@ const float MAP_R = 30.0f;
 struct WallInfo
 {
 	VECTOR vPos;
+	VECTOR MiniMapPos;
 	bool IsMap;
 	int iHndl;
 };

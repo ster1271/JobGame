@@ -81,9 +81,9 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 	cPos = cNextPos;
 	
 	//キャラクターの移動
-	Move_CON();
+	//Move_CON();
 
-	/*Move_KEY();*/
+	Move_KEY();
 
 	
 	//弾発射処理

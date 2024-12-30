@@ -117,6 +117,7 @@ void CMap::LoadMap1()
 			{
 				//•Ç
 				Walltmp.vPos = VGet(FileIndexX * MAP_SIZE, 5.0f, FileIndexY * MAP_SIZE);
+				Walltmp.MiniMapPos = VGet(FileIndexX * 10.0f, FileIndexY * 10.0f, 0.0f);
 				Walltmp.IsMap = true;
 				Walltmp.iHndl = MV1DuplicateModel(WallHndl);
 				WallList.push_back(Walltmp);
