@@ -5,7 +5,7 @@
 enum WAVE_STATE
 {
 	STATE_WAVE_NONE,		//何もしてない
-	STATE_WAVE_START,		//ウェーブ開始
+	STATE_WAVE_PREPAR,		//ウェーブ準備中
 	STATE_WAVE_NORMAL,		//ノーマルウェーブ中
 	STATE_WAVE_BOTMOVE,		//ボット移動ウェーブ中
 	STATE_WAVE_END,			//ウェーブ終了

@@ -198,7 +198,7 @@ void CPlayScene::Step()
 		//マップ全般処理 
 		cMapManager.Step();
 		//ミニマップ描画
-		cMiniMap.Step(cPlayer.GetPos(), cPlayer.GetRotate(), cMapManager);
+		cMiniMap.Step(cPlayer.GetPos(), cPlayer.GetSpeed(), cPlayer.GetRotate(), cMapManager);
 		//キャラクター更新処理
 		cPlayer.Step(cShotManager, cTurretManager, cMapManager, cBot.GetPos());
 		cPlayer.UpData();

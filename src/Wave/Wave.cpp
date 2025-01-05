@@ -41,10 +41,10 @@ void CWave::WaveStart(WAVE_STATE id)
 	if (id == STATE_WAVE_NONE)
 		return;
 
-	if (id == STATE_WAVE_START)
+	if (id == STATE_WAVE_PREPAR)
 	{
 		IsWave = true;					//フラグをtrueに
-		Wave_ID = STATE_WAVE_NORMAL;	//状態をウェーブ中に
+		Wave_ID = STATE_WAVE_PREPAR;	//状態を準備中に
 	}
 }
 

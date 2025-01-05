@@ -42,6 +42,7 @@ protected:
 	VECTOR cNextPos;			//1フレーム後の座標
 	VECTOR cRotate;				//キャラクターの向きの回転軸
 	VECTOR cMoveRotate;			//キャラクターの方向指定の回転軸
+	VECTOR cSpeed;				//キャラクター速度
 	VECTOR cScale;				//サイズ
 	VECTOR cSize;				//モデルの幅
 
@@ -60,7 +61,8 @@ public:
 	VECTOR GetPos() { return cPos; }						//座標取得
 	VECTOR GetNextPos() { return cNextPos; }				//座標取得
 	void SetNextPos(VECTOR NewPos) { cNextPos = NewPos; }	//座標設定
-	VECTOR GetRotate() { return cRotate; }					//回転地取得
+	VECTOR GetRotate() { return cRotate; }					//回転値取得
+	VECTOR GetSpeed() { return cSpeed; }					//速度取得
 	VECTOR GetSize() { return cSize; }						//サイズ取得
 	bool GetIsActive() { return IsActive; }					//フラグ取得
 	bool GetDir(int dir) { return IsDir[dir]; }				//方向フラグ取得

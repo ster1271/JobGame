@@ -10,8 +10,11 @@
 class CMiniMap
 {
 private:
+
 	VECTOR PlayerPos;
+	VECTOR MoveVec;
 	VECTOR PlayerRot;
+	VECTOR PlayerSpd;
 	vector<WallInfo> WallInfoList;
 	vector<FloarInfo> FloarInfoList;
 
@@ -32,7 +35,7 @@ public:
 	void Draw();
 
 	//毎フレーム行う処理
-	void Step(VECTOR vPos, VECTOR vRot, CMapManager& cMapManager);
+	void Step(VECTOR vPos, VECTOR vSpd, VECTOR vRot, CMapManager& cMapManager);
 
 	//情報更新
 	void UpData();

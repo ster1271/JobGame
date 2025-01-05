@@ -238,13 +238,12 @@ void CPlayer::Move_CON()
 	cMoveRotate.y = CGamePad::StickRot(STICK_LEFT);
 
 	//入力したキー情報とプレイヤーの角度から、移動速度を求める
-	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
-	vSpeed.x = sin(cMoveRotate.y) * fSpd;
-	vSpeed.z = cos(cMoveRotate.y) * fSpd;
+	cSpeed.x = sin(cMoveRotate.y) * fSpd;
+	cSpeed.z = cos(cMoveRotate.y) * fSpd;
 
 	//移動速度を現在の座標に加算する
-	cNextPos.x += vSpeed.x;
-	cNextPos.z += vSpeed.z;
+	cNextPos.x += cSpeed.x;
+	cNextPos.z += cSpeed.z;
 }
 
 //キーボード移動処理
@@ -275,10 +274,9 @@ void CPlayer::Move_KEY()
 	}
 
 	//キャラクターの移動角度計算
-	cMoveRotate.y = atan2(XSpd, ZSpd * -1);
-
-	VECTOR MoveVec = VGet(XSpd, 0.0f, ZSpd);
-	cNextPos = VAdd(cPos, MoveVec);
+	//cMoveRotate.y = atan2(XSpd, ZSpd * -1);
+	cSpeed = VGet(XSpd, 0.0f, ZSpd);
+	cNextPos = VAdd(cPos, cSpeed);
 }
 
 
@@ -310,7 +308,7 @@ void CPlayer::StartWave()
 
 		if (PushCnt > 50)
 		{
-			CWave::GetInstance()->WaveStart(STATE_WAVE_START);
+			CWave::GetInstance()->WaveStart(STATE_WAVE_PREPAR);
 			PushCnt = 0;
 		}
 	}
