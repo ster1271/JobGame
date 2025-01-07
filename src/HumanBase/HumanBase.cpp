@@ -1,4 +1,5 @@
 #include "HumanBase.h"
+#include "../Mouse/Mouse.h"
 
 
 //コンストラクタ
@@ -195,7 +196,9 @@ void CHumanBase::UpdateAnim()
 void CHumanBase::Player_Rotation()
 {
 	StoreRot = cRotate.y;
-	cRotate.y = CGamePad::StickRot(STICK_RIGHT);
+
+	cRotate.y = CMouse::MouseToRot();
+	//cRotate.y = CGamePad::StickRot(STICK_RIGHT);
 
 	if (cRotate.y == 0.0f)
 	{

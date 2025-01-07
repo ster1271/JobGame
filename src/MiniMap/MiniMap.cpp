@@ -1,6 +1,7 @@
 #include "MiniMap.h"
 
 #define PLAYER_MINI_PATH	"data/MiniMap/Mini_Player.png"
+#define WALL_MINI_PATH		"data/MiniMap/Wall.png"
 
 //コンストラクタ
 CMiniMap::CMiniMap() {};
@@ -18,6 +19,7 @@ void CMiniMap::Init()
 void CMiniMap::Load()
 {
 	PlayerHndl = LoadGraph(PLAYER_MINI_PATH);
+	WallHndl = LoadGraph(WALL_MINI_PATH);
 }
 
 //描画
@@ -26,18 +28,11 @@ void CMiniMap::Draw()
 	DrawRotaGraph(PlayerPos.x / 2, PlayerPos.z / 2, 0.3f, PlayerRot.y, PlayerHndl, true);
 	DrawCircle(1150, 600, 100, GetColor(255, 255, 255), false);
 
-	/*int Size = WallInfoList.size();*/
 	for (int WallIndex = 0; WallIndex < WallInfoList.size(); WallIndex++)
 	{
 		if (WallInfoList[WallIndex].IsMap)
 		{
-			/*DrawBox(WallInfoList[WallIndex].MiniMapPos.x + 1150, WallInfoList[WallIndex].MiniMapPos.y + 600,
-				WallInfoList[WallIndex].MiniMapPos.x + 10 + 1150, WallInfoList[WallIndex].MiniMapPos.y + 10 + 600,
-				GetColor(0, 255, 0), false);*/
-
-			DrawBox(WallInfoList[WallIndex].vPos.x / 2/* + 1100*/, WallInfoList[WallIndex].vPos.z / 2/* + 500*/,
-				WallInfoList[WallIndex].vPos.x / 2 + /*11*/25, WallInfoList[WallIndex].vPos.z / 2 + /*5*/25,
-				GetColor(0, 255, 0), false);
+			DrawRotaGraph(WallInfoList[WallIndex].vPos.x / 2/* + 1100*/, WallInfoList[WallIndex].vPos.z / 2/* + 500*/, 0.25f, 0.0f, WallHndl, false, false);
 		}
 	
 	}

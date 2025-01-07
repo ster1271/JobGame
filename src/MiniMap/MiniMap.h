@@ -19,6 +19,7 @@ private:
 	vector<FloarInfo> FloarInfoList;
 
 	int PlayerHndl;
+	int WallHndl;
 
 public:
 	//コンストラクタ・デストラクタ

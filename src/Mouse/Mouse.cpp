@@ -103,5 +103,5 @@ float CMouse::MouseToRot()
 	int X = MouseX - (SCREEN_SIZE_X / 2);
 	int Y = MouseY - (SCREEN_SIZE_Y / 2);
 
-	return (float)atan2((int)X, (int)Y);
+	return (float)atan2((int)X, (int)Y * -1);
 }

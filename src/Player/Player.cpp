@@ -287,7 +287,7 @@ void CPlayer::Move_KEY()
 
 
 	//キャラクターの移動角度計算
-	cMoveRotate.y = (float)atan2((int)XSpd * -1, (int)ZSpd * -1);
+	cRotate.y = (float)atan2((int)XSpd * -1, (int)ZSpd * -1);
 
 
 	cSpeed = VGet(XSpd, 0.0f, ZSpd);
