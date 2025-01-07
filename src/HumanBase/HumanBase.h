@@ -46,6 +46,8 @@ protected:
 	VECTOR cScale;				//サイズ
 	VECTOR cSize;				//モデルの幅
 
+	int MouseX, MouseY;			//マウス座標
+
 	bool IsActive;				//生存フラグ
 	int iHndl;					//ハンドル
 	float Life;					//ライフ

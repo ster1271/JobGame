@@ -14,6 +14,8 @@ CHumanBase::CHumanBase()
 
 	IsActive = false;
 
+	MouseX = MouseY = 0;
+
 	Life = -1;
 	iHndl = -1;
 	PushCnt = 0;
@@ -38,6 +40,8 @@ void CHumanBase::Init()
 	cSize = VECTOR_ZERO;
 
 	IsActive = false;
+
+	MouseX = MouseY = 0;
 
 	Life = 0;
 	iHndl = 0;
@@ -91,6 +95,8 @@ void CHumanBase::Exit()
 	cSize = VECTOR_ZERO;
 
 	IsActive = false;
+
+	MouseX = MouseY = 0;
 
 	Life = -1;
 	iHndl = -1;

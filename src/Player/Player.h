@@ -1,5 +1,6 @@
 #pragma once
 #include "../GamePad/GamePad.h"
+#include "../Mouse/Mouse.h"
 #include "../HumanBase/HumanBase.h"
 #include "../Shot/ShotManager.h"
 #include "../Turret/TurretManager.h"
@@ -29,6 +30,8 @@ enum PLAYER_STATE
 class CPlayer : public CHumanBase
 {
 private:
+
+
 	bool IsDir[DIR_NUM];	//•ûŒüƒtƒ‰ƒO
 	PLAYER_STATE Id;
 	PLAYER_STATE oldId;

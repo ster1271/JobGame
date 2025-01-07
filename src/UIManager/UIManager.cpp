@@ -18,6 +18,12 @@ void CUIManager::Load()
 
 }
 
+//•`‰æ
+void CUIManager::Draw()
+{
+
+}
+
 //–ˆƒtƒŒ[ƒ€s‚¤ˆ—
 void CUIManager::Step()
 {

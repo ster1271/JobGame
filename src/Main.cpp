@@ -31,6 +31,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	CInput::InitInput();
 	//ゲームパッド初期化	
 	CGamePad::InitGamePad();
+	//マウス初期化
+	CMouse::InitMouse();
 
 	//シーンマネージャー
 	SceneManager cSceneManager;
@@ -74,6 +76,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			CInput::StepInput();
 			//ゲームパッド情報更新
 			CGamePad::StepGamePad();
+			//マウス情報更新
+			CMouse::StepMouse();
 
 			//エスケープキーまたはスタートボタンが押されたら終了
 			if (CInput::IsKeyPush(KEY_INPUT_ESCAPE) || CGamePad::IsPadPush(DX_INPUT_PAD1, BUTTON_BACK))

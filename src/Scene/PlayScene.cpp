@@ -70,7 +70,6 @@ void CPlayScene::Draw()
 	//プレイ時処理
 	if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_PALY)
 	{
-		
 		//オブジェクト描画
 		cObjectManager.Draw();
 		//マップ全般描画 
@@ -87,12 +86,8 @@ void CPlayScene::Draw()
 		cBot.Draw();
 		//ミニマップ描画
 		cMiniMap.Draw();
-	}
-	else if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_DEBUG)
-	{
-		//オブジェクト描画
-		cObjectManager.Draw();
-		//デバック時描画
+
+
 	}
 
 	//カメラ情報表示
@@ -222,12 +217,6 @@ void CPlayScene::Step()
 		cCollisionManager.PlayerToGoal(cPlayer, cMapManager);
 	}
 
-	//デバック時処理
-	if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_DEBUG)
-	{
-
-	}
-
 	//デバックカメラとの切り替え処理
 	if (CInput::IsKeyPush(KEY_INPUT_C))
 	{
@@ -239,6 +228,6 @@ void CPlayScene::Step()
 	}
 
 	//カメラ更新処理
-	cCameraManager.Step(cPlayer.GetPos(), cPlayer.GetRotate(), VGet(0.0f,0.0f,0.0f));
+	cCameraManager.Step(cPlayer.GetPos(), cPlayer.GetRotate(), VECTOR_ZERO);
 }
 

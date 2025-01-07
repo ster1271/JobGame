@@ -27,10 +27,13 @@ public:
 	CWave();
 	~CWave();
 
-	bool GetIsWave() { return IsWave; }		//フラグの取得
+	bool GetIsWave() { return IsWave; }				//フラグの取得
+	WAVE_STATE GetWaveState() { return Wave_ID; }	//ウェーブの状態取得
 
-	void WaveStart(WAVE_STATE id);
-	void WaveEnd(WAVE_STATE id);
+	void WaveStart(WAVE_STATE id);	//ウェーブ開始
+	void WaveEnd(WAVE_STATE id);	//ウェーブ終了
+
+	void Draw();					//ウェーブの
 
 	//CGameDataを取得
 	static CWave* GetInstance();

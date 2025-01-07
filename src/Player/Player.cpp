@@ -82,13 +82,15 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 	
 	//キャラクターの移動
 	//Move_CON();
-
 	Move_KEY();
+
+	//マウスポインタの座標取得
+	GetMousePoint(&MouseX, &MouseY);
 
 	
 	//弾発射処理
 	ShotCoolCount++;
-	if (CInput::IsKeyKeep(KEY_INPUT_SPACE) ||CGamePad::IsKeep_LR(RIGHT))
+	if (CMouse::IsMouseKeep(MOUSE_INPUT_LEFT) || CGamePad::IsKeep_LR(RIGHT))
 	{
 		Id = STATE_SHOT;						//アニメーションを変更する
 		Player_Rotation();
@@ -147,6 +149,9 @@ void CPlayer::Draw()
 		DrawFormatString(0, 15, GetColor(255, 0, 0), "アタッカーY座標:%f", cPos.y);
 		DrawFormatString(0, 30, GetColor(255, 0, 0), "アタッカーZ座標:%f", cPos.z);
 		DrawFormatString(0, 45, GetColor(255, 0, 0), "プレイヤーY軸:%f", cRotate.y);
+
+		DrawFormatString(300, 0, GetColor(255, 0, 0), "マウスX座標:%d", MouseX);
+		DrawFormatString(300, 15, GetColor(255, 0, 0), "マウスY座標:%d", MouseY);
 	}
 
 	CDebugString::GetInstance()->AddString(0, 300, "AボタンかEキーでタレット設置");
@@ -261,6 +266,7 @@ void CPlayer::Move_KEY()
 	{
 		Id = STATE_RUN;
 		ZSpd = MOVESPEED;
+
 	}
 	if (CInput::IsKeyKeep(KEY_INPUT_A))
 	{
@@ -273,14 +279,22 @@ void CPlayer::Move_KEY()
 		XSpd = -MOVESPEED;
 	}
 
+	//動いていないなら
+	if (XSpd == 0.0f && ZSpd == 0.0f)
+	{
+		Id = STATE_DEFAULT;
+	}
+
+
 	//キャラクターの移動角度計算
-	//cMoveRotate.y = atan2(XSpd, ZSpd * -1);
+	cMoveRotate.y = (float)atan2((int)XSpd * -1, (int)ZSpd * -1);
+
+
 	cSpeed = VGet(XSpd, 0.0f, ZSpd);
 	cNextPos = VAdd(cPos, cSpeed);
 }
 
-
-//発射リクエスト処理W
+//発射リクエスト処理
 void CPlayer::PlayerShot(CShotManager& cShotManager)
 {
 	//弾の位置決定
