@@ -25,16 +25,15 @@ void CMiniMap::Load()
 //•`‰æ
 void CMiniMap::Draw()
 {
-	DrawRotaGraph(PlayerPos.x / 2, PlayerPos.z / 2, 0.3f, PlayerRot.y, PlayerHndl, true);
-	DrawCircle(1150, 600, 100, GetColor(255, 255, 255), false);
+	DrawRotaGraph(-PlayerPos.x / 2 + 335, PlayerPos.z / 2, 0.3f, PlayerRot.y, PlayerHndl, true);
+	//DrawCircle(1150, 600, 100, GetColor(255, 255, 255), false);
 
 	for (int WallIndex = 0; WallIndex < WallInfoList.size(); WallIndex++)
 	{
 		if (WallInfoList[WallIndex].IsMap)
 		{
-			DrawRotaGraph(WallInfoList[WallIndex].vPos.x / 2/* + 1100*/, WallInfoList[WallIndex].vPos.z / 2/* + 500*/, 0.25f, 0.0f, WallHndl, false, false);
+			DrawRotaGraph(-WallInfoList[WallIndex].vPos.x / 2 + 335, WallInfoList[WallIndex].vPos.z / 2/* + 500*/, 0.25f, 0.0f, WallHndl, true, false, false);
 		}
-	
 	}
 }
 
