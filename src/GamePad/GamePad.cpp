@@ -24,6 +24,12 @@ void CGamePad::StepGamePad()
 	GetJoypadDirectInputState(DX_INPUT_PAD1, &PadcurrentBuf);
 }
 
+//Ú‘±‘ä”æ“¾
+int CGamePad::GetPadNumState()
+{
+	return GetJoypadNum();
+}
+
 
 //¡‰Ÿ‚³‚ê‚½
 bool CGamePad::IsPadPush(int InputType, int Key_code)

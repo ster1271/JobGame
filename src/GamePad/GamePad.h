@@ -57,6 +57,9 @@ public:
 
 	//入力制御ステップ
 	static void StepGamePad();
+	
+	//接続台数取得
+	static int GetPadNumState();
 
 	//今押された
 	static bool IsPadPush(int InputType, int Key_code);

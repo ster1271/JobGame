@@ -197,8 +197,15 @@ void CHumanBase::Player_Rotation()
 {
 	StoreRot = cRotate.y;
 
-	cRotate.y = CMouse::MouseToRot();
-	//cRotate.y = CGamePad::StickRot(STICK_RIGHT);
+
+	if (CGamePad::GetPadNumState() != 0)
+	{
+		cRotate.y = CGamePad::StickRot(STICK_RIGHT);
+	}
+	else
+	{
+		cRotate.y = CMouse::MouseToRot();
+	}
 
 	if (cRotate.y == 0.0f)
 	{

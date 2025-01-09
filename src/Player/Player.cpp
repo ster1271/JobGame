@@ -58,8 +58,6 @@ void CPlayer::Shot()
 //毎フレーム行う処理
 void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, CMapManager& cMapManager, VECTOR BotPos)
 {
-	fSpd = 0.0f;
-
 	switch (Id)
 	{
 	case STATE_DEFAULT:
@@ -79,21 +77,30 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 	}
 
 	cPos = cNextPos;
-	
+	fSpd = 0.0f;
+	//ChangeSpeed();		//速度変更
 	//キャラクターの移動
-	//Move_CON();
-	Move_KEY();
+	if (CGamePad::GetPadNumState() != 0)
+	{
+		//接続されていたらゲームパッド操作を行う
+		Move_CON();
+	}
+	else
+	{
+		//接続されていなかったらキーボード操作を行う
+		Move_KEY();
+	}
 
 	//マウスポインタの座標取得
 	GetMousePoint(&MouseX, &MouseY);
-
 	
 	//弾発射処理
 	ShotCoolCount++;
 	if (CMouse::IsMouseKeep(MOUSE_INPUT_LEFT) || CGamePad::IsKeep_LR(RIGHT))
 	{
 		Id = STATE_SHOT;						//アニメーションを変更する
-		Player_Rotation();
+		fSpd = -SHOTMOVESPEED;					//移動速度を変更する
+		Player_Rotation();						//プレイヤーの角度変更(射撃中)
 
 		if (ShotCoolCount < SHOT_COOL_TIME)		//クールタイム中なら処理しない
 			return;
@@ -173,71 +180,62 @@ void CPlayer::Exit()
 }
 
 
+//速度変更
+void CPlayer::ChangeSpeed()
+{
+	switch (Id)
+	{
+	case STATE_DEFAULT:
+		fSpd = 0.0f;
+		break;
+	case STATE_RUN:
+		fSpd = MOVESPEED;
+		break;
+	case STATE_SHOT:
+		fSpd = SHOTMOVESPEED;
+		break;
+	default:
+		break;
+	}
+}
+
 
 //コントローラー処理
 void CPlayer::Move_CON()
 {
 	if (CGamePad::Stick(STICK_LY_NEG))
 	{
-		//射撃中は移動速度を下げる
-		if (CGamePad::IsKeep_LR(RIGHT))
-		{
-			fSpd = -0.5f;
-		}
-		else
-		{
-			Id = STATE_RUN;
-			fSpd = -MOVESPEED;
-			cRotate.y = cMoveRotate.y;
-		}
+		fSpd = -MOVESPEED;
 	}
 	else if (CGamePad::Stick(STICK_LY_POS))
 	{
-		//射撃中は移動速度を下げる
-		if (CGamePad::IsKeep_LR(RIGHT))
-		{
-			fSpd = -0.5f;
-		}
-		else
-		{
-			Id = STATE_RUN;
-			fSpd = -MOVESPEED;
-			cRotate.y = cMoveRotate.y;
-		}
+		fSpd = -MOVESPEED;
 	}
 	else if (CGamePad::Stick(STICK_LX_NEG))
 	{
-		//射撃中は移動速度を下げる
-		if (CGamePad::IsKeep_LR(RIGHT))
-		{
-			fSpd = -0.5f;
-		}
-		else
-		{
-			Id = STATE_RUN;
-			fSpd = -MOVESPEED;
-			cRotate.y = cMoveRotate.y;
-		}
+		fSpd = -MOVESPEED;
 	}
 	else if (CGamePad::Stick(STICK_LX_POS))
 	{
-		//射撃中は移動速度を下げる
-		if (CGamePad::IsKeep_LR(RIGHT))
-		{
-			fSpd = -0.5f;
-		}
-		else
-		{
-			Id = STATE_RUN;
-			fSpd = -MOVESPEED;
-			cRotate.y = cMoveRotate.y;
-		}
+		fSpd = -MOVESPEED;
 	}
 	else
 	{
-		Id = STATE_DEFAULT;
+		fSpd = 0.0f;
 	}
 
+
+	//動いているかどうか
+	if (fSpd == 0.0f)
+	{
+		Id = STATE_DEFAULT;
+	}
+	else
+	{
+		if(Id != STATE_SHOT)
+		cRotate.y = cMoveRotate.y;
+		Id = STATE_RUN;
+	}
 
 	//キャラクターの移動角度計算
 	cMoveRotate.y = CGamePad::StickRot(STICK_LEFT);
@@ -259,36 +257,37 @@ void CPlayer::Move_KEY()
 
 	if (CInput::IsKeyKeep(KEY_INPUT_W))
 	{
-		Id = STATE_RUN;
 		ZSpd = -MOVESPEED;
+		Id = STATE_RUN;
 	}
 	if (CInput::IsKeyKeep(KEY_INPUT_S))
 	{
-		Id = STATE_RUN;
 		ZSpd = MOVESPEED;
-
+		Id = STATE_RUN;
 	}
 	if (CInput::IsKeyKeep(KEY_INPUT_A))
 	{
-		Id = STATE_RUN;
 		XSpd = MOVESPEED;
+		Id = STATE_RUN;
 	}
 	if (CInput::IsKeyKeep(KEY_INPUT_D))
 	{
-		Id = STATE_RUN;
 		XSpd = -MOVESPEED;
+		Id = STATE_RUN;
 	}
 
-	//動いていないなら
+	//動いているかどうか
 	if (XSpd == 0.0f && ZSpd == 0.0f)
 	{
 		Id = STATE_DEFAULT;
 	}
-
+	else
+	{
+		cRotate.y = cMoveRotate.y;
+	}
 
 	//キャラクターの移動角度計算
-	cRotate.y = (float)atan2((int)XSpd * -1, (int)ZSpd * -1);
-
+	cMoveRotate.y = (float)atan2((int)XSpd * -1, (int)ZSpd * -1);
 
 	cSpeed = VGet(XSpd, 0.0f, ZSpd);
 	cNextPos = VAdd(cPos, cSpeed);

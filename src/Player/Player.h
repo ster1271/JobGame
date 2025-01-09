@@ -11,7 +11,8 @@ const VECTOR PLAYER_POS = VGet(50.0f, 0.0f, 50.0f);		//初期座標
 const VECTOR PLAYER_SIZE = VGet(15.0f, 30.0f, 15.0f);	//プレイヤーサイズ
 const VECTOR PLAYER_SCALE = VGet(0.05f, 0.05f, 0.05f);	//プレイヤースケール
 const float SPERE_R = 3.0f;								//半径
-const float MOVESPEED = 2.0f;							//移動スピード
+const float MOVESPEED = 2.0f;							//通常移動スピード
+const float SHOTMOVESPEED = 0.5f;						//射撃中移動スピード
 const float ROT_SPEED = 0.05f;							//回転スピード
 const int SHOT_COOL_TIME = 15;							//弾の発射間隔
 const int PLAYER_MAX_LIFE = 100;						//最大体力
@@ -30,8 +31,6 @@ enum PLAYER_STATE
 class CPlayer : public CHumanBase
 {
 private:
-
-
 	bool IsDir[DIR_NUM];	//方向フラグ
 	PLAYER_STATE Id;
 	PLAYER_STATE oldId;
@@ -62,6 +61,9 @@ public:
 
 	//終了処理
 	void Exit();
+
+	//速度変更
+	void ChangeSpeed();
 
 	//コントローラー移動処理
 	void Move_CON();
