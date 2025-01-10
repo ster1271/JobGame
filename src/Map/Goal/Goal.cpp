@@ -3,7 +3,7 @@
 
 const char MODEL_PATH[] = "data/Map/door.x";
 
-const VECTOR POSITION = VGet(500.0f, -20.0f, 150.0f);
+const VECTOR POSITION = VGet(50.0f, -20.0f, 950.0f);
 
 //コンストラクタ
 CGoal::CGoal()

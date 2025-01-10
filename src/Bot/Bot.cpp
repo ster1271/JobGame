@@ -112,9 +112,9 @@ void CBot::Step(CMapManager& cMapManager)
 
 	case CBot::STATE_SEARCH:
 		
-		/*Route_List = cRoute.Route_Search(cPos, cMapManager.GetGoal().GetPos(), cMapManager);
+		Route_List = cRoute.Route_Search(cPos, cMapManager.GetGoal().GetPos(), cMapManager);
 		tmp = 0;
-		State_Id = STATE_MOVE;*/
+		State_Id = STATE_MOVE;
 
 		break;
 

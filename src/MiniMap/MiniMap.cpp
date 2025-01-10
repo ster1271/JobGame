@@ -13,6 +13,7 @@ CMiniMap::~CMiniMap() {};
 void CMiniMap::Init()
 {
 	PlayerPos = VECTOR_ZERO;
+	IsOpen = false;
 }
 
 //データ読み込み
@@ -25,15 +26,19 @@ void CMiniMap::Load()
 //描画
 void CMiniMap::Draw()
 {
-	DrawRotaGraph(-PlayerPos.x / 2 + 335, PlayerPos.z / 2, 0.3f, PlayerRot.y, PlayerHndl, true);
-	//DrawCircle(1150, 600, 100, GetColor(255, 255, 255), false);
-
-	for (int WallIndex = 0; WallIndex < WallInfoList.size(); WallIndex++)
+	if (IsOpen)
 	{
-		if (WallInfoList[WallIndex].IsMap)
+		DrawRotaGraph(-PlayerPos.x / 2 + 335 + 935, PlayerPos.z / 2, 0.3f, PlayerRot.y, PlayerHndl, true);
+		//DrawCircle(1150, 600, 100, GetColor(255, 255, 255), false);
+
+		for (int WallIndex = 0; WallIndex < WallInfoList.size(); WallIndex++)
 		{
-			DrawRotaGraph(-WallInfoList[WallIndex].vPos.x / 2 + 335, WallInfoList[WallIndex].vPos.z / 2/* + 500*/, 0.25f, 0.0f, WallHndl, true, false, false);
+			if (WallInfoList[WallIndex].IsMap)
+			{
+				DrawRotaGraph(-WallInfoList[WallIndex].vPos.x / 2 + 335 + 935, WallInfoList[WallIndex].vPos.z / 2/* + 500*/, 0.25f, 0.0f, WallHndl, true, false, false);
+			}
 		}
+
 	}
 }
 
@@ -52,15 +57,17 @@ void CMiniMap::Step(VECTOR vPos, VECTOR vSpd, VECTOR vRot, CMapManager& cMapMana
 	WallInfoList = cMapManager.GetMap().GetWallList();	
 	FloarInfoList = cMapManager.GetMap().GetFloarList();
 
-	VECTOR A = VECTOR_ZERO;
-	for (int WallIndex = 0; WallIndex < WallInfoList.size(); WallIndex++)
+	if (CInput::IsKeyPush(KEY_INPUT_TAB) || CGamePad::IsPadPush(DX_INPUT_PAD1,BUTTON_X))
 	{
-		A = VGet(WallInfoList[WallIndex].vPos.x / 50, 0.0f, WallInfoList[WallIndex].vPos.z / 50);
-	}
+		//表示中にもう一度押したら閉じるようにする
+		if (IsOpen)
+		{
+			IsOpen = false;
+			return;
+		}
 
-	for (int FloarIndex = 0; FloarIndex < FloarInfoList.size(); FloarIndex++)
-	{
-
+		//表示中に変更する
+		IsOpen = true;
 	}
 }
 

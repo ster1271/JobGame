@@ -21,6 +21,8 @@ private:
 	int PlayerHndl;
 	int WallHndl;
 
+	bool IsOpen;
+
 public:
 	//コンストラクタ・デストラクタ
 	CMiniMap();

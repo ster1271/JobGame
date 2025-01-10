@@ -73,35 +73,34 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 	VECTOR PastPos = VGet(0.0f, 0.0f, 0.0f);	//過去座標を格納する
 	VECTOR CurrentPos = cBot.GetPos();			//現在座標を格納する
 
-	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
+	/*for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Step(cBot, cMapManager);
-	}
+	}*/
 
 
 	//ウェーブ中のみ処理を行う
 	if (CWave::GetInstance()->GetIsWave() == true)
 	{
-		//int iEnemyCnt = 0;	//敵の出現数
-		//for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
-		//{
-		//	if (cEnemy_Normal[Enemy_Index].GetActive())
-		//	{
-		//		iEnemyCnt++;
-		//	}
-		//	cEnemy_Normal[Enemy_Index].Step(cBot, cMapManager);
-		//}
+		int iEnemyCnt = 0;	//敵の出現数
+		for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
+		{
+			if (cEnemy_Normal[Enemy_Index].GetActive())
+			{
+				iEnemyCnt++;
+			}
+			cEnemy_Normal[Enemy_Index].Step(cBot, cMapManager);
+		}
 
-		////敵の出現
-		//Coolcnt--;
+		//敵の出現
+		Coolcnt--;
 
-		////一定期間出現していないか、生存数が0の時リクエストさせる
-		//if (Coolcnt < 0 || iEnemyCnt == 0)
-		//{
-		//	RequestEnemy();
-		//	Coolcnt = WAIT_TIME;
-		//}
-
+		//一定期間出現していないか、生存数が0の時リクエストさせる
+		if (Coolcnt < 0 || iEnemyCnt == 0)
+		{
+			RequestEnemy();
+			Coolcnt = WAIT_TIME;
+		}
 
 		RequestEnemy();
 	}

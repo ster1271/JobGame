@@ -103,7 +103,7 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 	int LoopCount = 0;
 
 	//フラグがfalseなら計算を行う
-	while (/*!IsFinish*/LoopCount != 6)
+	while (!IsFinish/*LoopCount != 6*/)
 	{
 		int TotalMinCost = MAX_COST;	//最少評価コスト
 		int vectorSize = List.size();	//リスト格納サイズ
@@ -167,45 +167,45 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 			}
 		}
 
-		LoopCount++;
+		/*LoopCount++;
 		if (LoopCount == 7)
 			LoopCount = 7;
 		else if (LoopCount == 8)
-			LoopCount = 8;
+			LoopCount = 8;*/
 	}
 
 
-	////ゴールからスタートまでの軌跡をたどる
-	//for (int i = List.size() - 1; i >= 0; i--)
-	//{
+	//ゴールからスタートまでの軌跡をたどる
+	for (int i = List.size() - 1; i >= 0; i--)
+	{
 
-	//	//まずゴールと同座標を見つける
-	//	if (List[i].Renge_To_Goal == 0)
-	//	{
-	//		List[i].IsFast = true;
-	//	}
+		//まずゴールと同座標を見つける
+		if (List[i].Renge_To_Goal == 0)
+		{
+			List[i].IsFast = true;
+		}
 
-	//	//最初に見つけた配列の親番号をたどっていく
-	//	if (List[i].IsFast == true)
-	//	{
-	//		List[List[i].Source_Num].IsFast = true;
+		//最初に見つけた配列の親番号をたどっていく
+		if (List[i].IsFast == true)
+		{
+			List[List[i].Source_Num].IsFast = true;
 
-	//		//親番号が-1(スタート番号)になったらこの処理をやめる
-	//		if (List[List[i].Source_Num].Source_Num == -1)
-	//		{
-	//			break;
-	//		}
-	//	}
-	//}
+			//親番号が-1(スタート番号)になったらこの処理をやめる
+			if (List[List[i].Source_Num].Source_Num == -1)
+			{
+				break;
+			}
+		}
+	}
 
-	////フラグがfalseの配列番号を削除する
-	//for (int i = List.size() - 1; i >= 0; i--)
-	//{
-	//	if (List[i].IsFast == false)
-	//	{
-	//		List.erase(List.begin() + i);
-	//	}
-	//}
+	//フラグがfalseの配列番号を削除する
+	for (int i = List.size() - 1; i >= 0; i--)
+	{
+		if (List[i].IsFast == false)
+		{
+			List.erase(List.begin() + i);
+		}
+	}
 
 	vector<VECTOR>Pos_List;
 	Pos_List.clear();

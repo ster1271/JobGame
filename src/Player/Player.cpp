@@ -78,7 +78,6 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 
 	cPos = cNextPos;
 	fSpd = 0.0f;
-	//ChangeSpeed();		//速度変更
 	//キャラクターの移動
 	if (CGamePad::GetPadNumState() != 0)
 	{
@@ -124,8 +123,6 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 			StartWave();
 		}
 	}
-	//仮のウェーブ開始処理
-	StartWave();
 
 	//ボットの場所に移動
 	BackBotPosition(BotPos);
@@ -156,21 +153,36 @@ void CPlayer::Draw()
 		DrawFormatString(0, 15, GetColor(255, 0, 0), "アタッカーY座標:%f", cPos.y);
 		DrawFormatString(0, 30, GetColor(255, 0, 0), "アタッカーZ座標:%f", cPos.z);
 		DrawFormatString(0, 45, GetColor(255, 0, 0), "プレイヤーY軸:%f", cRotate.y);
-
-		DrawFormatString(300, 0, GetColor(255, 0, 0), "マウスX座標:%d", MouseX);
-		DrawFormatString(300, 15, GetColor(255, 0, 0), "マウスY座標:%d", MouseY);
+		DrawFormatString(0, 60, GetColor(255, 0, 0), "マウスX座標:%d", MouseX);
+		DrawFormatString(0, 75, GetColor(255, 0, 0), "マウスY座標:%d", MouseY);
 	}
 
-	CDebugString::GetInstance()->AddString(0, 300, "AボタンかEキーでタレット設置");
-	CDebugString::GetInstance()->AddString(0, 315, "BボタンかQキー長押しでボットにワープ");
-	CDebugString::GetInstance()->AddString(0, 330, "ゴールにLBボタンか1キー長押しでウェーブスタート");
-	CDebugString::GetInstance()->AddString(0, 345, "RTボタンかSPACEキー長押しで射撃");
-	CDebugString::GetInstance()->AddString(0, 360, "左スティックで移動");
-	CDebugString::GetInstance()->AddString(0, 375, "右スティックで角度変更");
-	CDebugString::GetInstance()->AddFormatString(0, 460, "LBか1キーを押した時間：%d", PushCnt);
-
+	if (CGamePad::GetPadNumState() != 0)
+	{
+		CDebugString::GetInstance()->AddString(0, 285, "コントローラーで操作中");
+		CDebugString::GetInstance()->AddString(0, 300, "左スティックで移動");
+		CDebugString::GetInstance()->AddString(0, 315, "RTボタンで射撃");
+		CDebugString::GetInstance()->AddString(0, 330, "右スティックで射撃中角度変更");
+		CDebugString::GetInstance()->AddString(0, 345, "Aボタンでタレット設置");
+		CDebugString::GetInstance()->AddString(0, 360, "Bボタン長押しでボットにワープ");
+		CDebugString::GetInstance()->AddString(0, 375, "ゴールにLBボタン長押しでウェーブスタート");
+		CDebugString::GetInstance()->AddFormatString(0, 390, "LBボタンを押した時間：%d", PushCnt);
+		CDebugString::GetInstance()->AddString(0, 405, "Xボタンでマップ表示切り替え");
+	}
+	else
+	{
+		CDebugString::GetInstance()->AddString(0, 285, "キーボードで操作中");
+		CDebugString::GetInstance()->AddString(0, 300, "WASDで移動");
+		CDebugString::GetInstance()->AddString(0, 315, "マウス左クリックで射撃");
+		CDebugString::GetInstance()->AddString(0, 330, "マウスポインタで射撃中角度変更");
+		CDebugString::GetInstance()->AddString(0, 345, "Eキーでタレット設置");
+		CDebugString::GetInstance()->AddString(0, 360, "Qキー長押しでボットにワープ");
+		CDebugString::GetInstance()->AddString(0, 375, "ゴールに1キー長押しでウェーブスタート");
+		CDebugString::GetInstance()->AddFormatString(0, 390, "1キーを押した時間：%d", PushCnt);
+		CDebugString::GetInstance()->AddString(0, 405, "TABキーでマップ表示切り替え");
+	}
+	
 	CDebugString::GetInstance()->Draw();
-
 }
 
 //終了処理

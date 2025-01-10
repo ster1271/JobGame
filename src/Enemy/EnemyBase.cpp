@@ -260,7 +260,7 @@ void CEnemyBase::Out_Move(VECTOR vPos)
 	Vtmp.y = 0.0f;
 	Vtmp.z = vPos.z - cPos.z;
 
-	float Speed = 1.0f;
+	float Speed = 10.0f;
 	VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ボットの移動ベクトル
 	vSpd.x = sinf(cRotate.y) * -Speed;
 	vSpd.y = 0.0f;
@@ -281,16 +281,16 @@ void CEnemyBase::Out_Move(VECTOR vPos)
 	}
 	else if (Dir >= 0.0f)//それ以外は角度を変える
 	{
-		cRotate.y += 0.05f;
+		cRotate.y += 0.1f;
 	}
 	else if (Dir < 0.0f)
 	{
-		cRotate.y -= 0.05f;
+		cRotate.y -= 0.1f;
 	}
 
 	//座標に速度を加算する
-	cPos.x += sinf(cRotate.y) * -0.2f;
-	cPos.z += cosf(cRotate.y) * -0.2f;
+	cPos.x += sinf(cRotate.y) * -Speed;
+	cPos.z += cosf(cRotate.y) * -Speed;
 }
 
 

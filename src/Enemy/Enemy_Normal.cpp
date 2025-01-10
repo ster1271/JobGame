@@ -63,7 +63,7 @@ void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 	switch (State_Id)
 	{
 	case CEnemyBase::STATE_SEARCH:
-		List = cRoute_Search.Route_Search(cPos, /*cBot.GetPos()*/cMapManager.GetGoal().GetPos(), cMapManager);
+		List = cRoute_Search.Route_Search(cPos, cBot.GetPos()/*cMapManager.GetGoal().GetPos()*/, cMapManager);
 		
 		State_Id = STATE_MOVE;
 		break;
@@ -80,18 +80,18 @@ void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 
 		if (Range >= 50.0f)
 		{
-			//ReSeachTime++;
+			ReSeachTime++;
 
-			////ŠÔŒo‰ß‚ÅŒo˜H’Tõ‚µ’¼‚µ
-			//if (ReSeachTime >= RESEARCH_TIME)
-			//{
-			//	List.clear();
-			//	ReSeachTime = 0;
-			//	ListCnt = 0;
-			//	State_Id = STATE_SEARCH;
+			//ŠÔŒo‰ß‚ÅŒo˜H’Tõ‚µ’¼‚µ
+			if (ReSeachTime >= RESEARCH_TIME)
+			{
+				List.clear();
+				ReSeachTime = 0;
+				ListCnt = 0;
+				State_Id = STATE_SEARCH;
 
-			//	break;
-			//}
+				break;
+			}
 
 			//Œo˜HˆÚ“®ˆ—
 			Enemy_Move(List, ListCnt);
