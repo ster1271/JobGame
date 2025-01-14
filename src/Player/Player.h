@@ -65,11 +65,8 @@ public:
 	//速度変更
 	void ChangeSpeed();
 
-	//コントローラー移動処理
-	void Move_CON();
-
-	//キーボード移動処理
-	void Move_KEY();
+	//移動処理
+	void Move();
 
 	//発射リクエスト処理
 	void PlayerShot(CShotManager& cShotManager);

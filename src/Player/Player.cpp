@@ -77,18 +77,8 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 	}
 
 	cPos = cNextPos;
-	fSpd = 0.0f;
 	//キャラクターの移動
-	if (CGamePad::GetPadNumState() != 0)
-	{
-		//接続されていたらゲームパッド操作を行う
-		Move_CON();
-	}
-	else
-	{
-		//接続されていなかったらキーボード操作を行う
-		Move_KEY();
-	}
+	Move();
 
 	//マウスポインタの座標取得
 	GetMousePoint(&MouseX, &MouseY);
@@ -211,32 +201,37 @@ void CPlayer::ChangeSpeed()
 	}
 }
 
-
-//コントローラー処理
-void CPlayer::Move_CON()
+//移動処理
+void CPlayer::Move()
 {
-	if (CGamePad::Stick(STICK_LY_NEG))
-	{
-		fSpd = -MOVESPEED;
-	}
-	else if (CGamePad::Stick(STICK_LY_POS))
-	{
-		fSpd = -MOVESPEED;
-	}
-	else if (CGamePad::Stick(STICK_LX_NEG))
-	{
-		fSpd = -MOVESPEED;
-	}
-	else if (CGamePad::Stick(STICK_LX_POS))
-	{
-		fSpd = -MOVESPEED;
-	}
-	else
-	{
-		fSpd = 0.0f;
-	}
+	VECTOR KeyBuf = VECTOR_ZERO;
+	fSpd = 0.0f;
 
-
+	if (CGamePad::Stick(STICK_LY_NEG) || CInput::IsKeyKeep(KEY_INPUT_W))
+	{
+		fSpd = -MOVESPEED;
+		KeyBuf.z = -1000;
+		Id = STATE_RUN;
+	}
+	else if (CGamePad::Stick(STICK_LY_POS) || CInput::IsKeyKeep(KEY_INPUT_S))
+	{
+		fSpd = -MOVESPEED;
+		KeyBuf.z = 1000;
+		Id = STATE_RUN;
+	}
+	else if (CGamePad::Stick(STICK_LX_NEG) || CInput::IsKeyKeep(KEY_INPUT_A))
+	{
+		fSpd = -MOVESPEED;
+		KeyBuf.x = 1000;
+		Id = STATE_RUN;
+	}
+	else if (CGamePad::Stick(STICK_LX_POS) || CInput::IsKeyKeep(KEY_INPUT_D))
+	{
+		fSpd = -MOVESPEED;
+		KeyBuf.x = -1000;
+		Id = STATE_RUN;
+	}
+	
 	//動いているかどうか
 	if (fSpd == 0.0f)
 	{
@@ -244,64 +239,22 @@ void CPlayer::Move_CON()
 	}
 	else
 	{
-		if(Id != STATE_SHOT)
 		cRotate.y = cMoveRotate.y;
-		Id = STATE_RUN;
 	}
 
 	//キャラクターの移動角度計算
-	cMoveRotate.y = CGamePad::StickRot(STICK_LEFT);
+	cMoveRotate.y = (float)atan2((int)KeyBuf.x * -1, (int)KeyBuf.z * -1);
+
+	if(CGamePad::GetPadNumState() != 0)
+	{
+		cMoveRotate.y = CGamePad::StickRot(STICK_LEFT);
+	}
 
 	//入力したキー情報とプレイヤーの角度から、移動速度を求める
 	cSpeed.x = sin(cMoveRotate.y) * fSpd;
 	cSpeed.z = cos(cMoveRotate.y) * fSpd;
 
 	//移動速度を現在の座標に加算する
-	cNextPos.x += cSpeed.x;
-	cNextPos.z += cSpeed.z;
-}
-
-//キーボード移動処理
-void CPlayer::Move_KEY()
-{
-	float XSpd = 0.0f;
-	float ZSpd = 0.0f;
-
-	if (CInput::IsKeyKeep(KEY_INPUT_W))
-	{
-		ZSpd = -MOVESPEED;
-		Id = STATE_RUN;
-	}
-	if (CInput::IsKeyKeep(KEY_INPUT_S))
-	{
-		ZSpd = MOVESPEED;
-		Id = STATE_RUN;
-	}
-	if (CInput::IsKeyKeep(KEY_INPUT_A))
-	{
-		XSpd = MOVESPEED;
-		Id = STATE_RUN;
-	}
-	if (CInput::IsKeyKeep(KEY_INPUT_D))
-	{
-		XSpd = -MOVESPEED;
-		Id = STATE_RUN;
-	}
-
-	//動いているかどうか
-	if (XSpd == 0.0f && ZSpd == 0.0f)
-	{
-		Id = STATE_DEFAULT;
-	}
-	else
-	{
-		cRotate.y = cMoveRotate.y;
-	}
-
-	//キャラクターの移動角度計算
-	cMoveRotate.y = (float)atan2((int)XSpd * -1, (int)ZSpd * -1);
-
-	cSpeed = VGet(XSpd, 0.0f, ZSpd);
 	cNextPos = VAdd(cPos, cSpeed);
 }
 

@@ -176,7 +176,6 @@ bool CGamePad::IsKeep_Cross(CHECK check)
 	return false;
 }
 
-
 //スティック
 bool CGamePad::Stick(STICK stick)
 {
