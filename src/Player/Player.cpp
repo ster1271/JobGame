@@ -212,24 +212,48 @@ void CPlayer::Move()
 		fSpd = -MOVESPEED;
 		KeyBuf.z = -1000;
 		Id = STATE_RUN;
+
+		//ŽËŒ‚’†‚ÍˆÚ“®‘¬“x‚ð’x‚­‚·‚é
+		if (CMouse::IsMouseKeep(MOUSE_INPUT_LEFT) || CGamePad::IsKeep_LR(RIGHT))
+		{
+			fSpd = -SHOTMOVESPEED;
+		}
 	}
-	else if (CGamePad::Stick(STICK_LY_POS) || CInput::IsKeyKeep(KEY_INPUT_S))
+	if (CGamePad::Stick(STICK_LY_POS) || CInput::IsKeyKeep(KEY_INPUT_S))
 	{
 		fSpd = -MOVESPEED;
 		KeyBuf.z = 1000;
 		Id = STATE_RUN;
+
+		//ŽËŒ‚’†‚ÍˆÚ“®‘¬“x‚ð’x‚­‚·‚é
+		if (CMouse::IsMouseKeep(MOUSE_INPUT_LEFT) || CGamePad::IsKeep_LR(RIGHT))
+		{
+			fSpd = -SHOTMOVESPEED;
+		}
 	}
-	else if (CGamePad::Stick(STICK_LX_NEG) || CInput::IsKeyKeep(KEY_INPUT_A))
+	if (CGamePad::Stick(STICK_LX_NEG) || CInput::IsKeyKeep(KEY_INPUT_A))
 	{
 		fSpd = -MOVESPEED;
 		KeyBuf.x = 1000;
 		Id = STATE_RUN;
+
+		//ŽËŒ‚’†‚ÍˆÚ“®‘¬“x‚ð’x‚­‚·‚é
+		if (CMouse::IsMouseKeep(MOUSE_INPUT_LEFT) || CGamePad::IsKeep_LR(RIGHT))
+		{
+			fSpd = -SHOTMOVESPEED;
+		}
 	}
-	else if (CGamePad::Stick(STICK_LX_POS) || CInput::IsKeyKeep(KEY_INPUT_D))
+	if (CGamePad::Stick(STICK_LX_POS) || CInput::IsKeyKeep(KEY_INPUT_D))
 	{
 		fSpd = -MOVESPEED;
 		KeyBuf.x = -1000;
 		Id = STATE_RUN;
+
+		//ŽËŒ‚’†‚ÍˆÚ“®‘¬“x‚ð’x‚­‚·‚é
+		if (CMouse::IsMouseKeep(MOUSE_INPUT_LEFT) || CGamePad::IsKeep_LR(RIGHT))
+		{
+			fSpd = -SHOTMOVESPEED;
+		}
 	}
 	
 	//“®‚¢‚Ä‚¢‚é‚©‚Ç‚¤‚©
