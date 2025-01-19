@@ -87,19 +87,19 @@ void CNumber::SetNumber(const char FontDataPath[128], int SizeX, int SizeY)
 void CNumber::DrawNumber_Normal(int Number, VECTOR Pos)
 {
 	//ポイント描画
-	int DrawScore = Number;
+	int DrawNumber = Number;
 
 	int count = 0;
 
-	//DrawScoreが0になったとき
-	if (DrawScore == 0) {
+	//DrawNumberが0になったとき
+	if (DrawNumber == 0) {
 		DrawGraph((int)Pos.x - count * 20, (int)Pos.y, Hundl[0], true);
 	}
-	//DrawScoreが0以外の時
-	while (DrawScore > 0)
+	//DrawNumberが0以外の時
+	while (DrawNumber > 0)
 	{
-		int num = DrawScore % 10;
-		DrawScore = DrawScore / 10;
+		int num = DrawNumber % 10;
+		DrawNumber = DrawNumber / 10;
 		DrawGraph((int)Pos.x - count * 20, (int)Pos.y, Hundl[num], true);
 		count++;
 	}
@@ -112,19 +112,19 @@ void CNumber::DrawNumber_Normal(int Number, VECTOR Pos)
 void CNumber::DrawNumber_Double(int Number, VECTOR Pos)
 {
 	//ポイント描画
-	int DrawScore = Number;
+	int DrawNumber = Number;
 
 	int count = 0;
 
-	//DrawScoreが0になったとき
-	if (DrawScore == 0) {
+	//DrawNumberが0になったとき
+	if (DrawNumber == 0) {
 		DrawRotaGraph((int)Pos.x - count * 35, (int)Pos.y, 2.0f, 0.0f, Hundl[0], true);
 	}
-	//DrawScoreが0以外の時
-	while (DrawScore > 0)
+	//DrawNumberが0以外の時
+	while (DrawNumber > 0)
 	{
-		int num = DrawScore % 10;
-		DrawScore = DrawScore / 10;
+		int num = DrawNumber % 10;
+		DrawNumber = DrawNumber / 10;
 		DrawRotaGraph((int)Pos.x - count * 35, (int)Pos.y, 2.0f, 0.0f, Hundl[num], true);
 		count++;
 	}

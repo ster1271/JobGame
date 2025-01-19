@@ -69,8 +69,8 @@ void CTurret_Normal::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManag
 			if (!cEnemy.GetActive())
 				return;
 
-			VECTOR Reng_Vec = VSub(cEnemy.GetPosition(), cPos);		//敵とタレットの距離を引いたVECTORを作る	
-			float Range = CMyLibrary::VecLong(Reng_Vec);			//距離を求める
+			VECTOR Reng_Vec = VSub(cEnemy.GetPosition(), cPos);		//敵とタレットの距離を求める	
+			float Range = CMyLibrary::VecLong(Reng_Vec);
 
 			//直線距離が設定値よりも大きかったら下の処理をしない
 			if (Range >= SET_RANGE)

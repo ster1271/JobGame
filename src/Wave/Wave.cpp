@@ -35,28 +35,64 @@ void CWave::DeleteInstance()
 	}
 }
 
-//ウェーブ開始
-void CWave::WaveStart(WAVE_STATE id)
-{
-	if (id == STATE_WAVE_NONE)
-		return;
 
-	if (id == STATE_WAVE_PREPAR)
+//ウェーブ状態変更
+void CWave::WaveStateChange(WAVE_STATE id)
+{
+	Wave_ID = id;
+
+
+	Cnt = 780;
+}
+
+
+void CWave::Step()
+{
+	switch (Wave_ID)
 	{
-		IsWave = true;					//フラグをtrueに
-		Wave_ID = STATE_WAVE_PREPAR;	//状態を準備中に
+	case STATE_WAVE_NONE:
+		break;
+	case STATE_WAVE_PREPAR:
+		Cnt--;
+
+		if (Cnt < 0)
+		{
+			Wave_ID = STATE_WAVE_NORMAL;
+			IsWave = true;
+			Cnt = 0;
+		}
+
+		break;
+	case STATE_WAVE_NORMAL:
+
+		break;
+
+	case STATE_WAVE_BOTMOVE:
+		break;
+	case STATE_WAVE_END:
+		break;
+	default:
+		break;
 	}
 }
 
-//ウェーブ終了
-void CWave::WaveEnd(WAVE_STATE id)
+void CWave::Draw()
 {
-	if (id == STATE_WAVE_NONE)
-		return;
-
-	if (id == STATE_WAVE_END)
+	switch (Wave_ID)
 	{
-		IsWave = false;				//フラグをfalseに
-		Wave_ID = STATE_WAVE_NONE;	//状態を何もしていないに
+	case STATE_WAVE_NONE:
+		break;
+	case STATE_WAVE_PREPAR:
+		DrawFormatString(1000, 0, GetColor(255, 0, 0), "ウェーブ開始まであと %d秒", Cnt / 60);
+		
+		break;
+	case STATE_WAVE_NORMAL:
+		break;
+	case STATE_WAVE_BOTMOVE:
+		break;
+	case STATE_WAVE_END:
+		break;
+	default:
+		break;
 	}
 }

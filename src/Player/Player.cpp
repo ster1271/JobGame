@@ -181,26 +181,6 @@ void CPlayer::Exit()
 	CHumanBase::Exit();
 }
 
-
-//‘¬“x•ÏX
-void CPlayer::ChangeSpeed()
-{
-	switch (Id)
-	{
-	case STATE_DEFAULT:
-		fSpd = 0.0f;
-		break;
-	case STATE_RUN:
-		fSpd = MOVESPEED;
-		break;
-	case STATE_SHOT:
-		fSpd = SHOTMOVESPEED;
-		break;
-	default:
-		break;
-	}
-}
-
 //ˆÚ“®ˆ—
 void CPlayer::Move()
 {
@@ -310,7 +290,7 @@ void CPlayer::StartWave()
 
 		if (PushCnt > 50)
 		{
-			CWave::GetInstance()->WaveStart(STATE_WAVE_PREPAR);
+			CWave::GetInstance()->WaveStateChange(STATE_WAVE_PREPAR);
 			PushCnt = 0;
 		}
 	}

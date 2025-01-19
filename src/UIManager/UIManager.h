@@ -1,31 +1,26 @@
 #pragma once
+#include "../Wave/Wave.h"
 
 //UIマネージャー
 class CUIManager
 {
 private:
+	static CUIManager* cInstance;		//インスタンス
 
-
-public:
 	//コンストラクタ・デストラクタ
 	CUIManager();
 	~CUIManager();
 
-	//初期化
-	void Init();
+	int hnd;
 
-	//読み込み
-	void Load();
+public:
+
+	static void Create();				//インスタンスの生成
+
+	static void Destroy();				//インスタンスの削除
+
+	static CUIManager* GetInstance();	//インスタンスの取得
 
 	//描画
 	void Draw();
-
-	//毎フレーム行う処理
-	void Step();
-
-	//情報更新
-	void Updata();
-
-	//後処理
-	void Exit();
 };

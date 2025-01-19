@@ -19,25 +19,30 @@ private:
 	static CWave* cInstance;
 
 	WAVE_STATE Wave_ID;		//ウェーブの状態
-
 	bool IsWave;			//ウェーブフラグ
+	int Cnt;				//時間カウント
+	
+	int hnd;
 
 public:
 	//コンストラクタ・デストラクタ
 	CWave();
 	~CWave();
 
-	bool GetIsWave() { return IsWave; }				//フラグの取得
-	WAVE_STATE GetWaveState() { return Wave_ID; }	//ウェーブの状態取得
-
-	void WaveStart(WAVE_STATE id);	//ウェーブ開始
-	void WaveEnd(WAVE_STATE id);	//ウェーブ終了
-
-	void Draw();					//ウェーブの
-
 	//CGameDataを取得
 	static CWave* GetInstance();
 
 	//CGameDataを削除
 	static void DeleteInstance();
+
+
+	bool GetIsWave() { return IsWave; }				//フラグの取得
+	WAVE_STATE GetWaveState() { return Wave_ID; }	//ウェーブの状態取得
+
+	void WaveStateChange(WAVE_STATE id);	//ウェーブ状態変更
+
+	void Step();					
+
+	void Draw();
+
 };

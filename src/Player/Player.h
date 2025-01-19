@@ -62,9 +62,6 @@ public:
 	//I—¹ˆ—
 	void Exit();
 
-	//‘¬“x•ÏX
-	void ChangeSpeed();
-
 	//ˆÚ“®ˆ—
 	void Move();
 

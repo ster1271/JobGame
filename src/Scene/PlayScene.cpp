@@ -86,7 +86,8 @@ void CPlayScene::Draw()
 		cBot.Draw();
 		//ミニマップ描画
 		cMiniMap.Draw();
-
+		
+		CWave::GetInstance()->Draw();
 
 	}
 
@@ -206,7 +207,7 @@ void CPlayScene::Step()
 		//ボット更新処理
 		cBot.Step(cMapManager);
 
-
+		CWave::GetInstance()->Step();
 
 		//=======当たり判定処理==========//
 		cCollisionManager.PlayerToMap(cPlayer, cMapManager);

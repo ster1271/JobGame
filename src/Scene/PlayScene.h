@@ -12,6 +12,7 @@
 #include "../RouteSearch/RouteSearch.h"
 #include "../Map/MapManager.h"
 #include "../MiniMap/MiniMap.h"
+#include "../Wave/Wave.h"
 
 class CPlayScene
 {
