@@ -86,6 +86,8 @@ void CPlayScene::Draw()
 		cBot.Draw();
 		//ミニマップ描画
 		cMiniMap.Draw();
+
+		cUIManager.Draw();
 		
 		CWave::GetInstance()->Draw();
 
@@ -171,6 +173,8 @@ void CPlayScene::Load()
 	cBot.Load();
 	//ミニマップ描画
 	cMiniMap.Load();
+
+	cUIManager.Load();
 }
 
 

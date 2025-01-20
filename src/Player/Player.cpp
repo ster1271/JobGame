@@ -106,6 +106,7 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 	//ウェーブ開始
 	if (!CWave::GetInstance()->GetIsWave())
 	{
+
 		VECTOR GoalPos = cMapManager.GetGoal().GetPos();
 		GoalPos.z -= 10.0f;
 		if (CCollision::CheckHitBoxToBox(cPos, PLAYER_SIZE, GoalPos, GOAL_SIZE))
@@ -291,6 +292,7 @@ void CPlayer::StartWave()
 		if (PushCnt > 50)
 		{
 			CWave::GetInstance()->WaveStateChange(STATE_WAVE_PREPAR);
+			
 			PushCnt = 0;
 		}
 	}

@@ -13,6 +13,7 @@
 #include "../Map/MapManager.h"
 #include "../MiniMap/MiniMap.h"
 #include "../Wave/Wave.h"
+#include "../UIManager/UIManager.h"
 
 class CPlayScene
 {
@@ -41,6 +42,7 @@ private:
 	CCollisionManager cCollisionManager;	//コリジョンマネージャー
 	CMapManager cMapManager;				//マップマネージャー
 	CMiniMap cMiniMap;						//ミニマップクラス
+	CUIManager cUIManager;					//UIマネージャー
 	
 
 public:
