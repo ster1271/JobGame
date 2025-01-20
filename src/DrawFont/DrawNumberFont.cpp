@@ -1,5 +1,8 @@
 #include "DrawNumberFont.h"
 
+int Hundl[13];			//格納
+
+
 //コンストラクタ
 CNumber::CNumber()
 {

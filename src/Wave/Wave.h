@@ -38,6 +38,7 @@ public:
 
 	bool GetIsWave() { return IsWave; }				//フラグの取得
 	WAVE_STATE GetWaveState() { return Wave_ID; }	//ウェーブの状態取得
+	int GetWaveTime() { return Cnt / 60; }				//時間取得
 
 	void WaveStateChange(WAVE_STATE id);	//ウェーブ状態変更
 

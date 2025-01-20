@@ -6,6 +6,12 @@ CUIManager::CUIManager(){}
 //デストラクタ
 CUIManager::~CUIManager(){}
 
+//初期化
+void CUIManager::Init()
+{
+	cWaveUI.Init();
+}
+
 
 //読み込み
 void CUIManager::Load()

@@ -15,6 +15,9 @@ public:
 	CUIManager();
 	~CUIManager();
 
+	//‰Šú‰»
+	void Init();
+
 	//“Ç‚İ‚İ
 	void Load();
 

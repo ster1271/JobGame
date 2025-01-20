@@ -123,7 +123,8 @@ void CPlayScene::Init()
 	cShotManager.Init();
 	//ボット初期化
 	cBot.Init();
-
+	//UIマネージャー初期化
+	cUIManager.Init();
 }
 
 

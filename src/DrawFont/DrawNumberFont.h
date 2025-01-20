@@ -5,8 +5,7 @@
 class CNumber
 {
 private:
-	int Hundl[13];			//格納
-
+	
 	/*
 	int NumberPosX;			//座標
 	int NumberPosY;			//座標			
@@ -18,18 +17,18 @@ public:
 	~CNumber();
 
 	//初期化
-	void Init();
+	static void Init();
 
 	//後処理
-	void Fin();
+	static void Fin();
 
 	//ナンバーフォント読み込み
-	void SetNumber(const char FontDataPath[128], int SizeX, int SizeY);
+	static void SetNumber(const char FontDataPath[128], int SizeX, int SizeY);
 
 	//ナンバーフォント描画(等倍描画, 16*32のみ有効)
-	void DrawNumber_Normal(int Number, VECTOR Pos);
+	static void DrawNumber_Normal(int Number, VECTOR Pos);
 
 	//ナンバーフォント描画(2倍描画, 16*32のみ有効)
-	void DrawNumber_Double(int Number, VECTOR Pos);
+	static void DrawNumber_Double(int Number, VECTOR Pos);
 
 };
