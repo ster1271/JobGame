@@ -40,9 +40,6 @@ void CWave::DeleteInstance()
 void CWave::WaveStateChange(WAVE_STATE id)
 {
 	Wave_ID = id;
-
-
-	Cnt = 780;
 }
 
 
@@ -83,7 +80,7 @@ void CWave::Draw()
 	case STATE_WAVE_NONE:
 		break;
 	case STATE_WAVE_PREPAR:
-		DrawFormatString(1000, 0, GetColor(255, 0, 0), "ウェーブ開始まであと %d秒", Cnt / 60);
+		//DrawFormatString(1000, 0, GetColor(255, 0, 0), "ウェーブ開始まであと %d秒", Cnt / 60);
 		
 		break;
 	case STATE_WAVE_NORMAL:

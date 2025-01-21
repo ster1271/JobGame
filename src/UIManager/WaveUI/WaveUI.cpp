@@ -4,12 +4,18 @@ const char WAVE_UI_PATH[] = { "data/UI/wave/wave.png" };
 const char FONT_NUMBER[] = { "data/UI/Number/number16x32_06.png" };
 
 
+//コンストラクタ
+CWaveUI::CWaveUI() {}
+
+//デストラクタ
+CWaveUI::~CWaveUI(){}
+
 //初期化
 void CWaveUI::Init()
 {
 	CUIBase::Init();
 	BgHndl = -1;
-	num = 100;
+	num = 80;
 	ChangeCount = 0;
 }
 
@@ -44,7 +50,7 @@ void CWaveUI::Draw()
 		switch (ChangeCount)
 		{
 		case 0:
-			num --;
+			num--;
 			if (num < 0)
 			{
 				ChangeCount = 1;
@@ -53,7 +59,7 @@ void CWaveUI::Draw()
 
 		case 1:
 			num += 2;
-			if (num > 100)
+			if (num > 80)
 			{
 				ChangeCount = 0;
 			}

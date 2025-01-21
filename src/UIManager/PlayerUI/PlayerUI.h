@@ -1,20 +1,16 @@
 #pragma once
 #include "../UIBase/BaseUI.h"
-#include "../../DrawFont/DrawNumberFont.h"
-#include "../../Wave/Wave.h"
 
-
-class CWaveUI : public CUIBase
+class CPlayerUI :public CUIBase
 {
 private:
-	int BgHndl;
-	int num;
-	int ChangeCount;
+	int HPHndl;
+	 
 
 public:
 	//コンストラクタ・デストラクタ
-	CWaveUI();
-	~CWaveUI();
+	CPlayerUI();
+	~CPlayerUI();
 
 	//初期化
 	void Init();
@@ -30,6 +26,4 @@ public:
 
 	//後処理
 	void Exit();
-
 };
-
