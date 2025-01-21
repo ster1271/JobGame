@@ -21,7 +21,7 @@ void CPlayerUI::Load()
 //–ˆƒtƒŒ[ƒ€s‚¤ˆ—
 void CPlayerUI::Step()
 {
-
+	
 }
 
 //•`‰æ

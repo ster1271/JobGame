@@ -77,7 +77,7 @@ bool CEnemyBoss::RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed)
 
 	cPos = vPos;
 	Respown_Pos = vPos;
-	cScale = VGet(0.2f, 0.2f, 0.2f);
+	cScale = VGet(0.1f, 0.1f, 0.1f);
 	cSize = ENEMY_BOSS_SIZE;
 	cRotate = VGet(0.0f, DX_PI_F / 2, 0.0f);
 	cSpeed = vSpeed;

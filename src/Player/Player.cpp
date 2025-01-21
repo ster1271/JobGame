@@ -291,7 +291,10 @@ void CPlayer::StartWave()
 
 		if (PushCnt > 50)
 		{
+			//状態を変える
 			CWave::GetInstance()->WaveStateChange(STATE_WAVE_PREPAR);
+			//ボット移動ウェーブフラグを変更
+			CWave::GetInstance()->SetIsBotMove(true);
 			
 			PushCnt = 0;
 		}

@@ -10,14 +10,25 @@ CEnemy_Normal::CEnemy_Normal()
 	memset(&Respown_Pos, 0, sizeof(VECTOR));
 }
 //デストラクタ
-CEnemy_Normal::~CEnemy_Normal()
-{
-}
+CEnemy_Normal::~CEnemy_Normal() {}
 
 //初期化
 void CEnemy_Normal::Init()
 {
-	CEnemyBase::Init();
+	//ひとまず初期化
+	memset(&cPos, 0, sizeof(VECTOR));
+	memset(&cNextPos, 0, sizeof(VECTOR));
+	memset(&cRotate, 0, sizeof(VECTOR));
+	memset(&cScale, 0, sizeof(VECTOR));
+	memset(&cSize, 0, sizeof(VECTOR));
+	memset(&cSpeed, 0, sizeof(VECTOR));
+
+	Life = 0;;			//ライフ
+	HitCount = 0;;		//弾の当たった回数
+	iHndl = -1;			//ハンドル
+	DeathCnt = 0;
+
+	IsActive = false;	//生存フラグ
 
 	List.clear();
 	ReSeachTime = 0;
@@ -34,21 +45,16 @@ void CEnemy_Normal::Load(int Hndl)
 //描画
 void CEnemy_Normal::Draw()
 {
-	CDraw3D::DrawBox3D(VGet(300.0f, 5.0f, 100.0f), VGet(20.0f, 20.0f, 20.0f));
+	CDebugString::GetInstance()->AddFormatString(100, 100, "サイズ	%f, %f, %f", cScale.x, cScale.y, cScale.z);
+
 
 	if (IsActive == false)	return;
 
 	MV1DrawModel(iHndl);
-	//DrawSphere3D(cPos, Radius, 16, GetColor(255, 255, 255), GetColor(255, 255, 255), FALSE);
 
 	if (IS_DEBUG)
 	{
-
 		cRoute_Search.Draw(GetColor(0, 0, 255));
-		//DrawString(200, 200, "描画中", GetColor(0, 0, 255));
-		//DrawFormatString(200, 215, GetColor(0, 0, 255), "X座標:%f", cPos.x);
-		//DrawFormatString(200, 230, GetColor(0, 0, 255), "Y座標:%f", cPos.y);
-		//DrawFormatString(200, 245, GetColor(0, 0, 255), "Z座標:%f", cPos.z);
 	}
 }
 
@@ -63,7 +69,7 @@ void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 	switch (State_Id)
 	{
 	case CEnemyBase::STATE_SEARCH:
-		List = cRoute_Search.Route_Search(cPos, cBot.GetPos()/*cMapManager.GetGoal().GetPos()*/, cMapManager);
+		List = cRoute_Search.Route_Search(cPos, cBot.GetPos(), cMapManager);
 		
 		State_Id = STATE_MOVE;
 		break;
@@ -117,9 +123,6 @@ void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 	//方向設定
 	SetDir();
 
-	//更新処理
-	Update();
-
 }
 
 //後処理
@@ -138,6 +141,10 @@ bool CEnemy_Normal::RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed)
 		return false;
 	}
 
+	//すべて初期化する
+	cScale = VGet(0.0f, 0.0f, 0.0f);
+
+	
 	cPos = vPos;
 	cNextPos = cPos;
 	Respown_Pos = vPos;
@@ -148,9 +155,9 @@ bool CEnemy_Normal::RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed)
 	Life = MAX_LIFE;
 	List.clear();
 	ListCnt = 0;
-	IsActive = true;
-
 	State_Id = STATE_SEARCH;
+
+	IsActive = true;
 
 	return true;
 }

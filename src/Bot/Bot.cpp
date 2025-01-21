@@ -102,8 +102,7 @@ void CBot::Step(CMapManager& cMapManager)
 	{
 	case CBot::STATE_STOP:
 
-		//テスト用処理
-		if (CWave::GetInstance()->GetIsWave())
+		if (CWave::GetInstance()->GetIsWave() && CWave::GetInstance()->GetIsBotMove())
 		{
 			//Idを変更する
 			State_Id = STATE_SEARCH;

@@ -3,7 +3,7 @@
 //定義
 static const char ENEMY_MODEL_PATH01[] = { "data/enemy/Enemy01.x" };
 static const char Enemy_MODEL_PATH02[] = { "data/enemy/Enemy02.x" };
-static const int WAIT_TIME = 120;		//敵が再登場するまでの時間
+static const int WAIT_TIME = 300;		//敵が再登場するまでの時間
 
 //コンストラクタ
 CEnemyManager::CEnemyManager()
@@ -12,10 +12,7 @@ CEnemyManager::CEnemyManager()
 }
 
 //デストラクタ
-CEnemyManager::~CEnemyManager()
-{
-
-}
+CEnemyManager::~CEnemyManager(){}
 
 //初期化
 void CEnemyManager::Init()
@@ -70,15 +67,6 @@ void CEnemyManager::Exit()
 //毎フレーム呼ぶ処理
 void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 {
-	VECTOR PastPos = VGet(0.0f, 0.0f, 0.0f);	//過去座標を格納する
-	VECTOR CurrentPos = cBot.GetPos();			//現在座標を格納する
-
-	/*for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
-	{
-		cEnemy_Normal[Enemy_Index].Step(cBot, cMapManager);
-	}*/
-
-
 	//ウェーブ中のみ処理を行う
 	if (CWave::GetInstance()->GetIsWave() == true)
 	{
@@ -90,6 +78,7 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 				iEnemyCnt++;
 			}
 			cEnemy_Normal[Enemy_Index].Step(cBot, cMapManager);
+			cEnemy_Normal[Enemy_Index].Update();
 		}
 
 		//敵の出現
@@ -101,8 +90,6 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 			RequestEnemy();
 			Coolcnt = WAIT_TIME;
 		}
-
-		RequestEnemy();
 	}
 }
 
@@ -120,7 +107,7 @@ void CEnemyManager::Draw()
 //敵リクエスト
 void CEnemyManager::RequestEnemy()
 {
-	//敵1のスポーン
+	//敵1のスポーン(読み込みで設定する)
 	VECTOR vPos = VGet(300.0f, 5.0f, 50.0f);
 	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
@@ -129,6 +116,5 @@ void CEnemyManager::RequestEnemy()
 		{
 			break;
 		}
-
 	}
 }

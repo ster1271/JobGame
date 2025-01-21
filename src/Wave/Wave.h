@@ -20,10 +20,10 @@ private:
 
 	WAVE_STATE Wave_ID;		//ウェーブの状態
 	bool IsWave;			//ウェーブフラグ
+	bool IsNormal;			//ノーマルウェーブフラグ
+	bool IsBotMove;			//ボット移動ウェーブフラグ
 	int Cnt;				//時間カウント
 	
-	int hnd;
-
 public:
 	//コンストラクタ・デストラクタ
 	CWave();
@@ -36,9 +36,15 @@ public:
 	static void DeleteInstance();
 
 
-	bool GetIsWave() { return IsWave; }				//フラグの取得
+	bool GetIsWave() { return IsWave; }					//フラグの取得
+	bool GetIsNormal() { return IsNormal; }				//フラグの取得
+	bool GetIsBotMove() { return IsBotMove; }			//フラグの取得
+	void SetIsWave(bool Flag) { IsWave = Flag;}			//フラグの設定
+	void SetIsNormal(bool Flag) { IsNormal = Flag; }	//フラグの設定
+	void SetIsBotMove(bool Flag) { IsBotMove = Flag; }	//フラグの設定
+
 	WAVE_STATE GetWaveState() { return Wave_ID; }	//ウェーブの状態取得
-	int GetWaveTime() { return Cnt / 60; }				//時間取得
+	int GetWaveTime() { return Cnt / 60; }			//時間取得
 
 	void WaveStateChange(WAVE_STATE id);	//ウェーブ状態変更
 

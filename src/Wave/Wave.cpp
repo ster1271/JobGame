@@ -7,6 +7,10 @@ CWave::CWave()
 {
 	Wave_ID = STATE_WAVE_NONE;
 	IsWave = false;
+	IsNormal = false;
+	IsBotMove = false;
+
+	Cnt = -1;
 }
 
 //デストラクタ
@@ -40,6 +44,29 @@ void CWave::DeleteInstance()
 void CWave::WaveStateChange(WAVE_STATE id)
 {
 	Wave_ID = id;
+
+	switch (Wave_ID)
+	{
+	case STATE_WAVE_NONE:
+		break;
+
+	case STATE_WAVE_PREPAR:
+		Cnt = 600;
+		break;
+
+	case STATE_WAVE_NORMAL:
+		break;
+
+	case STATE_WAVE_BOTMOVE:
+		break;
+
+	case STATE_WAVE_END:
+		Cnt = 600;
+		break;
+
+	default:
+		break;
+	}
 }
 
 
@@ -54,9 +81,21 @@ void CWave::Step()
 
 		if (Cnt < 0)
 		{
-			Wave_ID = STATE_WAVE_NORMAL;
-			IsWave = true;
 			Cnt = 0;
+
+			SetIsWave(true);
+
+			//ノーマルウェーブ
+			if (IsNormal)
+			{
+				WaveStateChange(STATE_WAVE_NORMAL);
+			}
+
+			//ボット移動ウェーブ
+			if (IsBotMove)
+			{
+				WaveStateChange(STATE_WAVE_BOTMOVE);
+			}	
 		}
 
 		break;
@@ -65,31 +104,15 @@ void CWave::Step()
 		break;
 
 	case STATE_WAVE_BOTMOVE:
+
 		break;
+
 	case STATE_WAVE_END:
+
 		break;
+
 	default:
 		break;
 	}
 }
 
-void CWave::Draw()
-{
-	switch (Wave_ID)
-	{
-	case STATE_WAVE_NONE:
-		break;
-	case STATE_WAVE_PREPAR:
-		//DrawFormatString(1000, 0, GetColor(255, 0, 0), "ウェーブ開始まであと %d秒", Cnt / 60);
-		
-		break;
-	case STATE_WAVE_NORMAL:
-		break;
-	case STATE_WAVE_BOTMOVE:
-		break;
-	case STATE_WAVE_END:
-		break;
-	default:
-		break;
-	}
-}

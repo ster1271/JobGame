@@ -86,11 +86,8 @@ void CPlayScene::Draw()
 		cBot.Draw();
 		//ミニマップ描画
 		cMiniMap.Draw();
-
+		//UI描画
 		cUIManager.Draw();
-		
-		CWave::GetInstance()->Draw();
-
 	}
 
 	//カメラ情報表示
@@ -146,7 +143,7 @@ void CPlayScene::Exit()
 	//タレットマネージャー終了処理
 	cTurretManager.Exit();
 	//弾終了処理
-	//cShotManager.Exit();
+	cShotManager.Exit();
 	//ボットクラス終了処理
 	cBot.Exit();
 
@@ -172,9 +169,9 @@ void CPlayScene::Load()
 	cShotManager.Load();
 	//ボットデータ読み込み
 	cBot.Load();
-	//ミニマップ描画
+	//ミニマップ読み込み
 	cMiniMap.Load();
-
+	//UI読み込み
 	cUIManager.Load();
 }
 
@@ -184,7 +181,7 @@ void CPlayScene::Load()
 //-----------------------------------
 void CPlayScene::Step()
 {
-	//シーン遷移処理(仮)
+	//シーン終了処理
 	if (cBot.GetFinish())
 	{
 		eSceneID = PLAY_SCENE_END;
@@ -211,7 +208,7 @@ void CPlayScene::Step()
 		cShotManager.Step(cPlayer.GetPos());
 		//ボット更新処理
 		cBot.Step(cMapManager);
-
+		//ウェーブ処理
 		CWave::GetInstance()->Step();
 
 		//=======当たり判定処理==========//

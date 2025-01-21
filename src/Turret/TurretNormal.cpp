@@ -1,7 +1,7 @@
 #include "Turret_Normal.h"
 #include "../CollisionManager/Collision/Collision.h"
 
-const float MAX_LIFE = 0.0f;		//Å‘å‘Ì—Í
+const float MAX_LIFE = 10.0f;		//Å‘å‘Ì—Í
 const float ATTACK = 5.0f;			//UŒ‚—Í
 const int MAX_COOL_TIME = 30;		//’e‚Ì”­ËŠÔŠu
 const float SET_RANGE = 150.0f;		//Å‘å’¼ü‹——£
@@ -98,6 +98,7 @@ void CTurret_Normal::TurretSpawn(const VECTOR &vPos)
 	if (IsActive) return;
 
 	cPos = vPos;
+	cPos.y -= 10.0f;
 	cRotate = VECTOR_ZERO;
 	cSize = VGet(0.1f, 0.1f, 0.1f);
 
