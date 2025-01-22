@@ -22,6 +22,7 @@ private:
 	bool IsWave;			//ウェーブフラグ
 	bool IsNormal;			//ノーマルウェーブフラグ
 	bool IsBotMove;			//ボット移動ウェーブフラグ
+	int WaveTime;			//ウェーブ発生時間
 	int Cnt;				//時間カウント
 	
 public:
@@ -39,12 +40,14 @@ public:
 	bool GetIsWave() { return IsWave; }					//フラグの取得
 	bool GetIsNormal() { return IsNormal; }				//フラグの取得
 	bool GetIsBotMove() { return IsBotMove; }			//フラグの取得
+	int GetWaveTime() { return WaveTime; }				//時間の取得
 	void SetIsWave(bool Flag) { IsWave = Flag;}			//フラグの設定
 	void SetIsNormal(bool Flag) { IsNormal = Flag; }	//フラグの設定
 	void SetIsBotMove(bool Flag) { IsBotMove = Flag; }	//フラグの設定
+	void SetWaveTime(int time) { WaveTime = time; }		//時間設定
 
 	WAVE_STATE GetWaveState() { return Wave_ID; }	//ウェーブの状態取得
-	int GetWaveTime() { return Cnt / 60; }			//時間取得
+	int GetTime() { return Cnt / 60; }				//時間取得
 
 	void WaveStateChange(WAVE_STATE id);	//ウェーブ状態変更
 

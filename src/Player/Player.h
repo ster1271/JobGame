@@ -31,6 +31,9 @@ enum PLAYER_STATE
 class CPlayer : public CHumanBase
 {
 private:
+
+	static CPlayer* cInstance;		//インスタンス
+
 	bool IsDir[DIR_NUM];	//方向フラグ
 	PLAYER_STATE Id;
 	PLAYER_STATE oldId;
@@ -41,11 +44,17 @@ private:
 	void Run();
 	void Shot();
 
-public:
-
 	//コンストラクタ・デストラクタ
 	CPlayer();
 	~CPlayer();
+
+public:
+
+	static void Create();				//インスタンスの生成
+
+	static void Destroy();				//インスタンスの削除
+
+	static CPlayer* GetInstance();		//インスタンスの取得
 
 	//初期化
 	void Init();

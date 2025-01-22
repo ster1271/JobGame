@@ -28,16 +28,7 @@ void CRoute_Search::Draw(unsigned int Color)
 {
 	for (int a = 0; a < List.size(); a++)
 	{
-		/*if (a == 28|| a == 27|| a == 23|| a == 21|| a == 20|| a == 18|| a == 13|| a == 11|| a == 9|| a == 8 || a == 4 || a == 2)
-		{
-			CDraw3D::DrawBox3D(List[a].Pos, VGet(25.0f, 80.0f, 25.0f));
-		}
-		else
-		{
-			CDraw3D::DrawBox3D(List[a].Pos, VGet(25.0f, 80.0f, 25.0f), Color);
-		}*/
 		CDraw3D::DrawBox3D(List[a].Pos, VGet(25.0f, 80.0f, 25.0f), Color);
-
 	}
 }
 
@@ -46,7 +37,7 @@ void CRoute_Search::Draw(unsigned int Color)
 vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMapManager& cMapManager)
 {
 	
-	List.clear();	//念のため
+	List.clear();			//念のため
 	List.shrink_to_fit();	//念のため
 
 	m_StartPos.x = (int)StartPos.x;
@@ -57,36 +48,36 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 	m_GoalPos.y = (int)GoalPos.y;
 	m_GoalPos.z = (int)GoalPos.z;
 
-	////X座標が50で割り切れないとき
-	//int Result = Remain((int)m_StartPos.x, CALC_DIS);
-	//if (Result != 0)
-	//{
-	//	//計算結果が規定値より小さいとき
-	//	if (Result <= 25)
-	//	{
-	//		m_StartPos.x -= Result;
-	//	}
-	//	else
-	//	{
-	//		Result = CALC_DIS - Result;
-	//		m_StartPos.x += Result;
-	//	}
-	//}
+	//X座標が50で割り切れないとき
+	int Result = Remain((int)m_StartPos.x, CALC_DIS);
+	if (Result != 0)
+	{
+		//計算結果が規定値より小さいとき
+		if (Result <= 25)
+		{
+			m_StartPos.x -= Result;
+		}
+		else
+		{
+			Result = CALC_DIS - Result;
+			m_StartPos.x += Result;
+		}
+	}
 
-	//Result = Remain((int)m_StartPos.z, CALC_DIS);
-	//if (Result != 0)
-	//{
-	//	//計算結果が規定値より小さいとき
-	//	if (Result < 25)
-	//	{
-	//		m_StartPos.z -= Result;
-	//	}
-	//	else
-	//	{
-	//		Result = CALC_DIS - Result;
-	//		m_StartPos.z += Result;
-	//	}
-	//}
+	Result = Remain((int)m_StartPos.z, CALC_DIS);
+	if (Result != 0)
+	{
+		//計算結果が規定値より小さいとき
+		if (Result < 25)
+		{
+			m_StartPos.z -= Result;
+		}
+		else
+		{
+			Result = CALC_DIS - Result;
+			m_StartPos.z += Result;
+		}
+	}
 
 	Info tmp;
 	memset(&tmp, -1, sizeof(Info));
@@ -103,7 +94,7 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 	int LoopCount = 0;
 
 	//フラグがfalseなら計算を行う
-	while (!IsFinish/*LoopCount != 6*/)
+	while (!IsFinish)
 	{
 		int TotalMinCost = MAX_COST;	//最少評価コスト
 		int vectorSize = List.size();	//リスト格納サイズ
@@ -166,12 +157,6 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 				break;
 			}
 		}
-
-		/*LoopCount++;
-		if (LoopCount == 7)
-			LoopCount = 7;
-		else if (LoopCount == 8)
-			LoopCount = 8;*/
 	}
 
 

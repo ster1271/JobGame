@@ -1,7 +1,11 @@
 #include "Player.h"
 #include "../Debug/DebugString.h"
 
+//インスタンスの初期化
+CPlayer* CPlayer::cInstance = nullptr;
+
 const char ATTACKER_PATH[] = { "data/character/human.x" };
+
 
 //コンストラクタ・デストラクタ
 CPlayer::CPlayer()
@@ -13,6 +17,48 @@ CPlayer::CPlayer()
 CPlayer::~CPlayer()
 {
 }
+
+//インスタンスの生成
+void CPlayer::Create()
+{
+	//インスタンスにが生成されていなかったら
+	if (cInstance == nullptr)
+	{
+		//新しくnewする
+		cInstance = new CPlayer();
+	}
+}
+
+
+//インスタンスの削除
+void CPlayer::Destroy()
+{
+	//インスタンスが生成されていたら
+	if (cInstance != nullptr)
+	{
+		//deleteしてnullptrを入れる
+		delete cInstance;
+		cInstance = nullptr;
+	}
+}
+
+
+//インスタンスの取得
+CPlayer* CPlayer::GetInstance()
+{
+	if (cInstance == nullptr)
+	{
+		//インスタンスが生成されていなかったら生成する
+		Create();
+		return cInstance;
+	}
+	else
+	{
+		return cInstance;
+	}
+}
+
+
 
 //初期化
 void CPlayer::Init()
@@ -75,7 +121,7 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 	default:
 		break;
 	}
-
+	
 	cPos = cNextPos;
 	//キャラクターの移動
 	Move();
@@ -106,11 +152,13 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 	//ウェーブ開始
 	if (!CWave::GetInstance()->GetIsWave())
 	{
-
 		VECTOR GoalPos = cMapManager.GetGoal().GetPos();
 		GoalPos.z -= 10.0f;
 		if (CCollision::CheckHitBoxToBox(cPos, PLAYER_SIZE, GoalPos, GOAL_SIZE))
 		{
+			if (CWave::GetInstance()->GetWaveState() == STATE_WAVE_PREPAR)
+				return;
+
 			StartWave();
 		}
 	}
@@ -258,6 +306,7 @@ void CPlayer::Move()
 	//入力したキー情報とプレイヤーの角度から、移動速度を求める
 	cSpeed.x = sin(cMoveRotate.y) * fSpd;
 	cSpeed.z = cos(cMoveRotate.y) * fSpd;
+	cSpeed.y = 0.0f;
 
 	//移動速度を現在の座標に加算する
 	cNextPos = VAdd(cPos, cSpeed);
@@ -285,6 +334,8 @@ void CPlayer::PlayerShot(CShotManager& cShotManager)
 //ウェーブ開始処理
 void CPlayer::StartWave()
 {
+
+
 	if (CGamePad::IsPadKeep(DX_INPUT_PAD1, BUTTON_LB) || CInput::IsKeyKeep(KEY_INPUT_1))
 	{
 		PushCnt++;
@@ -295,6 +346,7 @@ void CPlayer::StartWave()
 			CWave::GetInstance()->WaveStateChange(STATE_WAVE_PREPAR);
 			//ボット移動ウェーブフラグを変更
 			CWave::GetInstance()->SetIsBotMove(true);
+			CWave::GetInstance()->SetWaveTime(0);
 			
 			PushCnt = 0;
 		}

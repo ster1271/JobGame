@@ -9,6 +9,7 @@ CUIManager::~CUIManager(){}
 //‰Šú‰»
 void CUIManager::Init()
 {
+	cPlayerUI.Init();
 	cWaveUI.Init();
 }
 
@@ -16,11 +17,13 @@ void CUIManager::Init()
 //“Ç‚İ‚İ
 void CUIManager::Load()
 {
+	cPlayerUI.Load();
 	cWaveUI.Load();
 }
 
 //•`‰æ
 void CUIManager::Draw()
 {
+	cPlayerUI.Draw();
 	cWaveUI.Draw();
 }

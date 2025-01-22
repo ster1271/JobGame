@@ -1,16 +1,15 @@
 #pragma once
 #include "../UIBase/BaseUI.h"
-#include "../../Player/Player.h"
 
-class CPlayerUI :public CUIBase
+class CBotUI :public CUIBase
 {
 private:
-	int HPHndl;
+
 
 public:
 	//コンストラクタ・デストラクタ
-	CPlayerUI();
-	~CPlayerUI();
+	CBotUI();
+	~CBotUI();
 
 	//初期化
 	void Init();
@@ -26,4 +25,5 @@ public:
 
 	//後処理
 	void Exit();
+
 };

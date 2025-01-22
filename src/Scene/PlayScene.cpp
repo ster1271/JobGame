@@ -75,7 +75,7 @@ void CPlayScene::Draw()
 		//マップ全般描画 
 		cMapManager.Draw();
 		//キャラクター描画
-		cPlayer.Draw();
+		CPlayer::GetInstance()->Draw();
 		//タレット描画
 		cTurretManager.Draw();
 		//エネミー描画
@@ -103,6 +103,8 @@ void CPlayScene::Draw()
 //-----------------------------------
 void CPlayScene::Init()
 {
+	TIME = 0;
+
 	//カメラ初期化
 	cCameraManager.Init();
 	cCameraManager.SetNearFar(5.0f, 10000.0f);
@@ -111,7 +113,7 @@ void CPlayScene::Init()
 	//マップ全般初期化
 	cMapManager.Init();
 	//キャラクター初期化
-	cPlayer.Init();
+	CPlayer::GetInstance()->Init();
 	//エネミー初期化
 	cEnemyManager.Init();
 	//タレット初期化
@@ -130,6 +132,8 @@ void CPlayScene::Init()
 //-----------------------------------
 void CPlayScene::Exit()
 {
+	TIME = 0;
+
 	//カメラマネージャー終了処理
 	cCameraManager.Exit();
 	//オブジェクトマネージャー終了処理
@@ -137,7 +141,7 @@ void CPlayScene::Exit()
 	//マップ全般終了処理
 	cMapManager.Exit();
 	//キャラクター終了処理
-	cPlayer.Exit();
+	CPlayer::GetInstance()->Exit();
 	//エネミーマネジャー終了処理
 	cEnemyManager.Exit();
 	//タレットマネージャー終了処理
@@ -160,7 +164,7 @@ void CPlayScene::Load()
 	//マップ全般データ読み込み
 	cMapManager.Load();
 	//キャラクターデータ読み込み
-	cPlayer.Load();
+	CPlayer::GetInstance()->Load();
 	//エネミーデータ読み込み
 	cEnemyManager.Load();
 	//タレットデータ読み込み
@@ -181,6 +185,13 @@ void CPlayScene::Load()
 //-----------------------------------
 void CPlayScene::Step()
 {
+	TIME++;
+	if (CWave::GetInstance()->GetWaveState() == STATE_WAVE_NONE)
+	{
+		//時間を増加させる
+		CWave::GetInstance()->SetWaveTime(TIME);
+	}
+
 	//シーン終了処理
 	if (cBot.GetFinish())
 	{
@@ -191,33 +202,42 @@ void CPlayScene::Step()
 	//プレイ時処理
 	if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_PALY)
 	{
+		if (CWave::GetInstance()->GetWaveTime() > 1200)
+		{
+			CWave::GetInstance()->WaveStateChange(STATE_WAVE_PREPAR);
+			CWave::GetInstance()->SetIsNormal(true);
+			CWave::GetInstance()->SetWaveTime(0);
+		}
+
+		CDebugString::GetInstance()->AddFormatString(200, 200, "1200 / %d", CWave::GetInstance()->GetWaveTime());
+
 		//オブジェクト更新処理
 		cObjectManager.Step();
 		//マップ全般処理 
 		cMapManager.Step();
 		//ミニマップ描画
-		cMiniMap.Step(cPlayer.GetPos(), cPlayer.GetSpeed(), cPlayer.GetRotate(), cMapManager);
+		cMiniMap.Step(CPlayer::GetInstance()->GetPos(), CPlayer::GetInstance()->GetSpeed(), CPlayer::GetInstance()->GetRotate(), cMapManager);
 		//キャラクター更新処理
-		cPlayer.Step(cShotManager, cTurretManager, cMapManager, cBot.GetPos());
-		cPlayer.UpData();
+		CPlayer::GetInstance()->Step(cShotManager, cTurretManager, cMapManager, cBot.GetPos());
+		CPlayer::GetInstance()->UpData();
 		//エネミー更新処理
 		cEnemyManager.Step(cBot, cMapManager);
 		//タレット更新処理
 		cTurretManager.Step(cShotManager, cEnemyManager);
 		//弾更新処理
-		cShotManager.Step(cPlayer.GetPos());
+		cShotManager.Step(CPlayer::GetInstance()->GetPos());
 		//ボット更新処理
 		cBot.Step(cMapManager);
 		//ウェーブ処理
 		CWave::GetInstance()->Step();
 
 		//=======当たり判定処理==========//
-		cCollisionManager.PlayerToMap(cPlayer, cMapManager);
+		cCollisionManager.PlayerToMap(cMapManager);
 		cCollisionManager.TurretShotToEnemy(cShotManager, cEnemyManager);
 		cCollisionManager.PlayerShotToEnemy(cShotManager, cEnemyManager);
 		cCollisionManager.PlayerShotToMap(cShotManager, cMapManager);
 		cCollisionManager.TurretShotToMap(cShotManager, cMapManager);
-		cCollisionManager.PlayerToGoal(cPlayer, cMapManager);
+		cCollisionManager.PlayerToGoal(cMapManager);
 	}
 
 	//デバックカメラとの切り替え処理
@@ -231,6 +251,6 @@ void CPlayScene::Step()
 	}
 
 	//カメラ更新処理
-	cCameraManager.Step(cPlayer.GetPos(), cPlayer.GetRotate(), VECTOR_ZERO);
+	cCameraManager.Step(CPlayer::GetInstance()->GetPos(), CPlayer::GetInstance()->GetRotate(), VECTOR_ZERO);
 }
 

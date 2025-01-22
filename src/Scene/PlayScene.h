@@ -18,6 +18,9 @@
 class CPlayScene
 {
 private:
+
+	int TIME;
+
 	enum tagPLAY_SCENE
 	{
 		PLAY_SCENE_INIT,
@@ -33,7 +36,6 @@ private:
 
 	CCameraManager cCameraManager;			//カメラマネージャー
 	CShotManager cShotManager;				//ショットマネージャー
-	CPlayer cPlayer;						//プレイヤークラス
 	CEnemyManager cEnemyManager;			//エネミーマネージャー
 	CObjectManager cObjectManager;			//オブジェクトマネージャー
 	CTurretManager cTurretManager;			//タレットマネージャー

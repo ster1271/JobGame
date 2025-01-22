@@ -227,7 +227,7 @@ void CEnemyBase::Enemy_Move(vector<VECTOR> List, int& Cnt)
 	cNextPos.x += sinf(cRotate.y) * -0.2f;
 	cNextPos.z += cosf(cRotate.y) * -0.2f;
 
-	//プレイヤーとの距離を計算
+	//ボットとの距離を計算
 	VECTOR v_tmp;
 	v_tmp.x = List[Cnt].x - cPos.x;
 	v_tmp.y = 0.0f;
@@ -260,7 +260,7 @@ void CEnemyBase::Out_Move(VECTOR vPos)
 	Vtmp.y = 0.0f;
 	Vtmp.z = vPos.z - cPos.z;
 
-	float Speed = 10.0f;
+	float Speed = 0.5f;
 	VECTOR vSpd = VGet(0.0f, 0.0f, 0.0f);	//ボットの移動ベクトル
 	vSpd.x = sinf(cRotate.y) * -Speed;
 	vSpd.y = 0.0f;
@@ -291,6 +291,21 @@ void CEnemyBase::Out_Move(VECTOR vPos)
 	//座標に速度を加算する
 	cPos.x += sinf(cRotate.y) * -Speed;
 	cPos.z += cosf(cRotate.y) * -Speed;
+
+	//ボットとの距離を計算
+	VECTOR v_tmp;
+	v_tmp.x = vPos.x - cPos.x;
+	v_tmp.y = 0.0f;
+	v_tmp.z = vPos.z - cPos.z;
+
+	float Range = VSize(v_tmp);
+
+	//距離が一定値に達したらIdを変更する
+	if (Range < 0.2f)
+	{	
+		State_Id = STATE_ATTACK;
+	}
+	
 }
 
 

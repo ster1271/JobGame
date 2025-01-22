@@ -1,13 +1,13 @@
 #pragma once
 #include "../Wave/Wave.h"
 #include "WaveUI/WaveUI.h"
+#include "PlayerUI/PlayerUI.h"
 
 //UIマネージャー
 class CUIManager
 {
 private:
-	
-
+	CPlayerUI cPlayerUI;
 	CWaveUI cWaveUI;
 
 public:

@@ -16,7 +16,7 @@ private:
 
 public:
 	//プレイヤーとマップの当たり判定
-	void PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager);
+	void PlayerToMap(CMapManager& cMapManager);
 
 	//敵1とマップの当たり判定
 	void Enemy1ToMap(CEnemyManager& cEnemyManager, CMapManager& cMapManager);
@@ -43,7 +43,7 @@ public:
 	void TurretShotToMap(CShotManager& cShotManager, CMapManager& cMapManager);
 
 	//ゴールとプレイヤーの当たり判定
-	void PlayerToGoal(CPlayer& cPlayer, CMapManager& cMapManager);
+	void PlayerToGoal(CMapManager& cMapManager);
 
 	//描画
 	void Draw();

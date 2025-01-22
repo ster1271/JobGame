@@ -1,27 +1,22 @@
 #include "CollisionManager.h"
 
-void CCollisionManager::Draw()
-{
-	CDebugString::GetInstance()->AddFormatString(0, 700, "倒した敵の数：%d", Cnt);
-}
-
 //プレイヤーとマップの当たり判定
-void CCollisionManager::PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager)
+void CCollisionManager::PlayerToMap(CMapManager& cMapManager)
 {
 	//めり込み量を格納する変数を生成
 	float OverRap = 0.0f;
 
 	//プレイヤーの情報を格納する
-	VECTOR PlayerPos = cPlayer.GetPos();					//座標
-	VECTOR NextPlayerPos = cPlayer.GetNextPos();			//1フレーム後の座標
-	VECTOR Player_Size = PLAYER_SIZE;						//プレイヤーのサイズ
-	VECTOR Player_Harf_Size = VScale(Player_Size, 0.5f);	//プレイヤーのハーフサイズ
+	VECTOR PlayerPos = CPlayer::GetInstance()->GetPos();					//座標
+	VECTOR NextPlayerPos = CPlayer::GetInstance()->GetNextPos();			//1フレーム後の座標
+	VECTOR Player_Size = PLAYER_SIZE;										//プレイヤーのサイズ
+	VECTOR Player_Harf_Size = VScale(Player_Size, 0.5f);					//プレイヤーのハーフサイズ
 
 	bool Dir[DIR_NUM] = { false };
 	for (int Index = 0; Index < DIR_NUM; Index++)
 	{
 		//方向フラグを取得してくる
-		Dir[Index] = cPlayer.GetDir(Index);
+		Dir[Index] = CPlayer::GetInstance()->GetDir(Index);
 	}
 
 	//マップの情報を格納する
@@ -125,7 +120,7 @@ void CCollisionManager::PlayerToMap(CPlayer& cPlayer, CMapManager& cMapManager)
 			NextPlayerPos.z += OverRap;
 		}
 	}
-	cPlayer.SetNextPos(NextPlayerPos);
+	CPlayer::GetInstance()->SetNextPos(NextPlayerPos);
 }
 
 
@@ -488,14 +483,14 @@ void CCollisionManager::TurretShotToMap(CShotManager& cShotManager, CMapManager&
 
 
 //ゴールとプレイヤーの当たり判定
-void CCollisionManager::PlayerToGoal(CPlayer& cPlayer, CMapManager& cMapManager)
+void CCollisionManager::PlayerToGoal(CMapManager& cMapManager)
 {
 	//めり込み量を格納する変数を生成
 	float OverRap = 0.0f;
 
 	//プレイヤーの情報を格納する
-	VECTOR PlayerPos = cPlayer.GetPos();					//座標
-	VECTOR NextPlayerPos = cPlayer.GetNextPos();			//1フレーム後の座標
+	VECTOR PlayerPos = CPlayer::GetInstance()->GetPos();					//座標
+	VECTOR NextPlayerPos = CPlayer::GetInstance()->GetNextPos();			//1フレーム後の座標
 	VECTOR PlayerSize = PLAYER_SIZE;						//プレイヤーのサイズ
 	VECTOR PlayerHarfSize = VScale(PlayerSize, 0.5f);		//プレイヤーのハーフサイズ
 
@@ -503,7 +498,7 @@ void CCollisionManager::PlayerToGoal(CPlayer& cPlayer, CMapManager& cMapManager)
 	for (int Index = 0; Index < DIR_NUM; Index++)
 	{
 		//方向フラグを取得してくる
-		Dir[Index] = cPlayer.GetDir(Index);
+		Dir[Index] = CPlayer::GetInstance()->GetDir(Index);
 	}
 
 	VECTOR GoalPos = cMapManager.GetGoal().GetPos();		//ゴールの座標
@@ -579,7 +574,7 @@ void CCollisionManager::PlayerToGoal(CPlayer& cPlayer, CMapManager& cMapManager)
 		NextPlayerPos.z += OverRap;
 	}
 
-	cPlayer.SetNextPos(NextPlayerPos);
+	CPlayer::GetInstance()->SetNextPos(NextPlayerPos);
 
 }
 

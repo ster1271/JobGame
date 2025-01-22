@@ -66,6 +66,7 @@ public:
 	VECTOR GetRotate() { return cRotate; }					//回転値取得
 	VECTOR GetSpeed() { return cSpeed; }					//速度取得
 	VECTOR GetSize() { return cSize; }						//サイズ取得
+	float GetPlayerLife() { return Life; }					//ライフ取得
 	bool GetIsActive() { return IsActive; }					//フラグ取得
 	bool GetDir(int dir) { return IsDir[dir]; }				//方向フラグ取得
 

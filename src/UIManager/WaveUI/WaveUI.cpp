@@ -70,7 +70,7 @@ void CWaveUI::Draw()
 		}
 
 		DrawRotaGraph(1280 / 2, 100, 2.0f, 0.0f, BgHndl, true, false, false);
-		CNumber::DrawNumber_Normal(CWave::GetInstance()->GetWaveTime(), VGet(635, 120, 0));
+		CNumber::DrawNumber_Normal(CWave::GetInstance()->GetTime(), VGet(635, 120, 0));
 		break;
 
 	case STATE_WAVE_NORMAL:
