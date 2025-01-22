@@ -5,7 +5,12 @@
 class CPlayerUI :public CUIBase
 {
 private:
-	int HPHndl;
+	int LifeHndl;
+	int BgHndl;
+	float CurrentLife;	//現在ライフ格納
+	float PreLife;		//過去ライフ格納
+	int Alpha;			//透明度
+	int Count;		
 
 public:
 	//コンストラクタ・デストラクタ
@@ -26,4 +31,7 @@ public:
 
 	//後処理
 	void Exit();
+
+	//透明度変更
+	void Alpha_Change();
 };

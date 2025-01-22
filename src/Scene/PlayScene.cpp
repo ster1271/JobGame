@@ -230,6 +230,8 @@ void CPlayScene::Step()
 		cBot.Step(cMapManager);
 		//ウェーブ処理
 		CWave::GetInstance()->Step();
+		//UI処理
+		cUIManager.Step();
 
 		//=======当たり判定処理==========//
 		cCollisionManager.PlayerToMap(cMapManager);

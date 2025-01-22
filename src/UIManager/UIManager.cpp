@@ -27,3 +27,9 @@ void CUIManager::Draw()
 	cPlayerUI.Draw();
 	cWaveUI.Draw();
 }
+
+//–ˆƒtƒŒ[ƒ€s‚¤ˆ—
+void CUIManager::Step()
+{
+	cPlayerUI.Step();
+}

@@ -128,6 +128,11 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 
 	//マウスポインタの座標取得
 	GetMousePoint(&MouseX, &MouseY);
+
+	if (CInput::IsKeyPush(KEY_INPUT_R))
+	{
+		Life -= 2;
+	}
 	
 	//弾発射処理
 	ShotCoolCount++;

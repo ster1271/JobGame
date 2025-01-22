@@ -23,4 +23,7 @@ public:
 
 	//•`‰æ
 	void Draw();
+
+	//–ˆƒtƒŒ[ƒ€s‚¤ˆ—
+	void Step();
 };
