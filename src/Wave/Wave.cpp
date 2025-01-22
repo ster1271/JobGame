@@ -76,6 +76,7 @@ void CWave::Step()
 	{
 	case STATE_WAVE_NONE:
 		break;
+
 	case STATE_WAVE_PREPAR:
 		Cnt--;
 
@@ -108,7 +109,10 @@ void CWave::Step()
 		break;
 
 	case STATE_WAVE_END:
-
+		WaveStateChange(STATE_WAVE_NONE);
+		SetIsWave(false);
+		SetIsNormal(false);
+		SetIsBotMove(false);
 		break;
 
 	default:

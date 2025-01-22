@@ -18,6 +18,7 @@ CEnemyManager::~CEnemyManager(){}
 void CEnemyManager::Init()
 {
 	Coolcnt = WAIT_TIME;
+	Respawn_Count = 20;
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Init();
@@ -70,6 +71,14 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 	//ウェーブ中のみ処理を行う
 	if (CWave::GetInstance()->GetIsWave() == true)
 	{
+		if (cEnemy_Normal->GetDeathCnt() == 20)
+		{
+			CWave::GetInstance()->WaveStateChange(STATE_WAVE_END);
+			cEnemy_Normal->SetDeathCnt(0);
+			Respawn_Count = 20;
+			Coolcnt = WAIT_TIME;
+		}
+
 		int iEnemyCnt = 0;	//敵の出現数
 		for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 		{
@@ -87,8 +96,12 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 		//一定期間出現していないか、生存数が0の時リクエストさせる
 		if (Coolcnt < 0 || iEnemyCnt == 0)
 		{
+			//生成した数が20ならこれ以上処理しない
+			if (Respawn_Count < 0)
+				return;
+
 			RequestEnemy();
-			Coolcnt = WAIT_TIME;
+			Coolcnt = WAIT_TIME;	
 		}
 	}
 }
@@ -110,10 +123,12 @@ void CEnemyManager::RequestEnemy()
 	//敵1のスポーン(読み込みで設定する)
 	VECTOR vPos = VGet(300.0f, 5.0f, 50.0f);
 	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
+
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		if (cEnemy_Normal[Enemy_Index].RequestEnemy(vPos, vSpeed))
 		{
+			Respawn_Count--;
 			break;
 		}
 	}

@@ -26,6 +26,7 @@ private:
 	CEnemy_Normal cEnemy_Normal[ENEMY_MAXNUM];
 	CEnemyBoss cEnemyBoss[ENEMY_MAXNUM];
 	int Coolcnt;
+	int Respawn_Count;		//生成した数
 
 public:
 	//コンストラクタ・デストラクタ
