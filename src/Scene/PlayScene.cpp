@@ -88,6 +88,8 @@ void CPlayScene::Draw()
 		cMiniMap.Draw();
 		//UI描画
 		cUIManager.Draw();
+
+
 	}
 
 	//カメラ情報表示
@@ -210,6 +212,7 @@ void CPlayScene::Step()
 		}
 
 		CDebugString::GetInstance()->AddFormatString(200, 200, "1200 / %d", CWave::GetInstance()->GetWaveTime());
+		CDebugString::GetInstance()->AddFormatString(200, 215, "ウェーブ状態：%d", CWave::GetInstance()->GetWaveState());
 
 		//オブジェクト更新処理
 		cObjectManager.Step();

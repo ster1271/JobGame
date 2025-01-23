@@ -360,6 +360,7 @@ void CCollisionManager::TurretShotToEnemy(CShotManager& cShotManager, CEnemyMana
 				if (!cENormal.GetActive())
 				{
 					Cnt++;
+					cEnemyManager.SetDeathCount(Cnt);
 				}
 			}
 		}
@@ -402,6 +403,7 @@ void CCollisionManager::PlayerShotToEnemy(CShotManager& cShotManager, CEnemyMana
 				if (!cENormal.GetActive())
 				{
 					Cnt++;
+					cEnemyManager.SetDeathCount(Cnt);
 				}
 			}
 		}

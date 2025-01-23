@@ -54,15 +54,11 @@ protected:
 	vector<VECTOR>List;	//座標格納用
 	int ListCnt;
 
-	int DeathCnt;
-
 public:
 	VECTOR GetPosition() { return cPos; }						//座標取得
 	VECTOR GetNextPosision() { return cNextPos; }				//座標取得
 	void SetNextPosision(VECTOR NewPos) { cNextPos = NewPos; }	//座標設定
 	bool GetDir(int dir) { return IsDir[dir]; }					//方向フラグ取得
-	int GetDeathCnt() { return DeathCnt; }
-	void SetDeathCnt(int Cnt) { DeathCnt = Cnt; }
 
 	//コンストラクタ・デストラクタ
 	CEnemyBase();
@@ -110,13 +106,11 @@ public:
 			memset(&cSize, 0, sizeof(VECTOR));
 			memset(&cSpeed, 0, sizeof(VECTOR));
 
-			DeathCnt++;
 			HitCount = 0;
 			State_Id = STATE_NUM;
 			List.clear();
 			IsActive = false;
 
-			CDebugString::GetInstance()->AddFormatString(100, 0, "敵を倒した数：%d", DeathCnt);
 		}
 	}
 

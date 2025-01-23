@@ -26,9 +26,12 @@ private:
 	CEnemy_Normal cEnemy_Normal[ENEMY_MAXNUM];
 	CEnemyBoss cEnemyBoss[ENEMY_MAXNUM];
 	int Coolcnt;
-	int Respawn_Count;		//生成した数
+	int RespawnCount;		//生成した数
+	int DeathCount;			//倒された数
 
 public:
+	void SetDeathCount(int Num) { DeathCount = Num; }	//設定
+
 	//コンストラクタ・デストラクタ
 	CEnemyManager();
 	~CEnemyManager();

@@ -26,7 +26,6 @@ void CEnemy_Normal::Init()
 	Life = 0;;			//ライフ
 	HitCount = 0;;		//弾の当たった回数
 	iHndl = -1;			//ハンドル
-	DeathCnt = 0;
 
 	IsActive = false;	//生存フラグ
 

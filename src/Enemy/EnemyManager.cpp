@@ -18,7 +18,7 @@ CEnemyManager::~CEnemyManager(){}
 void CEnemyManager::Init()
 {
 	Coolcnt = WAIT_TIME;
-	Respawn_Count = 20;
+	RespawnCount = 20;
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Init();
@@ -71,11 +71,11 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 	//ウェーブ中のみ処理を行う
 	if (CWave::GetInstance()->GetIsWave() == true)
 	{
-		if (cEnemy_Normal->GetDeathCnt() == 20)
+		if (DeathCount > 20)
 		{
 			CWave::GetInstance()->WaveStateChange(STATE_WAVE_END);
-			cEnemy_Normal->SetDeathCnt(0);
-			Respawn_Count = 20;
+			DeathCount = 0;
+			RespawnCount = 20;
 			Coolcnt = WAIT_TIME;
 		}
 
@@ -97,7 +97,7 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 		if (Coolcnt < 0 || iEnemyCnt == 0)
 		{
 			//生成した数が20ならこれ以上処理しない
-			if (Respawn_Count < 0)
+			if (RespawnCount < 0)
 				return;
 
 			RequestEnemy();
@@ -114,6 +114,7 @@ void CEnemyManager::Draw()
 		cEnemy_Normal[Enemy_Index].Draw();
 		//cEnemyBoss[Enemy_Index].Draw();
 	}
+	CDebugString::GetInstance()->AddFormatString(100, 0, "敵を倒した数：%d", DeathCount);
 }
 
 
@@ -128,7 +129,7 @@ void CEnemyManager::RequestEnemy()
 	{
 		if (cEnemy_Normal[Enemy_Index].RequestEnemy(vPos, vSpeed))
 		{
-			Respawn_Count--;
+			RespawnCount--;
 			break;
 		}
 	}
