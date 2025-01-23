@@ -16,6 +16,9 @@ enum NODE_STATE
 class CRoute_Search
 {
 private:
+
+	static CRoute_Search* cInstance;		//インスタンス
+
 	enum DIR
 	{
 		DIR_UP = 0,
@@ -45,7 +48,18 @@ private:
 
 	float tmp;
 
+	//コンストラクタ・デストラクタ
+	CRoute_Search();
+	~CRoute_Search();
+
 public:
+
+	static void Create();				//インスタンスの生成
+
+	static void Destroy();				//インスタンスの削除
+
+	static CRoute_Search* GetInstance();		//インスタンスの取得
+
 	//初期化
 	void Init();
 

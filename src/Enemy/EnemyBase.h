@@ -99,18 +99,18 @@ public:
 		if (Life <= 0)
 		{
 			//‚Ð‚Æ‚Ü‚¸‰Šú‰»
-			memset(&cPos, 0, sizeof(VECTOR));
+			/*memset(&cPos, 0, sizeof(VECTOR));
 			memset(&cNextPos, 0, sizeof(VECTOR));
 			memset(&cRotate, 0, sizeof(VECTOR));
 			memset(&cScale, 0, sizeof(VECTOR));
 			memset(&cSize, 0, sizeof(VECTOR));
-			memset(&cSpeed, 0, sizeof(VECTOR));
+			memset(&cSpeed, 0, sizeof(VECTOR));*/
+			iHndl = -1;
 
 			HitCount = 0;
 			State_Id = STATE_NUM;
 			List.clear();
 			IsActive = false;
-
 		}
 	}
 

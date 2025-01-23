@@ -7,7 +7,6 @@ const VECTOR ENEMY_NORMAL_SIZE = VGet(0.0f, 0.0f, 0.0f);
 class CEnemy_Normal: public CEnemyBase
 {
 private:
-	CRoute_Search cRoute_Search;
 	VECTOR Respown_Pos;
 	int ReSeachTime;
 

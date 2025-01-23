@@ -18,7 +18,6 @@ private:
 
 		STATE_NUM,
 	};
-	CRoute_Search cRoute;
 	BOT_STATE State_Id;
 
 	VECTOR cPos;

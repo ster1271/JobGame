@@ -22,7 +22,7 @@ CBot::~CBot()
 void CBot::Init()
 {
 	
-	cPos = VGet(50, 0.0f, 400.0f);
+	cPos = VGet(150, 0.0f, 160.0f);
 	cSize = VGet(0.06f, 0.06f, 0.06f);
 	cRotate = VGet(0.0f, 0.0f, 0.0f);
 
@@ -41,8 +41,6 @@ void CBot::Exit()
 	iHndl = -1;
 	Route_List.clear();
 	IsFinish = false;
-
-	cRoute.Exit();
 
 	State_Id = STATE_NUM;
 }
@@ -89,7 +87,7 @@ void CBot::Draw()
 		DrawFormatString(0, 210, GetColor(0, 0, 0), "外積:%f", tmp_dir);
 		DrawFormatString(0, 225, GetColor(0, 0, 0), "距離:%2f", tmp_Range);
 
-		cRoute.Draw(GetColor(0, 255, 0));
+		CRoute_Search::GetInstance()->Draw(GetColor(0, 255, 0));
 	}
 }
 
@@ -102,19 +100,23 @@ void CBot::Step(CMapManager& cMapManager)
 	{
 	case CBot::STATE_STOP:
 
+		if (Route_List.empty() == true)
+		{
+			tmp = 0;
+			Route_List = CRoute_Search::GetInstance()->Route_Search(cPos, cMapManager.GetGoal().GetPos(), cMapManager);
+		}
+
 		if (CWave::GetInstance()->GetIsWave() && CWave::GetInstance()->GetIsBotMove())
 		{
 			//Idを変更する
 			State_Id = STATE_SEARCH;
 		}
+
 		break;
 
 	case CBot::STATE_SEARCH:
 		
-		Route_List = cRoute.Route_Search(cPos, cMapManager.GetGoal().GetPos(), cMapManager);
-		tmp = 0;
 		State_Id = STATE_MOVE;
-
 		break;
 
 	case CBot::STATE_MOVE:

@@ -73,12 +73,18 @@ void CTurret_Normal::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManag
 			float Range = CMyLibrary::VecLong(Reng_Vec);
 
 			//直線距離が設定値よりも大きかったら下の処理をしない
+			TotalMinLenge = SET_RANGE;
 			if (Range >= SET_RANGE)
 				continue;
 
-			Turret_Rotate(cEnemy.GetPosition());					//角度処理
+			if (Range < TotalMinLenge)
+			{
+				TotalMinLenge = Range;
+			}
 
-			TurretShot(cShotManager);								//弾の発射リクエスト
+			Turret_Rotate(cEnemy.GetPosition());		//角度処理
+
+			TurretShot(cShotManager);					//弾の発射リクエスト
 		}
 	}
 }

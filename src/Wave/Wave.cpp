@@ -9,7 +9,7 @@ CWave::CWave()
 	IsWave = false;
 	IsNormal = false;
 	IsBotMove = false;
-
+	WaveTime = 0;
 	Cnt = -1;
 }
 
@@ -75,6 +75,15 @@ void CWave::Step()
 	switch (Wave_ID)
 	{
 	case STATE_WAVE_NONE:
+		
+		//時間を増加させる
+		//WaveTime++;
+		if (WaveTime > 1200)
+		{
+			WaveStateChange(STATE_WAVE_PREPAR);			//ウェーブ準備中にする
+			CWave::GetInstance()->SetIsNormal(true);	//通常ウェーブフラグをtrueにする
+			WaveTime = 0;								//ウェーブ発生時間を初期化する
+		}
 		break;
 
 	case STATE_WAVE_PREPAR:

@@ -214,17 +214,17 @@ void CEnemyBase::Enemy_Move(vector<VECTOR> List, int& Cnt)
 	}
 	else if (Dir >= 0.0f)//それ以外は角度を変える
 	{
-		cRotate.y += 0.08f;
+		cRotate.y += 0.1f;
 	}
 	else if (Dir < 0.0f)
 	{
-		cRotate.y -= 0.08f;
+		cRotate.y -= 0.1f;
 	}
 
 
 	//座標に速度を加算する
-	cNextPos.x += sinf(cRotate.y) * -0.2f;
-	cNextPos.z += cosf(cRotate.y) * -0.2f;
+	cNextPos.x += sinf(cRotate.y) * -0.4f;
+	cNextPos.z += cosf(cRotate.y) * -0.4f;
 
 	//ボットとの距離を計算
 	VECTOR v_tmp;

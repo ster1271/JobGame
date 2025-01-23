@@ -105,8 +105,6 @@ void CPlayScene::Draw()
 //-----------------------------------
 void CPlayScene::Init()
 {
-	TIME = 0;
-
 	//カメラ初期化
 	cCameraManager.Init();
 	cCameraManager.SetNearFar(5.0f, 10000.0f);
@@ -134,8 +132,6 @@ void CPlayScene::Init()
 //-----------------------------------
 void CPlayScene::Exit()
 {
-	TIME = 0;
-
 	//カメラマネージャー終了処理
 	cCameraManager.Exit();
 	//オブジェクトマネージャー終了処理
@@ -187,13 +183,6 @@ void CPlayScene::Load()
 //-----------------------------------
 void CPlayScene::Step()
 {
-	TIME++;
-	if (CWave::GetInstance()->GetWaveState() == STATE_WAVE_NONE)
-	{
-		//時間を増加させる
-		CWave::GetInstance()->SetWaveTime(TIME);
-	}
-
 	//シーン終了処理
 	if (cBot.GetFinish())
 	{
@@ -204,13 +193,6 @@ void CPlayScene::Step()
 	//プレイ時処理
 	if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_PALY)
 	{
-		if (CWave::GetInstance()->GetWaveTime() > 1200)
-		{
-			CWave::GetInstance()->WaveStateChange(STATE_WAVE_PREPAR);
-			CWave::GetInstance()->SetIsNormal(true);
-			CWave::GetInstance()->SetWaveTime(0);
-		}
-
 		CDebugString::GetInstance()->AddFormatString(200, 200, "1200 / %d", CWave::GetInstance()->GetWaveTime());
 		CDebugString::GetInstance()->AddFormatString(200, 215, "ウェーブ状態：%d", CWave::GetInstance()->GetWaveState());
 
@@ -233,6 +215,7 @@ void CPlayScene::Step()
 		cBot.Step(cMapManager);
 		//ウェーブ処理
 		CWave::GetInstance()->Step();
+
 		//UI処理
 		cUIManager.Step();
 

@@ -9,6 +9,9 @@ private:
 	float Attack;
 	int CoolTime;
 
+	float TotalMinLenge;
+	VECTOR EnemyPos;
+
 public:
 	//コンストラクタ・デストラクタ
 	CTurret_Normal();

@@ -6,6 +6,62 @@ const int MOVE_BLOKE = 1;
 const float MOVE_SPEED = 0.2f;
 const float RADIUS = 5.0f;
 
+//インスタンスの初期化
+CRoute_Search* CRoute_Search::cInstance = nullptr;
+
+
+//コンストラクタ
+CRoute_Search::CRoute_Search()
+{
+	List.clear();
+	ListCnt = 0;
+	IsFinish = false;
+}
+
+//デストラクタ
+CRoute_Search::~CRoute_Search(){}
+
+
+
+//インスタンスの生成
+void CRoute_Search::Create()
+{
+	//インスタンスにが生成されていなかったら
+	if (cInstance == nullptr)
+	{
+		//新しくnewする
+		cInstance = new CRoute_Search();
+	}
+}
+
+
+//インスタンスの削除
+void CRoute_Search::Destroy()
+{
+	//インスタンスが生成されていたら
+	if (cInstance != nullptr)
+	{
+		//deleteしてnullptrを入れる
+		delete cInstance;
+		cInstance = nullptr;
+	}
+}
+
+
+//インスタンスの取得
+CRoute_Search* CRoute_Search::GetInstance()
+{
+	if (cInstance == nullptr)
+	{
+		//インスタンスが生成されていなかったら生成する
+		Create();
+		return cInstance;
+	}
+	else
+	{
+		return cInstance;
+	}
+}
 
 //初期化
 void CRoute_Search::Init()
@@ -130,10 +186,7 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 			{
 				if (List[i].Total_Cost < TotalMinCost)
 				{
-					if (List[i].Total_Cost < TotalMinCost)
-					{
-						TotalMinCost = List[i].Total_Cost;
-					}
+					TotalMinCost = List[i].Total_Cost;
 				}
 			}
 
@@ -199,6 +252,9 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 	{
 		Pos_List.push_back(List[i].Pos);
 	}
+
+	//リストを削除する
+	List.clear();
 
 	return Pos_List;
 }

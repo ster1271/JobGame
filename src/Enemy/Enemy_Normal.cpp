@@ -2,7 +2,7 @@
 
 const int MAX_LIFE = 20;		//Å‘å‘Ì—Í
 const float SPEED = 5.0f;		//ˆÚ“®‘¬“x
-const int RESEARCH_TIME = 300;	//Œo˜H’Tõ‚µ’¼‚µŽžŠÔ
+const int RESEARCH_TIME = 1000;	//Œo˜H’Tõ‚µ’¼‚µŽžŠÔ
 
 //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 CEnemy_Normal::CEnemy_Normal()
@@ -44,16 +44,14 @@ void CEnemy_Normal::Load(int Hndl)
 //•`‰æ
 void CEnemy_Normal::Draw()
 {
-	CDebugString::GetInstance()->AddFormatString(100, 100, "ƒTƒCƒY	%f, %f, %f", cScale.x, cScale.y, cScale.z);
-
-
-	if (IsActive == false)	return;
+	if (!IsActive)
+		return;
 
 	MV1DrawModel(iHndl);
 
 	if (IS_DEBUG)
 	{
-		cRoute_Search.Draw(GetColor(0, 0, 255));
+		CRoute_Search::GetInstance()->Draw(GetColor(0, 0, 255));
 	}
 }
 
@@ -68,7 +66,7 @@ void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 	switch (State_Id)
 	{
 	case CEnemyBase::STATE_SEARCH:
-		List = cRoute_Search.Route_Search(cPos, cBot.GetPos(), cMapManager);
+		List = CRoute_Search::GetInstance()->Route_Search(cPos, cBot.GetPos(), cMapManager);
 		
 		State_Id = STATE_MOVE;
 		break;
@@ -90,10 +88,10 @@ void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 			//ŽžŠÔŒo‰ß‚ÅŒo˜H’Tõ‚µ’¼‚µ
 			if (ReSeachTime >= RESEARCH_TIME)
 			{
-				List.clear();
+				/*List.clear();
 				ReSeachTime = 0;
 				ListCnt = 0;
-				State_Id = STATE_SEARCH;
+				State_Id = STATE_SEARCH;*/
 
 				break;
 			}

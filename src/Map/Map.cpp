@@ -92,7 +92,7 @@ void CMap::LoadMap1()
 	WallInfo Walltmp;
 	FloarInfo Floartmp;
 
-	fopen_s(&fp_, "Data/Map/Maptest.csv", "r");		//CSVファイル読み込み
+	fopen_s(&fp_, "Data/Map/map1.txt", "r");		//CSVファイル読み込み
 
 	if (fp_ != nullptr)
 	{

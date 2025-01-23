@@ -18,9 +18,6 @@
 class CPlayScene
 {
 private:
-
-	int TIME;
-
 	enum tagPLAY_SCENE
 	{
 		PLAY_SCENE_INIT,
@@ -40,7 +37,6 @@ private:
 	CObjectManager cObjectManager;			//オブジェクトマネージャー
 	CTurretManager cTurretManager;			//タレットマネージャー
 	CBot cBot;								//ボットクラス
-	CRoute_Search cRoute_Search;			//経路探索クラス
 	CCollisionManager cCollisionManager;	//コリジョンマネージャー
 	CMapManager cMapManager;				//マップマネージャー
 	CMiniMap cMiniMap;						//ミニマップクラス

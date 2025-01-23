@@ -4,6 +4,7 @@
 static const char ENEMY_MODEL_PATH01[] = { "data/enemy/Enemy01.x" };
 static const char Enemy_MODEL_PATH02[] = { "data/enemy/Enemy02.x" };
 static const int WAIT_TIME = 300;		//敵が再登場するまでの時間
+static const int RESPAWN_MAX_NUM = 3;
 
 //コンストラクタ
 CEnemyManager::CEnemyManager()
@@ -18,7 +19,7 @@ CEnemyManager::~CEnemyManager(){}
 void CEnemyManager::Init()
 {
 	Coolcnt = WAIT_TIME;
-	RespawnCount = 20;
+	RespawnCount = RESPAWN_MAX_NUM;
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Init();
@@ -71,11 +72,11 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 	//ウェーブ中のみ処理を行う
 	if (CWave::GetInstance()->GetIsWave() == true)
 	{
-		if (DeathCount > 20)
+		if (DeathCount >= RESPAWN_MAX_NUM)
 		{
 			CWave::GetInstance()->WaveStateChange(STATE_WAVE_END);
 			DeathCount = 0;
-			RespawnCount = 20;
+			RespawnCount = RESPAWN_MAX_NUM;
 			Coolcnt = WAIT_TIME;
 		}
 
@@ -96,9 +97,12 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 		//一定期間出現していないか、生存数が0の時リクエストさせる
 		if (Coolcnt < 0 || iEnemyCnt == 0)
 		{
-			//生成した数が20ならこれ以上処理しない
-			if (RespawnCount < 0)
-				return;
+			if (CWave::GetInstance()->GetWaveState() == STATE_WAVE_NORMAL)
+			{
+				//一定数生成したらそれ以上処理しない
+				if (RespawnCount <= 0)
+					return;
+			}
 
 			RequestEnemy();
 			Coolcnt = WAIT_TIME;	
@@ -114,7 +118,8 @@ void CEnemyManager::Draw()
 		cEnemy_Normal[Enemy_Index].Draw();
 		//cEnemyBoss[Enemy_Index].Draw();
 	}
-	CDebugString::GetInstance()->AddFormatString(100, 0, "敵を倒した数：%d", DeathCount);
+	
+	CDraw3D::DrawBox3D(VGet(50.0f, 5.0f, 700.0f), VGet(50.0f, 50.0f, 50.0f));
 }
 
 
@@ -122,7 +127,7 @@ void CEnemyManager::Draw()
 void CEnemyManager::RequestEnemy()
 {
 	//敵1のスポーン(読み込みで設定する)
-	VECTOR vPos = VGet(300.0f, 5.0f, 50.0f);
+	VECTOR vPos = VGet(50.0f, 5.0f, 700.0f);
 	VECTOR vSpeed = VGet(0.0f, 0.0f, 0.0f);
 
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)

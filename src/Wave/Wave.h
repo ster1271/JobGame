@@ -4,7 +4,7 @@
 //ウェーブの状態
 enum WAVE_STATE
 {
-	STATE_WAVE_NONE,		//何もしてない
+	STATE_WAVE_NONE = 0,	//何もしてない
 	STATE_WAVE_PREPAR,		//ウェーブ準備中
 	STATE_WAVE_NORMAL,		//ノーマルウェーブ中
 	STATE_WAVE_BOTMOVE,		//ボット移動ウェーブ中
@@ -24,6 +24,7 @@ private:
 	bool IsBotMove;			//ボット移動ウェーブフラグ
 	int WaveTime;			//ウェーブ発生時間
 	int Cnt;				//時間カウント
+
 	
 public:
 	//コンストラクタ・デストラクタ
