@@ -13,6 +13,8 @@ protected:
 	int Org_Hndl;		//モデルハンドル(コピー元)
 	int iHndl;			//モデルハンドル(コピー用)
 
+	FILE* fp;			//ファイル操作変数
+
 	VECTOR cPos;		//座標
 	VECTOR cRotate;		//回転値
 	VECTOR cSize;		//拡縮値
@@ -24,6 +26,8 @@ protected:
 	int Power_Up_Count;	//強化回数
 
 	bool IsActive;		//生存フラグ
+
+	vector<VECTOR> SetTurretPoint;
 
 public:
 	CTurretBase();
@@ -67,6 +71,9 @@ public:
 
 	//タレット回転処理
 	virtual void Turret_Rotate(VECTOR vPos);
+
+	//タレットの設置位置読み込み
+	void Load_TurretPoint();
 
 };
 

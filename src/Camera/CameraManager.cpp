@@ -78,20 +78,8 @@ void CCameraManager::Step(VECTOR vForcus, VECTOR fRot, VECTOR vPos)
 	
 }
 
-
 //描画
-void CCameraManager::Draw()
-{
-	switch (eCurrentCameraID)
-	{
-	case CCameraManager::CAMERA_ID_DEBUG:
-
-		cDebugCam.Draw();
-		break;
-	default:
-		break;
-	}
-}
+void CCameraManager::Draw(){}
 
 //-------------------------
 //カメラのニア・ファー設定

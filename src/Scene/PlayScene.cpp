@@ -88,15 +88,13 @@ void CPlayScene::Draw()
 		cMiniMap.Draw();
 		//UI描画
 		cUIManager.Draw();
-
-
 	}
 
 	//カメラ情報表示
 	cCameraManager.Draw();
 
+	//デバック文字表示
 	CDebugString::GetInstance()->Draw();
-
 }
 
 
@@ -204,7 +202,7 @@ void CPlayScene::Step()
 		cMiniMap.Step(CPlayer::GetInstance()->GetPos(), CPlayer::GetInstance()->GetSpeed(), CPlayer::GetInstance()->GetRotate(), cMapManager);
 		//キャラクター更新処理
 		CPlayer::GetInstance()->Step(cShotManager, cTurretManager, cMapManager, cBot.GetPos());
-		CPlayer::GetInstance()->UpData();
+		
 		//エネミー更新処理
 		cEnemyManager.Step(cBot, cMapManager);
 		//タレット更新処理

@@ -34,6 +34,8 @@ private:
 
 	static CPlayer* cInstance;		//インスタンス
 
+	FILE* fp = nullptr;
+
 	bool IsDir[DIR_NUM];	//方向フラグ
 	PLAYER_STATE Id;
 	PLAYER_STATE oldId;
@@ -82,5 +84,8 @@ public:
 
 	//ボットの位置に移動
 	void BackBotPosition(VECTOR vPos);
+
+	//タレット設置場所指定
+	void SetBotPlace();
 
 };

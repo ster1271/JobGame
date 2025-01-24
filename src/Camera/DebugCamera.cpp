@@ -25,10 +25,7 @@ CDebugCamera::CDebugCamera()
 	memset(&vRot, 0, sizeof(VECTOR));
 }
 
-CDebugCamera::~CDebugCamera()
-{
-
-}
+CDebugCamera::~CDebugCamera(){}
 
 
 //初期化
@@ -71,13 +68,7 @@ void CDebugCamera::Update()
 //-----------------------
 //デバックカメラ時の表示
 //-----------------------
-void CDebugCamera::Draw()
-{
-	DrawString(0, 0, "デバックカメラモード", GetColor(255, 255, 255));
-	DrawString(0, 15, "Pで設置", GetColor(255, 255, 255));
-	DrawString(0, 30, "1:チェックポイント 2:敵のスポーン地点", GetColor(255, 255, 255));
-	DrawFormatString(0, 45, GetColor(255, 0, 0), "座標X：%f, 座標Y：%f, 座標Z：%f", CameraPos.x, CameraPos.y, CameraPos.z);
-}
+void CDebugCamera::Draw(){}
 
 //後処理
 void CDebugCamera::Exit()

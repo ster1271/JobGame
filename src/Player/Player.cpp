@@ -74,6 +74,8 @@ void CPlayer::Init()
 	ShotCoolCount = 0;
 	PushCnt = 0;
 
+	IsActive = true;
+
 	Life = PLAYER_MAX_LIFE;
 }
 
@@ -104,6 +106,8 @@ void CPlayer::Shot()
 //毎フレーム行う処理
 void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, CMapManager& cMapManager, VECTOR BotPos)
 {
+	SetBotPlace();
+
 	switch (Id)
 	{
 	case STATE_DEFAULT:
@@ -176,20 +180,19 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 
 	//過去のアニメーションIDに現在アニメーションを代入
 	oldId = Id;
+
+	//情報更新
+	UpData();
 }
 
 //描画
 void CPlayer::Draw()
 {
-	//条件式がtrueならモデルをfalseなら球を表示
-	if (iHndl != -1)
-	{
-		MV1DrawModel(iHndl);
-	}
-	else
-	{
-		DrawSphere3D(cPos, SPERE_R, 32, GetColor(255, 0, 0), GetColor(255, 0, 0), TRUE);
-	}
+	if (!IsActive)
+		return;
+
+	//プレイヤーの描画
+	MV1DrawModel(iHndl);
 
 	if (IS_DEBUG)
 	{
@@ -199,6 +202,7 @@ void CPlayer::Draw()
 		DrawFormatString(0, 45, GetColor(255, 0, 0), "プレイヤーY軸:%f", cRotate.y);
 		DrawFormatString(0, 60, GetColor(255, 0, 0), "マウスX座標:%d", MouseX);
 		DrawFormatString(0, 75, GetColor(255, 0, 0), "マウスY座標:%d", MouseY);
+		DrawSphere3D(cPos, SPERE_R, 32, GetColor(255, 0, 0), GetColor(255, 0, 0), TRUE);
 	}
 
 	if (CGamePad::GetPadNumState() != 0)
@@ -224,9 +228,7 @@ void CPlayer::Draw()
 		CDebugString::GetInstance()->AddString(0, 375, "ゴールに1キー長押しでウェーブスタート");
 		CDebugString::GetInstance()->AddFormatString(0, 390, "1キーを押した時間：%d", PushCnt);
 		CDebugString::GetInstance()->AddString(0, 405, "TABキーでマップ表示切り替え");
-	}
-	
-	CDebugString::GetInstance()->Draw();
+	}	
 }
 
 //終了処理
@@ -379,4 +381,28 @@ void CPlayer::BackBotPosition(VECTOR vPos)
 	{
 		ReturnCnt = 0;
 	}
+}
+
+
+//タレット設置場所指定
+void CPlayer::SetBotPlace()
+{
+	VECTOR vPos = VECTOR_ZERO;
+
+	//ファイルを開く
+	fopen_s(&fp, "data/Turret/TurretPlace.txt", "a+");
+
+	if (CInput::IsKeyPush(KEY_INPUT_RETURN))
+	{
+		if (fp != nullptr)
+		{
+			//プレイヤーの現在座標を渡す
+			vPos = cPos;
+
+			fprintf(fp, "%d, %d, %d\n", (int)vPos.x, (int)vPos.y, (int)vPos.z);
+		}
+	}
+
+	//ファイルを閉じる
+	fclose(fp);
 }

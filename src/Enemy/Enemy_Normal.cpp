@@ -86,15 +86,15 @@ void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 			ReSeachTime++;
 
 			//ŠÔŒo‰ß‚ÅŒo˜H’Tõ‚µ’¼‚µ
-			if (ReSeachTime >= RESEARCH_TIME)
+			/*if (ReSeachTime >= RESEARCH_TIME)
 			{
-				/*List.clear();
+				List.clear();
 				ReSeachTime = 0;
 				ListCnt = 0;
-				State_Id = STATE_SEARCH;*/
+				State_Id = STATE_SEARCH;
 
 				break;
-			}
+			}*/
 
 			//Œo˜HˆÚ“®ˆ—
 			Enemy_Move(List, ListCnt);

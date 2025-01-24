@@ -61,7 +61,10 @@ void CWave::WaveStateChange(WAVE_STATE id)
 		break;
 
 	case STATE_WAVE_END:
-		Cnt = 600;
+		SetIsWave(false);
+		SetIsNormal(false);
+		SetIsBotMove(false);
+		Cnt = 300;
 		break;
 
 	default:
@@ -77,7 +80,7 @@ void CWave::Step()
 	case STATE_WAVE_NONE:
 		
 		//時間を増加させる
-		//WaveTime++;
+		/*WaveTime++;*/
 		if (WaveTime > 1200)
 		{
 			WaveStateChange(STATE_WAVE_PREPAR);			//ウェーブ準備中にする
@@ -87,8 +90,9 @@ void CWave::Step()
 		break;
 
 	case STATE_WAVE_PREPAR:
-		Cnt--;
 
+		//UI表示のための時間を作る
+		Cnt--;
 		if (Cnt < 0)
 		{
 			Cnt = 0;
@@ -118,10 +122,15 @@ void CWave::Step()
 		break;
 
 	case STATE_WAVE_END:
-		WaveStateChange(STATE_WAVE_NONE);
-		SetIsWave(false);
-		SetIsNormal(false);
-		SetIsBotMove(false);
+	
+		//UI表示のための時間を作る
+		Cnt--;
+		if (Cnt < 0)
+		{
+			Cnt = 0;
+			WaveStateChange(STATE_WAVE_NONE);
+		}
+		
 		break;
 
 	default:

@@ -24,6 +24,8 @@ void CTurret_Normal::Init()
 	CTurretBase::Init();
 	Attack = 0.0f;
 	CoolTime = 0;
+
+	Load_TurretPoint();
 }
 
 //データロード
