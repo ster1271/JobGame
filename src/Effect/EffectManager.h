@@ -1,5 +1,5 @@
 #pragma once
-
+#include "effekseer.h"
 
 class CEffectManager
 {
@@ -18,6 +18,14 @@ private:
 
 	static CEffectManager* cInstance;		//インスタンス
 
+	static int m_iHndl[EFFECTID_NUM];		//サウンドハンドル
+
+	VECTOR vRot;
+	VECTOR vEyePos;
+	float fNear;
+	float fFar;
+	float fPars;
+
 public:
 	static void Create();				//インスタンスの生成
 
@@ -25,7 +33,13 @@ public:
 
 	static CEffectManager* GetInstance();		//インスタンスの取得
 
+	void Init();
 
+	void UpData();
+
+	bool Load();
+
+	void Draw();
 };
 
 

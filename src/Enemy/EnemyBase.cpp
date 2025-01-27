@@ -202,7 +202,7 @@ void CEnemyBase::Enemy_Move(vector<VECTOR> List, int& Cnt)
 	//外積計算
 	Dir = (Vtmp.x * vSpd.z) - (vSpd.x * Vtmp.z);
 
-	if (fabsf(Dir) < 1.0f)
+	if (fabsf(Dir) < 2.0f)
 	{
 		float X = Vtmp.x = cPos.x - List[Cnt].x;
 		float Z = Vtmp.x = cPos.z - List[Cnt].z;
@@ -212,7 +212,7 @@ void CEnemyBase::Enemy_Move(vector<VECTOR> List, int& Cnt)
 
 		cRotate.y = NextRotY;
 	}
-	else if (Dir >= 0.0f)//それ以外は角度を変える
+	else if (Dir >= 0.0f)
 	{
 		cRotate.y += 0.1f;
 	}

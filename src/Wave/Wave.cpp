@@ -80,7 +80,7 @@ void CWave::Step()
 	case STATE_WAVE_NONE:
 		
 		//時間を増加させる
-		/*WaveTime++;*/
+		WaveTime++;
 		if (WaveTime > 1200)
 		{
 			WaveStateChange(STATE_WAVE_PREPAR);			//ウェーブ準備中にする

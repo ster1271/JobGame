@@ -59,13 +59,15 @@ void CTurret_Normal::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManag
 	//ƒ^ƒŒƒbƒg‚ª¶¬‚³‚ê‚Ä‚¢‚È‚©‚Á‚½‚çˆ—‚ðs‚í‚È‚¢
 	if (!IsActive)return;
 
+	int Num = -1;
+
 	//HP‚ª0‚æ‚è‘å‚«‚¢‚Æ‚«‚Éˆ—‚ðs‚¤
 	if (Hp > 0.0f)
 	{
-		for (int i = 0; i < ENEMY_MAXNUM; i++)
+		for (int Index = 0; Index < ENEMY_MAXNUM; Index++)
 		{
 			//‚±‚Ìfor•¶‚ÅExit‚ªŒÄ‚Î‚ê‚Ä‚½‚ç“G‚ª•`‰æ‚³‚ê‚È‚¢
-			CEnemy_Normal& cEnemy = cEnemyManager.GetEnemy(i);
+			CEnemy_Normal& cEnemy = cEnemyManager.GetEnemy(Index);
 
 			//“G‚Ìƒtƒ‰ƒO‚ªfalse‚È‚çˆÈ~‚Ìˆ—‚ð‚µ‚È‚¢
 			if (!cEnemy.GetActive())
@@ -82,9 +84,10 @@ void CTurret_Normal::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManag
 			if (Range < TotalMinLenge)
 			{
 				TotalMinLenge = Range;
+				Num = Index;
 			}
 
-			Turret_Rotate(cEnemy.GetPosition());		//Šp“xˆ—
+			Turret_Rotate(cEnemyManager.GetEnemy(Num).GetPosition());		//Šp“xˆ—
 
 			TurretShot(cShotManager);					//’e‚Ì”­ŽËƒŠƒNƒGƒXƒg
 		}

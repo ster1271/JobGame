@@ -2,13 +2,15 @@
 #include "DrawFPS/fps.h"
 #include "Scene/SceneManager.h"
 #include "Debug/DebugString.h"
+#include "Effect/effekseer.h"
+
 
 
 // Win32アプリケーションは WinMain関数 から始まる
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	//ウィンドウの状態を設定する
-	ChangeWindowMode(true);
+	ChangeWindowMode(TRUE);
 
 	//DXライブラリの初期化
 	if (DxLib_Init() == -1) {
@@ -20,6 +22,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//描画するスクリーンを設定する
 	SetDrawScreen(DX_SCREEN_BACK);
+	// Zソート判定
+	SetUseZBuffer3D(TRUE);
+	SetWriteZBuffer3D(TRUE);
+	SetTransColor(255, 0, 255);	// 透過色指定
 
 	//ライト設定
 	SetUseLighting(TRUE);
@@ -110,6 +116,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//-----------------------------------------
 	//最後に１回だけやる処理をここに書く
+	CEffekseerCtrl::Exit();
 
 	//-----------------------------------------
 	//DXライブラリの後処理
