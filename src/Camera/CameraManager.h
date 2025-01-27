@@ -16,8 +16,10 @@ public:
 	};
 
 private:
+	
 	CPlayCamera cPlayCam;			//プレイヤーカメラ
 	CDebugCamera cDebugCam;			//デバックカメラ
+
 	tagCAMERA_ID eCurrentCameraID;	//現在のカメラID
 
 	float	PlayerRotateY;	//プレイヤーの角度

@@ -28,6 +28,7 @@ void CBot::Init()
 
 	Route_List.clear();
 	IsFinish = false;
+	IsActive = false;
 	State_Id = STATE_STOP;
 }
 
@@ -41,6 +42,7 @@ void CBot::Exit()
 	iHndl = -1;
 	Route_List.clear();
 	IsFinish = false;
+	IsActive = false;
 
 	State_Id = STATE_NUM;
 }
@@ -51,7 +53,11 @@ bool CBot::Load()
 	iHndl = MV1LoadModel(BOT_FILE_PATH);
 
 	if (iHndl != -1)
+	{
+		IsActive = true;
+		Updata();
 		return true;
+	}
 	else
 		return false;
 }
@@ -67,6 +73,9 @@ void CBot::Updata()
 //描画
 void CBot::Draw()
 {
+	if (!IsActive)
+		return;
+
 	//条件式がtrueならモデルをfalseなら球を表示
 	if (iHndl != -1)
 	{

@@ -35,6 +35,7 @@ private:
 
 	vector<VECTOR> Route_List;
 	bool IsFinish;
+	bool IsActive;
 
 public:
 	//コンストラクタ・デストラクタ

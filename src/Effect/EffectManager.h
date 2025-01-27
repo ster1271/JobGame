@@ -18,9 +18,12 @@ private:
 
 	static CEffectManager* cInstance;		//インスタンス
 
-
 public:
+	static void Create();				//インスタンスの生成
 
+	static void Destroy();				//インスタンスの削除
+
+	static CEffectManager* GetInstance();		//インスタンスの取得
 
 
 };

@@ -65,8 +65,8 @@ void CTurretManager::Update()
 		Turret_List[TurretIndex]->Update();
 	}
 
-	CDebugString::GetInstance()->AddFormatString(500, 500, "リストの個数：%d", Turret_List.size());
-	CDebugString::GetInstance()->AddFormatString(500, 525, "設置できる数残り：%d", TURRET_MAX_NUM - Turret_List.size());
+	//CDebugString::GetInstance()->AddFormatString(500, 500, "リストの個数：%d", Turret_List.size());
+	//CDebugString::GetInstance()->AddFormatString(500, 525, "設置できる数残り：%d", TURRET_MAX_NUM - Turret_List.size());
 
 }
 

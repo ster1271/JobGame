@@ -94,6 +94,7 @@ void CPlayScene::Draw()
 	cCameraManager.Draw();
 
 	//デバック文字表示
+
 	CDebugString::GetInstance()->Draw();
 }
 
@@ -105,7 +106,6 @@ void CPlayScene::Init()
 {
 	//カメラ初期化
 	cCameraManager.Init();
-	cCameraManager.SetNearFar(5.0f, 10000.0f);
 	//オブジェクト初期化
 	cObjectManager.Init();
 	//マップ全般初期化
@@ -202,6 +202,7 @@ void CPlayScene::Step()
 		cMiniMap.Step(CPlayer::GetInstance()->GetPos(), CPlayer::GetInstance()->GetSpeed(), CPlayer::GetInstance()->GetRotate(), cMapManager);
 		//キャラクター更新処理
 		CPlayer::GetInstance()->Step(cShotManager, cTurretManager, cMapManager, cBot.GetPos());
+		CPlayer::GetInstance()->UpData();
 		
 		//エネミー更新処理
 		cEnemyManager.Step(cBot, cMapManager);

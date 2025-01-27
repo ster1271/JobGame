@@ -7,16 +7,34 @@ CPlayer* CPlayer::cInstance = nullptr;
 const char ATTACKER_PATH[] = { "data/character/human.x" };
 
 
-//コンストラクタ・デストラクタ
+//コンストラクタ
 CPlayer::CPlayer()
 {
-	IsDir[DIR_NUM] = { false };
+	for (int Index = 0; Index < DIR_NUM; Index++)
+	{
+		IsDir[Index] = false;
+	}
 	memset(&Id, 0, sizeof(PLAYER_STATE));
+	memset(&oldId, 0, sizeof(PLAYER_STATE));
+
+	memset(&cPos, 0, sizeof(VECTOR));
+	memset(&cNextPos, 0, sizeof(VECTOR));
+	memset(&cRotate, 0, sizeof(VECTOR));
+	memset(&cMoveRotate, 0, sizeof(VECTOR));
+	memset(&cScale, 0, sizeof(VECTOR));
+	memset(&cSize, 0, sizeof(VECTOR));
+
+	fSpd = 0.0f;
+	StoreRot = 0.0f;
+	ShotCoolCount = 0;
+	PushCnt = 0;
+
+	Life = 0;
+	IsActive = false;
 }
 
-CPlayer::~CPlayer()
-{
-}
+//デストラクタ
+CPlayer::~CPlayer(){}
 
 //インスタンスの生成
 void CPlayer::Create()
@@ -73,16 +91,18 @@ void CPlayer::Init()
 	StoreRot = 0.0f;
 	ShotCoolCount = 0;
 	PushCnt = 0;
-
-	IsActive = true;
-
 	Life = PLAYER_MAX_LIFE;
+	IsActive = false;
 }
 
 //データ読み込み
 void CPlayer::Load()
 {
 	iHndl = MV1LoadModel(ATTACKER_PATH);
+	IsActive = true;
+	MV1SetPosition(iHndl, cPos);		//座標の更新
+	MV1SetScale(iHndl, cScale);			//サイズの更新
+	MV1SetRotationXYZ(iHndl, cRotate);	//回転値の更新
 }
 
 //デフォルトモーション
@@ -180,9 +200,6 @@ void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, C
 
 	//過去のアニメーションIDに現在アニメーションを代入
 	oldId = Id;
-
-	//情報更新
-	UpData();
 }
 
 //描画
@@ -202,7 +219,6 @@ void CPlayer::Draw()
 		DrawFormatString(0, 45, GetColor(255, 0, 0), "プレイヤーY軸:%f", cRotate.y);
 		DrawFormatString(0, 60, GetColor(255, 0, 0), "マウスX座標:%d", MouseX);
 		DrawFormatString(0, 75, GetColor(255, 0, 0), "マウスY座標:%d", MouseY);
-		DrawSphere3D(cPos, SPERE_R, 32, GetColor(255, 0, 0), GetColor(255, 0, 0), TRUE);
 	}
 
 	if (CGamePad::GetPadNumState() != 0)

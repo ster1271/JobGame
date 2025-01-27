@@ -1,18 +1,17 @@
 #pragma once
 #include <DxLib.h>
 
+enum tagSoundID
+{
+	SOUNDID_BGM,		//ゲーム中のBGM
+	SOUNDID_SE_PLSHOT,	//プレイヤーの発射音
+	SOUNDID_SE_EXPLORE,	//爆発音
+
+	SOUNDID_NUM
+};
+
 class CSoundManager
 {
-public:
-	enum tagSoundID
-	{
-		SOUNDID_BGM,		//ゲーム中のBGM
-		SOUNDID_SE_PLSHOT,	//プレイヤーの発射音
-		SOUNDID_SE_EXPLORE,	//爆発音
-
-		SOUNDID_NUM
-	};
-
 private:
 	static int m_iHndl[SOUNDID_NUM];	//サウンドハンドル
 
@@ -74,7 +73,4 @@ public:
 
 	//全音楽停止
 	static void StopAll();
-
-
-
 };

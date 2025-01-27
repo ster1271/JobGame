@@ -5,7 +5,12 @@ const char FONT_NUMBER[] = { "data/UI/Number/number16x32_06.png" };
 
 
 //コンストラクタ
-CWaveUI::CWaveUI() {}
+CWaveUI::CWaveUI()
+{
+	BgHndl = -1;
+	ChangeCount = 0;
+	num = 0;
+}
 
 //デストラクタ
 CWaveUI::~CWaveUI(){}

@@ -141,6 +141,7 @@ void CShotManager::RequestPlayerShot(const VECTOR& vPos, const VECTOR& vSpeed)
 	{
 		if (cPlayerShot[i].RequestShot(vPos, vSpeed))
 		{
+			CSoundManager::Play(SOUNDID_SE_PLSHOT, DX_PLAYTYPE_NORMAL, true);
 			break;
 		}
 	}

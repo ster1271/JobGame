@@ -33,6 +33,7 @@ CCameraManager::~CCameraManager()
 //-------------------------
 void CCameraManager::Init()
 {
+	SetNearFar(5.0f, 10000.0f);
 	cPlayCam.Init(DEFAULT_EYE_POS, DEFAULT_FORCUS_POS, DEFAULT_UP_VEC);
 	cDebugCam.Init(DEFAULT_EYE_POS);
 }

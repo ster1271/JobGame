@@ -51,6 +51,7 @@ void CGoal::Init()
 void CGoal::Load()
 {
 	iHndl = MV1LoadModel(MODEL_PATH);
+	Update();
 }
 
 //•`‰æ
