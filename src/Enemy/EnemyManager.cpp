@@ -4,7 +4,7 @@
 static const char ENEMY_MODEL_PATH01[] = { "data/enemy/Enemy01.x" };
 static const char Enemy_MODEL_PATH02[] = { "data/enemy/Enemy02.x" };
 static const int WAIT_TIME = 200;		//敵が再登場するまでの時間
-static const int RESPAWN_MAX_NUM = 3;
+static const int RESPAWN_MAX_NUM = 10;	//通常ウェーブ最大出現数
 
 //コンストラクタ
 CEnemyManager::CEnemyManager()

@@ -29,13 +29,13 @@ void CMiniMap::Draw()
 	if (IsOpen)
 	{
 		SetDrawBlendMode(DX_BLENDMODE_PMA_ALPHA, 150);
-		DrawRotaGraph(-PlayerPos.x / 2 + 700, PlayerPos.z / 2, 0.3f, PlayerRot.y, PlayerHndl, true);
+		DrawRotaGraph(-PlayerPos.x / 2 + 1000, PlayerPos.z / 2 + 75, 0.3f, PlayerRot.y, PlayerHndl, true);
 
 		for (int WallIndex = 0; WallIndex < WallInfoList.size(); WallIndex++)
 		{
 			if (WallInfoList[WallIndex].IsMap)
 			{
-				DrawRotaGraph(-WallInfoList[WallIndex].vPos.x / 2 + 700, WallInfoList[WallIndex].vPos.z / 2, 0.25f, 0.0f, WallHndl, true, false, false);
+				DrawRotaGraph(-WallInfoList[WallIndex].vPos.x / 2 + 1000, WallInfoList[WallIndex].vPos.z / 2 + 75, 0.25f, 0.0f, WallHndl, true, false, false);
 			}
 		}
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);

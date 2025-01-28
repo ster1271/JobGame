@@ -16,6 +16,6 @@ const unsigned int COLOR = GetColor(255, 0, 0);		//デフォルトの色
 
 const VECTOR VECTOR_ZERO = VGet(0.0f, 0.0f, 0.0f);	//VECTORの初期化に使う
 
-const bool IS_DEBUG = true;						//デバックフラグ
+const bool IS_DEBUG = false;						//デバックフラグ
 
 using namespace std;

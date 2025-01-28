@@ -87,9 +87,11 @@ void CTurret_Normal::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManag
 				Num = Index;
 			}
 
-			Turret_Rotate(cEnemyManager.GetEnemy(Num).GetPosition());		//角度処理
+			Turret_Rotate(cEnemy.GetPosition());							//角度処理
+			//Turret_Rotate(cEnemyManager.GetEnemy(Num).GetPosition());		//角度処理
 
 			TurretShot(cShotManager);					//弾の発射リクエスト
+
 		}
 	}
 }
