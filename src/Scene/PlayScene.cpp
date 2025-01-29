@@ -86,6 +86,8 @@ void CPlayScene::Draw()
 		cBot.Draw();
 		//ミニマップ描画
 		cMiniMap.Draw();
+		//エフェクト描画
+		CEffectManager::GetInstance()->Draw();
 		//UI描画
 		cUIManager.Draw();
 	}
@@ -122,6 +124,8 @@ void CPlayScene::Init()
 	cBot.Init();
 	//UIマネージャー初期化
 	cUIManager.Init();
+	//エフェクト初期化
+	CEffectManager::GetInstance()->Init();
 }
 
 
@@ -146,7 +150,6 @@ void CPlayScene::Exit()
 	cShotManager.Exit();
 	//ボットクラス終了処理
 	cBot.Exit();
-
 }
 
 
@@ -173,6 +176,8 @@ void CPlayScene::Load()
 	cMiniMap.Load();
 	//UI読み込み
 	cUIManager.Load();
+	//エフェクト読み込み
+	CEffectManager::GetInstance()->Load();
 }
 
 
@@ -214,6 +219,8 @@ void CPlayScene::Step()
 		cBot.Step(cMapManager);
 		//ウェーブ処理
 		CWave::GetInstance()->Step();
+
+		CEffectManager::GetInstance()->UpData(CPlayer::GetInstance()->GetPos(), CPlayer::GetInstance()->GetRotate());
 
 		//UI処理
 		cUIManager.Step();

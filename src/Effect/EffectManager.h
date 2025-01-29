@@ -1,15 +1,15 @@
 #pragma once
 #include "effekseer.h"
 
+enum EffectID
+{
+	EFFECTORID_A = 0,
+
+	EFFECTID_NUM,			//エフェクト総数
+};
+
 class CEffectManager
 {
-public:
-	enum EffectID
-	{
-		EFFECTORID_NONE = 0,
-
-		EFFECTID_NUM,			//エフェクト総数
-	};
 
 private:
 	//コンストラクタ・デストラクタ
@@ -26,6 +26,8 @@ private:
 	float fFar;
 	float fPars;
 
+	int Hndl;
+
 public:
 	static void Create();				//インスタンスの生成
 
@@ -35,9 +37,11 @@ public:
 
 	void Init();
 
-	void UpData();
+	void UpData(VECTOR CameraPos, VECTOR CameraRot);
 
 	bool Load();
+
+	void Reqest(int ID, VECTOR EffectPos, bool IsLoop);
 
 	void Draw();
 };

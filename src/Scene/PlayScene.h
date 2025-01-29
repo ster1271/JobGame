@@ -14,6 +14,7 @@
 #include "../MiniMap/MiniMap.h"
 #include "../Wave/Wave.h"
 #include "../UIManager/UIManager.h"
+#include "../Effect/EffectManager.h"
 
 class CPlayScene
 {
@@ -41,7 +42,6 @@ private:
 	CMapManager cMapManager;				//マップマネージャー
 	CMiniMap cMiniMap;						//ミニマップクラス
 	CUIManager cUIManager;					//UIマネージャー
-	
 
 public:
 	//コンストラクタ・デストラクタ

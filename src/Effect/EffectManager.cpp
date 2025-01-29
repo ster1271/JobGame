@@ -67,9 +67,9 @@ void CEffectManager::Init()
 	CEffekseerCtrl::SetProjectionMtx(fPars, 640.0f / 480.0f, fNear, fFar);
 }
 
-void CEffectManager::UpData()
+void CEffectManager::UpData(VECTOR CameraPos, VECTOR CameraRot)
 {
-	CEffekseerCtrl::SetCameraRotMtx(vEyePos, vRot, VGet(0.0f, 1.0f, 0.0f));
+	CEffekseerCtrl::SetCameraRotMtx(CameraPos, CameraRot, VGet(0.0f, 1.0f, 0.0f));
 	CEffekseerCtrl::Update();
 }
 
@@ -78,12 +78,12 @@ bool CEffectManager::Load()
 	bool isRet = true;
 	const char pFileName[EFFECTID_NUM][128] =
 	{
-		
+		"data/effect/eff.efk"
 	};
 
 	for (int i = 0; i < EFFECTID_NUM; i++)
 	{
-		m_iHndl[i] = LoadSoundMem(pFileName[i]);
+		m_iHndl[i] = CEffekseerCtrl::LoadData(pFileName[i]);
 		//1つでもロード失敗があればフラグをオフに
 		if (m_iHndl[i] == -1)
 		{
@@ -92,6 +92,11 @@ bool CEffectManager::Load()
 	}
 
 	return isRet;
+}
+
+void CEffectManager::Reqest(int ID, VECTOR EffectPos, bool IsLoop)
+{
+	CEffekseerCtrl::Request(ID, EffectPos, IsLoop);
 }
 
 
