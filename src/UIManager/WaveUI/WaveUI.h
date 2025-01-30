@@ -8,6 +8,8 @@ class CWaveUI : public CUIBase
 {
 private:
 	int BgHndl;
+	int StartHndl;
+	int ClearHndl;
 	int num;
 	int ChangeCount;
 

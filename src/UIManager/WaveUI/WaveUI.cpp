@@ -1,6 +1,7 @@
 #include "WaveUI.h"
 
 const char WAVE_UI_PATH[] = { "data/UI/wave/wave.png" };
+const char WAVE_CLEAR_UI_PATH[] = {"data/UI/wave/wave_clear.png"};
 const char FONT_NUMBER[] = { "data/UI/Number/number16x32_06.png" };
 
 
@@ -19,6 +20,8 @@ CWaveUI::~CWaveUI(){}
 void CWaveUI::Init()
 {
 	CUIBase::Init();
+	StartHndl = -1;
+	ClearHndl = -1;
 	BgHndl = -1;
 	num = 80;
 	ChangeCount = 0;
@@ -27,6 +30,8 @@ void CWaveUI::Init()
 //ì«Ç›çûÇ›
 void CWaveUI::Load()
 {
+	StartHndl = -1;
+	ClearHndl = LoadGraph(WAVE_CLEAR_UI_PATH);
 	BgHndl = LoadGraph(WAVE_UI_PATH);
 	CNumber::SetNumber(FONT_NUMBER, 16, 32);
 }
@@ -79,15 +84,24 @@ void CWaveUI::Draw()
 		break;
 
 	case STATE_WAVE_NORMAL:
-
+		num = 300;
 		break;
 
 	case STATE_WAVE_BOTMOVE:
-
+		num = 300;
 		break;
 
 	case STATE_WAVE_END:
+		num--;
 
+		if (num < 0)
+		{
+			num = 0;
+		}
+
+		SetDrawBlendMode(DX_BLENDMODE_PMA_ALPHA, num);
+		DrawRotaGraph(1280 / 2, 100, 4.0f, 0.0f, ClearHndl, true, false, false);
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		break;
 
 	default:
