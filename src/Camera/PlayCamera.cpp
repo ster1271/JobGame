@@ -2,6 +2,7 @@
 #include "math.h"
 #include "PlayCamera.h"
 #include "../MyLibrary/MyLibrary.h"
+#include "../Effect/EffectManager.h"
 
 //カメラの距離
 #define CAMERA_LENGTH	(80.0f)
@@ -62,12 +63,15 @@ void CPlayCamera::Step(VECTOR vForcus, VECTOR fRot)
 	//注視点はターゲットの位置を利用する
 	ForcusPos = vForcus;
 	ForcusPos.y = FORCUS_OFFSET_Y;
+
+	Rot = fRot;
 }
 
 //更新したデータを反映させる
 void CPlayCamera::Update()
 {
 	SetCameraPositionAndTargetAndUpVec(CameraPos, ForcusPos, Up);
+	CEffectManager::GetInstance()->UpData(CameraPos, Rot, Up);
 }
 
 

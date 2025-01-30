@@ -1,9 +1,10 @@
 #pragma once
+#include "../Common.h"
 #include "effekseer.h"
 
 enum EffectID
 {
-	EFFECTORID_A = 0,
+	EFFECTORID_EXPLOSION = 0,
 
 	EFFECTID_NUM,			//エフェクト総数
 };
@@ -37,7 +38,7 @@ public:
 
 	void Init();
 
-	void UpData(VECTOR CameraPos, VECTOR CameraRot);
+	void UpData(VECTOR vForcus, VECTOR fRot, VECTOR vUp);
 
 	bool Load();
 

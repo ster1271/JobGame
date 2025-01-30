@@ -354,6 +354,8 @@ void CCollisionManager::TurretShotToEnemy(CShotManager& cShotManager, CEnemyMana
 			//“–‚½‚è”»’è
 			if (CCollision::CheckHitSphereToSphere(cTShot.GetPos(), ShotRadius, cENormal.GetPosition(), EnemyRadius))
 			{
+				CEffectManager::GetInstance()->Reqest(EFFECTORID_EXPLOSION, cTShot.GetPos(), false);
+
 				cTShot.HitCalc();	//’e‚Ìƒtƒ‰ƒO‚ð‚¨‚é
 				cENormal.HitCalc();	//“G‚ÌHP‚ðŒ¸‚ç‚·
 
@@ -397,6 +399,8 @@ void CCollisionManager::PlayerShotToEnemy(CShotManager& cShotManager, CEnemyMana
 			//“–‚½‚è”»’è
 			if (CCollision::CheckHitSphereToSphere(cPShot.GetPos(), ShotRadius, cENormal.GetPosition(), EnemyRadius))
 			{
+				CEffectManager::GetInstance()->Reqest(EFFECTORID_EXPLOSION, cPShot.GetPos(), false);
+
 				cPShot.HitCalc();	//’e‚Ìƒtƒ‰ƒO‚ð‚¨‚é
 				cENormal.HitCalc();	//“G‚ÌHP‚ðŒ¸‚ç‚·
 
@@ -442,6 +446,8 @@ void CCollisionManager::PlayerShotToMap(CShotManager& cShotManager, CMapManager&
 
 			if (CCollision::CheckHitSphereToSphere(cPShot.GetPos(), SHOT_RADIUS, MapInfoList[MapIndex].vPos, MAP_R))
 			{
+				CEffectManager::GetInstance()->Reqest(EFFECTORID_EXPLOSION, cPShot.GetPos(), false);
+
 				cPShot.HitCalc();
 			}
 		}
@@ -477,6 +483,8 @@ void CCollisionManager::TurretShotToMap(CShotManager& cShotManager, CMapManager&
 
 			if (CCollision::CheckHitSphereToSphere(cTShot.GetPos(), SHOT_RADIUS, MapInfoList[MapIndex].vPos, MAP_R))
 			{
+				CEffectManager::GetInstance()->Reqest(EFFECTORID_EXPLOSION, cTShot.GetPos(), false);
+
 				cTShot.HitCalc();	//’e‚Ìƒtƒ‰ƒO‚ð‚¨‚é
 			}
 		}

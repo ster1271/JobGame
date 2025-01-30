@@ -196,8 +196,8 @@ void CPlayScene::Step()
 	//プレイ時処理
 	if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_PALY)
 	{
-		/*CDebugString::GetInstance()->AddFormatString(200, 200, "1200 / %d", CWave::GetInstance()->GetWaveTime());
-		CDebugString::GetInstance()->AddFormatString(200, 215, "ウェーブ状態：%d", CWave::GetInstance()->GetWaveState());*/
+		CDebugString::GetInstance()->AddFormatString(200, 200, "1200 / %d", CWave::GetInstance()->GetWaveTime());
+		CDebugString::GetInstance()->AddFormatString(200, 215, "ウェーブ状態：%d", CWave::GetInstance()->GetWaveState());
 
 		//オブジェクト更新処理
 		cObjectManager.Step();
@@ -219,9 +219,6 @@ void CPlayScene::Step()
 		cBot.Step(cMapManager);
 		//ウェーブ処理
 		CWave::GetInstance()->Step();
-
-		CEffectManager::GetInstance()->UpData(CPlayer::GetInstance()->GetPos(), CPlayer::GetInstance()->GetRotate());
-
 		//UI処理
 		cUIManager.Step();
 
@@ -245,6 +242,7 @@ void CPlayScene::Step()
 	}
 
 	//カメラ更新処理
-	cCameraManager.Step(CPlayer::GetInstance()->GetPos(), CPlayer::GetInstance()->GetRotate(), VECTOR_ZERO);
+	cCameraManager.Step(CPlayer::GetInstance()->GetPos(), CPlayer::GetInstance()->GetRotate(), VGet(0.0f, 1.0f, 0.0f));
+	
 }
 

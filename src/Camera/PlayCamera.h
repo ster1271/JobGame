@@ -9,6 +9,8 @@ private:
 	VECTOR ForcusPos;			//カメラの注視点
 	VECTOR Up;					//カメラの上方向
 
+	VECTOR Rot;
+
 public:
 	//コンストラクタ・デストラクタ
 	CPlayCamera();
