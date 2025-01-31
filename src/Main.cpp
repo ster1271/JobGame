@@ -3,6 +3,7 @@
 #include "Scene/SceneManager.h"
 #include "Debug/DebugString.h"
 #include "Effect/effekseer.h"
+#include "DrawFont/DrawFont.h"
 
 
 
@@ -46,6 +47,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//FPSの宣言と初期化
 	CFps cFps;
 	cFps.Init();
+
+	//フォントデータ初期化
+	CDrawFont::Init();
+	//フォントデータ読み込み
+	CDrawFont::LoadAllFontData();
 
 	//-----------------------------------------
 
@@ -117,6 +123,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//-----------------------------------------
 	//最後に１回だけやる処理をここに書く
 	CEffekseerCtrl::Exit();
+	CDrawFont::Exit();
 
 	//-----------------------------------------
 	//DXライブラリの後処理

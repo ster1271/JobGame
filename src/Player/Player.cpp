@@ -211,6 +211,9 @@ void CPlayer::Draw()
 	//プレイヤーの描画
 	MV1DrawModel(iHndl);
 
+
+
+
 	if (IS_DEBUG)
 	{
 		DrawFormatString(0, 0, GetColor(255, 0, 0), "アタッカーX座標:%f", cPos.x);

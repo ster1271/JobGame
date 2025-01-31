@@ -1,4 +1,4 @@
-#include "DrawNumberFont.h"
+#include "../DrawNumberFont/DrawNumberFont.h"
 
 int Hundl[13];			//Ši”[
 
@@ -10,7 +10,7 @@ CNumber::CNumber()
 	{
 		Hundl[i] = 0;
 	}
-
+	
 	/*
 	NumberPos = { 0.0f, 0.0f, 0.0f };
 	NumberPosX = 0;

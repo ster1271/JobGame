@@ -1,7 +1,6 @@
 #include "WaveUI.h"
 
 const char WAVE_UI_PATH[] = { "data/UI/wave/wave.png" };
-const char WAVE_CLEAR_UI_PATH[] = {"data/UI/wave/wave_clear.png"};
 const char FONT_NUMBER[] = { "data/UI/Number/number16x32_06.png" };
 
 
@@ -9,8 +8,10 @@ const char FONT_NUMBER[] = { "data/UI/Number/number16x32_06.png" };
 CWaveUI::CWaveUI()
 {
 	BgHndl = -1;
+	StartHndl = -1;
+	ClearHndl = -1;
 	ChangeCount = 0;
-	num = 0;
+	Alpha = 0;
 }
 
 //デストラクタ
@@ -23,15 +24,13 @@ void CWaveUI::Init()
 	StartHndl = -1;
 	ClearHndl = -1;
 	BgHndl = -1;
-	num = 80;
+	Alpha = 80;
 	ChangeCount = 0;
 }
 
 //読み込み
 void CWaveUI::Load()
 {
-	StartHndl = -1;
-	ClearHndl = LoadGraph(WAVE_CLEAR_UI_PATH);
 	BgHndl = LoadGraph(WAVE_UI_PATH);
 	CNumber::SetNumber(FONT_NUMBER, 16, 32);
 }
@@ -53,23 +52,23 @@ void CWaveUI::Draw()
 
 	case STATE_WAVE_PREPAR:
 
-		SetDrawBlendMode(DX_BLENDMODE_PMA_ALPHA, num);
+		SetDrawBlendMode(DX_BLENDMODE_PMA_ALPHA, Alpha);
 		DrawBox(0, 0, 1280, 720, GetColor(255, 0, 0), true);
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
 		switch (ChangeCount)
 		{
 		case 0:
-			num--;
-			if (num < 0)
+			Alpha--;
+			if (Alpha < 0)
 			{
 				ChangeCount = 1;
 			}
 			break;
 
 		case 1:
-			num += 2;
-			if (num > 80)
+			Alpha += 2;
+			if (Alpha > 80)
 			{
 				ChangeCount = 0;
 			}
@@ -79,28 +78,29 @@ void CWaveUI::Draw()
 			break;
 		}
 
-		DrawRotaGraph(1280 / 2, 100, 2.0f, 0.0f, BgHndl, true, false, false);
-		CNumber::DrawNumber_Normal(CWave::GetInstance()->GetTime(), VGet(635, 120, 0));
+		DrawRotaGraph(640, 110, 1.5f, DX_PI_F / 4, BgHndl, true, false);
+		CDrawFont::Draw(540, 100, FONT_ID_CP, "ウェーブスタートまで", GetColor(0, 0, 0));
+		CNumber::DrawNumber_Normal(CWave::GetInstance()->GetTime(), VGet(635, 130, 0));
 		break;
 
 	case STATE_WAVE_NORMAL:
-		num = 300;
+		Alpha = 300;
 		break;
 
 	case STATE_WAVE_BOTMOVE:
-		num = 300;
+		Alpha = 300;
 		break;
 
 	case STATE_WAVE_END:
-		num--;
+		Alpha--;
 
-		if (num < 0)
+		if (Alpha < 0)
 		{
-			num = 0;
+			Alpha = 0;
 		}
-
-		SetDrawBlendMode(DX_BLENDMODE_PMA_ALPHA, num);
-		DrawRotaGraph(1280 / 2, 100, 4.0f, 0.0f, ClearHndl, true, false, false);
+		
+		SetDrawBlendMode(DX_BLENDMODE_PMA_ALPHA, Alpha);
+		CDrawFont::Draw(540, 100, FONT_ID_CP, "ウェーブクリア!!", GetColor(0, 0, 0));
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		break;
 

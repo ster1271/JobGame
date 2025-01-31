@@ -1,6 +1,7 @@
 #pragma once
 #include "../UIBase/BaseUI.h"
-#include "../../DrawFont/DrawNumberFont.h"
+#include "../../DrawNumberFont/DrawNumberFont.h"
+#include "../../DrawFont/DrawFont.h"
 #include "../../Wave/Wave.h"
 
 
@@ -8,10 +9,8 @@ class CWaveUI : public CUIBase
 {
 private:
 	int BgHndl;
-	int StartHndl;
-	int ClearHndl;
-	int num;
-	int ChangeCount;
+	int Alpha;			//透過値
+	int ChangeCount;	//スイッチ分
 
 public:
 	//コンストラクタ・デストラクタ
