@@ -235,6 +235,10 @@ void CPlayer::Draw()
 		CDebugString::GetInstance()->AddString(0, 90, "ゴールにLBボタン長押しでウェーブスタート");
 		CDebugString::GetInstance()->AddFormatString(0, 105, "LBボタンを押した時間：%d", PushCnt);
 		CDebugString::GetInstance()->AddString(0, 120, "Xボタンでマップ表示切り替え");
+
+		CDebugString::GetInstance()->AddFormatString(0, 150, "アタッカーX座標:%d", (int)cPos.x);
+		CDebugString::GetInstance()->AddFormatString(0, 165, "アタッカーX座標:%d", (int)cPos.y);
+		CDebugString::GetInstance()->AddFormatString(0, 180, "アタッカーX座標:%d", (int)cPos.z);
 	}
 	else
 	{
@@ -247,7 +251,11 @@ void CPlayer::Draw()
 		CDebugString::GetInstance()->AddString(0, 90, "ゴールに1キー長押しでウェーブスタート");
 		CDebugString::GetInstance()->AddFormatString(0, 105, "1キーを押した時間：%d", PushCnt);
 		CDebugString::GetInstance()->AddString(0, 120, "TABキーでマップ表示切り替え");
-	}	
+
+		CDebugString::GetInstance()->AddFormatString(0, 150, "アタッカーX座標:%d", (int)cPos.x);
+		CDebugString::GetInstance()->AddFormatString(0, 165, "アタッカーX座標:%d", (int)cPos.y);
+		CDebugString::GetInstance()->AddFormatString(0, 180, "アタッカーX座標:%d", (int)cPos.z);
+	}
 }
 
 //終了処理

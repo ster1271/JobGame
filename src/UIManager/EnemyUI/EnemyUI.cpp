@@ -35,17 +35,17 @@ void CEnemyUI::Step(CEnemyManager& cEnemyManager)
 //•`‰æ
 void CEnemyUI::Draw()
 {
-	for (int EnemyIndex = 0; EnemyIndex < ENEMY_MAXNUM; EnemyIndex++)
-	{
-		if (!cEnemy[EnemyIndex].GetActive())
-			continue;
+	//for (int EnemyIndex = 0; EnemyIndex < ENEMY_MAXNUM; EnemyIndex++)
+	//{
+	//	if (!cEnemy[EnemyIndex].GetActive())
+	//		continue;
+	//	
+	//	DrawRectGraph(cEnemy[EnemyIndex].GetPosition().x, cEnemy[EnemyIndex].GetPosition().z,
+	//		0, 0, ENEMY_MAX_LIFE, 30, MaxLifeHndl, true, false);
+	//	DrawRectGraph(cEnemy[EnemyIndex].GetPosition().x, cEnemy[EnemyIndex].GetPosition().z,
+	//		0, 0, cEnemy[EnemyIndex].GetLife(), 30, LifeHndl, true, false);
 
-		DrawRectGraph(cEnemy[EnemyIndex].GetPosition().x / 2, cEnemy[EnemyIndex].GetPosition().z,
-			0, 0, ENEMY_MAX_LIFE, 30, MaxLifeHndl, true, false);
-		DrawRectGraph(cEnemy[EnemyIndex].GetPosition().x / 2, cEnemy[EnemyIndex].GetPosition().z,
-			0, 0, cEnemy[EnemyIndex].GetLife(), 30, LifeHndl, true, false);
-
-	}
+	//}
 
 }
 
