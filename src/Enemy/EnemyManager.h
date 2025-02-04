@@ -6,7 +6,7 @@
 #include "../RouteSearch/RouteSearch.h"
 #include "../Wave/Wave.h"
 
-#define ENEMY_MAXNUM	(10)
+const int ENEMY_MAXNUM = 10;
 
 //“G‚ÌŽí—Þ
 enum TYPE_ENEMY

@@ -1,6 +1,8 @@
 #pragma once
 #include "EnemyBase.h"
 
+const int ENEMY_MAX_LIFE = 20;		//最大体力
+
 //敵のサイズ
 const VECTOR ENEMY_NORMAL_SIZE = VGet(0.0f, 0.0f, 0.0f);
 
@@ -14,7 +16,7 @@ public:
 	//コンストラクタ・デストラクタ
 	CEnemy_Normal();
 	~CEnemy_Normal();
-
+	
 	//初期化
 	void Init();
 

@@ -11,7 +11,7 @@
 SceneManager::SceneManager()
 {
 	//ƒ^ƒCƒgƒ‹‰æ–Ê‚ª‚È‚¢‚Ì‚ÅSCENE_PLAY‚É
-	eSceneID = SCENE_TITLE;
+	eSceneID = SCENE_RESULT;
 	CInput::InitInput();
 	CSoundManager::Init();
 	CSoundManager::LoadAllData();

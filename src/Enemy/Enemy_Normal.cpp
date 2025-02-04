@@ -1,6 +1,5 @@
 #include "Enemy_Normal.h"
 
-const int MAX_LIFE = 20;		//Å‘å‘Ì—Í
 const float SPEED = 5.0f;		//ˆÚ“®‘¬“x
 const int RESEARCH_TIME = 1000;	//Œo˜H’Tõ‚µ’¼‚µŠÔ
 
@@ -149,7 +148,7 @@ bool CEnemy_Normal::RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed)
 	cSize = ENEMY_NORMAL_SIZE;
 	cRotate = VGet(0.0f, DX_PI_F / 2, 0.0f);
 	cSpeed = vSpeed;
-	Life = MAX_LIFE;
+	Life = ENEMY_MAX_LIFE;
 	List.clear();
 	ListCnt = 0;
 	State_Id = STATE_SEARCH;

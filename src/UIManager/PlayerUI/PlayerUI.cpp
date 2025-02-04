@@ -1,7 +1,7 @@
 #include "PlayerUI.h"
 
 const char PLAYER_LIFE_PATH[] = { "data/UI/player/PlayerLife.png" };
-const char PLAYER_LIFEBACK_PATH[] = { "data/UI/player/LifeBack.png" };
+const char PLAYER_MAXLIFE_PATH[] = { "data/UI/player/LifeBack.png" };
 
 const int DRAW_X = 590;
 const int DRAW_Y = 290;
@@ -27,7 +27,7 @@ void CPlayerUI::Init()
 void CPlayerUI::Load()
 {
 	LifeHndl = LoadGraph(PLAYER_LIFE_PATH);
-	BgHndl = LoadGraph(PLAYER_LIFEBACK_PATH);
+	BgHndl = LoadGraph(PLAYER_MAXLIFE_PATH);
 }
 
 //ñàÉtÉåÅ[ÉÄçsÇ§èàóù

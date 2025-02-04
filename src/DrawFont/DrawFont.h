@@ -5,8 +5,22 @@ enum FontID
 {
 	FONT_ID_CP,			//チェックポイントフォント
 
+
 	FONTID_NUM			//総番号
 };
+
+enum FontSizeID
+{
+	FONT_ID_CP_10,			//チェックポイントフォント
+	FONT_ID_CP_20,			//チェックポイントフォント
+	FONT_ID_CP_30,			//チェックポイントフォント
+	FONT_ID_CP_40,			//チェックポイントフォント
+	FONT_ID_CP_50,			//チェックポイントフォント
+
+	FONTSIZE_NUM
+};
+
+
 
 static const char FontFilePath[FONTID_NUM][128]
 {
@@ -18,7 +32,7 @@ static const char FontName[FONTID_NUM][128]
 	"チェックポイントフォント",
 };
 
-static int FontHndl[FONTID_NUM];
+static int FontHndl[FONTSIZE_NUM];
 
 class CDrawFont
 {
@@ -39,7 +53,7 @@ public:
 	static bool LoadAllFontData();
 
 	//描画
-	static void Draw(int PosX, int PosY, FontID Id,
+	static void Draw(int PosX, int PosY, FontSizeID Id,
 		const TCHAR *String, unsigned int Color = GetColor(255, 255, 255));
 
 };

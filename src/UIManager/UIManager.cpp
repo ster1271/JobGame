@@ -11,6 +11,7 @@ void CUIManager::Init()
 {
 	cPlayerUI.Init();
 	cWaveUI.Init();
+	cEnemyUI.Init();
 }
 
 
@@ -19,6 +20,7 @@ void CUIManager::Load()
 {
 	cPlayerUI.Load();
 	cWaveUI.Load();
+	cEnemyUI.Load();
 }
 
 //•`‰æ
@@ -26,10 +28,12 @@ void CUIManager::Draw()
 {
 	cPlayerUI.Draw();
 	cWaveUI.Draw();
+	cEnemyUI.Draw();
 }
 
 //–ˆƒtƒŒ[ƒ€s‚¤ˆ—
-void CUIManager::Step()
+void CUIManager::Step(CEnemyManager& cEnemyManager)
 {
 	cPlayerUI.Step();
+	cEnemyUI.Step(cEnemyManager);
 }

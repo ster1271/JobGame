@@ -59,6 +59,7 @@ public:
 	VECTOR GetNextPosision() { return cNextPos; }				//座標取得
 	void SetNextPosision(VECTOR NewPos) { cNextPos = NewPos; }	//座標設定
 	bool GetDir(int dir) { return IsDir[dir]; }					//方向フラグ取得
+	float GetLife() { return Life; }
 
 	//コンストラクタ・デストラクタ
 	CEnemyBase();

@@ -8,8 +8,6 @@ const char FONT_NUMBER[] = { "data/UI/Number/number16x32_06.png" };
 CWaveUI::CWaveUI()
 {
 	BgHndl = -1;
-	StartHndl = -1;
-	ClearHndl = -1;
 	ChangeCount = 0;
 	Alpha = 0;
 }
@@ -21,8 +19,6 @@ CWaveUI::~CWaveUI(){}
 void CWaveUI::Init()
 {
 	CUIBase::Init();
-	StartHndl = -1;
-	ClearHndl = -1;
 	BgHndl = -1;
 	Alpha = 80;
 	ChangeCount = 0;
@@ -79,7 +75,7 @@ void CWaveUI::Draw()
 		}
 
 		DrawRotaGraph(640, 110, 1.5f, DX_PI_F / 4, BgHndl, true, false);
-		CDrawFont::Draw(540, 100, FONT_ID_CP, "ウェーブスタートまで", GetColor(0, 0, 0));
+		CDrawFont::Draw(540, 100, FONT_ID_CP_20, "ウェーブスタートまで", GetColor(0, 0, 0));
 		CNumber::DrawNumber_Normal(CWave::GetInstance()->GetTime(), VGet(635, 130, 0));
 		break;
 
@@ -100,7 +96,7 @@ void CWaveUI::Draw()
 		}
 		
 		SetDrawBlendMode(DX_BLENDMODE_PMA_ALPHA, Alpha);
-		CDrawFont::Draw(540, 100, FONT_ID_CP, "ウェーブクリア!!", GetColor(0, 0, 0));
+		CDrawFont::Draw(540, 100, FONT_ID_CP_20, "ウェーブクリア!!", GetColor(0, 0, 0));
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		break;
 

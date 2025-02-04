@@ -87,9 +87,8 @@ void CResultScene::Step()
 //-------------------------------------
 void CResultScene::Draw()
 {
-	DrawString(0, 0, "リザルト画面です", GetColor(255, 255, 255));
-	DrawString(0, 15, "EnterまたはYボタンでシーン移動", GetColor(255, 255, 255));
-
+	CDrawFont::Draw(500, 100, FONT_ID_CP_40, "リザルト画面です");
+	CDrawFont::Draw(500, 150, FONT_ID_CP_20, "EnterまたはYボタンでシーン移動");
 }
 
 //-------------------------------------

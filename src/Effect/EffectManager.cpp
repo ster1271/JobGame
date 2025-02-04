@@ -69,8 +69,6 @@ void CEffectManager::Init()
 void CEffectManager::UpData(VECTOR vForcus, VECTOR fRot, VECTOR vUp)
 {
 	CEffekseerCtrl::UpdateAutoCamera();
-	/*CEffekseerCtrl::SetCameraRotMtx(vForcus, fRot, vUp);
-	CEffekseerCtrl::Update();*/
 }
 
 bool CEffectManager::Load()

@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include "../Input/Input.h"
 #include "../GamePad/GamePad.h"
+#include "../DrawFont/DrawFont.h"
 
 class CResultScene
 {

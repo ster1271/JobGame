@@ -2,6 +2,7 @@
 #include "../Wave/Wave.h"
 #include "WaveUI/WaveUI.h"
 #include "PlayerUI/PlayerUI.h"
+#include "EnemyUI/EnemyUI.h"
 
 //UIマネージャー
 class CUIManager
@@ -9,6 +10,7 @@ class CUIManager
 private:
 	CPlayerUI cPlayerUI;
 	CWaveUI cWaveUI;
+	CEnemyUI cEnemyUI;
 
 public:
 	//コンストラクタ・デストラクタ
@@ -25,5 +27,5 @@ public:
 	void Draw();
 
 	//毎フレーム行う処理
-	void Step();
+	void Step(CEnemyManager& cEnemyManager);
 };
