@@ -22,6 +22,7 @@ CTurretManager::~CTurretManager()
 void CTurretManager::Init()
 {
 	Turret_List.clear();
+	PlaceList.clear();
 }
 
 //データロード
@@ -70,7 +71,7 @@ void CTurretManager::Update()
 	for (int Index = 0; Index < PlaceList.size(); Index++)
 	{
 		MV1SetPosition(PlaceList[Index].iHndl, PlaceList[Index].vPos);		//座標の更新
-		MV1SetScale(PlaceList[Index].iHndl, PlaceList[Index].vSize);			//サイズの更新
+		MV1SetScale(PlaceList[Index].iHndl, PlaceList[Index].vSize);		//サイズの更新
 		MV1SetRotationXYZ(PlaceList[Index].iHndl, VGet(0.0f, 0.0f, 0.0f));	//回転値の更新
 	}
 
@@ -148,25 +149,34 @@ void CTurretManager::TurretSpawn(const VECTOR& vPos)
 void CTurretManager::LoadTurretSpawn()
 {
 	FILE* fp;
-	VECTOR Pos;
+	int Pos[3];
 	TurretPlaceInfo tmpInfo;
 
 	int Hndl = MV1LoadModel("data/Turret/TS_Place.x");
 
-	fopen_s(&fp, "Data/Turret/urretPlace.txt", "r");		//CSVファイル読み込み
+	fopen_s(&fp, "data/Turret/TurretPlace.txt", "r");		//CSVファイル読み込み
 
 	//方法1
 	if (fp != nullptr)
 	{
 
-		while (fscanf_s(fp, "%d,%d,%d",&Pos.x, &Pos.y, &Pos.z) != EOF)
+		while (fscanf_s(fp, "%d,%d,%d",&Pos[0], &Pos[1], &Pos[2]) != EOF)
 		{
-			tmpInfo.vPos = Pos;
-			tmpInfo.vSize = VGet(0.5f, 0.5f, 0.5f);
+			tmpInfo.vPos = VGet(Pos[0], Pos[1], Pos[2]);
+			tmpInfo.vSize = VGet(0.1f, 0.1f, 0.1f);
 			tmpInfo.IsInstall = false;
 			tmpInfo.iHndl = MV1DuplicateModel(Hndl);
 
 			PlaceList.push_back(tmpInfo);
 		}
 	}
+
+	for (int Index = 0; Index < PlaceList.size(); Index++)
+	{
+		MV1SetPosition(PlaceList[Index].iHndl, PlaceList[Index].vPos);		//座標の更新
+		MV1SetScale(PlaceList[Index].iHndl, PlaceList[Index].vSize);		//サイズの更新
+		MV1SetRotationXYZ(PlaceList[Index].iHndl, VGet(0.0f, 0.0f, 0.0f));	//回転値の更新
+	}
+
+	fclose(fp);
 }
