@@ -1,7 +1,7 @@
 #include "TurretManager.h"
 #include "../Debug/DebugString.h"
 
-const int TURRET_MAX_NUM = 5;		//タレットの最大設置数
+const int TURRET_MAX_NUM = 10;		//タレットの最大設置数
 const char TURRET_NORMAL_PATH[] = { "data/Turret/Turret_Normal.x" };	//タレットのモデルパス
 const VECTOR TURRET_SIZE = VGet(30.0f, 30.0f, 30.0f);					//タレットのサイズ
 
@@ -32,6 +32,8 @@ void CTurretManager::Load()
 	{
 		Turret_Normal_Hndl = MV1LoadModel(TURRET_NORMAL_PATH);
 	}
+
+	LoadTurretSpawn();
 }
 
 //終了処理
@@ -65,6 +67,13 @@ void CTurretManager::Update()
 		Turret_List[TurretIndex]->Update();
 	}
 
+	for (int Index = 0; Index < PlaceList.size(); Index++)
+	{
+		MV1SetPosition(PlaceList[Index].iHndl, PlaceList[Index].vPos);		//座標の更新
+		MV1SetScale(PlaceList[Index].iHndl, PlaceList[Index].vSize);			//サイズの更新
+		MV1SetRotationXYZ(PlaceList[Index].iHndl, VGet(0.0f, 0.0f, 0.0f));	//回転値の更新
+	}
+
 	//CDebugString::GetInstance()->AddFormatString(500, 500, "リストの個数：%d", Turret_List.size());
 	//CDebugString::GetInstance()->AddFormatString(500, 525, "設置できる数残り：%d", TURRET_MAX_NUM - Turret_List.size());
 
@@ -76,6 +85,11 @@ void CTurretManager::Draw()
 	for (int TurretIndex = 0; TurretIndex < Turret_List.size(); TurretIndex++)
 	{
 		Turret_List[TurretIndex]->Draw();
+	}
+
+	for (int Index = 0; Index < PlaceList.size(); Index++)
+	{
+		MV1DrawModel(PlaceList[Index].iHndl);
 	}
 }
 
@@ -126,5 +140,33 @@ void CTurretManager::TurretSpawn(const VECTOR& vPos)
 
 		//リストに追加
 		Turret_List.push_back(cTurretBase);
+	}
+}
+
+
+//タレット設置場所読み込み処理
+void CTurretManager::LoadTurretSpawn()
+{
+	FILE* fp;
+	VECTOR Pos;
+	TurretPlaceInfo tmpInfo;
+
+	int Hndl = MV1LoadModel("data/Turret/TS_Place.x");
+
+	fopen_s(&fp, "Data/Turret/urretPlace.txt", "r");		//CSVファイル読み込み
+
+	//方法1
+	if (fp != nullptr)
+	{
+
+		while (fscanf_s(fp, "%d,%d,%d",&Pos.x, &Pos.y, &Pos.z) != EOF)
+		{
+			tmpInfo.vPos = Pos;
+			tmpInfo.vSize = VGet(0.5f, 0.5f, 0.5f);
+			tmpInfo.IsInstall = false;
+			tmpInfo.iHndl = MV1DuplicateModel(Hndl);
+
+			PlaceList.push_back(tmpInfo);
+		}
 	}
 }

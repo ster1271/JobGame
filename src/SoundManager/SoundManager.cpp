@@ -58,9 +58,9 @@ bool CSoundManager::LoadAllData()
 	bool isRet = true;
 	const char pFileName[SOUNDID_NUM][128] =
 	{
-		"Data/Sound/BGM/bgm00.mp3",
-		"Data/Sound/SE/se_plshot.mp3",
-		"Data/Sound/SE/se_explore.mp3",
+		"data/Sound/bgm00.mp3",
+		"data/Sound/WaveBGM.mp3",
+		"data/Sound/PL_Shot.mp3",
 	};
 
 	for (int i = 0; i < SOUNDID_NUM; i++)

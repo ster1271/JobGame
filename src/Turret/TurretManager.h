@@ -15,9 +15,19 @@ class CTurretManager
 {
 private:
 	
+	//タレット設置場所情報
+	struct TurretPlaceInfo
+	{
+		VECTOR vPos;		//座標
+		VECTOR vSize;		//サイズ
+		int iHndl;			//モデルハンドル(コピー)
+		bool IsInstall;		//設置できるかどうか
+	};
+
 	int Turret_Normal_Hndl;				//ノーマルタレットモデルのコピー元
 	
 	vector<CTurretBase*> Turret_List;	//CTurretBase型のList配列
+	vector<TurretPlaceInfo> PlaceList;
 
 
 public:
@@ -41,4 +51,7 @@ public:
 
 	//タレット設置処理
 	void TurretSpawn(const VECTOR& vPos);
+
+	//タレット設置場所読み込み処理
+	void LoadTurretSpawn();
 };

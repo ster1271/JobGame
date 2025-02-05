@@ -196,8 +196,8 @@ void CPlayScene::Step()
 	//プレイ時処理
 	if (cCameraManager.GetCameraID() == CCameraManager::CAMERA_ID_PALY)
 	{
-		CDebugString::GetInstance()->AddFormatString(200, 200, "1200 / %d", CWave::GetInstance()->GetWaveTime());
-		CDebugString::GetInstance()->AddFormatString(200, 215, "ウェーブ状態：%d", CWave::GetInstance()->GetWaveState());
+		/*CDebugString::GetInstance()->AddFormatString(200, 200, "1200 / %d", CWave::GetInstance()->GetWaveTime());
+		CDebugString::GetInstance()->AddFormatString(200, 215, "ウェーブ状態：%d", CWave::GetInstance()->GetWaveState());*/
 
 		//オブジェクト更新処理
 		cObjectManager.Step();

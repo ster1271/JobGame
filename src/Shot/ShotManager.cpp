@@ -141,7 +141,8 @@ void CShotManager::RequestPlayerShot(const VECTOR& vPos, const VECTOR& vSpeed)
 	{
 		if (cPlayerShot[i].RequestShot(vPos, vSpeed))
 		{
-			CSoundManager::Play(SOUNDID_SE_PLSHOT, DX_PLAYTYPE_NORMAL, true);
+			CSoundManager::SetVolume(SOUNDID_SE_SHOT, 0.1f);
+			CSoundManager::Play(SOUNDID_SE_SHOT, DX_PLAYTYPE_BACK, true);
 			break;
 		}
 	}
@@ -156,6 +157,8 @@ void CShotManager::RequestTurretShot(const VECTOR& vPos, const VECTOR& vSpeed)
 	{
 		if (cTurretShot[i].RequestShot(vPos, vSpeed))
 		{
+			CSoundManager::SetVolume(SOUNDID_SE_SHOT, 0.1f);
+			CSoundManager::Play(SOUNDID_SE_SHOT, DX_PLAYTYPE_BACK, true);
 			break;
 		}
 	}

@@ -51,13 +51,17 @@ void CWave::WaveStateChange(WAVE_STATE id)
 		break;
 
 	case STATE_WAVE_PREPAR:
+		CSoundManager::SetVolume(SOUNDID_WAVE, 0.3f);
+		CSoundManager::Play(SOUNDID_WAVE, DX_PLAYTYPE_LOOP, true);
 		Cnt = 600;
 		break;
 
 	case STATE_WAVE_NORMAL:
+		CSoundManager::SetVolume(SOUNDID_WAVE, 0.4f);
 		break;
 
 	case STATE_WAVE_BOTMOVE:
+		CSoundManager::SetVolume(SOUNDID_WAVE, 0.4f);
 		break;
 
 	case STATE_WAVE_END:
@@ -65,6 +69,7 @@ void CWave::WaveStateChange(WAVE_STATE id)
 		SetIsNormal(false);
 		SetIsBotMove(false);
 		Cnt = 300;
+		CSoundManager::Stop(SOUNDID_WAVE);
 		break;
 
 	default:
@@ -81,7 +86,7 @@ void CWave::Step()
 		
 		//時間を増加させる
 		WaveTime++;
-		if (WaveTime > 100)
+		if (WaveTime > 2000)
 		{
 			WaveStateChange(STATE_WAVE_PREPAR);			//ウェーブ準備中にする
 			CWave::GetInstance()->SetIsNormal(true);	//通常ウェーブフラグをtrueにする
@@ -114,11 +119,9 @@ void CWave::Step()
 
 		break;
 	case STATE_WAVE_NORMAL:
-
 		break;
 
 	case STATE_WAVE_BOTMOVE:
-
 		break;
 
 	case STATE_WAVE_END:
@@ -130,7 +133,6 @@ void CWave::Step()
 			Cnt = 0;
 			WaveStateChange(STATE_WAVE_NONE);
 		}
-		
 		break;
 
 	default:

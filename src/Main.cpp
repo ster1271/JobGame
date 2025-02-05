@@ -2,6 +2,7 @@
 #include "DrawFPS/fps.h"
 #include "Scene/SceneManager.h"
 #include "Debug/DebugString.h"
+#include "SoundManager/SoundManager.h"
 #include "Effect/effekseer.h"
 #include "DrawFont/DrawFont.h"
 
@@ -52,6 +53,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	CDrawFont::Init();
 	//フォントデータ読み込み
 	CDrawFont::LoadAllFontData();
+	//サウンド初期化
+	CSoundManager::Init();
+	CSoundManager::LoadAllData();
 
 	//-----------------------------------------
 
@@ -105,6 +109,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 			//描画処理
 			cSceneManager.Draw();
+			
 
 			//FPS計算
 			cFps.CalcFPS();
@@ -124,6 +129,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//最後に１回だけやる処理をここに書く
 	CEffekseerCtrl::Exit();
 	CDrawFont::Exit();
+	CSoundManager::Exit();
 
 	//-----------------------------------------
 	//DXライブラリの後処理

@@ -4,8 +4,8 @@
 enum tagSoundID
 {
 	SOUNDID_BGM,		//ゲーム中のBGM
-	SOUNDID_SE_PLSHOT,	//プレイヤーの発射音
-	SOUNDID_SE_EXPLORE,	//爆発音
+	SOUNDID_WAVE,		//ウェーブ中のBGM
+	SOUNDID_SE_SHOT,	//プレイヤーの発射音
 
 	SOUNDID_NUM
 };

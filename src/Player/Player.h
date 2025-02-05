@@ -7,6 +7,7 @@
 #include "../Wave/Wave.h"
 #include "../Map/MapManager.h"
 #include "../Effect/EffectManager.h"
+#include "../SoundManager/SoundManager.h"
 
 const VECTOR PLAYER_POS = VGet(50.0f, 0.0f, 50.0f);		//初期座標
 const VECTOR PLAYER_SIZE = VGet(15.0f, 30.0f, 15.0f);	//プレイヤーサイズ

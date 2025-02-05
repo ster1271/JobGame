@@ -4,7 +4,7 @@
 static const char ENEMY_MODEL_PATH01[] = { "data/enemy/Enemy01.x" };
 static const char Enemy_MODEL_PATH02[] = { "data/enemy/Enemy02.x" };
 static const int WAIT_TIME = 200;		//敵が再登場するまでの時間
-static const int RESPAWN_MAX_NUM = 3;	//通常ウェーブ最大出現数
+static const int RESPAWN_MAX_NUM = 15;	//通常ウェーブ最大出現数
 
 //コンストラクタ
 CEnemyManager::CEnemyManager()
@@ -102,10 +102,15 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 				//一定数生成したらそれ以上処理しない
 				if (RespawnCount <= 0)
 					return;
-			}
 
-			RequestEnemy();
-			Coolcnt = WAIT_TIME;	
+				RequestEnemy();
+				Coolcnt = WAIT_TIME;
+			}
+			/*else if (CWave::GetInstance()->GetWaveState() == STATE_WAVE_BOTMOVE)
+			{
+				RequestEnemy();
+				Coolcnt = WAIT_TIME;
+			}*/
 		}
 	}
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include <DxLib.h>
+#include "../SoundManager/SoundManager.h"
 
 //ウェーブの状態
 enum WAVE_STATE
@@ -25,6 +26,7 @@ private:
 	int WaveTime;			//ウェーブ発生時間
 	int Cnt;				//時間カウント
 
+	int StartWaveTime;		//ウェーブ開始までの時間
 	
 public:
 	//コンストラクタ・デストラクタ
