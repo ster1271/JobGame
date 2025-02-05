@@ -14,6 +14,8 @@ void CEnemyUI::Init()
 {
 	MaxLifeHndl = -1;
 	LifeHndl = -1;
+	preLife[ENEMY_MAXNUM] = { 0 };
+	CurrentLife[ENEMY_MAXNUM] = { 0 };
 }
 
 //ì«Ç›çûÇ›
@@ -29,23 +31,30 @@ void CEnemyUI::Step(CEnemyManager& cEnemyManager)
 	for (int EnemyIndex = 0; EnemyIndex < ENEMY_MAXNUM; EnemyIndex++)
 	{
 		cEnemy[EnemyIndex] = cEnemyManager.GetEnemy(EnemyIndex);
+		preLife[EnemyIndex] = CurrentLife[EnemyIndex];
+
+		CurrentLife[EnemyIndex] = cEnemy[EnemyIndex].GetLife();
 	}
 }
 
 //ï`âÊ
 void CEnemyUI::Draw()
 {
-	//for (int EnemyIndex = 0; EnemyIndex < ENEMY_MAXNUM; EnemyIndex++)
-	//{
-	//	if (!cEnemy[EnemyIndex].GetActive())
-	//		continue;
-	//	
-	//	DrawRectGraph(cEnemy[EnemyIndex].GetPosition().x, cEnemy[EnemyIndex].GetPosition().z,
-	//		0, 0, ENEMY_MAX_LIFE, 30, MaxLifeHndl, true, false);
-	//	DrawRectGraph(cEnemy[EnemyIndex].GetPosition().x, cEnemy[EnemyIndex].GetPosition().z,
-	//		0, 0, cEnemy[EnemyIndex].GetLife(), 30, LifeHndl, true, false);
+	for (int EnemyIndex = 0; EnemyIndex < ENEMY_MAXNUM; EnemyIndex++)
+	{
+		if (!cEnemy[EnemyIndex].GetActive())
+			continue;
 
-	//}
+		VECTOR  DrawPos = cEnemy[EnemyIndex].GetPosition();
+		DrawPos.y = 20.0f;
+		
+		//float a = preLife[EnemyIndex] - CurrentLife[EnemyIndex];
+		//DrawPos.x = DrawPos.x + a * 5;
+		
+		DrawBillboard3D(DrawPos, 0.5f, 0.5f, 25, 0.0f, MaxLifeHndl, true);
+		DrawBillboard3D(DrawPos, 0.5f, 0.5f, cEnemy[EnemyIndex].GetLife(), 0.0f, LifeHndl, true);
+	}
+
 
 }
 

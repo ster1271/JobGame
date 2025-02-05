@@ -11,6 +11,9 @@ private:
 	int Alpha;			//“§–¾“x
 	int Count;
 
+	float preLife[ENEMY_MAXNUM];
+	float CurrentLife[ENEMY_MAXNUM];
+
 	CEnemy_Normal cEnemy[ENEMY_MAXNUM];
 
 public:
