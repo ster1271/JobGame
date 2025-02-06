@@ -4,6 +4,7 @@
 const int TURRET_MAX_NUM = 10;		//タレットの最大設置数
 const char TURRET_NORMAL_PATH[] = { "data/Turret/Turret_Normal.x" };	//タレットのモデルパス
 const VECTOR TURRET_SIZE = VGet(30.0f, 30.0f, 30.0f);					//タレットのサイズ
+const VECTOR SPAWN_PLACE_SIZE = VGet(30.0f, 10.0f, 30.0f);				//設置場所のサイズ
 
 
 //コンストラクタ
@@ -97,28 +98,16 @@ void CTurretManager::Draw()
 //タレット設置処理
 void CTurretManager::TurretSpawn(const VECTOR& vPos)
 {
-	
-	int NotHitCnt = 0;
 
-	//タレットの設置数が0個じゃない時
-	if (Turret_List.size() != 0)
+	for (int SpawnIndex = 0; SpawnIndex < PlaceList.size(); SpawnIndex++)
 	{
-		//最大数以上は生成しない
-		if (Turret_List.size() >= TURRET_MAX_NUM)
-			return;
-
-		//当たってないときにカウントをプラスする
-		for (int Turret_Index = 0; Turret_Index < Turret_List.size(); Turret_Index++)
+		//プレイヤーと設置位置との当たり判定をとる
+		if (CCollision::CheckHitBoxToBox(vPos, VGet(15.0f, 30.0f, 15.0f), PlaceList[SpawnIndex].vPos, SPAWN_PLACE_SIZE))
 		{
-			if (!CCollision::CheckHitBoxToBox(vPos, TURRET_SIZE, Turret_List[Turret_Index]->GetPos(), TURRET_SIZE))
-			{
-				NotHitCnt++;
-			}		
-		}
+			//設置フラグがfalseなら設置する
+			if (PlaceList[SpawnIndex].IsInstall)
+				continue;
 
-		//カウントがリストのサイズと同じ(誰とも当たってない場合)なら生成する
-		if (NotHitCnt == Turret_List.size())
-		{
 			//変数代入用クラス
 			CTurretBase* cTurretBase = new CTurret_Normal;
 			//基本情報を格納する
@@ -130,18 +119,51 @@ void CTurretManager::TurretSpawn(const VECTOR& vPos)
 			Turret_List.push_back(cTurretBase);
 		}
 	}
-	//タレットの設置数が0個の時
-	else if(Turret_List.size() == 0)
-	{
-		//変数代入用クラス
-		CTurretBase* cTurretBase = new CTurret_Normal;
-		cTurretBase->Init();
-		cTurretBase->Load(Turret_Normal_Hndl);
-		cTurretBase->TurretSpawn(vPos);
+	
+	//int NotHitCnt = 0;
 
-		//リストに追加
-		Turret_List.push_back(cTurretBase);
-	}
+	////タレットの設置数が0個じゃない時
+	//if (Turret_List.size() != 0)
+	//{
+	//	//最大数以上は生成しない
+	//	if (Turret_List.size() >= TURRET_MAX_NUM)
+	//		return;
+
+	//	//当たってないときにカウントをプラスする
+	//	for (int Turret_Index = 0; Turret_Index < Turret_List.size(); Turret_Index++)
+	//	{
+	//		if (!CCollision::CheckHitBoxToBox(vPos, TURRET_SIZE, Turret_List[Turret_Index]->GetPos(), TURRET_SIZE))
+	//		{
+	//			NotHitCnt++;
+	//		}		
+	//	}
+
+	//	//カウントがリストのサイズと同じ(誰とも当たってない場合)なら生成する
+	//	if (NotHitCnt == Turret_List.size())
+	//	{
+	//		//変数代入用クラス
+	//		CTurretBase* cTurretBase = new CTurret_Normal;
+	//		//基本情報を格納する
+	//		cTurretBase->Init();
+	//		cTurretBase->Load(Turret_Normal_Hndl);
+	//		cTurretBase->TurretSpawn(vPos);
+
+	//		//リストに追加
+	//		Turret_List.push_back(cTurretBase);
+	//	}
+	//}
+	////タレットの設置数が0個の時
+	//else if(Turret_List.size() == 0)
+	//{
+	//	//変数代入用クラス
+	//	CTurretBase* cTurretBase = new CTurret_Normal;
+	//	cTurretBase->Init();
+	//	cTurretBase->Load(Turret_Normal_Hndl);
+	//	cTurretBase->TurretSpawn(vPos);
+
+	//	//リストに追加
+	//	Turret_List.push_back(cTurretBase);
+	//}
 }
 
 
