@@ -14,7 +14,7 @@ void CEnemyUI::Init()
 {
 	MaxLifeHndl = -1;
 	LifeHndl = -1;
-	preLife[ENEMY_MAXNUM] = { 0 };
+	PreLife[ENEMY_MAXNUM] = { 0 };
 	CurrentLife[ENEMY_MAXNUM] = { 0 };
 }
 
@@ -31,9 +31,11 @@ void CEnemyUI::Step(CEnemyManager& cEnemyManager)
 	for (int EnemyIndex = 0; EnemyIndex < ENEMY_MAXNUM; EnemyIndex++)
 	{
 		cEnemy[EnemyIndex] = cEnemyManager.GetEnemy(EnemyIndex);
-		preLife[EnemyIndex] = CurrentLife[EnemyIndex];
+		PreLife[EnemyIndex] = CurrentLife[EnemyIndex];
 
 		CurrentLife[EnemyIndex] = cEnemy[EnemyIndex].GetLife();
+
+		Alpha_Change(EnemyIndex);
 	}
 }
 
@@ -46,13 +48,24 @@ void CEnemyUI::Draw()
 			continue;
 
 		VECTOR  DrawPos = cEnemy[EnemyIndex].GetPosition();
-		DrawPos.y = 20.0f;
-		
-		//float a = preLife[EnemyIndex] - CurrentLife[EnemyIndex];
-		//DrawPos.x = DrawPos.x + a * 5;
-		
-		DrawBillboard3D(DrawPos, 0.5f, 0.5f, 25, 0.0f, MaxLifeHndl, true);
-		DrawBillboard3D(DrawPos, 0.5f, 0.5f, cEnemy[EnemyIndex].GetLife(), 0.0f, LifeHndl, true);
+		DrawPos.x += 10.0f;
+		DrawPos.y = 30.0f;
+
+		SetDrawBlendMode(DX_BLENDMODE_PMA_ALPHA, Alpha[EnemyIndex]);
+		DrawModiBillboard3D(DrawPos, 
+			0.0f, 5.0f,
+			ENEMY_MAX_LIFE, 5.0f,
+			ENEMY_MAX_LIFE, 0.0f,
+			0.0f, 0.0f,
+			MaxLifeHndl, TRUE);
+		DrawModiBillboard3D(DrawPos,
+			0.0f, 5.0f,
+			cEnemy[EnemyIndex].GetLife(), 5.0f,
+			cEnemy[EnemyIndex].GetLife(), 0.0f,
+			0.0f, 0.0f,
+			LifeHndl, TRUE);
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
 	}
 
 
@@ -63,4 +76,33 @@ void CEnemyUI::Exit()
 {
 	MaxLifeHndl = -1;
 	LifeHndl = -1;
+}
+
+
+//透明度変更
+void CEnemyUI::Alpha_Change(int Index)
+{
+	//ライフが同じなら
+	if (CurrentLife[Index] == PreLife[Index])
+	{
+		//カウント増加
+		Count[Index]++;
+	}
+	else
+	{
+		Alpha[Index] = 200;
+		Count[Index] = 0;
+	}
+
+	if (Count[Index] > 100)
+	{
+		//透明度を下げる
+		Alpha[Index] -= 2;
+		if (Alpha[Index] < 0)
+		{
+			Alpha[Index] = 0;
+			Count[Index] = 0;
+		}
+	}
+
 }

@@ -8,10 +8,10 @@ class CEnemyUI :public CUIBase
 private:
 	int LifeHndl;
 	int MaxLifeHndl;
-	int Alpha;			//透明度
-	int Count;
-
-	float preLife[ENEMY_MAXNUM];
+	
+	int Count[ENEMY_MAXNUM];
+	int Alpha[ENEMY_MAXNUM];			//透明度
+	float PreLife[ENEMY_MAXNUM];
 	float CurrentLife[ENEMY_MAXNUM];
 
 	CEnemy_Normal cEnemy[ENEMY_MAXNUM];
@@ -36,5 +36,7 @@ public:
 	//後処理
 	void Exit();
 
+	//透明度変更
+	void Alpha_Change(int Index);
 };
 
