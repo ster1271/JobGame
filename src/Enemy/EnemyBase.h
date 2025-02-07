@@ -21,7 +21,6 @@ enum ENEMY_DIR
 	ENEMY_DIR_NUM,		//総番号
 };
 
-
 class CEnemyBase
 {
 protected:
@@ -74,7 +73,7 @@ public:
 	void Exit();
 
 	//毎フレーム呼ぶ処理
-	virtual void Step();
+	void Step();
 
 	//更新処理
 	void Update();

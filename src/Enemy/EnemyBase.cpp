@@ -129,9 +129,7 @@ bool CEnemyBase::RequestEnemy(const VECTOR &vPos, const VECTOR &vSpeed)
 //--------------------------------------
 //毎フレーム呼ぶ処理
 //--------------------------------------
-void CEnemyBase::Step()
-{
-}
+void CEnemyBase::Step(){}
 
 //更新処理
 void CEnemyBase::Update()

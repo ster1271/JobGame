@@ -23,7 +23,6 @@ void CEnemyManager::Init()
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Init();
-		cEnemyBoss[Enemy_Index].Init();
 	}
 }
 
@@ -56,7 +55,6 @@ void CEnemyManager::Exit()
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Exit();
-		cEnemyBoss[Enemy_Index].Exit();
 	}
 
 	if (Org_Hndl != -1)
@@ -106,11 +104,6 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 				RequestEnemy();
 				CoolTime = WAIT_TIME;
 			}
-			/*else if (CWave::GetInstance()->GetWaveState() == STATE_WAVE_BOTMOVE)
-			{
-				RequestEnemy();
-				Coolcnt = WAIT_TIME;
-			}*/
 		}
 	}
 }

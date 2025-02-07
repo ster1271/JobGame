@@ -1,12 +1,13 @@
 #pragma once
 #include "EnemyBase.h"
+#include "../Bot/Bot.h"
 
 const int ENEMY_MAX_LIFE = 20;		//Å‘å‘Ì—Í
 
 //“G‚ÌƒTƒCƒY
 const VECTOR ENEMY_NORMAL_SIZE = VGet(0.0f, 0.0f, 0.0f);
 
-class CEnemy_Normal: public CEnemyBase
+class CEnemy_Normal:public CEnemyBase
 {
 private:
 	VECTOR Respown_Pos;

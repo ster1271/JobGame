@@ -1,6 +1,5 @@
 #pragma once
 #include "Enemy_Normal.h"
-#include "EnemyBoss.h"
 #include "../Bot/Bot.h"
 #include "../Map/MapManager.h"
 #include "../RouteSearch/RouteSearch.h"
@@ -20,15 +19,16 @@ enum TYPE_ENEMY
 class CEnemyManager
 {
 private:
+	CEnemy_Normal cEnemy_Normal[ENEMY_MAXNUM];
 
 	//モデルのコピー元
 	int Org_Hndl;
-	TYPE_ENEMY type_id;
-	CEnemy_Normal cEnemy_Normal[ENEMY_MAXNUM];
-	CEnemyBoss cEnemyBoss[ENEMY_MAXNUM];
 	int CoolTime;
 	int ReqestCount;		//リクエストした数
 	int DeathCount;			//倒された数
+
+	void RequestEnemy();	//敵リクエスト
+
 
 public:
 
@@ -53,8 +53,4 @@ public:
 
 	//敵の情報取得
 	CEnemy_Normal& GetEnemy(int id) { return cEnemy_Normal[id]; }
-
-private:
-	//敵リクエスト
-	void RequestEnemy();
 };
