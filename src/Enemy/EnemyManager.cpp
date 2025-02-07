@@ -18,8 +18,8 @@ CEnemyManager::~CEnemyManager(){}
 //初期化
 void CEnemyManager::Init()
 {
-	Coolcnt = WAIT_TIME;
-	RespawnCount = RESPAWN_MAX_NUM;
+	CoolTime = WAIT_TIME;
+	ReqestCount = RESPAWN_MAX_NUM;
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Init();
@@ -76,8 +76,8 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 		{
 			CWave::GetInstance()->WaveStateChange(STATE_WAVE_END);
 			DeathCount = 0;
-			RespawnCount = RESPAWN_MAX_NUM;
-			Coolcnt = WAIT_TIME;
+			ReqestCount = RESPAWN_MAX_NUM;
+			CoolTime = WAIT_TIME;
 		}
 
 		int iEnemyCnt = 0;	//敵の出現数
@@ -92,19 +92,19 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 		}
 
 		//敵の出現
-		Coolcnt--;
+		CoolTime--;
 
 		//一定期間出現していないか、生存数が0の時リクエストさせる
-		if (Coolcnt < 0 || iEnemyCnt == 0)
+		if (CoolTime < 0 || iEnemyCnt == 0)
 		{
 			if (CWave::GetInstance()->GetWaveState() == STATE_WAVE_NORMAL)
 			{
 				//一定数生成したらそれ以上処理しない
-				if (RespawnCount <= 0)
+				if (ReqestCount <= 0)
 					return;
 
 				RequestEnemy();
-				Coolcnt = WAIT_TIME;
+				CoolTime = WAIT_TIME;
 			}
 			/*else if (CWave::GetInstance()->GetWaveState() == STATE_WAVE_BOTMOVE)
 			{
@@ -139,7 +139,7 @@ void CEnemyManager::RequestEnemy()
 	{
 		if (cEnemy_Normal[Enemy_Index].RequestEnemy(vPos, vSpeed))
 		{
-			RespawnCount--;
+			ReqestCount--;
 			break;
 		}
 	}

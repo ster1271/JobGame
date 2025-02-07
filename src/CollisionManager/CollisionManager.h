@@ -12,7 +12,6 @@
 class CCollisionManager
 {
 private:
-	int Cnt = 0;
 
 public:
 	//プレイヤーとマップの当たり判定

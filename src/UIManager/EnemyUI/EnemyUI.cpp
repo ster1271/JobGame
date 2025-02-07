@@ -26,11 +26,11 @@ void CEnemyUI::Load()
 }
 
 //–ˆƒtƒŒ[ƒ€s‚¤ˆ—
-void CEnemyUI::Step()
+void CEnemyUI::Step(CEnemyManager& cEnemyManager)
 {
 	for (int EnemyIndex = 0; EnemyIndex < ENEMY_MAXNUM; EnemyIndex++)
 	{
-		cEnemy[EnemyIndex] = CEnemyManager::GetInstance()->GetEnemy(EnemyIndex);
+		cEnemy[EnemyIndex] = cEnemyManager.GetEnemy(EnemyIndex);
 		PreLife[EnemyIndex] = CurrentLife[EnemyIndex];
 
 		CurrentLife[EnemyIndex] = cEnemy[EnemyIndex].GetLife();

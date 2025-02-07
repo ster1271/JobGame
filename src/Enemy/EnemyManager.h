@@ -20,7 +20,6 @@ enum TYPE_ENEMY
 class CEnemyManager
 {
 private:
-	static CEnemyManager* cInstance;		//インスタンス
 
 	//モデルのコピー元
 	int Org_Hndl;
@@ -31,17 +30,11 @@ private:
 	int ReqestCount;		//リクエストした数
 	int DeathCount;			//倒された数
 
+public:
+
 	//コンストラクタ・デストラクタ
 	CEnemyManager();
 	~CEnemyManager();
-
-public:
-	static void Create();				//インスタンスの生成
-
-	static void Destroy();				//インスタンスの削除
-
-	static CEnemyManager* GetInstance();		//インスタンスの取得
-	
 
 	//初期化
 	void Init();

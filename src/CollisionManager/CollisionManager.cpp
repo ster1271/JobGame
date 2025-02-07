@@ -359,11 +359,7 @@ void CCollisionManager::TurretShotToEnemy(CShotManager& cShotManager, CEnemyMana
 				cTShot.HitCalc();	//’e‚Ìƒtƒ‰ƒO‚ð‚¨‚é
 				cENormal.HitCalc();	//“G‚ÌHP‚ðŒ¸‚ç‚·
 
-				if (!cENormal.GetActive())
-				{
-					Cnt++;
-					cEnemyManager.SetDeathCount(Cnt);
-				}
+				
 			}
 		}
 	}
@@ -404,11 +400,7 @@ void CCollisionManager::PlayerShotToEnemy(CShotManager& cShotManager, CEnemyMana
 				cPShot.HitCalc();	//’e‚Ìƒtƒ‰ƒO‚ð‚¨‚é
 				cENormal.HitCalc();	//“G‚ÌHP‚ðŒ¸‚ç‚·
 
-				if (!cENormal.GetActive())
-				{
-					Cnt++;
-					cEnemyManager.SetDeathCount(Cnt);
-				}
+				
 			}
 		}
 	}
