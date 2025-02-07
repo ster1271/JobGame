@@ -1,5 +1,6 @@
 #pragma once
 #include "TurretBase.h"
+#include "../Debug/DebugString.h"
 
 
 //タレットクラス(通常)

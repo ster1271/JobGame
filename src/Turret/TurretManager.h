@@ -7,6 +7,8 @@
 #include "../Turret/TurretBase.h"
 #include "../Turret/Turret_Normal.h"
 
+#include "../Wave/Wave.h"
+
 using namespace std;
 
 const char TURRETPLACEPATH[3][128]
@@ -55,7 +57,7 @@ public:
 	void Draw();
 
 	//タレット設置処理
-	void TurretSpawn(const VECTOR& vPos);
+	void TurretSpawn(VECTOR vPos);
 
 	//タレット設置場所読み込み処理
 	void LoadTurretSpawn();

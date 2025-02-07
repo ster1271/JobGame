@@ -1,6 +1,5 @@
 #pragma once
 #include "../Common.h"
-#include "../Bot/Bot.h"
 #include "../RouteSearch/RouteSearch.h"
 #include "../SoundManager/SoundManager.h"
 #include "../Debug/DebugString.h"

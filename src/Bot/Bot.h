@@ -1,7 +1,5 @@
 #pragma once 
-#include "../Common.h"
 #include "../RouteSearch/RouteSearch.h"
-#include "../Map/MapManager.h"
 #include "../Wave/Wave.h"
 
 

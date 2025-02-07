@@ -96,7 +96,7 @@ void CTurretBase::Turret_Rotate(VECTOR vPos)
 	Dir = (Vtmp.x * Turret_Vec.z) - (Turret_Vec.x * Vtmp.z);
 
 	//â‘Î’l‚ª1.0f‚æ‚è¬‚³‚©‚Á‚½‚ç
-	if (fabsf(Dir) < 1.0f)
+	if (fabsf(Dir) < 5.0f)
 	{
 		float X = vPos.x - cPos.x;
 		float Z = vPos.z - cPos.z;

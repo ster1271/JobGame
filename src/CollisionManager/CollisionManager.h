@@ -1,7 +1,6 @@
 #pragma once
-#include "../Debug/DebugString.h"
-
 #include "Collision/Collision.h"
+#include "../Debug/DebugString.h"
 #include "../Player/Player.h"
 #include "../Enemy/EnemyManager.h"
 #include "../Shot/ShotManager.h"

@@ -359,7 +359,11 @@ void CCollisionManager::TurretShotToEnemy(CShotManager& cShotManager, CEnemyMana
 				cTShot.HitCalc();	//弾のフラグをおる
 				cENormal.HitCalc();	//敵のHPを減らす
 
-				
+				//もし敵が死んでいたらカウントする
+				if (!cENormal.GetActive())
+				{
+					cEnemyManager.SetCnt();
+				}
 			}
 		}
 	}
@@ -400,7 +404,11 @@ void CCollisionManager::PlayerShotToEnemy(CShotManager& cShotManager, CEnemyMana
 				cPShot.HitCalc();	//弾のフラグをおる
 				cENormal.HitCalc();	//敵のHPを減らす
 
-				
+				//もし敵が死んでいたらカウントする
+				if (!cENormal.GetActive())
+				{
+					cEnemyManager.SetCnt();
+				}
 			}
 		}
 	}

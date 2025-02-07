@@ -54,7 +54,7 @@ void CEnemy_Normal::Draw()
 }
 
 //毎フレーム行う処理
-void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
+void CEnemy_Normal::Step(VECTOR vPos, CMapManager& cMapManager)
 {
 	if (!IsActive)
 		return;
@@ -64,7 +64,7 @@ void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 	switch (State_Id)
 	{
 	case CEnemyBase::STATE_SEARCH:
-		List = CRoute_Search::GetInstance()->Route_Search(cPos, cBot.GetPos(), cMapManager);
+		List = CRoute_Search::GetInstance()->Route_Search(cPos, vPos, cMapManager);
 		
 		State_Id = STATE_MOVE;
 		break;
@@ -73,9 +73,9 @@ void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 
 		//プレイヤーとの距離を計算
 		VECTOR v_tmp;
-		v_tmp.x = cBot.GetPos().x - cPos.x;
+		v_tmp.x = vPos.x - cPos.x;
 		v_tmp.y = 0.0f;
-		v_tmp.z = cBot.GetPos().z - cPos.z;
+		v_tmp.z = vPos.z - cPos.z;
 
 		Range = VSize(v_tmp);
 
@@ -100,7 +100,7 @@ void CEnemy_Normal::Step(CBot& cBot, CMapManager& cMapManager)
 		else
 		{
 			//追尾移動
-			Out_Move(cBot.GetPos());
+			Out_Move(vPos);
 		}
 
 

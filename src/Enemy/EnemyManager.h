@@ -1,8 +1,5 @@
 #pragma once
 #include "Enemy_Normal.h"
-#include "../Bot/Bot.h"
-#include "../Map/MapManager.h"
-#include "../RouteSearch/RouteSearch.h"
 #include "../Wave/Wave.h"
 
 const int ENEMY_MAXNUM = 10;
@@ -31,6 +28,7 @@ private:
 
 
 public:
+	void SetCnt(int i = 1) { DeathCount += i; }
 
 	//コンストラクタ・デストラクタ
 	CEnemyManager();
@@ -45,8 +43,8 @@ public:
 	//終了処理
 	void Exit();
 
-	//毎フレーム呼ぶ処理
-	void Step(CBot& cBot, CMapManager cMapManager);
+	//毎フレーム行う処理
+	void Step(VECTOR vPos, CMapManager cMapManager);
 
 	//描画処理
 	void Draw();

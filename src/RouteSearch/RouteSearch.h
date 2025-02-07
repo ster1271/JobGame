@@ -1,8 +1,7 @@
 #pragma once
-#include "../Common.h"
-#include "../MyLibrary/MyLibrary.h"
+#include "../Draw3D/Draw3D.h"
 #include "../Map/MapManager.h"
-#include "../Debug/DebugString.h"
+
 
 
 //ó‘Ô‘JˆÚ

@@ -5,6 +5,7 @@ const float MAX_LIFE = 10.0f;		//最大体力
 const float ATTACK = 5.0f;			//攻撃力
 const int MAX_COOL_TIME = 30;		//弾の発射間隔
 const float SET_RANGE = 150.0f;		//最大直線距離
+const float MAX_LENGHT = 999.9f;	
 
 //コンストラクタ
 CTurret_Normal::CTurret_Normal()
@@ -24,8 +25,6 @@ void CTurret_Normal::Init()
 	CTurretBase::Init();
 	Attack = 0.0f;
 	CoolTime = 0;
-
-	Load_TurretPoint();
 }
 
 //データロード
@@ -41,7 +40,7 @@ void CTurret_Normal::Draw()
 	if (IsActive)
 	{
 		MV1DrawModel(iHndl);
-		CDraw3D::DrawBox3D(cPos, VGet(30.0f, 30.0f, 30.0f));
+		DrawSphere3D(cPos, 5.0f, 16, GetColor(255, 255, 255), GetColor(255, 255, 255), false);
 	}
 
 	if (IS_DEBUG)
@@ -59,7 +58,9 @@ void CTurret_Normal::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManag
 	//タレットが生成されていなかったら処理を行わない
 	if (!IsActive)return;
 
-	int Num = -1;
+	int Num = NULL;
+	float Range = 0.0f;
+	TotalMinLenge = MAX_LENGHT;
 
 	//HPが0より大きいときに処理を行う
 	if (Hp > 0.0f)
@@ -71,28 +72,34 @@ void CTurret_Normal::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManag
 
 			//敵のフラグがfalseなら以降の処理をしない
 			if (!cEnemy.GetActive())
-				return;
-
+				continue;
+	
 			VECTOR Reng_Vec = VSub(cEnemy.GetPosition(), cPos);		//敵とタレットの距離を求める	
-			float Range = CMyLibrary::VecLong(Reng_Vec);
+			Range = CMyLibrary::VecLong(Reng_Vec);
 
 			//直線距離が設定値よりも大きかったら下の処理をしない
-			TotalMinLenge = SET_RANGE;
-			if (Range >= SET_RANGE)
-				continue;
+			/*if (Range >= SET_RANGE)
+				continue;*/
 
-			if (Range < TotalMinLenge)
+			if (Range <= TotalMinLenge)
 			{
 				TotalMinLenge = Range;
 				Num = Index;
 			}
-
-			Turret_Rotate(cEnemy.GetPosition());							//角度処理
-			//Turret_Rotate(cEnemyManager.GetEnemy(Num).GetPosition());		//角度処理
-
-			TurretShot(cShotManager);					//弾の発射リクエスト
-
 		}
+
+		//球の当たり判定でfalseの時は処理しない
+		CEnemy_Normal& Enemy = cEnemyManager.GetEnemy(Num);
+		if (!CCollision::CheckHitSphereToSphere(cPos, 20.0f, Enemy.GetPosition(), 5.0f))
+			return;
+
+		CDebugString::GetInstance()->AddFormatString(300, 0, "いま%dを狙ってます", Num);
+
+		Turret_Rotate(Enemy.GetPosition());		//角度処理
+
+		TurretShot(cShotManager);	//弾の発射リクエスト
+
+		
 	}
 }
 

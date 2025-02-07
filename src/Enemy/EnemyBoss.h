@@ -1,5 +1,6 @@
 #pragma once
 #include "EnemyBase.h"
+#include "../Bot/Bot.h"
 
 //敵のサイズ
 const VECTOR ENEMY_BOSS_SIZE = VGet(0.0f, 0.0f, 0.0f);
@@ -24,7 +25,7 @@ public:
 	void Draw();
 
 	//毎フレーム行う処理
-	void Step(CBot cBot, CMapManager& cMapManager);
+	void Step(VECTOR vPos, CMapManager& cMapManager);
 
 	//後処理
 	void Exit();

@@ -1,6 +1,5 @@
 #pragma once
 #include "EnemyBase.h"
-#include "../Bot/Bot.h"
 
 const int ENEMY_MAX_LIFE = 20;		//最大体力
 
@@ -28,12 +27,12 @@ public:
 	void Draw();
 
 	//毎フレーム行う処理
-	void Step(CBot& cBot, CMapManager& cMapManager);
+	void Step(VECTOR vPos, CMapManager& cMapManager);
 
 	//後処理
 	void Exit();
 
 	//リクエスト
-	virtual bool RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed);
+	bool RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed);
 
 };

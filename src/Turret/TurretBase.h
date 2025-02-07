@@ -72,8 +72,5 @@ public:
 	//タレット回転処理
 	virtual void Turret_Rotate(VECTOR vPos);
 
-	//タレットの設置位置読み込み
-	void Load_TurretPoint();
-
 };
 

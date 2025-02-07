@@ -3,8 +3,8 @@
 //定義
 static const char ENEMY_MODEL_PATH01[] = { "data/enemy/Enemy01.x" };
 static const char Enemy_MODEL_PATH02[] = { "data/enemy/Enemy02.x" };
-static const int WAIT_TIME = 200;		//敵が再登場するまでの時間
-static const int RESPAWN_MAX_NUM = 15;	//通常ウェーブ最大出現数
+static const int COOL_MAX_TIME = 200;		//敵が再登場するまでの時間
+static const int RESPAWN_MAX_NUM = 20;	//通常ウェーブ最大出現数
 
 //コンストラクタ
 CEnemyManager::CEnemyManager()
@@ -18,7 +18,7 @@ CEnemyManager::~CEnemyManager(){}
 //初期化
 void CEnemyManager::Init()
 {
-	CoolTime = WAIT_TIME;
+	CoolTime = COOL_MAX_TIME;
 	ReqestCount = RESPAWN_MAX_NUM;
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
@@ -65,7 +65,7 @@ void CEnemyManager::Exit()
 }
 
 //毎フレーム呼ぶ処理
-void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
+void CEnemyManager::Step(VECTOR vPos, CMapManager cMapManager)
 {
 	//ウェーブ中のみ処理を行う
 	if (CWave::GetInstance()->GetIsWave() == true)
@@ -75,7 +75,7 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 			CWave::GetInstance()->WaveStateChange(STATE_WAVE_END);
 			DeathCount = 0;
 			ReqestCount = RESPAWN_MAX_NUM;
-			CoolTime = WAIT_TIME;
+			CoolTime = COOL_MAX_TIME;
 		}
 
 		int iEnemyCnt = 0;	//敵の出現数
@@ -85,7 +85,7 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 			{
 				iEnemyCnt++;
 			}
-			cEnemy_Normal[Enemy_Index].Step(cBot, cMapManager);
+			cEnemy_Normal[Enemy_Index].Step(vPos, cMapManager);
 			cEnemy_Normal[Enemy_Index].Update();
 		}
 
@@ -102,7 +102,7 @@ void CEnemyManager::Step(CBot& cBot, CMapManager cMapManager)
 					return;
 
 				RequestEnemy();
-				CoolTime = WAIT_TIME;
+				CoolTime = COOL_MAX_TIME;
 			}
 		}
 	}

@@ -58,9 +58,12 @@ void CTurretManager::Exit()
 //繰り返し行う処理
 void CTurretManager::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManager)
 {
-	for (int TurretIndex = 0; TurretIndex < Turret_List.size(); TurretIndex++)
+	if (CWave::GetInstance()->GetIsWave())
 	{
-		Turret_List[TurretIndex]->Step(cShotManager, cEnemyManager);
+		for (int TurretIndex = 0; TurretIndex < Turret_List.size(); TurretIndex++)
+		{
+			Turret_List[TurretIndex]->Step(cShotManager, cEnemyManager);
+		}
 	}
 
 	Update();
@@ -80,10 +83,6 @@ void CTurretManager::Update()
 		MV1SetScale(PlaceList[Index].iHndl, PlaceList[Index].vSize);		//サイズの更新
 		MV1SetRotationXYZ(PlaceList[Index].iHndl, VGet(0.0f, 0.0f, 0.0f));	//回転値の更新
 	}
-
-	//CDebugString::GetInstance()->AddFormatString(500, 500, "リストの個数：%d", Turret_List.size());
-	//CDebugString::GetInstance()->AddFormatString(500, 525, "設置できる数残り：%d", TURRET_MAX_NUM - Turret_List.size());
-
 }
 
 //描画処理
@@ -101,7 +100,7 @@ void CTurretManager::Draw()
 }
 
 //タレット設置処理
-void CTurretManager::TurretSpawn(const VECTOR& vPos)
+void CTurretManager::TurretSpawn(VECTOR vPos)
 {
 
 	for (int SpawnIndex = 0; SpawnIndex < PlaceList.size(); SpawnIndex++)
@@ -118,7 +117,7 @@ void CTurretManager::TurretSpawn(const VECTOR& vPos)
 			//基本情報を格納する
 			cTurretBase->Init();
 			cTurretBase->Load(Turret_Normal_Hndl);
-			cTurretBase->TurretSpawn(PlaceList[SpawnIndex].vPos);
+			cTurretBase->TurretSpawn(VGet(PlaceList[SpawnIndex].vPos.x, 0, PlaceList[SpawnIndex].vPos.z));
 
 			//リストに追加
 			Turret_List.push_back(cTurretBase);
