@@ -47,6 +47,12 @@ void CTurretManager::Exit()
 	}
 
 	Turret_List.clear();
+
+	for (int Index = 0; Index < PlaceList.size(); Index++)
+	{
+		//コピーモデルの削除
+		MV1DeleteModel(PlaceList[Index].iHndl);
+	}
 }
 
 //繰り返し行う処理
@@ -58,7 +64,6 @@ void CTurretManager::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManag
 	}
 
 	Update();
-
 }
 
 //更新処理
@@ -113,57 +118,13 @@ void CTurretManager::TurretSpawn(const VECTOR& vPos)
 			//基本情報を格納する
 			cTurretBase->Init();
 			cTurretBase->Load(Turret_Normal_Hndl);
-			cTurretBase->TurretSpawn(vPos);
+			cTurretBase->TurretSpawn(PlaceList[SpawnIndex].vPos);
 
 			//リストに追加
 			Turret_List.push_back(cTurretBase);
+			PlaceList[SpawnIndex].IsInstall = true;
 		}
 	}
-	
-	//int NotHitCnt = 0;
-
-	////タレットの設置数が0個じゃない時
-	//if (Turret_List.size() != 0)
-	//{
-	//	//最大数以上は生成しない
-	//	if (Turret_List.size() >= TURRET_MAX_NUM)
-	//		return;
-
-	//	//当たってないときにカウントをプラスする
-	//	for (int Turret_Index = 0; Turret_Index < Turret_List.size(); Turret_Index++)
-	//	{
-	//		if (!CCollision::CheckHitBoxToBox(vPos, TURRET_SIZE, Turret_List[Turret_Index]->GetPos(), TURRET_SIZE))
-	//		{
-	//			NotHitCnt++;
-	//		}		
-	//	}
-
-	//	//カウントがリストのサイズと同じ(誰とも当たってない場合)なら生成する
-	//	if (NotHitCnt == Turret_List.size())
-	//	{
-	//		//変数代入用クラス
-	//		CTurretBase* cTurretBase = new CTurret_Normal;
-	//		//基本情報を格納する
-	//		cTurretBase->Init();
-	//		cTurretBase->Load(Turret_Normal_Hndl);
-	//		cTurretBase->TurretSpawn(vPos);
-
-	//		//リストに追加
-	//		Turret_List.push_back(cTurretBase);
-	//	}
-	//}
-	////タレットの設置数が0個の時
-	//else if(Turret_List.size() == 0)
-	//{
-	//	//変数代入用クラス
-	//	CTurretBase* cTurretBase = new CTurret_Normal;
-	//	cTurretBase->Init();
-	//	cTurretBase->Load(Turret_Normal_Hndl);
-	//	cTurretBase->TurretSpawn(vPos);
-
-	//	//リストに追加
-	//	Turret_List.push_back(cTurretBase);
-	//}
 }
 
 
@@ -176,7 +137,7 @@ void CTurretManager::LoadTurretSpawn()
 
 	int Hndl = MV1LoadModel("data/Turret/TS_Place.x");
 
-	fopen_s(&fp, "data/Turret/TurretPlace.txt", "r");		//CSVファイル読み込み
+	fopen_s(&fp, TURRETPLACEPATH[0], "r");		//ファイル読み込み
 
 	//方法1
 	if (fp != nullptr)

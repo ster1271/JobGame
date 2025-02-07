@@ -7,8 +7,13 @@
 #include "../Turret/TurretBase.h"
 #include "../Turret/Turret_Normal.h"
 
-
 using namespace std;
+
+const char TURRETPLACEPATH[3][128]
+{
+	"data/Turret/TurretPlace.txt",
+};
+
 
 //タレットマネージャークラス
 class CTurretManager
