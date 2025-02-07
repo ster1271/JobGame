@@ -2,6 +2,8 @@
 #include <DxLib.h>
 #include "../SoundManager/SoundManager.h"
 
+#include "../Enemy/EnemyManager.h"
+
 //ウェーブの状態
 enum WAVE_STATE
 {
@@ -24,7 +26,6 @@ private:
 	bool IsNormal;			//ノーマルウェーブフラグ
 	bool IsBotMove;			//ボット移動ウェーブフラグ
 	int WaveTime;			//ウェーブ発生時間
-	int Cnt;				//時間カウント
 
 	int StartWaveTime;		//ウェーブ開始までの時間
 	
@@ -50,7 +51,7 @@ public:
 	void SetWaveTime(int time) { WaveTime = time; }		//時間設定
 
 	WAVE_STATE GetWaveState() { return Wave_ID; }	//ウェーブの状態取得
-	int GetTime() { return Cnt / 60; }				//時間取得
+	int GetTime() { return StartWaveTime / 60; }	//時間取得
 
 	void WaveStateChange(WAVE_STATE id);	//ウェーブ状態変更
 

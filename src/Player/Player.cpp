@@ -426,7 +426,7 @@ void CPlayer::SetBotPlace()
 			//プレイヤーの現在座標を渡す
 			vPos = cPos;
 
-			fprintf(fp, "%d, %d, %d\n", (int)vPos.x, (int)vPos.y, (int)vPos.z);
+			fprintf(fp, "%d, %d, %d\n", (int)vPos.x, -13, (int)vPos.z);
 		}
 	}
 

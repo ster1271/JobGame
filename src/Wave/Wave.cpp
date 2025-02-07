@@ -10,7 +10,7 @@ CWave::CWave()
 	IsNormal = false;
 	IsBotMove = false;
 	WaveTime = 0;
-	Cnt = -1;
+	StartWaveTime = -1;
 }
 
 //デストラクタ
@@ -53,7 +53,7 @@ void CWave::WaveStateChange(WAVE_STATE id)
 	case STATE_WAVE_PREPAR:
 		CSoundManager::SetVolume(SOUNDID_WAVE, 0.3f);
 		CSoundManager::Play(SOUNDID_WAVE, DX_PLAYTYPE_LOOP, true);
-		Cnt = 600;
+		StartWaveTime = 600;
 		break;
 
 	case STATE_WAVE_NORMAL:
@@ -68,7 +68,7 @@ void CWave::WaveStateChange(WAVE_STATE id)
 		SetIsWave(false);
 		SetIsNormal(false);
 		SetIsBotMove(false);
-		Cnt = 300;
+		StartWaveTime = 300;
 		CSoundManager::Stop(SOUNDID_WAVE);
 		break;
 
@@ -97,10 +97,10 @@ void CWave::Step()
 	case STATE_WAVE_PREPAR:
 
 		//UI表示のための時間を作る
-		Cnt--;
-		if (Cnt < 0)
+		StartWaveTime--;
+		if (StartWaveTime < 0)
 		{
-			Cnt = 0;
+			StartWaveTime = 0;
 
 			SetIsWave(true);
 
@@ -119,18 +119,22 @@ void CWave::Step()
 
 		break;
 	case STATE_WAVE_NORMAL:
+
+
 		break;
 
 	case STATE_WAVE_BOTMOVE:
+
+
 		break;
 
 	case STATE_WAVE_END:
 	
 		//UI表示のための時間を作る
-		Cnt--;
-		if (Cnt < 0)
+		StartWaveTime--;
+		if (StartWaveTime < 0)
 		{
-			Cnt = 0;
+			StartWaveTime = 0;
 			WaveStateChange(STATE_WAVE_NONE);
 		}
 		break;

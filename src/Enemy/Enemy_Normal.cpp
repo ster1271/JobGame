@@ -23,7 +23,6 @@ void CEnemy_Normal::Init()
 	memset(&cSpeed, 0, sizeof(VECTOR));
 
 	Life = 0;;			//ライフ
-	HitCount = 0;;		//弾の当たった回数
 	iHndl = -1;			//ハンドル
 
 	IsActive = false;	//生存フラグ
@@ -136,10 +135,6 @@ bool CEnemy_Normal::RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed)
 	{
 		return false;
 	}
-
-	//すべて初期化する
-	cScale = VGet(0.0f, 0.0f, 0.0f);
-
 	
 	cPos = vPos;
 	cNextPos = cPos;
@@ -149,10 +144,14 @@ bool CEnemy_Normal::RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed)
 	cRotate = VGet(0.0f, DX_PI_F / 2, 0.0f);
 	cSpeed = vSpeed;
 	Life = ENEMY_MAX_LIFE;
+
+	//情報を更新する
+	Update();
+
 	List.clear();
 	ListCnt = 0;
-	State_Id = STATE_SEARCH;
 
+	State_Id = STATE_SEARCH;
 	IsActive = true;
 
 	return true;

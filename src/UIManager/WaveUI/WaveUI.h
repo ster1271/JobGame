@@ -13,6 +13,8 @@ private:
 	int ChangeCount;	//スイッチ分
 
 public:
+	//void SetAlpha(int Cnt) { Alpha = Cnt; }	//透過値設定
+
 	//コンストラクタ・デストラクタ
 	CWaveUI();
 	~CWaveUI();

@@ -46,7 +46,6 @@ protected:
 	int iHndl;			//ハンドル
 
 	float Life;			//ライフ
-	int HitCount;		//弾の当たった回数
 	bool IsActive;		//生存フラグ
 
 	bool IsDir[ENEMY_DIR_NUM];	//方向フラグ
@@ -94,14 +93,10 @@ public:
 	void HitCalc()
 	{
 		Life--;
-		HitCount++;
 
 		//ライフがなくなったらフラグをおる
 		if (Life <= 0)
 		{
-			iHndl = -1;
-
-			HitCount = 0;
 			State_Id = STATE_NUM;
 			List.clear();
 			IsActive = false;

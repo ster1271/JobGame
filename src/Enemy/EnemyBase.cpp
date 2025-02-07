@@ -20,7 +20,6 @@ CEnemyBase::CEnemyBase()
 	State_Id = STATE_NUM;
 	Radius = ENEMY_RADIUS;
 	Life = 0;			//ライフ
-	HitCount = 0;		//弾の当たった回数
 	iHndl = -1;			//ハンドル
 
 	IsActive = false;	//生存フラグ
@@ -51,7 +50,6 @@ void CEnemyBase::Init()
 
 	State_Id = STATE_MOVE;
 	Life = 0;;			//ライフ
-	HitCount = 0;;		//弾の当たった回数
 	iHndl = -1;			//ハンドル
 	ListCnt = 0;
 
@@ -64,11 +62,11 @@ void CEnemyBase::Init()
 void CEnemyBase::Exit()
 {
 	//モデルハンドル解放
-	/*if (iHndl != -1)
+	if (iHndl != -1)
 	{
 		MV1DeleteModel(iHndl);
 		iHndl = -1;
-	}*/
+	}
 
 	//ひとまず初期化
 	memset(&cPos, 0, sizeof(VECTOR));
@@ -78,9 +76,7 @@ void CEnemyBase::Exit()
 	memset(&cSize, 0, sizeof(VECTOR));
 	memset(&cSpeed, 0, sizeof(VECTOR));
 
-	Life = 0;;			//ライフ
-	HitCount = 0;;		//弾の当たった回数
-
+	Life = 0;			//ライフ
 
 	IsActive = false;	//生存フラグ
 }
@@ -103,45 +99,10 @@ void CEnemyBase::Load(int iMdlHndl)
 //--------------------------------------
 void CEnemyBase::Draw()
 {
-	if (IsActive)
-	{
-		MV1DrawModel(iHndl);
+	if (!IsActive)
+		return;
 
-		//デバック用---------------------------------------------------------------------
-		/*
-		int R, G, B;
-		B = 255;
-		R = G = 0;
-
-
-		switch (HitCount)
-		{
-		//一回も当たってないとき
-		case 0:
-			break;
-			B = 255;
-			R = G = 0;
-		//一回当たったとき
-		case 1:
-			G = 255;
-			R = B = 0;
-
-			break;
-		//二回当たったとき
-		case 2:
-			R = 255;
-			G = B = 0;
-
-			break;
-
-		default:
-			break;
-		}
-		DrawSphere3D(cPos, Radius, 16, GetColor(R, G, B), GetColor(R, G, B), false);
-		*/
-		//デバック用---------------------------------------------------------------------
-	}
-
+	MV1DrawModel(iHndl);
 }
 
 

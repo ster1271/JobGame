@@ -109,36 +109,13 @@ void CTurretBase::Turret_Rotate(VECTOR vPos)
 	//回転する角度を決める
 	else if (Dir >= 0.0f)
 	{
-		cRotate.y += 0.05f;
+		cRotate.y += 0.1f;
 	}
 	else if (Dir < 0.0f)
 	{
-		cRotate.y -= 0.05f;
+		cRotate.y -= 0.1f;
 	}
 }
 
-
-//タレットの設置位置読み込み
-void CTurretBase::Load_TurretPoint()
-{
-	VECTOR vPos = VECTOR_ZERO;
-
-	//ファイルを開く
-	fopen_s(&fp, "data/Turret/TurretPlace.txt", "r");
-
-	//方法1
-	if (fp != nullptr)
-	{
-
-		while (fscanf_s(fp, "%d,%d,%d",
-			&vPos.x, &vPos.y, &vPos.z) != EOF)
-		{
-			SetTurretPoint.push_back(vPos);
-		}
-	}
-
-	//ファイルを閉じる
-	fclose(fp);
-}
 
 
