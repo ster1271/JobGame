@@ -56,7 +56,6 @@ void CMap::Updata()
 		MV1SetScale(FloarList[i].iHndl, cScale);					//サイズの更新
 		MV1SetRotationXYZ(FloarList[i].iHndl, cRotate);				//回転値の更新
 	}
-
 }
 
 //CSV読み込み
@@ -184,8 +183,6 @@ void CMap::LoadMap2()
 					FloarList.push_back(Floartmp);
 				}
 			}
-
-
 			cnt++;
 		}
 	}
