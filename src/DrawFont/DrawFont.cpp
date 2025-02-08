@@ -13,7 +13,6 @@ void CDrawFont::Init()
 	{
 		FontHndl[FontIndex] = -1;
 	}
-
 }
 
 //I—¹ˆ—

@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "../Debug/DebugString.h"
 
 //インスタンスの初期化
 CPlayer* CPlayer::cInstance = nullptr;
@@ -126,7 +125,7 @@ void CPlayer::Shot()
 //毎フレーム行う処理
 void CPlayer::Step(CShotManager& cShotManager, CTurretManager& cTurretManager, CMapManager& cMapManager, VECTOR BotPos)
 {
-	SetBotPlace();
+	SetPlace();
 
 	switch (Id)
 	{
@@ -211,7 +210,10 @@ void CPlayer::Draw()
 	//プレイヤーの描画
 	MV1DrawModel(iHndl);
 
-
+	//for (int i = 0; i < LIST.size(); i++)
+	//{
+	//	CDraw3D::DrawBox3D(LIST[i], VGet(20, 20, 20));
+	//}
 
 
 	if (IS_DEBUG)
@@ -262,6 +264,7 @@ void CPlayer::Draw()
 void CPlayer::Exit()
 {
 	CHumanBase::Exit();
+	LIST.clear();
 }
 
 //移動処理
@@ -412,12 +415,17 @@ void CPlayer::BackBotPosition(VECTOR vPos)
 
 
 //タレット設置場所指定
-void CPlayer::SetBotPlace()
+void CPlayer::SetPlace()
 {
 	VECTOR vPos = VECTOR_ZERO;
 
+	//data/Turret/TurretPlace.txt	//タレット用(Y座標：-13)
+	//data/enemy/Enemy_Pass01.txt	//敵の移動用
+
+	const char TMP[] = { "aaa" };
+
 	//ファイルを開く
-	fopen_s(&fp, "data/Turret/TurretPlace.txt", "a+");
+	fopen_s(&fp, TMP, "a+");
 
 	if (CInput::IsKeyPush(KEY_INPUT_RETURN))
 	{
@@ -425,8 +433,9 @@ void CPlayer::SetBotPlace()
 		{
 			//プレイヤーの現在座標を渡す
 			vPos = cPos;
+			LIST.push_back(vPos);
 
-			fprintf(fp, "%d, %d, %d\n", (int)vPos.x, -13, (int)vPos.z);
+			fprintf(fp, "%d, %d, %d\n", (int)vPos.x, vPos.y, (int)vPos.z);
 		}
 	}
 

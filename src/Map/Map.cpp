@@ -83,7 +83,7 @@ void CMap::Draw()
 }
 
 //マップの読み込み1
-void CMap::LoadMap1()
+void CMap::LoadMap1(MapID id)
 {
 	int WallHndl = MV1LoadModel(BLOCK_MODEL_PATH);
 	int FloarHndl = MV1LoadModel(FLOAR_MODEL_PATH);
@@ -91,7 +91,7 @@ void CMap::LoadMap1()
 	WallInfo Walltmp;
 	FloarInfo Floartmp;
 
-	fopen_s(&fp_, "Data/Map/map1.txt", "r");		//CSVファイル読み込み
+	fopen_s(&fp_, MapFilePath[id], "r");		//CSVファイル読み込み
 
 	if (fp_ != nullptr)
 	{
@@ -145,7 +145,7 @@ void CMap::LoadMap1()
 }
 
 //マップの読み込み2
-void CMap::LoadMap2()
+void CMap::LoadMap2(MapID id)
 {
 	int WallHndl = MV1LoadModel(BLOCK_MODEL_PATH);
 	int FloarHndl = MV1LoadModel(FLOAR_MODEL_PATH);
@@ -155,7 +155,7 @@ void CMap::LoadMap2()
 
 	int cnt = 0;
 	int num[MAP_MAX_NUM] = { 0 };
-	fopen_s(&fp_, "Data/Map/Maptest.csv", "r");		//CSVファイル読み込み
+	fopen_s(&fp_, MapFilePath[id], "r");		//ファイル読み込み
 
 	//方法1
 	if (fp_ != nullptr)

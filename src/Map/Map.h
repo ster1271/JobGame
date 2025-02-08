@@ -4,6 +4,21 @@
 const VECTOR MAP_SIZE = VGet(50.0f, 50.0f, 50.0f);
 const float MAP_R = 30.0f;
 
+enum MapID
+{
+	MAPID_01,
+
+
+	MAPID_NUM
+};
+
+//マップのファイルパス
+static const char MapFilePath[MAPID_NUM][128]
+{
+	"Data/Map/map01.txt",
+};
+
+
 struct WallInfo
 {
 	VECTOR vPos;
@@ -56,10 +71,10 @@ public:
 	vector<FloarInfo> GetFloarList() { return FloarList; }
 
 	//マップの読み込み1
-	void LoadMap1();
+	void LoadMap1(MapID id);
 
 	//マップの読み込み2
-	void LoadMap2();
+	void LoadMap2(MapID id);
 };
 
 
