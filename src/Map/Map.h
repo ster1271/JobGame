@@ -1,6 +1,5 @@
 #pragma once
 #include "../Object/Object.h"
-#include "block/block.h"
 
 const VECTOR MAP_SIZE = VGet(50.0f, 50.0f, 50.0f);
 const float MAP_R = 30.0f;

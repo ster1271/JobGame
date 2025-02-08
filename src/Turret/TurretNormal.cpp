@@ -4,7 +4,7 @@
 const float MAX_LIFE = 10.0f;		//最大体力
 const float ATTACK = 5.0f;			//攻撃力
 const int MAX_COOL_TIME = 30;		//弾の発射間隔
-const float SET_RANGE = 150.0f;		//最大直線距離
+const float SET_RANGE = 175.0f;		//最大直線距離
 const float MAX_LENGHT = 999.9f;	
 
 //コンストラクタ
@@ -77,10 +77,6 @@ void CTurret_Normal::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManag
 			VECTOR Reng_Vec = VSub(cEnemy.GetPosition(), cPos);		//敵とタレットの距離を求める	
 			Range = CMyLibrary::VecLong(Reng_Vec);
 
-			//直線距離が設定値よりも大きかったら下の処理をしない
-			/*if (Range >= SET_RANGE)
-				continue;*/
-
 			if (Range <= TotalMinLenge)
 			{
 				TotalMinLenge = Range;
@@ -88,18 +84,13 @@ void CTurret_Normal::Step(CShotManager& cShotManager, CEnemyManager& cEnemyManag
 			}
 		}
 
-		//球の当たり判定でfalseの時は処理しない
-		CEnemy_Normal& Enemy = cEnemyManager.GetEnemy(Num);
-		if (!CCollision::CheckHitSphereToSphere(cPos, 20.0f, Enemy.GetPosition(), 5.0f))
+		//直線距離が設定値よりも大きかったら下の処理をしない
+		if (TotalMinLenge >= SET_RANGE)
 			return;
 
-		CDebugString::GetInstance()->AddFormatString(300, 0, "いま%dを狙ってます", Num);
-
-		Turret_Rotate(Enemy.GetPosition());		//角度処理
+		Turret_Rotate(cEnemyManager.GetEnemy(Num).GetPosition());		//角度処理
 
 		TurretShot(cShotManager);	//弾の発射リクエスト
-
-		
 	}
 }
 
