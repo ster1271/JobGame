@@ -104,6 +104,11 @@ void CEnemyManager::Step(VECTOR vPos, CMapManager cMapManager)
 				RequestEnemy();
 				CoolTime = COOL_MAX_TIME;
 			}
+			else
+			{
+				RequestEnemy();
+				CoolTime = COOL_MAX_TIME;
+			}
 		}
 	}
 }

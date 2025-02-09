@@ -2,8 +2,6 @@
 #include <DxLib.h>
 #include "../SoundManager/SoundManager.h"
 
-#include "../Enemy/EnemyManager.h"
-
 //ウェーブの状態
 enum WAVE_STATE
 {

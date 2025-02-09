@@ -15,14 +15,12 @@ CEnemy_Normal::~CEnemy_Normal() {}
 void CEnemy_Normal::Init()
 {
 	//ひとまず初期化
-	memset(&cPos, 0, sizeof(VECTOR));
-	memset(&cNextPos, 0, sizeof(VECTOR));
-	memset(&cRotate, 0, sizeof(VECTOR));
-	memset(&cScale, 0, sizeof(VECTOR));
-	memset(&cSize, 0, sizeof(VECTOR));
-	memset(&cSpeed, 0, sizeof(VECTOR));
+	cScale = VGet(0.1f, 0.1f, 0.1f);
+	cSize = ENEMY_NORMAL_SIZE;
+	cRotate = VGet(0.0f, DX_PI_F / 2, 0.0f);
 
-	Life = 0;;			//ライフ
+
+	Life = 0;			//ライフ
 	iHndl = -1;			//ハンドル
 
 	IsActive = false;	//生存フラグ
@@ -79,21 +77,26 @@ void CEnemy_Normal::Step(VECTOR vPos, CMapManager& cMapManager)
 
 		Range = VSize(v_tmp);
 
-		if (Range >= 50.0f)
+		//ボットの移動ウェーブ時のみ経路探索をしなおす
+		if (CWave::GetInstance()->GetWaveState() == STATE_WAVE_BOTMOVE)
 		{
 			ReSeachTime++;
 
 			//時間経過で経路探索し直し
-			/*if (ReSeachTime >= RESEARCH_TIME)
+			if (ReSeachTime >= RESEARCH_TIME)
 			{
 				List.clear();
 				ReSeachTime = 0;
 				ListCnt = 0;
 				State_Id = STATE_SEARCH;
 
-				break;
-			}*/
+				return;
+			}
+		}
 
+
+		if (Range >= 50.0f)
+		{
 			//経路移動処理
 			Enemy_Move(List, ListCnt);
 		}
@@ -102,9 +105,8 @@ void CEnemy_Normal::Step(VECTOR vPos, CMapManager& cMapManager)
 			//追尾移動
 			Out_Move(vPos);
 		}
-
-
 		break;
+
 	case CEnemyBase::STATE_ATTACK:
 		
 
@@ -128,28 +130,20 @@ void CEnemy_Normal::Exit()
 }
 
 //リクエスト
-bool CEnemy_Normal::RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed)
+bool CEnemy_Normal::RequestEnemy(VECTOR vPos, VECTOR vSpeed)
 {
 	//すでに出現している
 	if (IsActive)
-	{
 		return false;
-	}
 	
 	cPos = vPos;
 	cNextPos = cPos;
 	Respown_Pos = vPos;
-	cScale = VGet(0.1f, 0.1f, 0.1f);
-	cSize = ENEMY_NORMAL_SIZE;
-	cRotate = VGet(0.0f, DX_PI_F / 2, 0.0f);
 	cSpeed = vSpeed;
 	Life = ENEMY_MAX_LIFE;
 
 	//情報を更新する
 	Update();
-
-	List.clear();
-	ListCnt = 0;
 
 	State_Id = STATE_SEARCH;
 	IsActive = true;

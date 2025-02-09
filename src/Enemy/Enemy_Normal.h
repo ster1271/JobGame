@@ -1,5 +1,6 @@
 #pragma once
 #include "EnemyBase.h"
+#include "../Wave/Wave.h"
 
 const int ENEMY_MAX_LIFE = 20;		//最大体力
 
@@ -33,6 +34,6 @@ public:
 	void Exit();
 
 	//リクエスト
-	bool RequestEnemy(const VECTOR& vPos, const VECTOR& vSpeed);
+	bool RequestEnemy(VECTOR vPos, VECTOR vSpeed);
 
 };

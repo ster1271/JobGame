@@ -62,7 +62,7 @@ void CMap::Updata()
 void CMap::MapLoad()
 {
 	//•û–@1(1•¶š“Ç‚İ‚İ)
-	LoadMap1();
+	LoadMap1(MAPID_01);
 
 	//•û–@2(1s“Ç‚İ‚İ)
 	//LoadMap2();		
