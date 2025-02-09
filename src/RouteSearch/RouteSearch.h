@@ -4,7 +4,7 @@
 
 
 
-//ó‘Ô‘JˆÚ
+//ƒm[ƒhó‘Ô
 enum NODE_STATE
 {
 	NONE = 0,	//–¢’è
