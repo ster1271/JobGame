@@ -20,10 +20,10 @@ private:
 
 	enum DIR
 	{
-		DIR_UP = 0,
-		DIR_DOWN,
-		DIR_LEFT,
-		DIR_RIGHT,
+		DIR_UP = 0,	//ëO
+		DIR_DOWN,	//å„ÇÎ
+		DIR_LEFT,	//ç∂
+		DIR_RIGHT,	//âE
 		DIR_NUM,
 	};
 
