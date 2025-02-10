@@ -97,8 +97,6 @@ void CBot::Draw()
 //マイフレーム行う処理
 void CBot::Step(CMapManager& cMapManager)
 {
-	
-
 	switch (State_Id)
 	{
 	case CBot::STATE_STOP:
@@ -116,7 +114,6 @@ void CBot::Step(CMapManager& cMapManager)
 			//Idを変更する
 			State_Id = STATE_SEARCH;
 		}
-
 		break;
 
 	case CBot::STATE_SEARCH:
@@ -126,7 +123,6 @@ void CBot::Step(CMapManager& cMapManager)
 
 	case CBot::STATE_MOVE:
 		Move_Bot(Route_List);
-
 		break;
 
 	default:

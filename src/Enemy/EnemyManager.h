@@ -2,7 +2,7 @@
 #include "Enemy_Normal.h"
 #include "../Wave/Wave.h"
 
-const int ENEMY_MAXNUM = 10;
+const int ENEMY_MAXNUM = 20;
 
 //敵の種類
 enum TYPE_ENEMY
@@ -23,6 +23,8 @@ private:
 	int CoolTime;
 	int ReqestCount;		//リクエストした数
 	int DeathCount;			//倒された数
+
+	vector<VECTOR> tmpList;
 
 	void RequestEnemy();	//敵リクエスト
 

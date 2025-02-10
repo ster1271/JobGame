@@ -332,3 +332,9 @@ void CEnemyBase::SetDir()
 }
 
 
+//ƒ‹[ƒg”­Œ©
+void CEnemyBase::Route()
+{
+
+}
+

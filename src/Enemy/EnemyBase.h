@@ -111,4 +111,6 @@ public:
 	void SetDir();
 
 
+	//ƒ‹[ƒg”­Œ©
+	void Route();
 };

@@ -28,7 +28,7 @@ public:
 	void Draw();
 
 	//–ˆƒtƒŒ[ƒ€s‚¤ˆ—
-	void Step(VECTOR vPos, CMapManager& cMapManager);
+	void Step(VECTOR vPos, CMapManager& cMapManager, vector<VECTOR> NormalWaveList);
 
 	//Œãˆ—
 	void Exit();

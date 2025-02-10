@@ -53,18 +53,19 @@ void CEnemy_Normal::Draw()
 }
 
 //毎フレーム行う処理
-void CEnemy_Normal::Step(VECTOR vPos, CMapManager& cMapManager)
+void CEnemy_Normal::Step(VECTOR vPos, CMapManager& cMapManager, vector<VECTOR> NormalWaveList)
 {
 	if (!IsActive)
 		return;
 
 	float Range = 0.0f;
+	vector <VECTOR> tmp;
 
 	switch (State_Id)
 	{
 	case CEnemyBase::STATE_SEARCH:
-		List = CRoute_Search::GetInstance()->Route_Search(cPos, vPos, cMapManager);
 		
+
 		State_Id = STATE_MOVE;
 		break;
 
@@ -99,7 +100,7 @@ void CEnemy_Normal::Step(VECTOR vPos, CMapManager& cMapManager)
 		if (Range >= 50.0f)
 		{
 			//経路移動処理
-			Enemy_Move(List, ListCnt);
+			Enemy_Move(NormalWaveList, ListCnt);
 		}
 		else
 		{

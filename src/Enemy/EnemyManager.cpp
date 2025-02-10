@@ -24,6 +24,8 @@ void CEnemyManager::Init()
 	{
 		cEnemy_Normal[Enemy_Index].Init();
 	}
+
+	tmpList.clear();
 }
 
 //データロード
@@ -78,6 +80,24 @@ void CEnemyManager::Step(VECTOR vPos, CMapManager cMapManager)
 			CoolTime = COOL_MAX_TIME;
 		}
 
+
+		switch (CWave::GetInstance()->GetWaveState())
+		{
+		case STATE_WAVE_NORMAL:
+			if (tmpList.empty())
+			{
+				tmpList = CRoute_Search::GetInstance()->Route_Search(VGet(50.0f, 5.0f, 700.0f), vPos, cMapManager);
+			}
+			break;
+
+		case STATE_WAVE_BOTMOVE:
+
+			break;
+
+		default:
+			break;
+		}
+
 		int iEnemyCnt = 0;	//敵の出現数
 		for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 		{
@@ -85,7 +105,7 @@ void CEnemyManager::Step(VECTOR vPos, CMapManager cMapManager)
 			{
 				iEnemyCnt++;
 			}
-			cEnemy_Normal[Enemy_Index].Step(vPos, cMapManager);
+			cEnemy_Normal[Enemy_Index].Step(vPos, cMapManager, tmpList);
 			cEnemy_Normal[Enemy_Index].Update();
 		}
 
@@ -121,6 +141,8 @@ void CEnemyManager::Draw()
 		cEnemy_Normal[Enemy_Index].Draw();
 		//cEnemyBoss[Enemy_Index].Draw();
 	}
+
+	CDebugString::GetInstance()->AddFormatString(0, 400, "生成できる数：%d", ReqestCount);
 	
 	CDraw3D::DrawBox3D(VGet(50.0f, 5.0f, 700.0f), VGet(50.0f, 50.0f, 50.0f));
 }
