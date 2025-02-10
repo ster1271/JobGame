@@ -84,10 +84,10 @@ void CEnemyManager::Step(VECTOR vPos, CMapManager cMapManager)
 		switch (CWave::GetInstance()->GetWaveState())
 		{
 		case STATE_WAVE_NORMAL:
-			if (tmpList.empty() == true)
+			/*if (tmpList.empty() == true)
 			{
 				tmpList = CRoute_Search::GetInstance()->Route_Search(VGet(50.0f, 5.0f, 700.0f), vPos, cMapManager);
-			}
+			}*/
 			break;
 
 		case STATE_WAVE_BOTMOVE:

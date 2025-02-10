@@ -181,8 +181,6 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 
 	int SaveCnt = 0;										//前回のループで増えた配列の個数
 	int CurrentCnt = Evaluat_Calc(tmp, -1, cMapManager);	//今回のループで増えた配列の個数(スタート地点の親番号を-1とする)
-	
-	int LoopCount = 0;
 
 	//フラグがfalseなら計算を行う
 	while (!IsFinish)
@@ -247,11 +245,9 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 		}
 	}
 
-
 	//ゴールからスタートまでの軌跡をたどる
 	for (int i = List.size() - 1; i >= 0; i--)
 	{
-
 		//まずゴールと同座標を見つける
 		if (List[i].Renge_To_Goal == 0)
 		{
@@ -326,8 +322,6 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMapManager& cMapMana
 	
 	for (int Index = 0; Index < DIR_NUM; Index++)
 	{
-
-
 		//スタート地点の座標が同じなら計算しない
 		if (tmp[Index].Pos.x == m_StartPos.x &&
 			//tmp[Index].Pos.y == m_StartPos.y &&
