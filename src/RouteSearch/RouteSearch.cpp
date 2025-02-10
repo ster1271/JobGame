@@ -144,7 +144,7 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 	bool IsFinish = false;		//探索終了フラグ
 
 
-	int SaveCnt = 0;			//前回のループで増えた配列の個数
+	int SaveCnt = 0;										//前回のループで増えた配列の個数
 	int CurrentCnt = Evaluat_Calc(tmp, -1, cMapManager);	//今回のループで増えた配列の個数(スタート地点の親番号を-1とする)
 	
 	int LoopCount = 0;

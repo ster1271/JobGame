@@ -9,7 +9,7 @@ static const int RESPAWN_MAX_NUM = 20;	//通常ウェーブ最大出現数
 //コンストラクタ
 CEnemyManager::CEnemyManager()
 {
-	Org_Hndl = -1;
+	OrgHndl = -1;
 }
 
 //デストラクタ
@@ -30,14 +30,14 @@ void CEnemyManager::Init()
 void CEnemyManager::Load()
 {
 	//オリジナルデータ読み込み
-	if (Org_Hndl == -1)
+	if (OrgHndl == -1)
 	{
-		Org_Hndl = MV1LoadModel(ENEMY_MODEL_PATH01);
+		OrgHndl = MV1LoadModel(ENEMY_MODEL_PATH01);
 	}
 
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
-		cEnemy_Normal[Enemy_Index].Load(Org_Hndl);
+		cEnemy_Normal[Enemy_Index].Load(OrgHndl);
 	}
 
 	/*Org_Hndl = MV1LoadModel(Enemy_MODEL_PATH02);
@@ -57,10 +57,10 @@ void CEnemyManager::Exit()
 		cEnemy_Normal[Enemy_Index].Exit();
 	}
 
-	if (Org_Hndl != -1)
+	if (OrgHndl != -1)
 	{
-		MV1DeleteModel(Org_Hndl);
-		Org_Hndl = -1;
+		MV1DeleteModel(OrgHndl);
+		OrgHndl = -1;
 	}
 }
 

@@ -19,7 +19,7 @@ private:
 	CEnemy_Normal cEnemy_Normal[ENEMY_MAXNUM];
 
 	//モデルのコピー元
-	int Org_Hndl;
+	int OrgHndl;
 	int CoolTime;
 	int ReqestCount;		//リクエストした数
 	int DeathCount;			//倒された数

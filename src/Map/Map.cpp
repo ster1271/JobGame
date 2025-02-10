@@ -4,7 +4,7 @@
 #define MAP_SIZE		50	//マップのサイズ
 #define MAP_MAX_NUM		14	//マップの縦横
 
-const char BLOCK_MODEL_PATH[] = "data/Map/block.x";
+const char WALL_MODEL_PATH[] = "data/Map/wall.x";
 const char FLOAR_MODEL_PATH[] = "data/Map/floar.x";
 
 //コンストラクタ
@@ -45,7 +45,7 @@ void CMap::Updata()
 {
 	for (int i = 0; i < WallList.size(); i++)
 	{
-		MV1SetPosition(WallList[i].iHndl, WallList[i].vPos);		//座標の更新
+		MV1SetPosition(WallList[i].iHndl, WallList[i].vPos);	//座標の更新
 		MV1SetScale(WallList[i].iHndl, cScale);					//サイズの更新
 		MV1SetRotationXYZ(WallList[i].iHndl, cRotate);			//回転値の更新
 	}
@@ -85,7 +85,7 @@ void CMap::Draw()
 //マップの読み込み1
 void CMap::LoadMap1(MapID id)
 {
-	int WallHndl = MV1LoadModel(BLOCK_MODEL_PATH);
+	int WallHndl = MV1LoadModel(WALL_MODEL_PATH);
 	int FloarHndl = MV1LoadModel(FLOAR_MODEL_PATH);
 
 	WallInfo Walltmp;
@@ -147,7 +147,7 @@ void CMap::LoadMap1(MapID id)
 //マップの読み込み2
 void CMap::LoadMap2(MapID id)
 {
-	int WallHndl = MV1LoadModel(BLOCK_MODEL_PATH);
+	int WallHndl = MV1LoadModel(WALL_MODEL_PATH);
 	int FloarHndl = MV1LoadModel(FLOAR_MODEL_PATH);
 
 	WallInfo Walltmp;
