@@ -64,9 +64,9 @@ void CEnemy_Normal::Step(VECTOR vPos, CMapManager& cMapManager, vector<VECTOR> N
 	switch (State_Id)
 	{
 	case CEnemyBase::STATE_SEARCH:
+		tmp = CRoute_Search::GetInstance()->Route_Search(cPos, vPos, cMapManager);
 
 		ListCnt = 0;
-		tmp = CRoute_Search::GetInstance()->Route_Search(cPos, vPos, cMapManager);
 
 		State_Id = STATE_MOVE;
 		break;

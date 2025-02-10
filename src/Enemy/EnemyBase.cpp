@@ -335,6 +335,8 @@ void CEnemyBase::SetDir()
 //ルート発見
 void CEnemyBase::Route()
 {
-
+	//ボットの座標
+	//ルートの座標
+	//壁の座標
 }
 

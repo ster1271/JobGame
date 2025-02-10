@@ -84,10 +84,10 @@ void CEnemyManager::Step(VECTOR vPos, CMapManager cMapManager)
 		switch (CWave::GetInstance()->GetWaveState())
 		{
 		case STATE_WAVE_NORMAL:
-			/*if (tmpList.empty() == true)
+			if (tmpList.empty() == true)
 			{
 				tmpList = CRoute_Search::GetInstance()->Route_Search(VGet(50.0f, 5.0f, 700.0f), vPos, cMapManager);
-			}*/
+			}
 			break;
 
 		case STATE_WAVE_BOTMOVE:
@@ -98,6 +98,7 @@ void CEnemyManager::Step(VECTOR vPos, CMapManager cMapManager)
 			break;
 		}
 
+		/*
 		int iEnemyCnt = 0;	//“G‚ÌoŒ»”
 		for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 		{
@@ -130,6 +131,8 @@ void CEnemyManager::Step(VECTOR vPos, CMapManager cMapManager)
 				CoolTime = COOL_MAX_TIME;
 			}
 		}
+		*/
+		
 	}
 }
 
