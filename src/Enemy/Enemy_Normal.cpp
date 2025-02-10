@@ -1,12 +1,13 @@
 #include "Enemy_Normal.h"
 
 const float SPEED = 5.0f;		//移動速度
-const int RESEARCH_TIME = 1000;	//経路探索し直し時間
+const int RESEARCH_MAX_TIME = 3000;	//経路探索し直し時間
 
 //コンストラクタ
 CEnemy_Normal::CEnemy_Normal()
 {
 	memset(&Respown_Pos, 0, sizeof(VECTOR));
+	ReSeachTime = 0;
 }
 //デストラクタ
 CEnemy_Normal::~CEnemy_Normal() {}
@@ -78,14 +79,14 @@ void CEnemy_Normal::Step(VECTOR vPos, CMapManager& cMapManager)
 		Range = VSize(v_tmp);
 
 		//ボットの移動ウェーブ時のみ経路探索をしなおす
+		/*
 		if (CWave::GetInstance()->GetWaveState() == STATE_WAVE_BOTMOVE)
 		{
 			ReSeachTime++;
 
 			//時間経過で経路探索し直し
-			if (ReSeachTime >= RESEARCH_TIME)
+			if (ReSeachTime >= RESEARCH_MAX_TIME)
 			{
-				List.clear();
 				ReSeachTime = 0;
 				ListCnt = 0;
 				State_Id = STATE_SEARCH;
@@ -93,7 +94,7 @@ void CEnemy_Normal::Step(VECTOR vPos, CMapManager& cMapManager)
 				return;
 			}
 		}
-
+		*/
 
 		if (Range >= 50.0f)
 		{

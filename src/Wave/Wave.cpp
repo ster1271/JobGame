@@ -85,8 +85,8 @@ void CWave::Step()
 	case STATE_WAVE_NONE:
 		
 		//時間を増加させる
-		/*WaveTime++;*/
-		if (WaveTime > /*2000*/100)
+		WaveTime++;
+		if (WaveTime > 2000)
 		{
 			WaveStateChange(STATE_WAVE_PREPAR);			//ウェーブ準備中にする
 			CWave::GetInstance()->SetIsNormal(true);	//通常ウェーブフラグをtrueにする

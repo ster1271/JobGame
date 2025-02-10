@@ -76,16 +76,7 @@ void CBot::Draw()
 	if (!IsActive)
 		return;
 
-	//条件式がtrueならモデルをfalseなら球を表示
-	if (iHndl != -1)
-	{
-		MV1DrawModel(iHndl);
-	}
-	else
-	{
-		DrawSphere3D(cPos, SPERE_R, 32, GetColor(255, 0, 0), GetColor(255, 0, 0), TRUE);
-	}
-
+	MV1DrawModel(iHndl);
 
 	if (IS_DEBUG)
 	{
@@ -96,7 +87,10 @@ void CBot::Draw()
 		DrawFormatString(0, 210, GetColor(0, 0, 0), "外積:%f", tmp_dir);
 		DrawFormatString(0, 225, GetColor(0, 0, 0), "距離:%2f", tmp_Range);
 
-		CRoute_Search::GetInstance()->Draw(GetColor(0, 255, 0));
+		for (int i = 0; i < Route_List.size(); i++)
+		{
+			CDraw3D::DrawBox3D(VGet(Route_List[i].x, Route_List[i].y, Route_List[i].z), VGet(10, 30, 10));
+		}
 	}
 }
 
@@ -109,12 +103,14 @@ void CBot::Step(CMapManager& cMapManager)
 	{
 	case CBot::STATE_STOP:
 
+		//リストが空なら値を入れる(1度のみ)
 		if (Route_List.empty() == true)
 		{
 			tmp = 0;
 			Route_List = CRoute_Search::GetInstance()->Route_Search(cPos, cMapManager.GetGoal().GetPos(), cMapManager);
 		}
 
+		//ウェーブが変更されたら状態を変更する
 		if (CWave::GetInstance()->GetIsWave() && CWave::GetInstance()->GetIsBotMove())
 		{
 			//Idを変更する

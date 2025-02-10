@@ -2,8 +2,6 @@
 #include "../Draw3D/Draw3D.h"
 #include "../Map/MapManager.h"
 
-
-
 //ƒm[ƒhó‘Ô
 enum NODE_STATE
 {
