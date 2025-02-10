@@ -64,7 +64,15 @@ void CEnemy_Normal::Step(VECTOR vPos, CMapManager& cMapManager, vector<VECTOR> N
 	switch (State_Id)
 	{
 	case CEnemyBase::STATE_SEARCH:
-		
+
+		if (CWave::GetInstance()->GetWaveState() == STATE_WAVE_BOTMOVE)
+		{
+			tmp = CRoute_Search::GetInstance()->Route_Search(VGet(50.0f, 5.0f, 700.0f), vPos, cMapManager);
+		}
+		else
+		{
+			tmp = NormalWaveList;
+		}
 
 		State_Id = STATE_MOVE;
 		break;
@@ -80,7 +88,6 @@ void CEnemy_Normal::Step(VECTOR vPos, CMapManager& cMapManager, vector<VECTOR> N
 		Range = VSize(v_tmp);
 
 		//ボットの移動ウェーブ時のみ経路探索をしなおす
-		/*
 		if (CWave::GetInstance()->GetWaveState() == STATE_WAVE_BOTMOVE)
 		{
 			ReSeachTime++;
@@ -95,12 +102,12 @@ void CEnemy_Normal::Step(VECTOR vPos, CMapManager& cMapManager, vector<VECTOR> N
 				return;
 			}
 		}
-		*/
+		
 
 		if (Range >= 50.0f)
 		{
 			//経路移動処理
-			Enemy_Move(NormalWaveList, ListCnt);
+			Enemy_Move(tmp, ListCnt);
 		}
 		else
 		{

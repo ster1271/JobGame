@@ -120,6 +120,7 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 		}
 	}
 
+	//Z座標が50で割り切れないとき
 	Result = Remain((int)m_StartPos.z, CALC_DIS);
 	if (Result != 0)
 	{
@@ -134,6 +135,40 @@ vector<VECTOR> CRoute_Search::Route_Search(VECTOR StartPos, VECTOR GoalPos, CMap
 			m_StartPos.z += Result;
 		}
 	}
+
+
+	//X座標が50で割り切れないとき
+	Result = Remain((int)m_GoalPos.x, CALC_DIS);
+	if (Result != 0)
+	{
+		//計算結果が規定値より小さいとき
+		if (Result <= 25)
+		{
+			m_GoalPos.x -= Result;
+		}
+		else
+		{
+			Result = CALC_DIS - Result;
+			m_GoalPos.x += Result;
+		}
+	}
+
+	//Z座標が50で割り切れないとき
+	Result = Remain((int)m_GoalPos.z, CALC_DIS);
+	if (Result != 0)
+	{
+		//計算結果が規定値より小さいとき
+		if (Result < 25)
+		{
+			m_GoalPos.z -= Result;
+		}
+		else
+		{
+			Result = CALC_DIS - Result;
+			m_GoalPos.z += Result;
+		}
+	}
+
 
 	Info tmp;
 	memset(&tmp, -1, sizeof(Info));
@@ -291,27 +326,8 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMapManager& cMapMana
 	
 	for (int Index = 0; Index < DIR_NUM; Index++)
 	{
-		/*
-		//オブジェクトと当たっているか判定する
-		bool IsHit = false;
-		//壁の座標と同じなら計算しない
-		for (int A = 0; A < cMapManager.GetMap().GetWallList().size(); A++)
-		{
-			if (tmp[Index].Pos.x == cMapManager.GetMap().GetWallList()[A].vPos.x &&
-				//tmp[Index].Pos.y == cMapManager.GetMap().GetWallList()[A].vPos.y &&
-				tmp[Index].Pos.z == cMapManager.GetMap().GetWallList()[A].vPos.z)
-			{
-				IsHit = true;
-				break;
-			}
-		}
-		
-		//trueならこれ以降計算せずfor文を回す
-		if (IsHit)
-			continue;
-		*/
 
-		
+
 		//スタート地点の座標が同じなら計算しない
 		if (tmp[Index].Pos.x == m_StartPos.x &&
 			//tmp[Index].Pos.y == m_StartPos.y &&
@@ -353,7 +369,6 @@ int CRoute_Search::Evaluat_Calc(Info info, int Info_Index, CMapManager& cMapMana
 		//trueならこれ以降計算せずfor文を回す
 		if (IsHit)
 			continue;
-
 
 		//移動コストを求める
 		int _X = (int)fabs((m_GoalPos.x / CALC_DIS) - (tmp[Index].Pos.x / CALC_DIS));
