@@ -1,5 +1,6 @@
 #pragma once
 #include "../Common.h"
+#include "../Animation/Animation.h"
 
 //プレイヤー方向
 enum PLAYER_DIR
@@ -17,27 +18,6 @@ enum PLAYER_DIR
 class CHumanBase
 {
 protected:
-	//アニメ再生状態
-	enum ANIME_STATE
-	{
-		ANIMESTATE_NORMAL = 0,
-		ANIMESTATE_LOOP,
-		ANIMESTATE_END,
-	};
-
-	//アニメ関連のデータをまとめた構造体
-	struct ANIME_DATA
-	{
-		float m_EndFrame;
-		float m_Frame;
-		float m_Speed;
-		int m_iHndl;
-		int m_AnimID;
-		int m_OldAnimID;
-		int m_State;
-	};
-	ANIME_DATA AnimDataInfo;	//アニメ再生データ
-
 	VECTOR cPos;				//座標
 	VECTOR cNextPos;			//1フレーム後の座標
 	VECTOR cRotate;				//キャラクターの向きの回転軸
@@ -92,21 +72,6 @@ public:
 
 	//後処理
 	void Exit();
-
-	//アニメアップデート
-	void UpdateAnim();
-
-	//リクエスト
-	void Reqest(int iAnimID, float iAnimSpd, int iAnimHndl = -1, bool NameCheck = false);
-
-	//ループアニメリクエスト(アニメが最終フレームになったら最初に戻る)
-	void ReqestLoop(int iAnimID, float iAnimSpd, int iAnimHndl = -1, bool NameCheck = false);
-
-	//エンドループアニメリクエスト(アニメが最終フレームになったら止まる)
-	void ReqestEndLoop(int iAnimID, float iAnimSpd, int iAnimHndl = -1, bool NameCheck = false);
-
-	//アニメをデタッチ
-	void DetachAnim();
 
 	//キャラクター回転処理
 	void Player_Rotation();

@@ -5,6 +5,7 @@
 #include "SoundManager/SoundManager.h"
 #include "Effect/effekseer.h"
 #include "DrawFont/DrawFont.h"
+#include "Animation/Animation.h"
 
 
 
@@ -34,13 +35,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	
 	//-----------------------------------------
 	//一番最初に１回だけやる処理をここに書く
-	
-	//キーボード初期化
-	CInput::InitInput();
-	//ゲームパッド初期化	
-	CGamePad::InitGamePad();
-	//マウス初期化
-	CMouse::InitMouse();
 
 	//シーンマネージャー
 	SceneManager cSceneManager;
@@ -49,6 +43,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	CFps cFps;
 	cFps.Init();
 
+	//キーボード初期化
+	CInput::InitInput();
+	//ゲームパッド初期化	
+	CGamePad::InitGamePad();
+	//マウス初期化
+	CMouse::InitMouse();
+
 	//フォントデータ初期化
 	CDrawFont::Init();
 	//フォントデータ読み込み
@@ -56,6 +57,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//サウンド初期化
 	CSoundManager::Init();
 	CSoundManager::LoadAllData();
+	//アニメーション初期化
+	CAnim::Init();
 
 	//-----------------------------------------
 
@@ -130,6 +133,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	CEffekseerCtrl::Exit();
 	CDrawFont::Exit();
 	CSoundManager::Exit();
+	CAnim::Exit();
 
 	//-----------------------------------------
 	//DXライブラリの後処理

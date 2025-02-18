@@ -107,19 +107,19 @@ void CPlayer::Load()
 //デフォルトモーション
 void CPlayer::Default()
 {
-	ReqestLoop(STATE_DEFAULT, 0.8f);
+	CAnim::ReqestLoop(iHndl, STATE_DEFAULT, 0.8f);
 }
 
 //走りモーション
 void CPlayer::Run()
 {
-	ReqestLoop(STATE_RUN, 0.7f);
+	CAnim::ReqestLoop(iHndl, STATE_RUN, 0.7f);
 }
 
 //撃つモーション
 void CPlayer::Shot()
 {
-	ReqestLoop(STATE_SHOT, 0.1f);
+	CAnim::ReqestLoop(iHndl, STATE_SHOT, 0.1f);
 }
 
 //毎フレーム行う処理
@@ -209,11 +209,6 @@ void CPlayer::Draw()
 
 	//プレイヤーの描画
 	MV1DrawModel(iHndl);
-
-	//for (int i = 0; i < LIST.size(); i++)
-	//{
-	//	CDraw3D::DrawBox3D(LIST[i], VGet(20, 20, 20));
-	//}
 
 
 	if (IS_DEBUG)

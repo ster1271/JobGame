@@ -5,7 +5,6 @@
 //コンストラクタ
 CHumanBase::CHumanBase()
 {
-	memset(&AnimDataInfo, 0, sizeof(ANIME_DATA));
 	memset(&cPos, 0, sizeof(VECTOR));
 	memset(&cNextPos, 0, sizeof(VECTOR));
 	memset(&cRotate, 0, sizeof(VECTOR));
@@ -30,8 +29,6 @@ CHumanBase::~CHumanBase(){}
 //初期化
 void CHumanBase::Init()
 {
-	memset(&AnimDataInfo, 0, sizeof(ANIME_DATA));
-
 	//変数の初期化
 	cPos = VECTOR_ZERO;
 	cNextPos = VECTOR_ZERO;
@@ -80,13 +77,12 @@ void CHumanBase::UpData()
 	MV1SetScale(iHndl, cScale);			//サイズの更新
 	MV1SetRotationXYZ(iHndl, cRotate);	//回転値の更新
 
-	UpdateAnim();						//アニメーションの情報更新
+	CAnim::UpdateAnim(iHndl);						//アニメーションの情報更新
 }
 
 //後処理
 void CHumanBase::Exit()
 {
-	memset(&AnimDataInfo, 0, sizeof(ANIME_DATA));
 	//変数の初期化
 	cPos = VECTOR_ZERO;
 	cNextPos = VECTOR_ZERO;
@@ -104,93 +100,6 @@ void CHumanBase::Exit()
 	PushCnt = 0;
 	ReturnCnt = 0;
 }
-
-
-//リクエスト
-void CHumanBase::Reqest(int iAnimID, float iAnimSpd, int iAnimHndl, bool NameCheck)
-{
-	//前のアニメーションとo同じだったら処理しない
-	if (AnimDataInfo.m_OldAnimID == iAnimID)
-		return;
-
-	//アニメ消失
-	DetachAnim();
-
-	//アニメ再生&各種データをセット
-	AnimDataInfo.m_iHndl = MV1AttachAnim(iHndl, iAnimID, iAnimHndl, NameCheck);
-	AnimDataInfo.m_AnimID = iAnimID;
-	AnimDataInfo.m_OldAnimID = AnimDataInfo.m_AnimID;
-	AnimDataInfo.m_EndFrame = MV1GetAnimTotalTime(iHndl, iAnimID);
-	AnimDataInfo.m_Frame = 0.0f;
-	AnimDataInfo.m_Speed = iAnimSpd;
-	AnimDataInfo.m_State = ANIMESTATE_NORMAL;
-
-}
-
-//ループアニメリクエスト(アニメが最終フレームになったら最初に戻る)
-void CHumanBase::ReqestLoop(int iAnimID, float iAnimSpd, int iAnimHndl, bool NameCheck)
-{
-
-	Reqest(iAnimID, iAnimSpd, iAnimHndl, NameCheck);
-	//アニメ再生状態をループに変える
-	AnimDataInfo.m_State = ANIMESTATE_LOOP;
-}
-
-//エンドループアニメリクエスト(アニメが最終フレームになったら止まる)
-void CHumanBase::ReqestEndLoop(int iAnimID, float iAnimSpd, int iAnimHndl, bool NameCheck)
-{
-	Reqest(iAnimID, iAnimSpd, iAnimHndl, NameCheck);
-	//アニメ再生状態をエンドループに変える
-	AnimDataInfo.m_State = ANIMESTATE_END;
-}
-
-//アニメをデタッチ
-void CHumanBase::DetachAnim()
-{
-	if (AnimDataInfo.m_iHndl != -1)
-	{
-		MV1DetachAnim(iHndl, AnimDataInfo.m_iHndl);
-		AnimDataInfo.m_iHndl = -1;
-	}
-}
-
-//アニメアップデート
-void CHumanBase::UpdateAnim()
-{
-	if (AnimDataInfo.m_iHndl == -1)return;	//アニメーションが再生されていない
-
-	//アニメーション速度更新
-	AnimDataInfo.m_Frame += AnimDataInfo.m_Speed;
-
-	if (AnimDataInfo.m_Frame >= AnimDataInfo.m_EndFrame)
-	{
-		//最終フレームになったら、状態にあわせて動作を変える
-		switch (AnimDataInfo.m_State)
-		{
-		case ANIMESTATE_NORMAL:	//通常終了
-			DetachAnim();
-			AnimDataInfo.m_EndFrame = 0.0f;
-			AnimDataInfo.m_Frame = 0.0f;
-			AnimDataInfo.m_Speed = 0.0f;
-			return;
-
-		case ANIMESTATE_LOOP:	//ループを最初に戻す
-			AnimDataInfo.m_Frame = 0.0f;
-			break;
-
-		case ANIMESTATE_END:
-			AnimDataInfo.m_State = AnimDataInfo.m_EndFrame;
-			break;
-
-		default:
-			break;
-		}
-	}
-
-	//再生時間設定
-	MV1SetAttachAnimTime(iHndl, AnimDataInfo.m_iHndl, AnimDataInfo.m_Frame);
-}
-
 
 //キャラクター回転処理
 void CHumanBase::Player_Rotation()
