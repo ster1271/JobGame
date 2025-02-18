@@ -6,6 +6,7 @@
 
 const char WALL_MODEL_PATH[] = "data/Map/wall.x";
 const char FLOAR_MODEL_PATH[] = "data/Map/floar.x";
+const char DOOR_MODEL_PATH[] = "data/map/door.x";
 
 //コンストラクタ
 CMap::CMap()
@@ -121,13 +122,13 @@ void CMap::LoadMap1(MapID id)
 				Walltmp.iHndl = MV1DuplicateModel(WallHndl);
 				WallList.push_back(Walltmp);
 			}
-
+		
 			FileIndexX++;
 
-			// 「,」を飛ばすために読み込みを実行
+			//「,」を飛ばすために読み込みを実行
 			FileNum = fgetc(fp_);
 
-			// EOFの場合は読み込み終了
+			//EOFの場合は読み込み終了
 			if (FileNum == EOF)
 			{
 				break;

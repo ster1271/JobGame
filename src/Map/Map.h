@@ -34,6 +34,7 @@ struct FloarInfo
 	int iHndl;
 };
 
+
 class CMap :public CObject
 {
 
