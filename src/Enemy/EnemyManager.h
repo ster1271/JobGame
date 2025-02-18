@@ -24,8 +24,6 @@ private:
 	int ReqestCount;		//リクエストした数
 	int DeathCount;			//倒された数
 
-	vector<VECTOR> tmpList;
-
 	void RequestEnemy();	//敵リクエスト
 
 

@@ -16,6 +16,7 @@ CEnemy_Normal::~CEnemy_Normal() {}
 void CEnemy_Normal::Init()
 {
 	//ひとまず初期化
+	cPos = VECTOR_ZERO;
 	cScale = VGet(0.1f, 0.1f, 0.1f);
 	cSize = ENEMY_NORMAL_SIZE;
 	cRotate = VGet(0.0f, DX_PI_F / 2, 0.0f);
@@ -53,22 +54,28 @@ void CEnemy_Normal::Draw()
 }
 
 //毎フレーム行う処理
-void CEnemy_Normal::Step(VECTOR vPos, CMapManager& cMapManager, vector<VECTOR> NormalWaveList)
+void CEnemy_Normal::Step(VECTOR vPos, CMapManager& cMapManager)
 {
 	if (!IsActive)
 		return;
 
 	float Range = 0.0f;
-	vector <VECTOR> tmp;
+	
 
 	switch (State_Id)
 	{
 	case CEnemyBase::STATE_SEARCH:
-		tmp = CRoute_Search::GetInstance()->Route_Search(cPos, vPos, cMapManager);
+		
+		if (List.empty())
+		{
+			List = CRoute_Search::GetInstance()->Route_Search(cPos, vPos, cMapManager);
+			ListCnt = 0;
+		}
+		else
+		{
+			State_Id = STATE_MOVE;
+		}
 
-		ListCnt = 0;
-
-		State_Id = STATE_MOVE;
 		break;
 
 	case CEnemyBase::STATE_MOVE:
@@ -100,15 +107,20 @@ void CEnemy_Normal::Step(VECTOR vPos, CMapManager& cMapManager, vector<VECTOR> N
 
 		if (Range >= 50.0f)
 		{
-			if (CWave::GetInstance()->GetWaveState() == STATE_WAVE_NORMAL)
+			switch (CWave::GetInstance()->GetWaveState())
 			{
-				//経路移動処理
-				Enemy_Move(NormalWaveList, ListCnt);
-			}
-			else
-			{
-				//経路移動処理
-				Enemy_Move(tmp, ListCnt);
+			case STATE_WAVE_NORMAL:
+				//ノーマルウェーブ移動処理
+				Enemy_Move(List, ListCnt);
+				break;
+
+			case STATE_WAVE_BOTMOVE:
+				//ボット移動ウェーブ移動処理
+				Enemy_Move(List, ListCnt);
+				break;
+
+			default:
+				break;
 			}
 		}
 		else
@@ -144,7 +156,7 @@ void CEnemy_Normal::Exit()
 bool CEnemy_Normal::RequestEnemy(VECTOR vPos, VECTOR vSpeed)
 {
 	//すでに出現している
-	if (IsActive)
+	if (IsActive == true)
 		return false;
 	
 	cPos = vPos;

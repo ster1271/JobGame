@@ -9,7 +9,7 @@ using namespace std;
 constexpr bool isDebug = true;
 
 //文字のデフォルトカラー
-#define DEFAULT_COLOR	GetColor(255, 255, 255)
+#define DEFAULT_COLOR	GetColor(255, 0, 0)
 
 //リストのサイズ
 constexpr int TEXTINFO_LIST_SIZE = 100;

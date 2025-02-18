@@ -239,8 +239,8 @@ void CPlayer::Draw()
 		CDebugString::GetInstance()->AddString(0, 120, "Xボタンでマップ表示切り替え");
 
 		CDebugString::GetInstance()->AddFormatString(0, 150, "アタッカーX座標:%d", (int)cPos.x);
-		CDebugString::GetInstance()->AddFormatString(0, 165, "アタッカーX座標:%d", (int)cPos.y);
-		CDebugString::GetInstance()->AddFormatString(0, 180, "アタッカーX座標:%d", (int)cPos.z);
+		CDebugString::GetInstance()->AddFormatString(0, 165, "アタッカーY座標:%d", (int)cPos.y);
+		CDebugString::GetInstance()->AddFormatString(0, 180, "アタッカーZ座標:%d", (int)cPos.z);
 	}
 	else
 	{

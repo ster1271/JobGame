@@ -200,7 +200,7 @@ void CEnemyBase::Enemy_Move(vector<VECTOR> List, int& Cnt)
 
 		if (Cnt == List.size())
 		{
-			State_Id = STATE_SEARCH;
+			State_Id = STATE_ATTACK;
 		}
 	}
 	
