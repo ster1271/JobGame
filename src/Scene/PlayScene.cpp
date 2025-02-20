@@ -220,7 +220,7 @@ void CPlayScene::Step()
 		//ウェーブ処理
 		CWave::GetInstance()->Step();
 		//UI処理
-		cUIManager.Step(cEnemyManager);
+		cUIManager.Step(cEnemyManager, CPlayer::GetInstance()->GetPushCnt());
 
 		//=======当たり判定処理==========//
 		cCollisionManager.PlayerToMap(cMapManager);

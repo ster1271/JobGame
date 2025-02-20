@@ -49,6 +49,7 @@ public:
 	float GetPlayerLife() { return Life; }					//ライフ取得
 	bool GetIsActive() { return IsActive; }					//フラグ取得
 	bool GetDir(int dir) { return IsDir[dir]; }				//方向フラグ取得
+	const int GetPushCnt() { return PushCnt; }
 
 
 	//コンストラクタ・デストラクタ

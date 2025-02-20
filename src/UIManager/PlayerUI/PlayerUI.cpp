@@ -7,7 +7,15 @@ const int DRAW_X = 590;
 const int DRAW_Y = 290;
 
 //コンストラクタ
-CPlayerUI::CPlayerUI(){}
+CPlayerUI::CPlayerUI()
+{
+	LifeHndl = -1;
+	BgHndl = -1;
+	CurrentLife = 0.0f;
+	PreLife = 0.0f;
+	Alpha = 0;
+	Count = 0;
+}
 
 //デストラクタ
 CPlayerUI::~CPlayerUI(){}
@@ -49,6 +57,9 @@ void CPlayerUI::Draw()
 	DrawRectGraph(DRAW_X, DRAW_Y, 0, 0, PLAYER_MAX_LIFE, 30, BgHndl, true, false);
 	DrawRectGraph(DRAW_X, DRAW_Y, 0, 0, CurrentLife, 30, LifeHndl, true, false);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
+
+	
 }
 
 //後処理
