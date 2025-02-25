@@ -13,7 +13,7 @@ CButtonUI::CButtonUI()
 	GaugeFlameHndl = -1;
 	GaugeHndl = -1;
 
-	Cnt = 0;
+	CurrentGaugeVol = 0;
 }
 
 CButtonUI::~CButtonUI(){}
@@ -23,7 +23,7 @@ void CButtonUI::Init()
 {
 	GaugeFlameHndl = -1;
 	GaugeHndl = -1;
-	Cnt = 0.0f;
+	CurrentGaugeVol = 0;
 
 	for (int i = 0; i < BUTTONID_NUM; i++)
 	{
@@ -55,13 +55,19 @@ bool CButtonUI::Load()
 //–ˆƒtƒŒ[ƒ€s‚¤ˆ—
 void CButtonUI::Step(const int Count)
 {
-	Cnt = Count * 2;
+	CurrentGaugeVol = Count * 2;
 }
 
 //•`‰æ
 void CButtonUI::Draw()
 {
-	DrawCircleGauge(300, 300, Cnt, GaugeHndl, 0.0f);
+	int a = 1250.0f / 1150.0f;
+	a = a * 80.0f;
+
+	int b = 1150.0f / 1150.0f;
+	b = b * 80.0f;
+	DrawCircleGauge(a, b, CurrentGaugeVol, GaugeHndl, 0.0f, 0.5f);
+
 	DrawBillboard3D(VGet(1250.0f, 20.0f, 1150.0f), 0.5, 0.5f, 15, 0.0f, GaugeFlameHndl, true, false, false);
 	DrawBillboard3D(VGet(1250.0f, 20.0f, 1150.0f), 0.5, 0.5f, 15, 0.0f, ButtonHndl[BUTTONID_A], true, false, false);
 }
@@ -71,4 +77,6 @@ void CButtonUI::Exit()
 {
 	GaugeFlameHndl = -1;
 	GaugeHndl = -1;
+
+	CurrentGaugeVol = 0;
 }

@@ -27,7 +27,7 @@ private:
 	int ButtonHndl[BUTTONID_NUM];
 	int GaugeFlameHndl;
 	int GaugeHndl;
-	int Cnt;
+	int CurrentGaugeVol;
 
 public:
 	//コンストラクタ・デストラクタ
