@@ -61,12 +61,12 @@ void CButtonUI::Step(const int Count)
 //•`‰æ
 void CButtonUI::Draw()
 {
-	int a = 1250.0f / 1150.0f;
-	a = a * 80.0f;
+	//int a = 1250.0f / 1150.0f;
+	//a = a * 80.0f;
 
-	int b = 1150.0f / 1150.0f;
-	b = b * 80.0f;
-	DrawCircleGauge(a, b, CurrentGaugeVol, GaugeHndl, 0.0f, 0.5f);
+	//int b = 1150.0f / 1150.0f;
+	//b = b * 80.0f;
+	DrawCircleGauge(100, 300, CurrentGaugeVol, GaugeHndl, 0.0f, 0.5f);
 
 	DrawBillboard3D(VGet(1250.0f, 20.0f, 1150.0f), 0.5, 0.5f, 15, 0.0f, GaugeFlameHndl, true, false, false);
 	DrawBillboard3D(VGet(1250.0f, 20.0f, 1150.0f), 0.5, 0.5f, 15, 0.0f, ButtonHndl[BUTTONID_A], true, false, false);
