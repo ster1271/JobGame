@@ -92,7 +92,7 @@ void CMap::LoadMap1(MapID id)
 	WallInfo Walltmp;
 	FloarInfo Floartmp;
 
-	fopen_s(&fp_, MapFilePath[id], "r");		//CSVファイル読み込み
+	fopen_s(&fp_, MapFilePath[id], "r");
 
 	if (fp_ != nullptr)
 	{
@@ -141,8 +141,9 @@ void CMap::LoadMap1(MapID id)
 				FileIndexX = 0;
 			}
 		}
+
+		fclose(fp_);
 	}
-	fclose(fp_);
 }
 
 //マップの読み込み2
@@ -186,5 +187,8 @@ void CMap::LoadMap2(MapID id)
 			}
 			cnt++;
 		}
+
+		fclose(fp_);
 	}
+	
 }

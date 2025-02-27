@@ -61,20 +61,19 @@ void CEnemy_Normal::Step(VECTOR vPos, CMapManager& cMapManager)
 
 	float Range = 0.0f;
 	
-
 	switch (State_Id)
 	{
 	case CEnemyBase::STATE_SEARCH:
 		
-		if (List.empty())
-		{
-			List = CRoute_Search::GetInstance()->Route_Search(cPos, vPos, cMapManager);
-			ListCnt = 0;
-		}
-		else
-		{
-			State_Id = STATE_MOVE;
-		}
+		//if (List.empty())
+		//{
+		//	List = CRoute_Search::GetInstance()->Route_Search(cPos, vPos, cMapManager);
+		//	ListCnt = 0;
+		//}
+		//else
+		//{
+		//	State_Id = STATE_MOVE;
+		//}
 
 		break;
 

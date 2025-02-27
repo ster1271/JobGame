@@ -4,6 +4,7 @@
 
 const int ENEMY_MAXNUM = 20;
 
+
 //敵の種類
 enum TYPE_ENEMY
 {
@@ -18,8 +19,7 @@ class CEnemyManager
 private:
 	CEnemy_Normal cEnemy_Normal[ENEMY_MAXNUM];
 
-	//モデルのコピー元
-	int OrgHndl;
+
 	int CoolTime;
 	int ReqestCount;		//リクエストした数
 	int DeathCount;			//倒された数
@@ -28,7 +28,7 @@ private:
 
 
 public:
-	void SetCnt(int i = 1) { DeathCount += i; }
+	const void SetCnt(int i = 1) { DeathCount += i; }
 
 	//コンストラクタ・デストラクタ
 	CEnemyManager();

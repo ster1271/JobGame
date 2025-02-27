@@ -6,10 +6,16 @@ static const char Enemy_MODEL_PATH02[] = { "data/enemy/Enemy02.x" };
 static const int COOL_MAX_TIME = 200;		//敵が再登場するまでの時間
 static const int RESPAWN_MAX_NUM = 20;	//通常ウェーブ最大出現数
 
+const VECTOR EnemySpawn[MAP_MAX_NUM][3] =
+{
+	VGet(50.0f, 5.0f, 700.0f), VGet(800.0f, 5.0f, 50.0f), VGet(500.0f, 5.0f, 900.0f)
+};
+
+
 //コンストラクタ
 CEnemyManager::CEnemyManager()
 {
-	OrgHndl = -1;
+	
 }
 
 //デストラクタ
@@ -29,91 +35,48 @@ void CEnemyManager::Init()
 //データロード
 void CEnemyManager::Load()
 {
-	//オリジナルデータ読み込み
-	if (OrgHndl == -1)
-	{
-		OrgHndl = MV1LoadModel(ENEMY_MODEL_PATH01);
-	}
+	int Hndl = MV1LoadModel(ENEMY_MODEL_PATH01);
 
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
-		cEnemy_Normal[Enemy_Index].Load(OrgHndl);
+		cEnemy_Normal[Enemy_Index].Load(Hndl);
 	}
-
-	/*Org_Hndl = MV1LoadModel(Enemy_MODEL_PATH02);
-	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
-	{
-		cEnemyBoss[Enemy_Index].Load(Org_Hndl);
-	}*/
-
 }
 
 //終了処理
 void CEnemyManager::Exit()
 {
-
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Exit();
-	}
-
-	if (OrgHndl != -1)
-	{
-		MV1DeleteModel(OrgHndl);
-		OrgHndl = -1;
 	}
 }
 
 //毎フレーム呼ぶ処理
 void CEnemyManager::Step(VECTOR vPos, CMapManager cMapManager)
 {
-	//ウェーブ中のみ処理を行う
-	if (CWave::GetInstance()->GetIsWave() == true)
+	int iEnemyCnt = 0;	//敵の出現数
+	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
-		if (DeathCount >= RESPAWN_MAX_NUM)
+		if (cEnemy_Normal[Enemy_Index].GetActive())
 		{
-			CWave::GetInstance()->WaveStateChange(STATE_WAVE_END);
-			DeathCount = 0;
-			ReqestCount = RESPAWN_MAX_NUM;
-			CoolTime = COOL_MAX_TIME;
+			iEnemyCnt++;
 		}
-		
-		int iEnemyCnt = 0;	//敵の出現数
-		for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
-		{
-			if (cEnemy_Normal[Enemy_Index].GetActive())
-			{
-				iEnemyCnt++;
-			}
-			cEnemy_Normal[Enemy_Index].Step(vPos, cMapManager);
-			cEnemy_Normal[Enemy_Index].Update();
-		}
+		cEnemy_Normal[Enemy_Index].Step(vPos, cMapManager);
+		cEnemy_Normal[Enemy_Index].Update();
+	}
 
-		//敵の出現
-		CoolTime--;
+	//敵の出現
+	//CoolTime--;
 
-		//一定期間出現していないか、生存数が0の時リクエストさせる
-		if (CoolTime < 0 || iEnemyCnt == 0)
-		{
-			if (CWave::GetInstance()->GetWaveState() == STATE_WAVE_NORMAL)
-			{
-				//一定数生成したらそれ以上処理しない
-				if (ReqestCount <= 0)
-					return;
-
-				RequestEnemy();
-				CoolTime = COOL_MAX_TIME;
-			}
-			else
-			{
-				RequestEnemy();
-				CoolTime = COOL_MAX_TIME;
-			}
-		}
-		
-		
+	//一定期間出現していないか、生存数が0の時リクエストさせる
+	if (CoolTime < 0 || iEnemyCnt == 0)
+	{
+		//RequestEnemy();
+		CoolTime = COOL_MAX_TIME;
 	}
 }
+
 
 //描画処理
 void CEnemyManager::Draw()
@@ -121,12 +84,14 @@ void CEnemyManager::Draw()
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
 		cEnemy_Normal[Enemy_Index].Draw();
-		//cEnemyBoss[Enemy_Index].Draw();
 	}
 
 	CDebugString::GetInstance()->AddFormatString(0, 400, "生成できる数：%d", ReqestCount);
 	
-	CDraw3D::DrawBox3D(VGet(50.0f, 5.0f, 700.0f), VGet(50.0f, 50.0f, 50.0f));
+	for (int i = 0; i < 3; i++)
+	{
+		CDraw3D::DrawBox3D(EnemySpawn[0][i], VGet(50.0f, 50.0f, 50.0f));
+	}
 }
 
 
@@ -139,7 +104,7 @@ void CEnemyManager::RequestEnemy()
 
 	for (int Enemy_Index = 0; Enemy_Index < ENEMY_MAXNUM; Enemy_Index++)
 	{
-		if (cEnemy_Normal[Enemy_Index].RequestEnemy(vPos, vSpeed))
+		if (cEnemy_Normal[Enemy_Index].RequestEnemy(EnemySpawn[0][1], vSpeed))
 		{
 			ReqestCount--;
 			break;

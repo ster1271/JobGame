@@ -4,16 +4,16 @@
 const VECTOR MAP_SIZE = VGet(50.0f, 50.0f, 50.0f);
 const float MAP_R = 30.0f;
 
-enum MapID
+const enum MapID
 {
 	MAPID_01,
 
 
-	MAPID_NUM
+	MAP_MAX_NUM
 };
 
 //マップのファイルパス
-static const char MapFilePath[MAPID_NUM][128]
+static const char MapFilePath[MAP_MAX_NUM][128]
 {
 	"Data/Map/map01.txt",
 };
